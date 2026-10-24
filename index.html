@@ -46,6 +46,13 @@ button.pill{cursor:pointer;font:inherit;font-family:var(--f-display);font-size:1
 .intro li::before{counter-increment:s;content:counter(s);font-family:var(--f-display);color:var(--ink);background:var(--brass);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:15px;margin-top:1px}
 .intro .small{font-size:13px;font-style:italic;color:var(--parchment-2);opacity:.85}
 .go{align-self:flex-start;font-family:var(--f-display);font-size:22px;letter-spacing:.04em;background:var(--brass);color:var(--ink);border:0;border-radius:10px;padding:13px 26px;cursor:pointer;box-shadow:0 6px 0 var(--brass-deep)}
+.choices{display:flex;flex-wrap:wrap;gap:12px}
+.go{display:inline-flex;align-items:center;gap:10px}
+.go .ico{display:inline-flex}
+.go.alt{background:transparent;color:var(--brass);border:2px solid var(--brass);box-shadow:none;padding:11px 22px}
+.go.alt:active{transform:translateY(2px);box-shadow:none}
+.pill.mode{font-size:15px;gap:6px}
+.hud-top .row{pointer-events:none;display:flex;gap:6px;flex-wrap:nowrap}
 .go:active{transform:translateY(3px);box-shadow:0 3px 0 var(--brass-deep)}
 .go:focus-visible,.btn:focus-visible,.pill:focus-visible,.key:focus-visible,.cbtn:focus-visible,.dial button:focus-visible,.spine:focus-visible{outline:3px solid var(--parchment);outline-offset:2px}
 
@@ -139,6 +146,7 @@ button.pill{cursor:pointer;font:inherit;font-family:var(--f-display);font-size:1
   <span class="pill" id="timer" aria-label="Time elapsed">0:00</span>
   <span class="row" style="pointer-events:none">
     <span class="pill" id="keyPill" hidden aria-label="Carrying a brass key"><span class="key"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="7" cy="12" r="4"/><path d="M11 12h10M17 12v4M20 12v3"/></svg></span>Key</span>
+    <button class="pill mode" id="modeBtn" type="button" hidden></button>
     <button class="pill" id="notesBtn" type="button">Notebook <span class="badge" id="badge">0/5</span></button>
   </span>
 </div>
@@ -151,13 +159,16 @@ button.pill{cursor:pointer;font:inherit;font-family:var(--f-display);font-size:1
     <h1>The Astronomer's <em>Study</em></h1>
     <p>Professor Halvorsen locked the door behind you. You can't take a single step. All you can do is turn around and look.</p>
     <ol>
-      <li>Hold your phone up like a window and turn your body to look around. Look up at the ceiling and down at the floor too.</li>
+      <li>Look around the whole room, including the ceiling and the floor. Turn your phone to look, or drag the screen with touch controls.</li>
       <li>Pinch to zoom in on anything far away.</li>
       <li>Tap an object to inspect it.</li>
       <li>Work out the five-digit code that opens the door.</li>
     </ol>
-    <button class="go" id="go" type="button">Enter the study</button>
-    <p class="small">Works best standing up, where you can turn all the way around.</p>
+    <div class="choices">
+      <button class="go" id="go" type="button"><span class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="3" width="8" height="18" rx="2"/><path d="M4 8a6 6 0 0 0 0 8M20 8a6 6 0 0 1 0 8"/></svg></span>Turn my phone</button>
+      <button class="go alt" id="goTouch" type="button"><span class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11V5a1.5 1.5 0 0 1 3 0v6M12 10V8.5a1.5 1.5 0 0 1 3 0V11M15 10.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a5 5 0 0 1-4.2-2.3L4 14.5a1.5 1.5 0 0 1 2.5-1.6L9 15"/></svg></span>Use touch controls</button>
+    </div>
+    <p class="small">Phone motion works best standing up, where you can turn all the way around. Touch controls work sitting down or on a computer. You can switch any time with the button at the top of the screen.</p>
   </div>
 </div>
 
@@ -638,13 +649,13 @@ function buildScene(){
 }
 
 /* ---------- View control: gyro, drag fallback, pinch zoom, tap ---------- */
-let gyroLive=false,dragMode=false,needCal=true,ori=null,yaw=0,pitch=0,idleSpin=true;
+let mode='motion',gyroLive=false,dragMode=false,needCal=true,ori=null,yaw=0,pitch=0,idleSpin=true;
 const zee=new THREE.Vector3(0,0,1),eul=new THREE.Euler(),q0=new THREE.Quaternion(),q1=new THREE.Quaternion(-Math.sqrt(.5),0,0,Math.sqrt(.5)),calQ=new THREE.Quaternion(),tq=new THREE.Quaternion(),Y=new THREE.Vector3(0,1,0),fwd=new THREE.Vector3();
 function screenAngle(){return (screen.orientation&&typeof screen.orientation.angle==='number')?screen.orientation.angle:(window.orientation||0);}
 function onOri(e){
   if(e.alpha==null&&e.beta==null)return;
   ori={a:e.alpha||0,b:e.beta||0,g:e.gamma||0};
-  if(!gyroLive){gyroLive=true;needCal=true;if(dragMode){dragMode=false;showHint('Phone motion found. Turn around to look.');}}
+  if(!gyroLive){gyroLive=true;if(mode==='motion'&&dragMode){syncFromCamera();dragMode=false;needCal=true;}}
 }
 function gyroQuat(out){
   const d=THREE.MathUtils.degToRad;
@@ -792,7 +803,7 @@ const PANELS={
       <ul class="symlist">${ORDER.map(k=>`<li>${sym(k,22)}<span>${S.syms[k]?fmt(S.syms[k]):'<em>Not found yet</em>'}</span></li>`).join('')}</ul>
       <h3 class="sub">Clues</h3>${clues.length?`<ul class="clues">${clues.map(c=>`<li>${c}</li>`).join('')}</ul>`:'<p class="muted">Nothing yet. Tap things around the room.</p>'}
       <h3 class="sub">Carrying</h3><p>${S.hasKey&&!S.keyUsed?'A small brass key.':'Nothing.'}</p>
-      <h3 class="sub">How to play</h3><p class="muted">Turn your phone to look around. Pinch to zoom. Tap anything that looks interesting. A few things, like the cat, are just for looking. When you know all five symbols, tap the door.</p>`};
+      <h3 class="sub">How to play</h3><p class="muted">Turn your phone or drag the screen to look around. The Motion/Touch button at the top switches between them. Pinch to zoom. Tap anything that looks interesting. A few things, like the cat, are just for looking. When you know all five symbols, tap the door.</p>`};
   }
 };
 
@@ -811,16 +822,35 @@ function reset(){
 }
 $('#again').addEventListener('click',reset);
 
-$('#go').addEventListener('click',()=>{
+/* Look modes: 'motion' (turn the phone) or 'touch' (drag the screen). Switchable any time. */
+let listening=false,motionTimer;
+const ICON_MOTION='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="3" width="8" height="18" rx="2"/><path d="M4 8a6 6 0 0 0 0 8M20 8a6 6 0 0 1 0 8"/></svg>';
+const ICON_TOUCH='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11V5a1.5 1.5 0 0 1 3 0v6M12 10V8.5a1.5 1.5 0 0 1 3 0V11M15 10.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a5 5 0 0 1-4.2-2.3L4 14.5a1.5 1.5 0 0 1 2.5-1.6L9 15"/></svg>';
+function updateModeBtn(){const b=$('#modeBtn');b.innerHTML=(mode==='motion'?ICON_MOTION+'Motion':ICON_TOUCH+'Touch');b.setAttribute('aria-label','Look controls: '+(mode==='motion'?'phone motion':'touch')+'. Tap to switch.');}
+function syncFromCamera(){eul.setFromQuaternion(camera.quaternion,'YXZ');pitch=eul.x;yaw=eul.y;}
+function useMotion(){
+  // must run inside a tap so iPhones can show their permission prompt
   let perm=null;
   try{if(window.DeviceOrientationEvent&&typeof DeviceOrientationEvent.requestPermission==='function')perm=DeviceOrientationEvent.requestPermission();}catch(_){}
-  window.addEventListener('deviceorientation',onOri);
   if(perm&&perm.catch)perm.catch(()=>{});
-  $('#start').hidden=true;idleSpin=false;yaw=0;pitch=0;
-  S.running=true;S.t0=performance.now();updateHud();
-  showHint('Turn your phone to look around. Pinch to zoom. Tap things to inspect them.',7000);
-  setTimeout(()=>{if(!gyroLive){dragMode=true;showHint('Phone motion isn’t available here, so drag to look around instead. Pinch or scroll to zoom.',8000);}},1500);
-});
+  if(!listening){window.addEventListener('deviceorientation',onOri);listening=true;}
+  syncFromCamera();mode='motion';needCal=true;dragMode=!gyroLive;updateModeBtn();
+  showHint('Turn your phone to look around. Pinch to zoom. Tap things to inspect them.',6000);
+  clearTimeout(motionTimer);
+  motionTimer=setTimeout(()=>{if(mode==='motion'&&!gyroLive){mode='touch';dragMode=true;updateModeBtn();showHint('Phone motion isn’t available here, so touch controls are on. Drag to look around.',8000);}},1500);
+}
+function useTouch(){
+  clearTimeout(motionTimer);syncFromCamera();mode='touch';dragMode=true;updateModeBtn();
+  showHint('Drag to look around. Pinch to zoom. Tap things to inspect them.',6000);
+}
+function begin(m){
+  $('#start').hidden=true;idleSpin=false;yaw=0;pitch=0;camera.quaternion.set(0,0,0,1);
+  S.running=true;S.t0=performance.now();updateHud();$('#modeBtn').hidden=false;
+  if(m==='motion')useMotion();else useTouch();
+}
+$('#go').addEventListener('click',()=>begin('motion'));
+$('#goTouch').addEventListener('click',()=>begin('touch'));
+$('#modeBtn').addEventListener('click',()=>{if(mode==='motion')useTouch();else useMotion();});
 
 /* ---------- Loop ---------- */
 function resize(){const w=stage.clientWidth||innerWidth,h=stage.clientHeight||innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
@@ -830,9 +860,9 @@ let last=performance.now();
 function frame(now){
   requestAnimationFrame(frame);
   const dt=Math.min(0.05,(now-last)/1000);last=now;const t=now/1000;
-  if(gyroLive&&!dragMode&&ori){
+  if(mode==='motion'&&gyroLive&&!dragMode&&ori){
     gyroQuat(tq);
-    if(needCal){fwd.set(0,0,-1).applyQuaternion(tq);const yw=Math.atan2(-fwd.x,-fwd.z);calQ.setFromAxisAngle(Y,-yw);tq.premultiply(calQ);camera.quaternion.copy(tq);needCal=false;}
+    if(needCal){fwd.set(0,0,-1).applyQuaternion(tq);const yw=Math.atan2(-fwd.x,-fwd.z);calQ.setFromAxisAngle(Y,yaw-yw);tq.premultiply(calQ);camera.quaternion.copy(tq);needCal=false;}
     else{tq.premultiply(calQ);camera.quaternion.slerp(tq,0.5);}
   }else{
     if(idleSpin)yaw+=dt*0.08;

@@ -1419,12 +1419,11 @@ function loadLevel(i){
 function renderRooms(){
   const sv=loadSave();
   $('#rooms').innerHTML=LEVELS.map((L,i)=>{
-    const prev=LEVELS[i-1],locked=i>0&&!sv.done[prev.id],best=sv.best[L.id];
-    return `<button class="room r${L.num}" type="button" data-i="${i}" ${locked?'disabled':''}>
+    const best=sv.best[L.id];
+    return `<button class="room r${L.num}" type="button" data-i="${i}">
       <span class="rnum">Room ${L.num}</span><span class="rname">${L.name}</span>
-      <span class="rblurb">${locked?'Escape '+prev.name+' to unlock this room.':L.blurb}</span>
-      <span class="rbest">${best?'Best time '+fmtT(best):(locked?'':'Not escaped yet')}</span>
-      ${locked?'<svg class="lock" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>':''}
+      <span class="rblurb">${L.blurb}</span>
+      <span class="rbest">${best?'Best time '+fmtT(best):'Not escaped yet'}</span>
     </button>`;}).join('');
   document.querySelectorAll('#rooms .room').forEach(b=>b.addEventListener('click',()=>showIntro(+b.dataset.i)));
 }

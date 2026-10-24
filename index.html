@@ -1,0 +1,817 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>
+<title>The Astronomer's Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,400;0,600;1,400&family=Courier+Prime:wght@700&display=swap">
+<style>
+/* Layout: full-bleed WebGL room; HUD pinned to the corners; close-ups rise as a parchment sheet from the bottom. */
+:root{
+  --night:#0d1120; --night-2:#161b2e;
+  --parchment:#efe2c4; --parchment-2:#e1cda4; --ink:#2a1b10; --ink-soft:#6a5440;
+  --brass:#c9a24f; --brass-deep:#8a6a2a; --oxblood:#7b2621; --moss:#3d5a3a;
+  --veil:rgba(13,17,32,.74); --rule:rgba(201,162,79,.45);
+  --f-display:"IM Fell English SC","IM Fell English",Georgia,serif;
+  --f-body:"Spectral",Georgia,serif;
+  --f-mono:"Courier Prime","Courier New",monospace;
+  color-scheme:dark;
+}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;background:var(--night);color:var(--parchment);font-family:var(--f-body);font-size:16px;overflow:hidden;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+#stage{position:fixed;inset:0}
+#stage canvas{display:block;width:100%;height:100%;touch-action:none}
+
+/* HUD */
+.hud-top{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;gap:8px;
+  padding-top:calc(env(safe-area-inset-top,0px) + 10px);padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px));pointer-events:none;z-index:5}
+.pill{pointer-events:auto;background:var(--veil);border:1px solid var(--rule);color:var(--brass);border-radius:999px;padding:7px 13px;font-family:var(--f-mono);font-size:14px;display:inline-flex;gap:8px;align-items:center;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+button.pill{cursor:pointer;font:inherit;font-family:var(--f-display);font-size:16px;letter-spacing:.04em}
+.pill .badge{font-family:var(--f-mono);font-size:12px;background:var(--brass);color:var(--ink);border-radius:999px;padding:1px 7px}
+.pill .key{display:inline-flex;color:var(--brass)}
+.hint{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 18px);max-width:calc(100% - 32px);text-align:center;font-family:var(--f-body);font-style:italic;font-size:14px;color:var(--parchment);background:var(--veil);border:1px solid var(--rule);border-radius:12px;padding:8px 14px;transition:opacity .6s;z-index:5;pointer-events:none}
+.hint.fade{opacity:0}
+#zoomReset{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 70px);z-index:5}
+
+/* Overlays */
+.screen{position:fixed;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;overflow:auto;
+  background:radial-gradient(1200px 700px at 70% -10%,rgba(201,162,79,.16),transparent 60%),radial-gradient(900px 600px at 0% 110%,rgba(123,38,33,.25),transparent 60%),rgba(9,12,24,.94);
+  padding-block:calc(env(safe-area-inset-top,0px) + 24px) calc(env(safe-area-inset-bottom,0px) + 24px);padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.intro{max-width:30rem;display:flex;flex-direction:column;gap:18px}
+.intro .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass)}
+.intro h1{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,11vw,64px);line-height:.95;margin:0;text-wrap:balance;color:var(--parchment)}
+.intro h1 em{font-family:"IM Fell English",Georgia,serif;font-style:italic;color:var(--brass)}
+.intro p{margin:0;line-height:1.55;color:var(--parchment-2);max-width:60ch}
+.intro ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;counter-reset:s}
+.intro li{display:grid;grid-template-columns:28px 1fr;gap:10px;line-height:1.45;color:var(--parchment)}
+.intro li::before{counter-increment:s;content:counter(s);font-family:var(--f-display);color:var(--ink);background:var(--brass);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:15px;margin-top:1px}
+.intro .small{font-size:13px;font-style:italic;color:var(--parchment-2);opacity:.85}
+.go{align-self:flex-start;font-family:var(--f-display);font-size:22px;letter-spacing:.04em;background:var(--brass);color:var(--ink);border:0;border-radius:10px;padding:13px 26px;cursor:pointer;box-shadow:0 6px 0 var(--brass-deep)}
+.go:active{transform:translateY(3px);box-shadow:0 3px 0 var(--brass-deep)}
+.go:focus-visible,.btn:focus-visible,.pill:focus-visible,.key:focus-visible,.cbtn:focus-visible,.dial button:focus-visible,.spine:focus-visible{outline:3px solid var(--parchment);outline-offset:2px}
+
+/* Close-up sheet */
+#panel{position:fixed;inset:0;z-index:20;display:flex;align-items:flex-end;justify-content:center;background:rgba(5,6,12,.5)}
+.card{position:relative;width:min(560px,100%);max-height:88%;overflow:auto;-webkit-overflow-scrolling:touch;background:var(--parchment);color:var(--ink);border-radius:16px 16px 0 0;
+  background-image:radial-gradient(circle at 20% 10%,rgba(255,255,255,.35),transparent 40%),radial-gradient(circle at 90% 90%,rgba(138,106,42,.18),transparent 45%);
+  padding-top:20px;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 22px);padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));
+  box-shadow:0 -10px 40px rgba(0,0,0,.5);animation:rise .28s ease-out;display:flex;flex-direction:column;gap:14px}
+@keyframes rise{from{transform:translateY(30px);opacity:.4}to{transform:none;opacity:1}}
+@media (min-width:700px){#panel{align-items:center}.card{border-radius:16px}}
+@media (prefers-reduced-motion:reduce){.card{animation:none}.hint{transition:none}}
+.card .x{position:absolute;top:10px;right:max(10px,env(safe-area-inset-right,0px));width:40px;height:40px;border-radius:50%;border:1px solid rgba(42,27,16,.25);background:transparent;color:var(--ink);font-size:24px;line-height:1;cursor:pointer}
+.p-eye{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--oxblood)}
+.p-title{font-family:var(--f-display);font-weight:400;font-size:30px;line-height:1.05;margin:-6px 48px 0 0;text-wrap:balance}
+#p-body{display:flex;flex-direction:column;gap:14px;line-height:1.55}
+#p-body p{margin:0;max-width:62ch}
+.sub{font-family:var(--f-display);font-weight:400;font-size:19px;margin:6px 0 -4px;color:var(--oxblood)}
+.note{background:#f8f0dc;border:1px solid rgba(42,27,16,.2);border-radius:4px;padding:14px 16px;transform:rotate(-.6deg);box-shadow:0 3px 10px rgba(42,27,16,.15);font-family:"IM Fell English",Georgia,serif;font-size:19px;line-height:1.4;display:flex;align-items:center;gap:12px}
+.note .sym{flex:none;color:var(--ink)}
+.note b{font-family:var(--f-mono);font-size:26px}
+.quote{font-family:"IM Fell English",Georgia,serif;font-style:italic;font-size:20px;border-left:3px solid var(--brass);padding-left:12px}
+.msg{min-height:1.4em;font-style:italic;color:var(--oxblood)}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.btn{font-family:var(--f-display);font-size:18px;border:0;border-radius:9px;padding:10px 16px;background:var(--ink);color:var(--parchment);cursor:pointer}
+.btn.brass{background:var(--brass);color:var(--ink);box-shadow:0 4px 0 var(--brass-deep)}
+.btn:disabled{opacity:.4;cursor:default}
+.sym{display:inline-block;vertical-align:-3px}
+.figure{width:100%;max-width:100%;border-radius:6px;display:block;box-shadow:0 4px 14px rgba(42,27,16,.25)}
+
+/* Keypad */
+.lockgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:330px;width:100%;margin-inline:auto}
+.plaq{display:grid;place-items:center;color:var(--brass-deep);background:linear-gradient(#e3c475,#b8913f);border-radius:6px;padding:7px 0;color:#3a280e}
+.slot{display:grid;place-items:center;height:52px;border-radius:6px;background:#1d140c;color:var(--brass);font-family:var(--f-mono);font-size:28px;font-variant-numeric:tabular-nums}
+.keys{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:330px;width:100%;margin-inline:auto}
+.key{height:54px;border-radius:10px;border:0;background:linear-gradient(#d8b766,#a9853a);color:var(--ink);font-family:var(--f-mono);font-size:24px;cursor:pointer;box-shadow:0 4px 0 #6f5420}
+.key:active{transform:translateY(2px);box-shadow:0 2px 0 #6f5420}
+.key.enter{font-family:var(--f-display);font-size:19px;background:linear-gradient(#9b3a33,#6d1f1b);color:var(--parchment);box-shadow:0 4px 0 #3e100d}
+.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+
+/* Color box */
+.boxui{background:linear-gradient(#5a3820,#3b2414);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:14px;align-items:center}
+.lamps{display:flex;gap:16px}
+.lamp{width:14px;height:14px;border-radius:50%;background:#2a1a0e;box-shadow:inset 0 1px 2px rgba(0,0,0,.6)}
+.lamp.on{background:#ffd46b;box-shadow:0 0 10px #ffc23d}
+.cbtns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.cbtn{width:58px;height:58px;border-radius:50%;border:4px solid #b8913f;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.45),transparent 45%),var(--c);cursor:pointer;box-shadow:0 4px 0 #1a0e06}
+.cbtn:active{transform:translateY(3px);box-shadow:0 1px 0 #1a0e06}
+
+/* Clock */
+.pclock{width:min(260px,70vw);height:auto;aspect-ratio:1;display:block;margin-inline:auto;max-width:100%}
+.clockctl{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.ctl{display:flex;align-items:center;gap:8px;background:rgba(42,27,16,.08);border-radius:10px;padding:6px 10px}
+.ctl span{font-family:var(--f-display);font-size:17px;min-width:4.2em}
+.ctl button{width:44px;height:44px;border-radius:8px;border:0;background:var(--ink);color:var(--parchment);font-size:22px;cursor:pointer}
+.readout{text-align:center;font-family:var(--f-mono);font-size:22px;font-variant-numeric:tabular-nums}
+
+/* Chest dials */
+.dials{display:flex;gap:8px;justify-content:center;background:linear-gradient(#d8b766,#9f7c33);padding:12px;border-radius:10px;align-self:center}
+.dial{display:flex;flex-direction:column;align-items:center;gap:4px}
+.dial span{width:44px;height:54px;display:grid;place-items:center;background:#1d140c;color:var(--parchment);font-family:var(--f-mono);font-size:30px;border-radius:5px}
+.dial button{width:44px;height:34px;border:0;border-radius:6px;background:rgba(42,27,16,.75);color:var(--parchment);cursor:pointer;display:grid;place-items:center}
+
+/* Bookshelf */
+.shelf{display:flex;gap:5px;align-items:flex-end;padding:12px 12px 0;background:linear-gradient(#2a180c,#3d2414);border-radius:8px 8px 0 0;border-bottom:12px solid #5a3820;overflow-x:auto}
+.spine{writing-mode:vertical-rl;transform:rotate(180deg);flex:none;width:44px;border:0;border-radius:3px 3px 0 0;color:#f2deb0;font-family:"IM Fell English",Georgia,serif;font-size:14px;padding:10px 0;cursor:pointer;background:var(--c);box-shadow:inset -4px 0 0 rgba(0,0,0,.25),inset 3px 0 0 rgba(255,255,255,.08);border-top:3px solid rgba(214,176,92,.6)}
+.spine[aria-pressed="true"]{outline:3px solid var(--brass);outline-offset:-3px}
+
+/* Chalk */
+.chalk{background:#2b3330;color:#ece8da;border:10px solid #5a3820;border-radius:6px;padding:16px 18px;font-family:"IM Fell English",Georgia,serif;font-style:italic;font-size:21px;line-height:1.45;text-align:center}
+.chalk strong{font-style:normal;font-family:var(--f-display);letter-spacing:.06em;font-weight:400;font-size:18px;display:block;margin-bottom:6px}
+
+/* Notebook */
+.symlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.symlist li{display:grid;grid-template-columns:32px 1fr;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed rgba(42,27,16,.25)}
+.symlist em{color:var(--ink-soft)}
+.symlist b{font-family:var(--f-mono);font-size:20px}
+.clues{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px}
+.clues li{line-height:1.45}
+.muted{color:var(--ink-soft);font-size:14px}
+
+/* Win */
+.win h1{font-family:var(--f-display);font-weight:400;font-size:clamp(44px,12vw,72px);margin:0;line-height:.95;color:var(--parchment)}
+.win .time{font-family:var(--f-mono);font-size:30px;color:var(--brass);font-variant-numeric:tabular-nums}
+</style>
+
+<div id="stage" aria-label="3D room view"></div>
+
+<div class="hud-top">
+  <span class="pill" id="timer" aria-label="Time elapsed">0:00</span>
+  <span class="row" style="pointer-events:none">
+    <span class="pill" id="keyPill" hidden aria-label="Carrying a brass key"><span class="key"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="7" cy="12" r="4"/><path d="M11 12h10M17 12v4M20 12v3"/></svg></span>Key</span>
+    <button class="pill" id="notesBtn" type="button">Notebook <span class="badge" id="badge">0/5</span></button>
+  </span>
+</div>
+<div class="hint fade" id="hint"></div>
+<button class="pill" id="zoomReset" type="button" hidden>Zoom out</button>
+
+<div class="screen" id="start">
+  <div class="intro">
+    <span class="eyebrow">An escape room · 5-digit code</span>
+    <h1>The Astronomer's <em>Study</em></h1>
+    <p>Professor Halvorsen locked the door behind you. You can't take a single step. All you can do is turn around and look.</p>
+    <ol>
+      <li>Hold your phone up like a window and turn your body to look around. Look up at the ceiling and down at the floor too.</li>
+      <li>Pinch to zoom in on anything far away.</li>
+      <li>Tap an object to inspect it.</li>
+      <li>Work out the five-digit code that opens the door.</li>
+    </ol>
+    <button class="go" id="go" type="button">Enter the study</button>
+    <p class="small">Works best standing up, where you can turn all the way around.</p>
+  </div>
+</div>
+
+<div class="screen" id="win" hidden>
+  <div class="intro win">
+    <span class="eyebrow">Door unlocked</span>
+    <h1>You're out.</h1>
+    <p>The lock clicks, the door swings open and cool night air pours into the study.</p>
+    <div class="time" id="winTime">0:00</div>
+    <button class="go" id="again" type="button">Play again</button>
+  </div>
+</div>
+
+<div id="panel" hidden role="dialog" aria-modal="true" aria-labelledby="p-title">
+  <div class="card" id="card">
+    <button class="x" id="closeP" type="button" aria-label="Close">×</button>
+    <div class="p-eye" id="p-eye"></div>
+    <h2 class="p-title" id="p-title"></h2>
+    <div id="p-body"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s);
+const FELL='"IM Fell English", Georgia, serif';
+const REDUCED=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- Puzzle data ---------- */
+const ORDER=['tri','star','diamond','circle','square'];
+const DIGIT={tri:8,star:6,diamond:1,circle:3,square:5};
+const CODE=ORDER.map(k=>DIGIT[k]).join('');
+const BOX_ORDER=['green','red','blue','yellow'];
+const BOX_COLORS={red:'#b8322a',blue:'#2f5d8a',green:'#3f7a4a',yellow:'#d9ae3c'};
+const LETTERS='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const WORD='CLOCK';
+const PATHS={
+  star:'M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7z',
+  circle:'M12 4a8 8 0 1 1 0 16a8 8 0 1 1 0-16z',
+  tri:'M12 3l9.5 17h-19z',
+  diamond:'M12 2l9 10-9 10-9-10z',
+  square:'M4 4h16v16H4z'
+};
+const SYMNAME={tri:'triangle',star:'star',diamond:'diamond',circle:'circle',square:'square'};
+function sym(k,s){s=s||20;return `<svg class="sym" width="${s}" height="${s}" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="${SYMNAME[k]}"><path d="${PATHS[k]}"/></svg>`;}
+const CHEV_UP='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 15l6-6 6 6"/></svg>';
+const CHEV_DN='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 9l6 6 6-6"/></svg>';
+
+function fresh(){return{h:10,m:50,clockOpen:false,seq:[],boxOpen:false,hasKey:false,keyUsed:false,drawerOpen:false,dials:[0,0,0,0,0],chestOpen:false,syms:{},clues:{},entry:'',msg:'',won:false,t0:0,tEnd:0,book:null,running:false};}
+let S=fresh();
+
+/* ---------- Canvas texture helpers ---------- */
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function mk(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;return c;}
+function grain(x,X,Y,W,H,base,line,vertical,seed){
+  x.save();x.beginPath();x.rect(X,Y,W,H);x.clip();
+  x.fillStyle=base;x.fillRect(X,Y,W,H);
+  const r=rng(seed);x.strokeStyle=line;
+  const n=Math.max(4,(vertical?W:H)/3), len=vertical?H:W;
+  for(let i=0;i<n;i++){
+    x.globalAlpha=0.06+r()*0.2;x.lineWidth=0.5+r()*1.6;
+    const off=(vertical?X:Y)+r()*(vertical?W:H), amp=1+r()*3, f=0.004+r()*0.02, ph=r()*6;
+    x.beginPath();
+    for(let t=0;t<=len+8;t+=8){const d=Math.sin(t*f+ph)*amp;
+      if(vertical){t?x.lineTo(off+d,Y+t):x.moveTo(off+d,Y+t);}else{t?x.lineTo(X+t,off+d):x.moveTo(X+t,off+d);}}
+    x.stroke();
+  }
+  x.restore();x.globalAlpha=1;
+}
+function bevel(x,X,Y,W,H){
+  x.lineWidth=3;x.strokeStyle='rgba(255,215,160,.2)';x.beginPath();x.moveTo(X,Y+H);x.lineTo(X,Y);x.lineTo(X+W,Y);x.stroke();
+  x.strokeStyle='rgba(0,0,0,.45)';x.beginPath();x.moveTo(X+W,Y);x.lineTo(X+W,Y+H);x.lineTo(X,Y+H);x.stroke();
+}
+function drawPath(x,k,cx,cy,size,fill,stroke){
+  x.save();x.translate(cx-size/2,cy-size/2);x.scale(size/24,size/24);
+  const p=new Path2D(PATHS[k]);
+  if(fill){x.fillStyle=fill;x.fill(p);} if(stroke){x.lineWidth=24/size*2;x.strokeStyle=stroke;x.stroke(p);}
+  x.restore();
+}
+function brassFill(x,X,Y,W,H){const g=x.createLinearGradient(X,Y,X,Y+H);g.addColorStop(0,'#e6c87a');g.addColorStop(.5,'#c29b45');g.addColorStop(1,'#8a6a2a');x.fillStyle=g;x.fillRect(X,Y,W,H);}
+
+function wallCanvas(){
+  const W=400,H=640,c=mk(W,H),x=c.getContext('2d');
+  x.fillStyle='#2b3a31';x.fillRect(0,0,W,H);
+  for(let i=0;i<W;i+=50){x.fillStyle='#32443a';x.fillRect(i+14,0,22,360);}
+  x.fillStyle='rgba(201,162,79,.24)';
+  for(let i=0;i<W;i+=50)for(let j=60;j<350;j+=60){const cx=i+25,cy=j+((i/50)%2?30:0);if(cy>345)continue;x.beginPath();x.moveTo(cx,cy-7);x.lineTo(cx+5,cy);x.lineTo(cx,cy+7);x.lineTo(cx-5,cy);x.fill();}
+  grain(x,0,0,W,34,'#3a2416','#120804',false,1);x.fillStyle='rgba(255,220,160,.16)';x.fillRect(0,30,W,3);
+  grain(x,0,356,W,24,'#5a3a22','#1a0e06',false,2);x.fillStyle='rgba(255,220,160,.2)';x.fillRect(0,356,W,3);x.fillStyle='rgba(0,0,0,.35)';x.fillRect(0,378,W,3);
+  grain(x,0,381,W,231,'#4a2e1b','#160b05',true,3);
+  const px=36,py=410,pw=W-72,ph=170;
+  x.fillStyle='rgba(0,0,0,.3)';x.fillRect(px,py,pw,ph);
+  grain(x,px+8,py+8,pw-16,ph-16,'#553520','#1a0c05',true,4);bevel(x,px,py,pw,ph);bevel(x,px+8,py+8,pw-16,ph-16);
+  grain(x,0,612,W,28,'#24160c','#000',false,5);
+  return c;
+}
+function floorCanvas(){
+  const N=512,c=mk(N,N),x=c.getContext('2d'),r=rng(9),cols=6,w=N/cols;
+  const tones=['#5b3a21','#4f321c','#664328','#563620','#60401f'];
+  for(let i=0;i<cols;i++){let y=-r()*220,k=0;
+    while(y<N){const len=140+r()*230;grain(x,i*w,y,w,len,tones[(r()*tones.length)|0],'#1a0d05',true,100+i*20+k);
+      x.fillStyle='rgba(0,0,0,.55)';x.fillRect(i*w,y,w,2);y+=len;k++;}
+    x.fillStyle='rgba(0,0,0,.6)';x.fillRect(i*w,0,2,N);x.fillStyle='rgba(255,220,170,.06)';x.fillRect(i*w+2,0,1,N);
+  }
+  return c;
+}
+const GOLD_STARS=[[190,230],[770,170],[880,640],[455,575],[250,830],[650,890]];
+function ceilingCanvas(){
+  const N=1024,c=mk(N,N),x=c.getContext('2d'),r=rng(77);
+  const g=x.createRadialGradient(N/2,N/2,40,N/2,N/2,N*.75);g.addColorStop(0,'#1d2a52');g.addColorStop(1,'#0a1026');x.fillStyle=g;x.fillRect(0,0,N,N);
+  x.strokeStyle='rgba(201,162,79,.16)';x.lineWidth=2;
+  [120,240,360,480].forEach(rad=>{x.beginPath();x.arc(N/2,N/2,rad,0,Math.PI*2);x.stroke();});
+  for(let i=0;i<12;i++){const a=i/12*Math.PI*2;x.beginPath();x.moveTo(N/2+Math.cos(a)*120,N/2+Math.sin(a)*120);x.lineTo(N/2+Math.cos(a)*720,N/2+Math.sin(a)*720);x.stroke();}
+  x.fillStyle='rgba(201,162,79,.3)';x.font=`28px ${FELL}`;x.textAlign='center';x.textBaseline='middle';
+  ['N','E','S','W'].forEach((t,i)=>{const a=i/4*Math.PI*2-Math.PI/2;x.fillText(t,N/2+Math.cos(a)*510,N/2+Math.sin(a)*510);});
+  x.font=`italic 22px ${FELL}`;x.fillText('Atlas Coelestis · E.H.',N/2,N/2-150);
+  // constellations
+  const groups=[[[90,520],[150,470],[220,480],[260,420],[330,400]],[[600,320],[660,360],[720,330],[780,380],[760,450]],[[560,700],[620,760],[700,740],[740,800]],[[330,120],[400,150],[470,110],[520,170]],[[880,300],[940,360],[900,430]]];
+  x.strokeStyle='rgba(220,230,255,.22)';x.lineWidth=1.5;
+  groups.forEach(gp=>{x.beginPath();gp.forEach((p,i)=>i?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]));x.stroke();gp.forEach(p=>{x.fillStyle='#eef2ff';x.beginPath();x.arc(p[0],p[1],3.6,0,7);x.fill();});});
+  for(let i=0;i<300;i++){const sx=r()*N,sy=r()*N,s=0.6+r()*2.2;x.globalAlpha=0.35+r()*0.6;x.fillStyle=r()<.15?'#cfdcff':'#ffffff';x.beginPath();x.arc(sx,sy,s,0,7);x.fill();}
+  x.globalAlpha=1;
+  // bright white decoys with flares
+  [[380,300],[820,500],[140,700],[560,180],[700,560]].forEach(([sx,sy])=>{x.fillStyle='rgba(235,242,255,.9)';x.beginPath();x.arc(sx,sy,4,0,7);x.fill();x.strokeStyle='rgba(235,242,255,.5)';x.lineWidth=1.5;x.beginPath();x.moveTo(sx-14,sy);x.lineTo(sx+14,sy);x.moveTo(sx,sy-14);x.lineTo(sx,sy+14);x.stroke();});
+  // gold stars
+  GOLD_STARS.forEach(([sx,sy])=>{
+    const gg=x.createRadialGradient(sx,sy,2,sx,sy,48);gg.addColorStop(0,'rgba(255,214,110,.55)');gg.addColorStop(1,'rgba(255,214,110,0)');x.fillStyle=gg;x.beginPath();x.arc(sx,sy,48,0,7);x.fill();
+    drawPath(x,'star',sx,sy,40,'#f4c95d','#fff1c2');
+  });
+  return c;
+}
+function rugCanvas(){
+  const W=640,H=440,c=mk(W,H),x=c.getContext('2d'),r=rng(5);
+  x.fillStyle='#5e1a19';x.fillRect(0,0,W,H);
+  for(let i=0;i<2600;i++){x.fillStyle=`rgba(${r()<.5?0:255},${r()<.5?20:200},${r()<.5?10:140},${r()*.06})`;x.fillRect(r()*W,r()*H,2,2);}
+  x.strokeStyle='#d6b05c';x.lineWidth=6;x.strokeRect(18,18,W-36,H-36);
+  x.fillStyle='#1d2a4a';x.fillRect(30,30,W-60,30);x.fillRect(30,H-60,W-60,30);x.fillRect(30,30,30,H-60);x.fillRect(W-60,30,30,H-60);
+  x.fillStyle='#d6b05c';
+  for(let i=50;i<W-50;i+=26){x.beginPath();x.moveTo(i,45);x.lineTo(i+8,38);x.lineTo(i+16,45);x.lineTo(i+8,52);x.fill();x.beginPath();x.moveTo(i,H-45);x.lineTo(i+8,H-52);x.lineTo(i+16,H-45);x.lineTo(i+8,H-38);x.fill();}
+  for(let j=70;j<H-70;j+=26){x.beginPath();x.moveTo(45,j);x.lineTo(38,j+8);x.lineTo(45,j+16);x.lineTo(52,j+8);x.fill();x.beginPath();x.moveTo(W-45,j);x.lineTo(W-52,j+8);x.lineTo(W-45,j+16);x.lineTo(W-38,j+8);x.fill();}
+  x.strokeStyle='rgba(214,176,92,.5)';x.lineWidth=2;x.strokeRect(74,74,W-148,H-148);
+  const meds=[['blue','III'],['green','I'],['yellow','IV'],['red','II']];
+  meds.forEach(([col,num],i)=>{const cx=150+i*113,cy=H/2;
+    x.fillStyle='#efe2c4';x.beginPath();x.arc(cx,cy,50,0,7);x.fill();
+    x.fillStyle=BOX_COLORS[col];x.beginPath();x.arc(cx,cy,42,0,7);x.fill();
+    x.strokeStyle='rgba(0,0,0,.3)';x.lineWidth=2;x.beginPath();x.arc(cx,cy,34,0,7);x.stroke();
+    x.fillStyle='#fdf6e3';x.font=`bold 34px ${FELL}`;x.textAlign='center';x.textBaseline='middle';x.fillText(num,cx,cy+2);
+  });
+  return c;
+}
+function doorCanvas(){
+  const W=260,H=450,c=mk(W,H),x=c.getContext('2d');
+  grain(x,0,0,W,H,'#4f301b','#140904',true,11);
+  [[24,24,95,180],[141,24,95,180],[24,236,95,190],[141,236,95,190]].forEach(([X,Y,w,h],i)=>{x.fillStyle='rgba(0,0,0,.25)';x.fillRect(X,Y,w,h);grain(x,X+8,Y+8,w-16,h-16,'#5a3820','#160a04',true,12+i);bevel(x,X,Y,w,h);bevel(x,X+8,Y+8,w-16,h-16);});
+  x.fillStyle='#b8913f';x.fillRect(222,205,22,62);x.fillStyle='#e6c87a';x.beginPath();x.arc(233,225,11,0,7);x.fill();x.fillStyle='#1a0e06';x.beginPath();x.arc(233,250,4,0,7);x.fill();x.fillRect(231,250,4,10);
+  return c;
+}
+function plaqueCanvas(){
+  const W=512,H=128,c=mk(W,H),x=c.getContext('2d');
+  brassFill(x,0,0,W,H);x.strokeStyle='#5c4416';x.lineWidth=5;x.strokeRect(8,8,W-16,H-16);
+  ORDER.forEach((k,i)=>drawPath(x,k,64+i*96,H/2,62,'#3a280e',null));
+  return c;
+}
+function keypadCanvas(){
+  const W=128,H=192,c=mk(W,H),x=c.getContext('2d');
+  brassFill(x,0,0,W,H);x.strokeStyle='#5c4416';x.lineWidth=4;x.strokeRect(4,4,W-8,H-8);
+  x.fillStyle='#1d140c';x.fillRect(16,14,W-32,26);
+  const labels=['1','2','3','4','5','6','7','8','9','<','0','>'];
+  labels.forEach((t,i)=>{const cx=28+(i%3)*36,cy=60+Math.floor(i/3)*34;x.fillStyle='#2a1b10';x.beginPath();x.arc(cx,cy,13,0,7);x.fill();x.fillStyle='#e6c87a';x.font='bold 14px monospace';x.textAlign='center';x.textBaseline='middle';x.fillText(t,cx,cy+1);});
+  return c;
+}
+function drawClock(c,h,m){
+  const x=c.getContext('2d'),s=c.width,cx=s/2,R=s/2;
+  x.clearRect(0,0,s,s);
+  let g=x.createRadialGradient(cx,cx,R*.7,cx,cx,R);g.addColorStop(0,'#e0bd6a');g.addColorStop(1,'#6e4f1c');x.fillStyle=g;x.beginPath();x.arc(cx,cx,R,0,7);x.fill();
+  g=x.createRadialGradient(cx,cx*.8,10,cx,cx,R*.88);g.addColorStop(0,'#f6ecd2');g.addColorStop(1,'#d6c296');x.fillStyle=g;x.beginPath();x.arc(cx,cx,R*.88,0,7);x.fill();
+  x.strokeStyle='#2a1b10';
+  for(let i=0;i<60;i++){const a=i/60*Math.PI*2,r1=R*.84,r2=i%5?R*.8:R*.74;x.lineWidth=i%5?s*.004:s*.011;x.beginPath();x.moveTo(cx+Math.sin(a)*r1,cx-Math.cos(a)*r1);x.lineTo(cx+Math.sin(a)*r2,cx-Math.cos(a)*r2);x.stroke();}
+  const rom=['XII','I','II','III','IIII','V','VI','VII','VIII','IX','X','XI'];
+  x.fillStyle='#2a1b10';x.font=`${s*.075}px ${FELL}`;x.textAlign='center';x.textBaseline='middle';
+  rom.forEach((t,i)=>{const a=i/12*Math.PI*2;x.fillText(t,cx+Math.sin(a)*R*.62,cx-Math.cos(a)*R*.62);});
+  x.font=`italic ${s*.045}px ${FELL}`;x.fillText('Halvorsen',cx,cx+R*.34);
+  x.fillStyle='#8a6a2a';x.fillRect(cx-s*.05,cx+R*.44,s*.1,s*.03);
+  const ha=((h%12)+m/60)/12*Math.PI*2,ma=m/60*Math.PI*2;
+  const hand=(a,len,w)=>{x.save();x.translate(cx,cx);x.rotate(a);x.fillStyle='#1d140c';x.beginPath();x.moveTo(-w/2,len*.16);x.lineTo(-w/2,-len*.8);x.lineTo(0,-len);x.lineTo(w/2,-len*.8);x.lineTo(w/2,len*.16);x.closePath();x.fill();x.restore();};
+  hand(ha,R*.44,s*.026);hand(ma,R*.7,s*.014);
+  x.fillStyle='#b8913f';x.beginPath();x.arc(cx,cx,s*.028,0,7);x.fill();
+}
+function windowCanvas(){
+  const W=256,H=300,c=mk(W,H),x=c.getContext('2d');
+  const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#0a1330');g.addColorStop(1,'#22325c');x.fillStyle=g;x.fillRect(0,0,W,H);
+  const r=rng(3);for(let i=0;i<60;i++){x.fillStyle=`rgba(255,255,255,${.3+r()*.6})`;x.fillRect(r()*W,r()*H*.8,1.5,1.5);}
+  x.fillStyle='#f3ecd0';x.beginPath();x.arc(178,86,22,0,7);x.fill();x.fillStyle='#0f1a3c';x.beginPath();x.arc(188,80,20,0,7);x.fill();
+  x.fillStyle='#0c1020';x.beginPath();x.moveTo(0,H);x.lineTo(0,240);x.lineTo(60,215);x.lineTo(120,232);x.lineTo(190,205);x.lineTo(W,228);x.lineTo(W,H);x.fill();
+  grain(x,0,0,W,16,'#3a2416','#100602',false,30);grain(x,0,H-16,W,16,'#3a2416','#100602',false,31);grain(x,0,0,16,H,'#3a2416','#100602',true,32);grain(x,W-16,0,16,H,'#3a2416','#100602',true,33);
+  grain(x,W/2-5,0,10,H,'#3a2416','#100602',true,34);grain(x,0,H/2-5,W,10,'#3a2416','#100602',false,35);
+  x.fillStyle='rgba(255,255,255,.05)';x.fillRect(16,16,W/2-21,H/2-21);
+  return c;
+}
+function shelfCanvas(){
+  const W=512,H=614,c=mk(W,H),x=c.getContext('2d'),r=rng(33);
+  grain(x,0,0,W,H,'#2f1c10','#0d0603',true,21);
+  const cols=['#6e1f1c','#1f3352','#2e4a2e','#8a6a2a','#3b2a1e','#1a1a1a','#245050','#5a2a44'],sh=H/4;
+  for(let s=0;s<4;s++){
+    const top=s*sh+16,base=(s+1)*sh-16;
+    x.fillStyle='#120a05';x.fillRect(18,top,W-36,base-top);
+    let bx=24;
+    while(bx<W-44){
+      if(r()<.07&&bx>60){bx+=22;continue;}
+      const bw=12+r()*20,bh=(base-top)*(.6+r()*.34),col=cols[(r()*cols.length)|0];
+      x.fillStyle=col;x.fillRect(bx,base-bh,bw,bh);
+      x.fillStyle='rgba(255,255,255,.09)';x.fillRect(bx+1,base-bh,2,bh);
+      x.fillStyle='rgba(0,0,0,.32)';x.fillRect(bx+bw-2,base-bh,2,bh);
+      x.fillStyle='rgba(214,176,92,.75)';x.fillRect(bx+2,base-bh+10,bw-4,2);x.fillRect(bx+2,base-16,bw-4,2);
+      bx+=bw+1.5;
+    }
+    grain(x,0,base,W,16,'#5a3820','#1a0c05',false,50+s);x.fillStyle='rgba(255,220,160,.18)';x.fillRect(0,base,W,2);
+    grain(x,0,top-16,W,16,'#4a2e1a','#1a0c05',false,60+s);
+  }
+  grain(x,0,0,18,H,'#4a2e1a','#100602',true,70);grain(x,W-18,0,18,H,'#4a2e1a','#100602',true,71);
+  return c;
+}
+function chalkCanvas(){
+  const W=512,H=320,c=mk(W,H),x=c.getContext('2d'),r=rng(8);
+  grain(x,0,0,W,H,'#5a3820','#1a0c05',false,80);
+  x.fillStyle='#2b3330';x.fillRect(16,16,W-32,H-32);
+  for(let i=0;i<70;i++){x.strokeStyle=`rgba(235,232,218,${r()*.05})`;x.lineWidth=8+r()*20;x.beginPath();const sx=20+r()*W,sy=20+r()*H;x.moveTo(sx,sy);x.lineTo(sx+60*r()-30,sy+20*r());x.stroke();}
+  x.fillStyle='#ece8da';x.textAlign='center';x.textBaseline='middle';
+  x.font=`30px ${FELL}`;x.fillText('FIVE LETTERS OPEN THE CHEST',W/2,62);
+  x.strokeStyle='rgba(236,232,218,.6)';x.lineWidth=2;x.beginPath();x.moveTo(110,84);x.lineTo(W-110,84);x.stroke();
+  x.font=`italic 31px ${FELL}`;x.fillText('I have a face and two hands,',W/2,140);x.fillText('but no arms and no legs.',W/2,184);
+  x.font=`italic 26px ${FELL}`;x.fillText('What am I?',W/2,240);
+  return c;
+}
+function chestCanvas(c){
+  const W=512,H=256,x=c.getContext('2d');
+  const tones=['#5a3820','#523219','#603d22','#4d2f19'];
+  for(let i=0;i<4;i++){grain(x,0,i*64,W,64,tones[i],'#160a04',false,40+i);x.fillStyle='rgba(0,0,0,.5)';x.fillRect(0,i*64,W,2);}
+  [52,W-82].forEach(bx=>{x.fillStyle='#2f2d2a';x.fillRect(bx,0,30,H);x.fillStyle='#57534c';for(let y=18;y<H;y+=48){x.beginPath();x.arc(bx+15,y,5,0,7);x.fill();}});
+  brassFill(x,136,64,240,128);x.strokeStyle='#5c4416';x.lineWidth=4;x.strokeRect(140,68,232,120);
+  for(let i=0;i<5;i++){const wx=150+i*44;x.fillStyle='#1d140c';x.fillRect(wx,92,36,56);x.fillStyle='#efe2c4';x.font='bold 34px monospace';x.textAlign='center';x.textBaseline='middle';x.fillText(LETTERS[S.dials[i]],wx+18,122);}
+  x.fillStyle='#3a280e';x.font=`16px ${FELL}`;x.fillText(S.chestOpen?'OPEN':'LOCKED',W/2,172);
+}
+function lockboxCanvas(){
+  const W=260,H=100,c=mk(W,H),x=c.getContext('2d');
+  grain(x,0,0,W,H,'#3e2414','#100602',false,90);
+  x.strokeStyle='#b8913f';x.lineWidth=4;x.strokeRect(4,4,W-8,H-8);
+  ['red','blue','green','yellow'].forEach((col,i)=>{const cx=44+i*57;
+    x.fillStyle='#2a1a0e';x.beginPath();x.arc(cx,24,5,0,7);x.fill();
+    x.fillStyle='#b8913f';x.beginPath();x.arc(cx,62,19,0,7);x.fill();x.fillStyle=BOX_COLORS[col];x.beginPath();x.arc(cx,62,15,0,7);x.fill();
+    x.fillStyle='rgba(255,255,255,.35)';x.beginPath();x.arc(cx-5,56,5,0,7);x.fill();});
+  return c;
+}
+function drawerCanvas(){
+  const W=280,H=72,c=mk(W,H),x=c.getContext('2d');
+  grain(x,0,0,W,H,'#5f3c22','#1a0c05',false,95);bevel(x,3,3,W-6,H-6);
+  brassFill(x,W/2-18,H/2-14,36,28);x.fillStyle='#1a0e06';x.beginPath();x.arc(W/2,H/2-3,4,0,7);x.fill();x.fillRect(W/2-2,H/2-3,4,10);
+  return c;
+}
+function paintingCanvas(){
+  const W=270,H=345,c=mk(W,H),x=c.getContext('2d'),r=rng(12);
+  brassFill(x,0,0,W,H);x.strokeStyle='#5c4416';x.lineWidth=3;x.strokeRect(10,10,W-20,H-20);x.strokeRect(18,18,W-36,H-36);
+  const g=x.createLinearGradient(0,22,0,H-22);g.addColorStop(0,'#2e2418');g.addColorStop(1,'#14100a');x.fillStyle=g;x.fillRect(22,22,W-44,H-44);
+  x.fillStyle='#14223e';x.fillRect(150,44,82,104);for(let i=0;i<14;i++){x.fillStyle='rgba(255,240,200,.8)';x.fillRect(152+r()*78,46+r()*100,2,2);}
+  x.strokeStyle='#3a2a18';x.lineWidth=5;x.strokeRect(150,44,82,104);
+  x.fillStyle='#2f3d2c';x.beginPath();x.moveTo(52,H-22);x.lineTo(70,190);x.quadraticCurveTo(112,160,150,190);x.lineTo(176,H-22);x.fill();
+  x.fillStyle='#c9a27a';x.beginPath();x.arc(112,142,27,0,7);x.fill();
+  x.fillStyle='#8f8a82';x.beginPath();x.arc(112,124,24,Math.PI,0);x.fill();x.beginPath();x.arc(112,104,11,0,7);x.fill();
+  x.fillStyle='#efe2c4';x.fillRect(96,170,32,8);
+  x.strokeStyle='#c29b45';x.lineWidth=9;x.lineCap='round';x.beginPath();x.moveTo(128,232);x.lineTo(204,150);x.stroke();
+  x.strokeStyle='#8a6a2a';x.lineWidth=12;x.beginPath();x.moveTo(196,158);x.lineTo(210,143);x.stroke();
+  for(let i=0;i<900;i++){x.fillStyle=`rgba(0,0,0,${r()*.08})`;x.fillRect(22+r()*(W-44),22+r()*(H-44),3,3);}
+  const v=x.createRadialGradient(W/2,H/2,60,W/2,H/2,220);v.addColorStop(0,'rgba(0,0,0,0)');v.addColorStop(1,'rgba(0,0,0,.55)');x.fillStyle=v;x.fillRect(22,22,W-44,H-44);
+  brassFill(x,85,H-46,100,22);x.fillStyle='#3a280e';x.font=`13px ${FELL}`;x.textAlign='center';x.textBaseline='middle';x.fillText('E. HALVORSEN',W/2,H-35);
+  return c;
+}
+function diplomaCanvas(){
+  const W=280,H=220,c=mk(W,H),x=c.getContext('2d');
+  grain(x,0,0,W,H,'#2a180c','#000',false,96);
+  x.fillStyle='#ece0c0';x.fillRect(14,14,W-28,H-28);x.strokeStyle='#8a6a2a';x.lineWidth=2;x.strokeRect(22,22,W-44,H-44);x.strokeRect(26,26,W-52,H-52);
+  x.fillStyle='#2a1b10';x.textAlign='center';x.textBaseline='middle';
+  x.font=`17px ${FELL}`;x.fillText('Northern Astronomical Society',W/2,58);
+  x.font=`italic 13px ${FELL}`;x.fillText('presented to',W/2,86);
+  x.font=`20px ${FELL}`;x.fillText('Prof. Elsa Halvorsen',W/2,112);
+  x.font=`italic 13px ${FELL}`;x.fillText('MDCCCLXXXIX',W/2,140);
+  x.fillStyle='#8f2a24';x.beginPath();x.arc(W/2,172,15,0,7);x.fill();
+  return c;
+}
+function globeCanvas(){
+  const W=512,H=256,c=mk(W,H),x=c.getContext('2d'),r=rng(41);
+  x.fillStyle='#3b5f72';x.fillRect(0,0,W,H);
+  x.fillStyle='#c8b07a';
+  for(let i=0;i<14;i++){const cx=r()*W,cy=40+r()*170;for(let j=0;j<6;j++){x.beginPath();x.ellipse(cx+r()*50-25,cy+r()*36-18,14+r()*30,10+r()*22,r()*3,0,7);x.fill();}}
+  x.strokeStyle='rgba(42,27,16,.3)';x.lineWidth=1;for(let i=1;i<8;i++){x.beginPath();x.moveTo(0,i*H/8);x.lineTo(W,i*H/8);x.stroke();}for(let i=1;i<16;i++){x.beginPath();x.moveTo(i*W/16,0);x.lineTo(i*W/16,H);x.stroke();}
+  return c;
+}
+function cardCanvas(k,text){
+  const W=256,H=160,c=mk(W,H),x=c.getContext('2d');
+  x.fillStyle='#f3e8cc';x.fillRect(0,0,W,H);x.strokeStyle='#8a6a2a';x.lineWidth=3;x.strokeRect(6,6,W-12,H-12);
+  drawPath(x,k,62,H/2,70,'#2a1b10',null);
+  x.fillStyle='#2a1b10';x.textAlign='left';x.textBaseline='middle';
+  if(text.length<4){x.font='bold 64px monospace';x.fillText('= '+text,108,H/2+4);}
+  else{x.font=`italic 22px ${FELL}`;x.fillText('= '+text,104,H/2);}
+  return c;
+}
+function glowCanvas(){
+  const c=mk(64,64),x=c.getContext('2d'),g=x.createRadialGradient(32,32,0,32,32,32);
+  g.addColorStop(0,'rgba(255,220,150,1)');g.addColorStop(.35,'rgba(255,170,80,.45)');g.addColorStop(1,'rgba(255,140,40,0)');x.fillStyle=g;x.fillRect(0,0,64,64);return c;
+}
+
+/* ---------- Three.js scene ---------- */
+const stage=$('#stage');
+const renderer=new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+renderer.outputEncoding=THREE.sRGBEncoding;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.2;
+stage.appendChild(renderer.domElement);
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x05060c);
+const camera=new THREE.PerspectiveCamera(70,1,0.05,60);camera.position.set(0,1.6,0);
+const maxAniso=renderer.capabilities.getMaxAnisotropy();
+function tex(c,rep){const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.anisotropy=maxAniso;if(rep){t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(rep[0],rep[1]);}return t;}
+const M=o=>new THREE.MeshStandardMaterial(Object.assign({roughness:.82,metalness:0},o));
+const darkWood=M({color:0x3b2416}),midWood=M({color:0x6a4428}),brass=M({color:0xc29b45,metalness:.45,roughness:.38}),stone=M({color:0x8a7e70,roughness:.95}),iron=M({color:0x2c2a27,metalness:.3,roughness:.6});
+function box(w,h,d,mat,x,y,z,parent){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);(parent||scene).add(m);return m;}
+function plane(w,h,mat,x,y,z,ry,parent){const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),mat);m.position.set(x,y,z);m.rotation.y=ry||0;(parent||scene).add(m);return m;}
+function cyl(rt,rb,h,mat,x,y,z,parent,seg){const m=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,seg||16),mat);m.position.set(x,y,z);(parent||scene).add(m);return m;}
+function tag(o,id){o.userData.id=id;return o;}
+const noRay=o=>{o.raycast=function(){};return o;};
+const faceMats=(front,side,idx)=>{const a=[side,side,side,side,side,side];a[idx]=front;return a;};
+
+let clockC,clockTex,chestC,chestTex,doorPivot,exitGlow,lidBox,lidChest,drawer,flames=[],fireFlames=[],fireLight,candleLight;
+const anim={boxLid:0,chestLid:0,drawer:0,door:0};
+
+function buildScene(){
+  // Room shell
+  const wallMat=M({map:tex(wallCanvas(),[4,1])});
+  plane(10,4,wallMat,0,2,-5,0);plane(10,4,wallMat,0,2,5,Math.PI);plane(10,4,wallMat,5,2,0,-Math.PI/2);plane(10,4,wallMat,-5,2,0,Math.PI/2);
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(10,10),M({map:tex(floorCanvas(),[5,5]),roughness:.7}));floor.rotation.x=-Math.PI/2;scene.add(floor);
+  const ceil=new THREE.Mesh(new THREE.PlaneGeometry(10,10),new THREE.MeshBasicMaterial({map:tex(ceilingCanvas()),color:0xd4d4d4}));ceil.rotation.x=Math.PI/2;ceil.position.y=4;scene.add(tag(ceil,'ceiling'));
+  const rugC=rugCanvas();window.__rug=rugC;
+  const rug=new THREE.Mesh(new THREE.PlaneGeometry(3.2,2.2),M({map:tex(rugC),roughness:1}));rug.rotation.x=-Math.PI/2;rug.position.y=0.006;scene.add(tag(rug,'rug'));
+
+  // NORTH: door, plaque, keypad, clock, certificate
+  box(0.12,2.42,0.14,darkWood,-0.72,1.21,-4.94);box(0.12,2.42,0.14,darkWood,0.72,1.21,-4.94);box(1.56,0.12,0.14,darkWood,0,2.36,-4.94);
+  exitGlow=plane(1.32,2.28,new THREE.MeshBasicMaterial({color:0xfff2d6}),0,1.14,-4.985,0);exitGlow.visible=false;noRay(exitGlow);
+  doorPivot=new THREE.Group();doorPivot.position.set(-0.65,0,-4.93);scene.add(doorPivot);
+  const door=box(1.3,2.26,0.06,faceMats(M({map:tex(doorCanvas())}),darkWood,4),0.65,1.13,0,doorPivot);tag(door,'keypad');
+  tag(plane(1.0,0.25,M({map:tex(plaqueCanvas()),metalness:.3,roughness:.4}),0,2.62,-4.98,0),'keypad');
+  tag(box(0.22,0.33,0.03,faceMats(M({map:tex(keypadCanvas()),metalness:.3,roughness:.45}),brass,4),1.0,1.25,-4.97),'keypad');
+  const clockG=tag(new THREE.Group(),'clock');scene.add(clockG);
+  const rim=cyl(0.52,0.52,0.1,darkWood,-2.3,2.45,-4.94,clockG,40);rim.rotation.x=Math.PI/2;
+  clockC=mk(512,512);drawClock(clockC,S.h,S.m);clockTex=tex(clockC);
+  const face=new THREE.Mesh(new THREE.CircleGeometry(0.46,48),M({map:clockTex,roughness:.5}));face.position.set(-2.3,2.45,-4.885);clockG.add(face);
+  box(0.3,0.5,0.08,darkWood,-2.3,1.75,-4.95,clockG);
+  tag(plane(0.7,0.55,M({map:tex(diplomaCanvas())}),2.4,2.2,-4.985,0),'diploma');
+
+  // NW: telescope
+  const tel=tag(new THREE.Group(),'telescope');tel.position.set(-3.9,0,-3.9);scene.add(tel);
+  for(let i=0;i<3;i++){const a=i/3*Math.PI*2;const leg=cyl(0.018,0.022,1.3,darkWood,Math.cos(a)*0.28,0.58,Math.sin(a)*0.28,tel,8);leg.rotation.z=Math.cos(a)*0.27;leg.rotation.x=-Math.sin(a)*0.27;}
+  box(0.12,0.08,0.12,brass,0,1.2,0,tel);
+  const tube=new THREE.Group();tube.position.set(0,1.24,0);tube.rotation.x=-0.28;tube.rotation.z=0.12;tel.add(tube);
+  cyl(0.07,0.055,1.05,brass,0,0.35,0,tube,20);cyl(0.085,0.085,0.12,darkWood,0,0.86,0,tube,20);cyl(0.025,0.025,0.16,darkWood,0,-0.22,0,tube,10);
+
+  // WEST: window, desk, lockbox, drawer, lamp, chair
+  tag(plane(1.2,1.4,new THREE.MeshBasicMaterial({map:tex(windowCanvas()),color:0xbdbdbd}),-4.985,2.3,-1.7,Math.PI/2),'window');
+  box(0.2,0.05,1.36,darkWood,-4.9,1.58,-1.7);
+  const desk=tag(new THREE.Group(),'desk');scene.add(desk);
+  box(0.8,0.06,1.8,midWood,-4.55,0.78,1.0,desk);
+  [[-4.2,0.15],[-4.2,1.85],[-4.9,0.15],[-4.9,1.85]].forEach(([lx,lz])=>box(0.06,0.75,0.06,darkWood,lx,0.375,lz,desk));
+  box(0.02,0.2,1.7,darkWood,-4.17,0.66,1.0,desk);
+  const paper=new THREE.Mesh(new THREE.PlaneGeometry(0.3,0.4),M({color:0xe8dcbc}));paper.rotation.x=-Math.PI/2;paper.rotation.z=0.25;paper.position.set(-4.45,0.812,1.2);desk.add(paper);
+  drawer=tag(new THREE.Group(),'drawer');scene.add(drawer);
+  box(0.03,0.16,0.6,faceMats(M({map:tex(drawerCanvas())}),midWood,0),-4.145,0.66,1.0,drawer);
+  box(0.6,0.12,0.58,midWood,-4.46,0.66,1.0,drawer);
+  const dCard=new THREE.Mesh(new THREE.PlaneGeometry(0.22,0.14),M({map:tex(cardCanvas('square','candles lit'))}));dCard.rotation.x=-Math.PI/2;dCard.rotation.z=Math.PI/2;dCard.position.set(-4.35,0.722,1.0);drawer.add(dCard);
+  const lb=tag(new THREE.Group(),'lockbox');scene.add(lb);
+  box(0.3,0.16,0.42,faceMats(M({map:tex(lockboxCanvas())}),darkWood,0),-4.55,0.89,0.45,lb);
+  const lbCard=new THREE.Mesh(new THREE.PlaneGeometry(0.2,0.125),M({map:tex(cardCanvas('circle','3'))}));lbCard.rotation.x=-Math.PI/2;lbCard.rotation.z=Math.PI/2;lbCard.position.set(-4.55,0.972,0.45);lb.add(lbCard);
+  lidBox=new THREE.Group();lidBox.position.set(-4.70,0.97,0.45);lb.add(lidBox);box(0.31,0.04,0.43,darkWood,0.155,0.02,0,lidBox);
+  cyl(0.08,0.09,0.03,brass,-4.7,0.825,1.65,desk);cyl(0.012,0.012,0.36,brass,-4.7,1.0,1.65,desk);
+  const shade=cyl(0.04,0.15,0.15,M({color:0x2f5a3a,emissive:0x203a22,emissiveIntensity:.6,side:THREE.DoubleSide}),-4.7,1.2,1.65,desk);shade.geometry=new THREE.CylinderGeometry(0.04,0.15,0.15,20,1,true);
+  const chair=new THREE.Group();scene.add(chair);
+  box(0.45,0.05,0.45,midWood,-3.7,0.46,1.0,chair);box(0.05,0.55,0.45,midWood,-3.48,0.76,1.0,chair);
+  [[-3.9,0.8],[-3.9,1.2],[-3.5,0.8],[-3.5,1.2]].forEach(([lx,lz])=>box(0.04,0.46,0.04,darkWood,lx,0.23,lz,chair));
+
+  // EAST: bookshelf, chalkboard
+  const shelf=tag(new THREE.Group(),'bookshelf');scene.add(shelf);
+  box(0.04,2.4,2.0,darkWood,4.96,1.2,-1.4,shelf);box(0.4,2.44,0.06,darkWood,4.78,1.22,-2.43,shelf);box(0.4,2.44,0.06,darkWood,4.78,1.22,-0.37,shelf);box(0.42,0.07,2.12,darkWood,4.78,2.47,-1.4,shelf);
+  plane(1.98,2.38,M({map:tex(shelfCanvas())}),4.74,1.21,-1.4,-Math.PI/2,shelf);
+  const cb=tag(new THREE.Group(),'chalkboard');scene.add(cb);
+  plane(1.7,1.06,M({map:tex(chalkCanvas()),roughness:.95}),4.975,1.75,2.4,-Math.PI/2,cb);box(0.08,0.03,1.6,darkWood,4.93,1.21,2.4,cb);
+
+  // SE: chest
+  const chest=tag(new THREE.Group(),'chest');chest.position.set(3.55,0,3.55);chest.rotation.y=-3*Math.PI/4;scene.add(chest);
+  chestC=mk(512,256);chestCanvas(chestC);chestTex=tex(chestC);
+  box(1.0,0.45,0.6,faceMats(M({map:chestTex}),midWood,4),0,0.225,0,chest);
+  const chCard=new THREE.Mesh(new THREE.PlaneGeometry(0.34,0.21),M({map:tex(cardCanvas('diamond','1'))}));chCard.rotation.x=-Math.PI/2;chCard.position.set(0,0.452,0.05);chest.add(chCard);
+  lidChest=new THREE.Group();lidChest.position.set(0,0.45,-0.3);chest.add(lidChest);
+  box(1.02,0.12,0.62,midWood,0,0.06,0.31,lidChest);box(0.06,0.125,0.63,iron,-0.37,0.06,0.31,lidChest);box(0.06,0.125,0.63,iron,0.37,0.06,0.31,lidChest);
+
+  // SOUTH: fireplace, mantel candles, painting
+  const fp=tag(new THREE.Group(),'fire');scene.add(fp);
+  box(0.36,1.25,0.4,stone,-0.95,0.625,4.8,fp);box(0.36,1.25,0.4,stone,0.95,0.625,4.8,fp);box(2.26,0.3,0.4,stone,0,1.1,4.8,fp);
+  plane(1.56,0.96,new THREE.MeshBasicMaterial({color:0x140b06}),0,0.48,4.97,Math.PI,fp);
+  box(2.6,0.06,0.7,stone,0,0.03,4.62,fp);
+  const log1=cyl(0.06,0.06,0.8,darkWood,0,0.12,4.8,fp,10);log1.rotation.z=Math.PI/2;const log2=cyl(0.055,0.055,0.7,darkWood,0.05,0.2,4.75,fp,10);log2.rotation.z=Math.PI/2+0.2;
+  const glowTex=tex(glowCanvas());
+  [[-0.2,0xff7a20,0.5],[0.0,0xffa640,0.62],[0.2,0xff8a2a,0.48]].forEach(([fx,col,h])=>{const f=new THREE.Mesh(new THREE.ConeGeometry(0.11,h,10),new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:.9}));f.position.set(fx,0.2+h/2,4.78);fp.add(f);fireFlames.push(f);noRay(f);});
+  const fglow=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true}));fglow.scale.set(1.6,1.1,1);fglow.position.set(0,0.45,4.7);noRay(fglow);scene.add(fglow);
+  const mantel=tag(new THREE.Group(),'mantel');scene.add(mantel);
+  box(2.7,0.08,0.5,darkWood,0,1.29,4.76,mantel);
+  const candleMat=M({color:0xf1e6c8,emissive:0x3a2a10,emissiveIntensity:.4});
+  [[-1.1,0.28,true],[-0.62,0.2,true],[-0.1,0.32,true],[0.3,0.16,false],[0.68,0.24,true],[1.12,0.3,true]].forEach(([cx,h,lit])=>{
+    cyl(0.032,0.036,h,candleMat,cx,1.33+h/2,4.7,mantel,12);cyl(0.004,0.004,0.02,iron,cx,1.33+h+0.01,4.7,mantel,4);
+    if(lit){const fl=new THREE.Mesh(new THREE.ConeGeometry(0.016,0.06,8),new THREE.MeshBasicMaterial({color:0xffd27a}));fl.position.set(cx,1.33+h+0.045,4.7);mantel.add(fl);flames.push(fl);
+      const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true}));sp.scale.set(0.2,0.24,1);sp.position.copy(fl.position);noRay(sp);scene.add(sp);}
+  });
+  tag(plane(0.95,1.2,M({map:tex(paintingCanvas()),roughness:.6}),0,2.55,4.975,Math.PI),'painting');
+
+  // SW: globe
+  const gl=tag(new THREE.Group(),'globe');gl.position.set(-3.7,0,3.7);scene.add(gl);
+  cyl(0.2,0.24,0.05,darkWood,0,0.025,0,gl,20);cyl(0.025,0.025,0.75,darkWood,0,0.4,0,gl,8);
+  const ball=new THREE.Mesh(new THREE.SphereGeometry(0.28,32,20),M({map:tex(globeCanvas()),roughness:.5}));ball.position.y=1.05;ball.rotation.z=0.4;gl.add(ball);gl.userData.ball=ball;
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(0.31,0.012,8,40),brass);ring.position.y=1.05;ring.rotation.y=Math.PI/2;gl.add(ring);
+
+  // Lights
+  scene.add(new THREE.AmbientLight(0xfff0dd,0.5));
+  scene.add(new THREE.HemisphereLight(0xffe2c0,0x3a2a1c,0.6));
+  fireLight=new THREE.PointLight(0xff8a3c,1.5,10,1.4);fireLight.position.set(0,0.7,4.2);scene.add(fireLight);
+  candleLight=new THREE.PointLight(0xffc070,0.7,7,1.4);candleLight.position.set(0,1.75,4.3);scene.add(candleLight);
+  const lamp=new THREE.PointLight(0xffd59a,1.2,7,1.4);lamp.position.set(-4.5,1.15,1.6);scene.add(lamp);
+  const fill=new THREE.PointLight(0xffe6c8,0.55,12,1);fill.position.set(0,3.5,0);scene.add(fill);
+  const nfill=new THREE.PointLight(0xffe0b8,0.45,7,1.3);nfill.position.set(0,2.6,-3.4);scene.add(nfill);
+  const efill=new THREE.PointLight(0xffe0b8,0.35,6,1.3);efill.position.set(3.2,2.4,0.4);scene.add(efill);
+}
+
+/* ---------- View control: gyro, drag fallback, pinch zoom, tap ---------- */
+let gyroLive=false,dragMode=false,needCal=true,ori=null,yaw=0,pitch=0,idleSpin=true;
+const zee=new THREE.Vector3(0,0,1),eul=new THREE.Euler(),q0=new THREE.Quaternion(),q1=new THREE.Quaternion(-Math.sqrt(.5),0,0,Math.sqrt(.5)),calQ=new THREE.Quaternion(),tq=new THREE.Quaternion(),Y=new THREE.Vector3(0,1,0),fwd=new THREE.Vector3();
+function screenAngle(){return (screen.orientation&&typeof screen.orientation.angle==='number')?screen.orientation.angle:(window.orientation||0);}
+function onOri(e){
+  if(e.alpha==null&&e.beta==null)return;
+  ori={a:e.alpha||0,b:e.beta||0,g:e.gamma||0};
+  if(!gyroLive){gyroLive=true;needCal=true;if(dragMode){dragMode=false;showHint('Phone motion found. Turn around to look.');}}
+}
+function gyroQuat(out){
+  const d=THREE.MathUtils.degToRad;
+  eul.set(d(ori.b),d(ori.a),-d(ori.g),'YXZ');out.setFromEuler(eul);out.multiply(q1);out.multiply(q0.setFromAxisAngle(zee,-d(screenAngle())));
+}
+
+const ptrs=new Map();let gest=null;
+const cvs=renderer.domElement;
+const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+cvs.addEventListener('pointerdown',e=>{
+  try{cvs.setPointerCapture(e.pointerId);}catch(_){}
+  ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(ptrs.size===1){gest={sx:e.clientX,sy:e.clientY,lx:e.clientX,ly:e.clientY,t:performance.now(),moved:false,pinched:false};}
+  else if(ptrs.size===2&&gest){const[a,b]=[...ptrs.values()];gest.pinched=true;gest.d0=dist(a,b)||1;gest.f0=camera.fov;}
+});
+cvs.addEventListener('pointermove',e=>{
+  if(!ptrs.has(e.pointerId))return;
+  ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(!gest)return;
+  if(ptrs.size>=2){const[a,b]=[...ptrs.values()];setFov(gest.f0*gest.d0/(dist(a,b)||1));return;}
+  if(Math.hypot(e.clientX-gest.sx,e.clientY-gest.sy)>9)gest.moved=true;
+  if(dragMode&&!gest.pinched){const k=0.0042*camera.fov/70;yaw+=(e.clientX-gest.lx)*k;pitch+=(e.clientY-gest.ly)*k;pitch=Math.max(-1.5,Math.min(1.5,pitch));}
+  gest.lx=e.clientX;gest.ly=e.clientY;
+});
+function endPtr(e,cancel){
+  if(!ptrs.has(e.pointerId))return;
+  ptrs.delete(e.pointerId);
+  if(gest&&ptrs.size===1){const p=[...ptrs.values()][0];gest.lx=p.x;gest.ly=p.y;}
+  if(ptrs.size===0&&gest){if(!cancel&&!gest.moved&&!gest.pinched&&performance.now()-gest.t<450)tap(e.clientX,e.clientY);gest=null;}
+}
+cvs.addEventListener('pointerup',e=>endPtr(e,false));
+cvs.addEventListener('pointercancel',e=>endPtr(e,true));
+cvs.addEventListener('wheel',e=>{e.preventDefault();setFov(camera.fov+e.deltaY*0.03);},{passive:false});
+document.addEventListener('gesturestart',e=>e.preventDefault());
+function setFov(f){camera.fov=Math.max(16,Math.min(72,f));camera.updateProjectionMatrix();$('#zoomReset').hidden=camera.fov>64;}
+$('#zoomReset').addEventListener('click',()=>setFov(70));
+
+const ray=new THREE.Raycaster(),ndc=new THREE.Vector2();
+function tap(cx,cy){
+  if(!S.running||S.won||!$('#panel').hidden)return;
+  const r=cvs.getBoundingClientRect();ndc.set((cx-r.left)/r.width*2-1,-((cy-r.top)/r.height)*2+1);
+  ray.setFromCamera(ndc,camera);
+  const hits=ray.intersectObjects(scene.children,true);
+  for(const h of hits){let o=h.object;while(o&&!o.userData.id)o=o.parent;if(o){if(o.userData.id==='globe')anim.spin=1.2;openPanel(o.userData.id);}return;}
+}
+
+/* ---------- Panels ---------- */
+const panel=$('#panel');let current=null;
+function openPanel(id){current=id;S.msg='';if(id!=='bookshelf')S.book=null;renderPanel();panel.hidden=false;$('#card').scrollTop=0;}
+function closePanel(){panel.hidden=true;current=null;}
+$('#closeP').addEventListener('click',closePanel);
+panel.addEventListener('click',e=>{if(e.target===panel)closePanel();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)closePanel();});
+$('#notesBtn').addEventListener('click',()=>openPanel('notes'));
+function renderPanel(){const d=PANELS[current];if(!d)return;const r=d();$('#p-eye').textContent=r.eye;$('#p-title').textContent=r.title;$('#p-body').innerHTML=r.html;if(r.bind)r.bind();}
+const on=(sel,fn)=>document.querySelectorAll('#p-body '+sel).forEach(el=>el.addEventListener('click',()=>fn(el)));
+function addSym(k,v){if(!S.syms[k]){S.syms[k]=v;updateHud();}}
+function addClue(k,v){S.clues[k]=v;}
+const note=(k,v)=>`<div class="note">${sym(k,30)}<span>= ${/^\d$/.test(v)?`<b>${v}</b>`:v}</span></div>`;
+const pad2=n=>String(n).padStart(2,'0');
+
+const BOOKS=[
+  {t:'Atlas of the Northern Sky',c:'#1f3352',x:'Star maps full of pencil notes. Halvorsen marked only the stars that mattered to her, and she always marked them in gold.'},
+  {t:'Diary, 1889',c:'#6e1f1c',x:'Most pages are torn out. The last entry reads:',q:'I finished painting the ceiling tonight and stopped the study clock at that very moment, a quarter past four. Set the clock back to that time and it will open for you.',clue:'diary'},
+  {t:'On Clockwork',c:'#2e4a2e',x:'Diagrams of gears and springs. Dry reading.'},
+  {t:'A Treatise on Locks',c:'#8a6a2a',hollow:true},
+  {t:'Riddles for Long Winters',c:'#245050',x:'One page is dog-eared:',q:'The answer is usually already in the room.'},
+  {t:'Tide Tables',c:'#1a1a1a',x:'Columns of numbers about the sea. None of them help in here.'}
+];
+
+const PANELS={
+  telescope:()=>{addSym('star','the number of golden stars on the ceiling');return{eye:'Northwest corner',title:'The telescope',html:`<p>A brass telescope on a tripod, aimed straight up at the ceiling instead of out the window. A slip of paper is rolled up inside the eyepiece.</p>${note('star','the number of <strong>golden stars</strong> on the ceiling')}`};},
+  ceiling:()=>({eye:'Ceiling',title:'A painted sky',html:`<p>Someone painted a whole star chart across the ceiling. Most of the stars are white. A few are gold. Pinch to zoom if you need a closer look.</p>`}),
+  window:()=>({eye:'West wall',title:'The window',html:`<p>Night outside. The window is nailed shut from the other side. There's no way out here.</p>`}),
+  painting:()=>{addClue('motto','The portrait’s label: “Look up. Look down. Look behind you.”');return{eye:'South wall',title:'Portrait of the professor',html:`<p>Professor Elsa Halvorsen, astronomer and owner of this study. The brass label under the portrait reads:</p><p class="quote">Look up. Look down. Look behind you.</p>`};},
+  diploma:()=>({eye:'North wall',title:'A framed certificate',html:`<p>Northern Astronomical Society, presented to Prof. Elsa Halvorsen, 1889. Nothing is hidden behind it.</p>`}),
+  globe:()=>({eye:'Southwest corner',title:'The globe',html:`<p>A dusty globe. It spins nicely, but nothing is written on it.</p>`}),
+  fire:()=>({eye:'South wall',title:'The fireplace',html:`<p>A fire crackles in the grate. It's warm, and it might be the only thing in this room that isn't a puzzle.</p>`}),
+  mantel:()=>({eye:'South wall',title:'Candles on the mantel',html:`<p>A row of candles stands along the mantel. Not all of them are lit.</p>`}),
+  rug:()=>{addClue('rug','The rug has four colored medallions numbered I to IV.');return{eye:'Floor',title:'The rug',html:`<p>A woven rug right under your feet. Four round medallions, each a different color, each marked with a Roman numeral.</p><img class="figure" alt="Rug with four medallions: blue III, green I, yellow IV, red II" src="${window.__rug.toDataURL('image/png')}">`};},
+  chalkboard:()=>{addClue('riddle','Chalkboard: “I have a face and two hands, but no arms and no legs.” Five letters open the chest.');return{eye:'East wall',title:'The chalkboard',html:`<div class="chalk"><strong>Five letters open the chest</strong>I have a face and two hands,<br>but no arms and no legs.<br>What am I?</div>`};},
+  desk:()=>({eye:'West wall',title:'The writing desk',html:`<p>A writing desk under a green lamp. There's a drawer at the front, and a small wooden box on top with four colored buttons.</p><div class="row"><button class="btn" data-go="drawer">Try the drawer</button><button class="btn" data-go="lockbox">Look at the box</button></div>`,bind(){on('[data-go]',el=>openPanel(el.dataset.go));}}),
+  drawer:()=>{
+    if(S.drawerOpen)return{eye:'West wall · Desk',title:'The desk drawer',html:`<p>The drawer is open. A card is lying inside:</p>${note('square','the number of candles <strong>burning</strong> on the mantel')}`};
+    return{eye:'West wall · Desk',title:'The desk drawer',html:`<p>The drawer won't budge. There's a small brass keyhole in the middle.</p>${S.hasKey?`<p>You're carrying a small brass key that might fit.</p><div class="row"><button class="btn brass" id="useKey">Use the brass key</button></div>`:''}`,
+      bind(){const b=$('#useKey');if(b)b.addEventListener('click',()=>{S.drawerOpen=true;S.keyUsed=true;anim.drawerT=1;addSym('square','the number of candles burning on the mantel');updateHud();renderPanel();});}};
+  },
+  lockbox:()=>{
+    if(S.boxOpen)return{eye:'West wall · Desk',title:'The button box',html:`<p>The lid is open. Inside is a card:</p>${note('circle','3')}`};
+    return{eye:'West wall · Desk',title:'The button box',html:`<p>A small box with four colored buttons and four tiny lamps. The buttons have to be pressed in the right order.</p>
+      <div class="boxui"><div class="lamps">${[0,1,2,3].map(i=>`<span class="lamp ${i<S.seq.length?'on':''}"></span>`).join('')}</div>
+      <div class="cbtns">${['red','blue','green','yellow'].map(c=>`<button class="cbtn" data-c="${c}" style="--c:${BOX_COLORS[c]}" aria-label="${c} button"></button>`).join('')}</div></div>
+      <p class="msg">${S.msg}</p>`,
+      bind(){on('.cbtn',el=>{S.seq.push(el.dataset.c);S.msg='';
+        if(S.seq.length===4){if(S.seq.every((c,i)=>c===BOX_ORDER[i])){S.boxOpen=true;anim.boxT=1;addSym('circle','3');}else{S.msg='The lamps flicker out. Wrong order.';S.seq=[];}}
+        renderPanel();});}};
+  },
+  clock:()=>{
+    const solved=S.clockOpen;
+    return{eye:'North wall',title:'The stopped clock',html:`<p>${solved?'The hands are set to a quarter past four. The little drawer under the face hangs open. Inside:':'The wall clock has stopped. A tiny drawer is set into the case below the face, and it’s locked. The hands can be moved.'}</p>
+      <canvas class="pclock" id="pclock" width="560" height="560" aria-label="Clock face"></canvas>
+      ${solved?note('tri','8'):`<p class="readout" aria-live="polite">${S.h}:${pad2(S.m)}</p><div class="clockctl"><div class="ctl"><span>Hour</span><button data-a="h-" aria-label="Hour back">−</button><button data-a="h+" aria-label="Hour forward">+</button></div><div class="ctl"><span>Minute</span><button data-a="m-" aria-label="Minutes back">−</button><button data-a="m+" aria-label="Minutes forward">+</button></div></div>`}`,
+      bind(){drawClock($('#pclock'),S.h,S.m);
+        on('[data-a]',el=>{const a=el.dataset.a;
+          if(a==='h+')S.h=S.h%12+1;if(a==='h-')S.h=(S.h+10)%12+1;
+          if(a==='m+')S.m=(S.m+5)%60;if(a==='m-')S.m=(S.m+55)%60;
+          drawClock(clockC,S.h,S.m);clockTex.needsUpdate=true;
+          if(S.h===4&&S.m===15){S.clockOpen=true;addSym('tri','8');}
+          renderPanel();});}};
+  },
+  bookshelf:()=>{
+    const b=S.book!=null?BOOKS[S.book]:null;let detail='<p class="muted">Tap a book to pull it off the shelf.</p>';
+    if(b){if(b.hollow){detail=S.hasKey||S.keyUsed?`<p><strong>${b.t}.</strong> The pages are hollowed out. The hollow is empty now.</p>`:`<p><strong>${b.t}.</strong> The pages are hollowed out. Tucked inside is a small brass key.</p><div class="row"><button class="btn brass" id="takeKey">Take the key</button></div>`;}
+      else{detail=`<p><strong>${b.t}.</strong> ${b.x}</p>${b.q?`<p class="quote">${b.q}</p>`:''}`;}}
+    return{eye:'East wall',title:'The bookshelf',html:`<p>Old books, mostly about the sky. A few look like they've been pulled out recently.</p><div class="shelf">${BOOKS.map((bk,i)=>`<button class="spine" data-i="${i}" aria-pressed="${S.book===i}" style="--c:${bk.c};height:${150+(i*37)%50}px">${bk.t}</button>`).join('')}</div>${detail}`,
+      bind(){on('.spine',el=>{S.book=+el.dataset.i;const bk=BOOKS[S.book];if(bk.clue==='diary')addClue('diary','Diary: the clock was stopped at a quarter past four. Set it back to that time.');renderPanel();});
+        const t=$('#takeKey');if(t)t.addEventListener('click',()=>{S.hasKey=true;updateHud();renderPanel();});}};
+  },
+  chest:()=>{
+    if(S.chestOpen)return{eye:'Southeast corner',title:'The iron-banded chest',html:`<p>The lid is up. The chest is empty except for a card at the bottom:</p>${note('diamond','1')}`};
+    return{eye:'Southeast corner',title:'The iron-banded chest',html:`<p>A heavy chest with a five-letter dial lock.</p>
+      <div class="dials">${S.dials.map((d,i)=>`<div class="dial"><button data-i="${i}" data-d="-1" aria-label="Letter ${i+1} back">${CHEV_UP}</button><span>${LETTERS[d]}</span><button data-i="${i}" data-d="1" aria-label="Letter ${i+1} forward">${CHEV_DN}</button></div>`).join('')}</div>`,
+      bind(){on('.dial button',el=>{const i=+el.dataset.i;S.dials[i]=(S.dials[i]+(+el.dataset.d)+26)%26;
+        if(S.dials.map(d=>LETTERS[d]).join('')===WORD){S.chestOpen=true;anim.chestT=1;addSym('diamond','1');}
+        chestCanvas(chestC);chestTex.needsUpdate=true;renderPanel();});}};
+  },
+  keypad:()=>({eye:'North wall · Door',title:'The door lock',html:`<p>Heavy oak, locked tight. A brass keypad beside it wants five digits. The plaque over the door shows five symbols in a row:</p>
+    <div class="lockgrid" id="lockgrid">${ORDER.map(k=>`<div class="plaq">${sym(k,24)}</div>`).join('')}${[0,1,2,3,4].map(i=>`<div class="slot">${S.entry[i]||''}</div>`).join('')}</div>
+    <div class="keys">${[1,2,3,4,5,6,7,8,9].map(n=>`<button class="key" data-k="${n}">${n}</button>`).join('')}<button class="key" data-k="del" aria-label="Delete">⌫</button><button class="key" data-k="0">0</button><button class="key enter" data-k="ok">Enter</button></div>
+    <p class="msg" id="kmsg">${S.msg}</p>`,
+    bind(){on('.key',el=>{const k=el.dataset.k;S.msg='';
+      if(k==='del')S.entry=S.entry.slice(0,-1);
+      else if(k==='ok'){if(S.entry.length<5){S.msg='The lock needs all five digits.';}
+        else if(S.entry===CODE){closePanel();win();return;}
+        else{S.entry='';S.msg='Nothing happens. That’s not the code.';renderPanel();const g=$('#lockgrid');g.classList.remove('shake');void g.offsetWidth;if(!REDUCED)g.classList.add('shake');return;}}
+      else if(S.entry.length<5)S.entry+=k;
+      renderPanel();});}}),
+  notes:()=>{
+    const fmt=v=>/^\d$/.test(v)?`= <b>${v}</b>`:`= ${v}`;
+    const clues=Object.values(S.clues);
+    return{eye:'Your notebook',title:'What you’ve found',html:`<h3 class="sub">The door’s symbols, in order</h3>
+      <ul class="symlist">${ORDER.map(k=>`<li>${sym(k,22)}<span>${S.syms[k]?fmt(S.syms[k]):'<em>Not found yet</em>'}</span></li>`).join('')}</ul>
+      <h3 class="sub">Clues</h3>${clues.length?`<ul class="clues">${clues.map(c=>`<li>${c}</li>`).join('')}</ul>`:'<p class="muted">Nothing yet. Tap things around the room.</p>'}
+      <h3 class="sub">Carrying</h3><p>${S.hasKey&&!S.keyUsed?'A small brass key.':'Nothing.'}</p>
+      <h3 class="sub">How to play</h3><p class="muted">Turn your phone to look around. Pinch to zoom. Tap anything that looks interesting. When you know all five symbols, tap the door.</p>`};
+  }
+};
+
+/* ---------- HUD, hints, win, reset ---------- */
+let hintTimer;
+function showHint(t,ms){const h=$('#hint');h.textContent=t;h.classList.remove('fade');clearTimeout(hintTimer);hintTimer=setTimeout(()=>h.classList.add('fade'),ms||6000);}
+function updateHud(){$('#badge').textContent=Object.keys(S.syms).length+'/5';$('#keyPill').hidden=!(S.hasKey&&!S.keyUsed);}
+const fmtT=ms=>{const s=Math.floor(ms/1000);return Math.floor(s/60)+':'+pad2(s%60);};
+setInterval(()=>{if(S.running&&!S.won)$('#timer').textContent=fmtT(performance.now()-S.t0);},500);
+function win(){S.won=true;S.tEnd=performance.now();exitGlow.visible=true;anim.doorT=1;$('#winTime').textContent='Escaped in '+fmtT(S.tEnd-S.t0);setTimeout(()=>{$('#win').hidden=false;},REDUCED?200:1600);}
+function reset(){
+  S=fresh();S.running=true;S.t0=performance.now();
+  drawClock(clockC,S.h,S.m);clockTex.needsUpdate=true;chestCanvas(chestC);chestTex.needsUpdate=true;
+  anim.boxT=anim.chestT=anim.drawerT=anim.doorT=0;exitGlow.visible=false;
+  setFov(70);updateHud();$('#timer').textContent='0:00';$('#win').hidden=true;needCal=true;yaw=0;pitch=0;
+}
+$('#again').addEventListener('click',reset);
+
+$('#go').addEventListener('click',()=>{
+  let perm=null;
+  try{if(window.DeviceOrientationEvent&&typeof DeviceOrientationEvent.requestPermission==='function')perm=DeviceOrientationEvent.requestPermission();}catch(_){}
+  window.addEventListener('deviceorientation',onOri);
+  if(perm&&perm.catch)perm.catch(()=>{});
+  $('#start').hidden=true;idleSpin=false;yaw=0;pitch=0;
+  S.running=true;S.t0=performance.now();updateHud();
+  showHint('Turn your phone to look around. Pinch to zoom. Tap things to inspect them.',7000);
+  setTimeout(()=>{if(!gyroLive){dragMode=true;showHint('Phone motion isn’t available here, so drag to look around instead. Pinch or scroll to zoom.',8000);}},1500);
+});
+
+/* ---------- Loop ---------- */
+function resize(){const w=stage.clientWidth||innerWidth,h=stage.clientHeight||innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+addEventListener('resize',resize);addEventListener('orientationchange',()=>setTimeout(resize,200));
+const lerp=(a,b,t)=>a+(b-a)*t;
+let last=performance.now();
+function frame(now){
+  requestAnimationFrame(frame);
+  const dt=Math.min(0.05,(now-last)/1000);last=now;const t=now/1000;
+  if(gyroLive&&!dragMode&&ori){
+    gyroQuat(tq);
+    if(needCal){fwd.set(0,0,-1).applyQuaternion(tq);const yw=Math.atan2(-fwd.x,-fwd.z);calQ.setFromAxisAngle(Y,-yw);tq.premultiply(calQ);camera.quaternion.copy(tq);needCal=false;}
+    else{tq.premultiply(calQ);camera.quaternion.slerp(tq,0.5);}
+  }else{
+    if(idleSpin)yaw+=dt*0.08;
+    camera.quaternion.setFromEuler(eul.set(pitch,yaw,0,'YXZ'));
+  }
+  const k=REDUCED?1:Math.min(1,dt*4);
+  anim.boxLid=lerp(anim.boxLid,anim.boxT?1.25:0,k);lidBox.rotation.z=anim.boxLid;
+  anim.chestLid=lerp(anim.chestLid,anim.chestT?1:0,k);lidChest.rotation.x=-1.25*anim.chestLid;
+  anim.drawer=lerp(anim.drawer,anim.drawerT?1:0,k);drawer.position.x=0.36*anim.drawer;
+  anim.door=lerp(anim.door,anim.doorT?1:0,REDUCED?1:Math.min(1,dt*1.8));doorPivot.rotation.y=-1.35*anim.door;
+  if(anim.spin){const g=scene.children.find(o=>o.userData.id==='globe');if(g)g.userData.ball.rotation.y+=anim.spin*dt*6;anim.spin=Math.max(0,anim.spin-dt*0.6);}
+  if(!REDUCED){
+    flames.forEach((f,i)=>{f.scale.y=1+0.18*Math.sin(t*11+i*1.7)+0.08*Math.sin(t*23+i);f.scale.x=f.scale.z=1+0.06*Math.sin(t*17+i);});
+    fireFlames.forEach((f,i)=>{f.scale.y=1+0.22*Math.sin(t*7+i*2.1)+0.1*Math.sin(t*19+i);f.scale.x=f.scale.z=1+0.1*Math.sin(t*9+i);});
+    fireLight.intensity=1.4+0.25*Math.sin(t*9)+0.15*Math.sin(t*23);candleLight.intensity=0.7+0.08*Math.sin(t*13);
+  }
+  renderer.render(scene,camera);
+}
+
+/* ---------- Boot ---------- */
+const fontsReady=document.fonts&&document.fonts.load?Promise.race([Promise.all([document.fonts.load('30px "IM Fell English"'),document.fonts.load('italic 30px "IM Fell English"')]),new Promise(r=>setTimeout(r,2500))]):Promise.resolve();
+fontsReady.catch(()=>{}).then(()=>{buildScene();resize();requestAnimationFrame(frame);});
+})();
+</script>
+
+</body></html>

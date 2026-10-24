@@ -213,7 +213,8 @@ let S=fresh();
 
 /* ---------- Canvas texture helpers ---------- */
 function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
-function mk(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;return c;}
+const Q=2; // texture supersampling: canvases are drawn at 2x for crisper detail
+function mk(w,h,q){q=q||Q;const c=document.createElement('canvas');c.width=w*q;c.height=h*q;c._w=w;c._h=h;c.getContext('2d').scale(q,q);return c;}
 function grain(x,X,Y,W,H,base,line,vertical,seed){
   x.save();x.beginPath();x.rect(X,Y,W,H);x.clip();
   x.fillStyle=base;x.fillRect(X,Y,W,H);
@@ -332,7 +333,7 @@ function keypadCanvas(){
   return c;
 }
 function drawClock(c,h,m){
-  const x=c.getContext('2d'),s=c.width,cx=s/2,R=s/2;
+  const x=c.getContext('2d'),s=c._w||c.width,cx=s/2,R=s/2;
   x.clearRect(0,0,s,s);
   let g=x.createRadialGradient(cx,cx,R*.7,cx,cx,R);g.addColorStop(0,'#e0bd6a');g.addColorStop(1,'#6e4f1c');x.fillStyle=g;x.beginPath();x.arc(cx,cx,R,0,7);x.fill();
   g=x.createRadialGradient(cx,cx*.8,10,cx,cx,R*.88);g.addColorStop(0,'#f6ecd2');g.addColorStop(1,'#d6c296');x.fillStyle=g;x.beginPath();x.arc(cx,cx,R*.88,0,7);x.fill();
@@ -465,6 +466,10 @@ function cardCanvas(k,text){
   else{x.font=`italic 22px ${FELL}`;x.fillText('= '+text,104,H/2);}
   return c;
 }
+function steamCanvas(){
+  const c=mk(64,64),x=c.getContext('2d'),g=x.createRadialGradient(32,32,0,32,32,32);
+  g.addColorStop(0,'rgba(255,255,255,.55)');g.addColorStop(.5,'rgba(255,255,255,.18)');g.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=g;x.fillRect(0,0,64,64);return c;
+}
 function glowCanvas(){
   const c=mk(64,64),x=c.getContext('2d'),g=x.createRadialGradient(32,32,0,32,32,32);
   g.addColorStop(0,'rgba(255,220,150,1)');g.addColorStop(.35,'rgba(255,170,80,.45)');g.addColorStop(1,'rgba(255,140,40,0)');x.fillStyle=g;x.fillRect(0,0,64,64);return c;
@@ -473,7 +478,7 @@ function glowCanvas(){
 /* ---------- Three.js scene ---------- */
 const stage=$('#stage');
 const renderer=new THREE.WebGLRenderer({antialias:true});
-renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,3));
 renderer.outputEncoding=THREE.sRGBEncoding;
 renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.2;
 stage.appendChild(renderer.domElement);
@@ -490,8 +495,9 @@ function tag(o,id){o.userData.id=id;return o;}
 const noRay=o=>{o.raycast=function(){};return o;};
 const faceMats=(front,side,idx)=>{const a=[side,side,side,side,side,side];a[idx]=front;return a;};
 
-let clockC,clockTex,chestC,chestTex,doorPivot,exitGlow,lidBox,lidChest,drawer,flames=[],fireFlames=[],fireLight,candleLight;
-const anim={boxLid:0,chestLid:0,drawer:0,door:0};
+let clockC,clockTex,chestC,chestTex,doorPivot,exitGlow,lidBox,lidChest,drawer,flames=[],fireFlames=[],fireLight,candleLight,catBody,catTail,steamTex;
+const orrery=[],steam=[];
+const anim={boxLid:0,chestLid:0,drawer:0,door:0,orrery:1,flick:0};
 
 function buildScene(){
   // Room shell
@@ -585,6 +591,41 @@ function buildScene(){
   const ball=new THREE.Mesh(new THREE.SphereGeometry(0.28,32,20),M({map:tex(globeCanvas()),roughness:.5}));ball.position.y=1.05;ball.rotation.z=0.4;gl.add(ball);gl.userData.ball=ball;
   const ring=new THREE.Mesh(new THREE.TorusGeometry(0.31,0.012,8,40),brass);ring.position.y=1.05;ring.rotation.y=Math.PI/2;gl.add(ring);
 
+  // NE: brass orrery on a side table (just for looking)
+  const orr=tag(new THREE.Group(),'orrery');orr.position.set(3.8,0,-3.8);scene.add(orr);
+  cyl(0.22,0.26,0.04,darkWood,0,0.02,0,orr,24);cyl(0.035,0.05,0.66,darkWood,0,0.35,0,orr,12);cyl(0.38,0.38,0.04,midWood,0,0.7,0,orr,32);
+  cyl(0.11,0.13,0.05,brass,0,0.745,0,orr,24);cyl(0.012,0.012,0.26,brass,0,0.9,0,orr,8);
+  const sun=new THREE.Mesh(new THREE.SphereGeometry(0.06,24,16),new THREE.MeshBasicMaterial({color:0xffc94a}));sun.position.y=1.04;orr.add(sun);
+  const sunGlow=new THREE.Sprite(new THREE.SpriteMaterial({map:tex(glowCanvas()),blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:.7}));sunGlow.scale.set(0.3,0.3,1);sunGlow.position.y=1.04;noRay(sunGlow);orr.add(sunGlow);
+  [[0.12,0.018,0x9a8b7a,1.6,0.98],[0.18,0.026,0xd8b46a,1.1,0.96],[0.25,0.028,0x3f74a8,0.75,0.94],[0.31,0.022,0xb5523a,0.5,0.93],[0.355,0.034,0xd9c08a,0.3,0.91,true]].forEach(([r,pr,col,sp,y,ringed],i)=>{
+    const arm=new THREE.Group();arm.position.y=y;arm.rotation.y=i*1.3;orr.add(arm);
+    box(r,0.006,0.006,brass,r/2,0,0,arm);cyl(0.004,0.004,1.04-y-0.0,brass,r,(1.04-y)/2,0,arm,6);
+    const pl=new THREE.Mesh(new THREE.SphereGeometry(pr,16,12),M({color:col,roughness:.45,metalness:.1}));pl.position.set(r,1.04-y,0);arm.add(pl);
+    if(ringed){const rg=new THREE.Mesh(new THREE.TorusGeometry(pr*1.7,0.005,6,32),brass);rg.rotation.x=Math.PI/2.4;rg.position.copy(pl.position);arm.add(rg);}
+    orrery.push({arm,sp});
+  });
+
+  // On the desk chair: the professor's sleeping cat (just for looking)
+  const cat=tag(new THREE.Group(),'cat');scene.add(cat);
+  const fur=M({color:0xc4793a,roughness:.95}),furDark=M({color:0x8a4f22,roughness:.95}),pink=M({color:0xd9958a});
+  catBody=new THREE.Mesh(new THREE.SphereGeometry(1,24,16),fur);catBody.scale.set(0.2,0.1,0.15);catBody.position.set(-3.72,0.585,1.0);cat.add(catBody);
+  const head=new THREE.Mesh(new THREE.SphereGeometry(0.075,20,14),fur);head.position.set(-3.86,0.6,0.89);head.scale.set(1,0.88,1);cat.add(head);
+  [[-0.03],[0.03]].forEach(([dz])=>{const ear=new THREE.Mesh(new THREE.ConeGeometry(0.026,0.05,4),fur);ear.position.set(-3.87,0.67,0.89+dz);ear.rotation.x=dz*6;cat.add(ear);});
+  const nose=new THREE.Mesh(new THREE.SphereGeometry(0.01,8,6),pink);nose.position.set(-3.93,0.59,0.85);cat.add(nose);
+  catTail=new THREE.Group();catTail.position.set(-3.6,0.55,1.08);cat.add(catTail);
+  const tail=new THREE.Mesh(new THREE.TorusGeometry(0.14,0.022,8,20,Math.PI*0.9),fur);tail.rotation.x=Math.PI/2;tail.rotation.z=Math.PI*0.55;catTail.add(tail);
+
+  // On the desk: a cup of tea, still steaming (just for looking)
+  const tea=tag(new THREE.Group(),'tea');tea.position.set(-4.3,0.81,0.88);scene.add(tea);
+  const china=M({color:0xf3eee4,roughness:.3}),teaMat=M({color:0x6b3a12,roughness:.2});
+  cyl(0.07,0.065,0.008,china,0,0.004,0,tea,28);
+  const cup=new THREE.Mesh(new THREE.CylinderGeometry(0.042,0.03,0.055,24,1,true),new THREE.MeshStandardMaterial({color:0xf3eee4,roughness:.3,side:THREE.DoubleSide}));cup.position.y=0.036;tea.add(cup);
+  cyl(0.03,0.03,0.004,china,0,0.01,0,tea,20);
+  const liquid=new THREE.Mesh(new THREE.CircleGeometry(0.039,24),teaMat);liquid.rotation.x=-Math.PI/2;liquid.position.y=0.056;tea.add(liquid);
+  const handle=new THREE.Mesh(new THREE.TorusGeometry(0.018,0.005,6,14,Math.PI),china);handle.position.set(0,0.038,0.043);handle.rotation.y=Math.PI/2;handle.rotation.z=-Math.PI/2;tea.add(handle);
+  steamTex=tex(steamCanvas());
+  for(let i=0;i<4;i++){const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:steamTex,depthWrite:false,transparent:true,opacity:0}));sp.userData.ph=i/4;noRay(sp);tea.add(sp);steam.push(sp);}
+
   // Lights
   scene.add(new THREE.AmbientLight(0xfff0dd,0.5));
   scene.add(new THREE.HemisphereLight(0xffe2c0,0x3a2a1c,0.6));
@@ -647,7 +688,7 @@ function tap(cx,cy){
   const r=cvs.getBoundingClientRect();ndc.set((cx-r.left)/r.width*2-1,-((cy-r.top)/r.height)*2+1);
   ray.setFromCamera(ndc,camera);
   const hits=ray.intersectObjects(scene.children,true);
-  for(const h of hits){let o=h.object;while(o&&!o.userData.id)o=o.parent;if(o){if(o.userData.id==='globe')anim.spin=1.2;openPanel(o.userData.id);}return;}
+  for(const h of hits){let o=h.object;while(o&&!o.userData.id)o=o.parent;if(o){if(o.userData.id==='globe')anim.spin=1.2;if(o.userData.id==='orrery')anim.orrery=5;if(o.userData.id==='cat')anim.flick=1;openPanel(o.userData.id);}return;}
 }
 
 /* ---------- Panels ---------- */
@@ -681,6 +722,9 @@ const PANELS={
   painting:()=>{addClue('motto','The portrait’s label: “Look up. Look down. Look behind you.”');return{eye:'South wall',title:'Portrait of the professor',html:`<p>Professor Elsa Halvorsen, astronomer and owner of this study. The brass label under the portrait reads:</p><p class="quote">Look up. Look down. Look behind you.</p>`};},
   diploma:()=>({eye:'North wall',title:'A framed certificate',html:`<p>Northern Astronomical Society, presented to Prof. Elsa Halvorsen, 1889. Nothing is hidden behind it.</p>`}),
   globe:()=>({eye:'Southwest corner',title:'The globe',html:`<p>A dusty globe. It spins nicely, but nothing is written on it.</p>`}),
+  orrery:()=>({eye:'Northeast corner · Just for looking',title:'The brass orrery',html:`<p>A clockwork model of the solar system. You nudge it and the little brass planets spin around the sun, each at its own speed. The ringed one wobbles a bit on its arm.</p><p class="muted">Nothing hidden here. It's just beautiful.</p>`}),
+  cat:()=>({eye:'West wall · Just for looking',title:'A sleeping cat',html:`<p>The professor's cat is curled up on the desk chair, fast asleep. A brass tag on her collar says <em>Nebula</em>. She flicks her tail once, decides you aren't interesting, and goes back to sleep.</p><p class="muted">She is not part of any puzzle. She would like you to know that.</p>`}),
+  tea:()=>({eye:'West wall · Just for looking',title:'A cup of tea',html:`<p>A china cup of black tea, still steaming. Someone was here not long ago and left in a hurry.</p><p class="muted">It's just tea. Probably best not to drink it.</p>`}),
   fire:()=>({eye:'South wall',title:'The fireplace',html:`<p>A fire crackles in the grate. It's warm, and it might be the only thing in this room that isn't a puzzle.</p>`}),
   mantel:()=>({eye:'South wall',title:'Candles on the mantel',html:`<p>A row of candles stands along the mantel. Not all of them are lit.</p>`}),
   rug:()=>{addClue('rug','The rug has four colored medallions numbered I to IV.');return{eye:'Floor',title:'The rug',html:`<p>A woven rug right under your feet. Four round medallions, each a different color, each marked with a Roman numeral.</p><img class="figure" alt="Rug with four medallions: blue III, green I, yellow IV, red II" src="${window.__rug.toDataURL('image/png')}">`};},
@@ -748,7 +792,7 @@ const PANELS={
       <ul class="symlist">${ORDER.map(k=>`<li>${sym(k,22)}<span>${S.syms[k]?fmt(S.syms[k]):'<em>Not found yet</em>'}</span></li>`).join('')}</ul>
       <h3 class="sub">Clues</h3>${clues.length?`<ul class="clues">${clues.map(c=>`<li>${c}</li>`).join('')}</ul>`:'<p class="muted">Nothing yet. Tap things around the room.</p>'}
       <h3 class="sub">Carrying</h3><p>${S.hasKey&&!S.keyUsed?'A small brass key.':'Nothing.'}</p>
-      <h3 class="sub">How to play</h3><p class="muted">Turn your phone to look around. Pinch to zoom. Tap anything that looks interesting. When you know all five symbols, tap the door.</p>`};
+      <h3 class="sub">How to play</h3><p class="muted">Turn your phone to look around. Pinch to zoom. Tap anything that looks interesting. A few things, like the cat, are just for looking. When you know all five symbols, tap the door.</p>`};
   }
 };
 
@@ -800,7 +844,13 @@ function frame(now){
   anim.drawer=lerp(anim.drawer,anim.drawerT?1:0,k);drawer.position.x=0.36*anim.drawer;
   anim.door=lerp(anim.door,anim.doorT?1:0,REDUCED?1:Math.min(1,dt*1.8));doorPivot.rotation.y=-1.35*anim.door;
   if(anim.spin){const g=scene.children.find(o=>o.userData.id==='globe');if(g)g.userData.ball.rotation.y+=anim.spin*dt*6;anim.spin=Math.max(0,anim.spin-dt*0.6);}
+  anim.orrery=Math.max(1,anim.orrery-dt*1.2);
+  orrery.forEach(o=>{o.arm.rotation.y+=o.sp*dt*0.25*anim.orrery;});
   if(!REDUCED){
+    catBody.scale.y=0.1*(1+0.045*Math.sin(t*1.6));
+    if(anim.flick>0){anim.flick=Math.max(0,anim.flick-dt*1.2);}
+    catTail.rotation.y=0.12*Math.sin(t*0.7)+0.5*Math.sin(anim.flick*Math.PI*3)*anim.flick;
+    steam.forEach(s=>{const p=(t*0.35+s.userData.ph)%1;s.position.set(0.012*Math.sin(t*2+s.userData.ph*9),0.07+p*0.22,0.006*Math.cos(t*1.7+s.userData.ph*7));const sz=0.05+p*0.09;s.scale.set(sz,sz,1);s.material.opacity=Math.sin(p*Math.PI)*0.55;});
     flames.forEach((f,i)=>{f.scale.y=1+0.18*Math.sin(t*11+i*1.7)+0.08*Math.sin(t*23+i);f.scale.x=f.scale.z=1+0.06*Math.sin(t*17+i);});
     fireFlames.forEach((f,i)=>{f.scale.y=1+0.22*Math.sin(t*7+i*2.1)+0.1*Math.sin(t*19+i);f.scale.x=f.scale.z=1+0.1*Math.sin(t*9+i);});
     fireLight.intensity=1.4+0.25*Math.sin(t*9)+0.15*Math.sin(t*23);candleLight.intensity=0.7+0.08*Math.sin(t*13);

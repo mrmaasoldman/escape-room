@@ -3369,7 +3369,7 @@ const ROOM9=(function(){
     sph(1,M({color:0xe0b84a,metalness:.4,roughness:.4}),0,0.14,-0.7,sarcLid,0.28,0.12,0.24);box(0.5,0.05,0.4,M({color:0x2f6f9a}),0,0.08,-0.35,sarcLid);
     const inMirror=new THREE.Mesh(new THREE.CircleGeometry(0.2,20),bronze);inMirror.rotation.x=-Math.PI/2;inMirror.position.set(0,0.81,0.2);sar.add(inMirror);a.inMirror=inMirror;
     // Treasure chest with glyph lock (southwest)
-    const ch=tag(new THREE.Group(),'chest');ch.position.set(-3.4,0,3.7);scene.add(ch);faceCenter(ch);
+    const ch=tag(new THREE.Group(),'chest');ch.position.set(-2.4,0,4.1);ch.scale.setScalar(1.35);scene.add(ch);faceCenter(ch);
     box(0.8,0.45,0.5,M({color:0x8a5a2b}),0,0.225,0,ch);[-0.3,0.3].forEach(bx=>box(0.06,0.46,0.52,gold,bx,0.225,0,ch));
     chestLid=new THREE.Group();chestLid.position.set(0,0.45,-0.25);ch.add(chestLid);box(0.82,0.1,0.52,M({color:0x8a5a2b}),0,0.05,0.26,chestLid);
     // Scales (east)

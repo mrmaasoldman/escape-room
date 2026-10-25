@@ -2,7 +2,7 @@
 <title>Escaped</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,400;0,600;1,400&family=Courier+Prime:wght@700&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@600;700&family=Rye&family=Pacifico&family=Orbitron:wght@700&family=Cinzel+Decorative:wght@700&family=Baloo+2:wght@600;700&family=Marcellus+SC&family=Righteous&family=Luckiest+Guy&family=Pirata+One&family=Chewy&family=MedievalSharp&family=Amatic+SC:wght@700&family=Audiowide&family=Bungee&family=Shippori+Mincho:wght@700&family=Bubblegum+Sans&family=Alfa+Slab+One&family=Creepster&family=Sniglet:wght@800&family=Patua+One&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,400;0,600;1,400&family=Courier+Prime:wght@700&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@600;700&family=Rye&family=Pacifico&family=Orbitron:wght@700&family=Cinzel+Decorative:wght@700&family=Baloo+2:wght@600;700&family=Marcellus+SC&family=Righteous&family=Luckiest+Guy&family=Pirata+One&family=Chewy&family=MedievalSharp&family=Amatic+SC:wght@700&family=Audiowide&family=Bungee&family=Shippori+Mincho:wght@700&family=Bubblegum+Sans&family=Alfa+Slab+One&family=Creepster&family=Sniglet:wght@800&family=Patua+One&family=Grenze+Gotisch:wght@600&family=Lobster&display=swap">
 <style>
 /* Layout: full-bleed WebGL room; HUD pinned to the corners; close-ups rise as a sheet from the bottom.
    Each room re-themes the UI through tokens on body[data-level]. 0 = menu, 1 = study (brass and candlelight), 2 = creation (bright). */
@@ -223,6 +223,48 @@ body[data-level="25"]{
 }
 body[data-level="25"] .intro{background:rgba(251,244,230,.86);padding:22px;border-radius:20px}
 body[data-level="23"] .intro{background:rgba(255,248,230,.88);padding:22px;border-radius:20px}
+body[data-level="26"]{
+  --parchment:#f4ece0; --parchment-2:#e2d2bc; --ink:#2a1a10; --ink-soft:#6a5440;
+  --brass:#c8302a; --brass-deep:#7a1a14; --oxblood:#2a5a8a;
+  --veil:rgba(30,20,14,.84); --rule:rgba(200,48,42,.45); --pill-fg:#ffc8a8; --badge-fg:#2a1a10;
+  --f-display:"Grenze Gotisch",Georgia,serif; --f-note:"IM Fell English",Georgia,serif; --f-body:"Nunito",system-ui,sans-serif;
+  --scr-bg:radial-gradient(400px 260px at 50% 100%,rgba(255,140,60,.35),transparent 60%),linear-gradient(180deg,#1a1410 0%,#3a2a1e 60%,#1a1008 100%);
+  --scr-fg:#f4ece0; --scr-fg2:#d8c8b0; --scr-accent:#ff7a4a; --scr-accent-deep:#7a1a14; --scr-btn-fg:#1a1008;
+}
+body[data-level="27"]{
+  --parchment:#f6f0e4; --parchment-2:#e6dac4; --ink:#241a30; --ink-soft:#5e5070;
+  --brass:#c9a46a; --brass-deep:#8a6a30; --oxblood:#a8202a;
+  --veil:rgba(26,20,36,.86); --rule:rgba(201,164,106,.5); --pill-fg:#f0d8a8; --badge-fg:#241a30;
+  --f-display:"Cinzel Decorative",Georgia,serif; --f-note:"IM Fell English",Georgia,serif; --f-body:"Nunito",system-ui,sans-serif;
+  --scr-bg:radial-gradient(300px 300px at 50% 0%,rgba(160,190,255,.3),transparent 60%),linear-gradient(180deg,#1a1424 0%,#3a2a4a 70%,#1a1424 100%);
+  --scr-fg:#f6f0e4; --scr-fg2:#d8cce0; --scr-accent:#ffd36a; --scr-accent-deep:#8a6a30; --scr-btn-fg:#1a1424;
+}
+body[data-level="28"]{
+  --parchment:#fff8ee; --parchment-2:#f6e2cc; --ink:#3a1a10; --ink-soft:#7a4a3a;
+  --brass:#c83a2a; --brass-deep:#8a1a10; --oxblood:#4a8ab8;
+  --veil:rgba(58,26,16,.82); --rule:rgba(200,58,42,.4); --pill-fg:#ffd0b0; --badge-fg:#3a1a10;
+  --f-display:"Lobster",Georgia,serif; --f-note:"Nunito",system-ui,sans-serif; --f-body:"Nunito",system-ui,sans-serif;
+  --scr-bg:repeating-conic-gradient(#c83a2a 0 25%,#f6efe0 0 50%) 0 0/56px 56px;
+  --scr-fg:#3a1a10; --scr-fg2:#3a1a10; --scr-accent:#c83a2a; --scr-accent-deep:#8a1a10; --scr-btn-fg:#ffffff; color-scheme:light;
+}
+body[data-level="28"] .intro{background:rgba(255,248,238,.92);padding:22px;border-radius:20px}
+body[data-level="29"]{
+  --parchment:#f4faff; --parchment-2:#dcecf8; --ink:#14304a; --ink-soft:#4a6a8a;
+  --brass:#ff8a2a; --brass-deep:#c8501a; --oxblood:#e84a3a;
+  --veil:rgba(20,48,74,.78); --rule:rgba(255,138,42,.45); --pill-fg:#ffe0b0; --badge-fg:#14304a;
+  --f-display:"Baloo 2",system-ui,sans-serif; --f-note:"Nunito",system-ui,sans-serif; --f-body:"Nunito",system-ui,sans-serif;
+  --scr-bg:radial-gradient(160px 70px at 20% 70%,#fff,transparent 70%),radial-gradient(200px 80px at 80% 30%,#fff,transparent 70%),linear-gradient(180deg,#3a8ad8 0%,#8ac8f8 60%,#d8f0ff 100%);
+  --scr-fg:#14304a; --scr-fg2:#14304a; --scr-accent:#c8501a; --scr-accent-deep:#7a2a08; --scr-btn-fg:#ffffff; color-scheme:light;
+}
+body[data-level="29"] .intro{background:rgba(244,250,255,.86);padding:22px;border-radius:20px}
+body[data-level="30"]{
+  --parchment:#f8f2e2; --parchment-2:#e8dcbc; --ink:#141a30; --ink-soft:#4a5070;
+  --brass:#e8b84a; --brass-deep:#a87a1a; --oxblood:#3a4a8a;
+  --veil:rgba(10,16,32,.86); --rule:rgba(232,184,74,.5); --pill-fg:#ffe8a8; --badge-fg:#141a30;
+  --f-display:"IM Fell English SC",Georgia,serif; --f-note:"IM Fell English",Georgia,serif; --f-body:"Nunito",system-ui,sans-serif;
+  --scr-bg:radial-gradient(60px 60px at 72% 22%,rgba(255,250,220,.95),rgba(255,240,180,.25) 40%,transparent 70%),linear-gradient(180deg,#050816 0%,#0a1430 60%,#1a2a1a 61%,#0a1408 100%);
+  --scr-fg:#f8f2e2; --scr-fg2:#d0d4e4; --scr-accent:#ffd86a; --scr-accent-deep:#a87a1a; --scr-btn-fg:#0a1020;
+}
 [hidden]{display:none!important}
 html,body{height:100%}
 body{margin:0;background:var(--night);color:var(--parchment);font-family:var(--f-body);font-size:16px;overflow:hidden;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
@@ -552,6 +594,16 @@ body[data-level="19"] .p-title,body[data-level="19"] .intro h1,body[data-level="
 .room.r23{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='45'%3E%3Cpath d='M13 0l13 7.5v15L13 30 0 22.5v-15z M13 30l13 7.5v7.5M13 30L0 37.5v7.5' fill='none' stroke='%23b87808' stroke-width='2'/%3E%3C/svg%3E") 0 0/26px 45px,#f2c040;color:#3a2408}.room.r23 .rname{font-family:"Sniglet",sans-serif;font-weight:800;font-size:26px}
 .room.r24{background:linear-gradient(180deg,#0a2a3a,#1a4a5a 50%,#4a1a20);color:#f6efe4}.room.r24 .rname{font-family:"Cinzel",Georgia,serif;font-weight:700;font-size:20px;color:#8ad8f0}
 .room.r25{background:linear-gradient(180deg,#8ad0f8 0%,#c8e8f8 50%,#a8281a 51%,#7a1a10 100%);color:#fff}.room.r25 .rname{font-family:"Patua One",Georgia,serif;font-size:26px;text-shadow:0 2px 0 #3a1a0a}.room.r25 .rnum{color:#3a1a0a}.room.r25 .rblurb,.room.r25 .rbest{text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.room.r26{background:linear-gradient(180deg,#1a1410,#3a2a1e 60%,#5a2a14);color:#f4ece0}.room.r26 .rname{font-family:"Grenze Gotisch",Georgia,serif;font-size:28px;color:#ff9a6a}
+.room.r27{background:radial-gradient(90px 90px at 80% 20%,rgba(160,190,255,.35),transparent 60%),linear-gradient(180deg,#1a1424,#3a2a4a);color:#f6f0e4}.room.r27 .rname{font-family:"Cinzel Decorative",Georgia,serif;font-weight:700;font-size:19px;color:#ffd36a}
+.room.r28{background:repeating-conic-gradient(#c83a2a 0 25%,#f6efe0 0 50%) 0 0/28px 28px;color:#3a1a10}.room.r28 .rname{font-family:"Lobster",Georgia,serif;font-size:28px;color:#fff;text-shadow:0 2px 0 #8a1a10,0 0 8px rgba(0,0,0,.5)}.room.r28 .rnum{color:#fff;text-shadow:0 1px 2px #000}.room.r28 .rblurb,.room.r28 .rbest{background:rgba(255,248,238,.9);border-radius:6px;padding:2px 6px}
+.room.r29{background:radial-gradient(70px 30px at 25% 75%,#fff,transparent 70%),linear-gradient(180deg,#3a8ad8,#8ac8f8 60%,#d8f0ff);color:#14304a}.room.r29 .rname{font-family:"Baloo 2",system-ui,sans-serif;font-weight:800;font-size:24px;color:#fff;text-shadow:0 2px 0 #1a5a9a}
+.room.r30{background:radial-gradient(30px 30px at 78% 22%,rgba(255,250,220,.95),transparent 70%),linear-gradient(180deg,#050816,#0a1430 65%,#1a2a1a);color:#f8f2e2}.room.r30 .rname{font-family:"IM Fell English SC",Georgia,serif;font-size:24px;color:#ffd86a}
+/* Rooms 26-30 widgets */
+.crew{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.crew .side{display:flex;flex-direction:column;gap:6px;background:var(--parchment-2);border-radius:12px;padding:8px}
+.crew .side b{text-align:center}
+.dial .muted{display:block;text-align:center}
 /* Rooms 21-25 widgets */
 .flashbox{display:grid;place-items:center;height:110px;background:#0a1420;border-radius:12px}
 .fdot{width:34px;height:34px;border-radius:50%;background:#2a3440;transition:background .08s,box-shadow .08s}
@@ -6275,7 +6327,661 @@ const ROOM25=(function(){
   };
 })();
 
-const LEVELS=[ROOM1,ROOM2,ROOM3,ROOM4,ROOM5,ROOM6,ROOM7,ROOM8,ROOM9,ROOM10,ROOM11,ROOM12,ROOM13,ROOM14,ROOM15,ROOM16,ROOM17,ROOM18,ROOM19,ROOM20,ROOM21,ROOM22,ROOM23,ROOM24,ROOM25];
+const ROOM26=(function(){
+  const SC=['#c8302a','#e0b84a','#2f5aa8'],SCN=['red','gold','blue'];
+  const LEFT=[[2,0,0],[0,1,0],[0,1,1],[0,1,1],[0,1,0],[2,0,0]];
+  const RIGHT_OK=LEFT.map(r=>[r[2],r[1],r[0]]);
+  const RIGHT0=[[0,1,2],[0,0,0],[1,1,0],[1,1,0],[0,2,0],[0,0,1]];
+  const CREW=[['Erik',10],['Astrid',9],['Bjorn',7],['Freya',6],['Leif',5],['Sigrid',3]];
+  const KN={A:[120,22],B:[40,82],C:[200,82],D:[62,182],E:[178,182],F:[120,124]};
+  const KE=[['A','B'],['A','C'],['B','C'],['B','D'],['C','E'],['D','E'],['B','F'],['C','F'],['D','F'],['E','F']];
+  let ext,ship,fireFl,doorL,doorR,sail,vikings,goat,fjord;
+  const a={};
+  const ekey=(p,q)=>[p,q].sort().join('');
+  function shieldSVG(clickable){const cs=34,ox=8,oy=8;let s=`<svg viewBox="0 0 220 220" style="width:100%;max-width:260px;align-self:center" role="img" aria-label="The jarl's shield, a 6 by 6 pattern"><defs><clipPath id="sc"><rect x="6" y="6" width="208" height="208" rx="26"/></clipPath></defs><rect x="2" y="2" width="216" height="216" rx="30" fill="#5a3a1a"/><g clip-path="url(#sc)">`;
+    for(let r=0;r<6;r++)for(let c=0;c<6;c++){const v=c<3?LEFT[r][c]:S.shield[r][c-3];s+=`<rect ${clickable&&c>=3?`class="scell" data-r="${r}" data-c="${c-3}" style="cursor:pointer"`:''} x="${ox+c*cs}" y="${oy+r*cs}" width="${cs-2}" height="${cs-2}" fill="${SC[v]}"/>`;}
+    s+=`</g><path d="M110 4V216" stroke="#f6efe0" stroke-width="3" stroke-dasharray="6 5" pointer-events="none"/><circle pointer-events="none" cx="110" cy="110" r="16" fill="#9aa0a8" stroke="#5a5a62" stroke-width="3"/><rect x="4" y="4" width="212" height="212" rx="28" fill="none" stroke="#9aa0a8" stroke-width="6" pointer-events="none"/></svg>`;return s;}
+  function knotSVG(){let s=`<svg viewBox="0 0 240 210" style="width:100%;max-width:280px;align-self:center;background:#8a8a92;border-radius:16px" role="img" aria-label="A knot pattern carved on a rune stone">`;
+    KE.forEach(([p,q])=>{const used=S.used.includes(ekey(p,q));s+=`<path d="M${KN[p][0]} ${KN[p][1]}L${KN[q][0]} ${KN[q][1]}" stroke="${used?'#ffd23a':'#3a3a42'}" stroke-width="${used?9:7}" stroke-linecap="round"/>`;});
+    Object.keys(KN).forEach(k=>{const cur=S.knotAt===k;s+=`<circle class="knode" data-k="${k}" cx="${KN[k][0]}" cy="${KN[k][1]}" r="15" fill="${cur?'#ffd23a':'#d8d4cc'}" stroke="#3a3a42" stroke-width="3" style="cursor:pointer"/>`;});return s+'</svg>';}
+  function logC(base,seed){const W=256,H=256,c=mk(W,H),x=c.getContext('2d');x.fillStyle=base;x.fillRect(0,0,W,H);const r=rng(seed);for(let y=0;y<H;y+=32){const g=x.createLinearGradient(0,y,0,y+32);g.addColorStop(0,'#3a2410');g.addColorStop(.3,base);g.addColorStop(.7,base);g.addColorStop(1,'#2a1808');x.fillStyle=g;x.fillRect(0,y,W,32);for(let i=0;i<6;i++){x.strokeStyle='rgba(30,16,6,.4)';x.beginPath();const px=r()*W;x.moveTo(px,y+8+r()*16);x.lineTo(px+20+r()*30,y+8+r()*16);x.stroke();}}return c;}
+  function fjordCanvas(){const W=512,H=256,c=mk(W,H),x=c.getContext('2d');const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#5a8ac8');g.addColorStop(.5,'#c8dcf0');g.addColorStop(.52,'#2a4a6a');g.addColorStop(1,'#1a3a5a');x.fillStyle=g;x.fillRect(0,0,W,H);
+    x.fillStyle='#4a5a6a';x.beginPath();x.moveTo(0,135);x.lineTo(60,40);x.lineTo(130,110);x.lineTo(170,135);x.fill();x.beginPath();x.moveTo(330,135);x.lineTo(420,30);x.lineTo(512,100);x.lineTo(512,135);x.fill();x.fillStyle='#f2f6fa';x.beginPath();x.moveTo(60,40);x.lineTo(45,65);x.lineTo(78,62);x.fill();x.beginPath();x.moveTo(420,30);x.lineTo(400,58);x.lineTo(442,55);x.fill();return c;}
+  function viking(parent,px,pz,col,hair,s){const g=new THREE.Group();g.position.set(px,0,pz);g.scale.setScalar(s||1);parent.add(g);const m=M({color:col});cyl(0.18,0.22,0.5,m,0,0.45,0,g,10);sph(0.15,M({color:0xf0c8a0}),0,0.85,0,g);
+    const hel=new THREE.Mesh(new THREE.SphereGeometry(0.16,12,8,0,Math.PI*2,0,Math.PI/2),M({color:0x9aa0a8,metalness:.6,roughness:.4}));hel.position.y=0.88;g.add(hel);sph(1,M({color:hair}),0,0.75,0.1,g,0.12,0.12,0.06);[-1,1].forEach(sd=>{const arm=cyl(0.05,0.05,0.4,m,sd*0.22,0.5,0.1,g,6);arm.rotation.x=-0.9;});return g;}
+
+  function build(){
+    ext={t:0};vikings={};a.doors=0;
+    scene.fog=new THREE.Fog(0x2a1a10,12,34);
+    const logM=M({map:tex(logC('#7a5232',2601),[3,1.2]),roughness:.9});
+    const W=12,L=20,H=4,RH=4;[[W/2,0,-Math.PI/2],[-W/2,0,Math.PI/2]].forEach(([wx,wz,ry])=>tag(plane(L,H,logM,wx,H/2,wz,ry),'wall'));tag(plane(W,H,logM,0,H/2,L/2,Math.PI),'wall');
+    // North wall around the big doors
+    [[-4,-L/2,4],[4,-L/2,4]].forEach(([wx,wz,ww])=>tag(plane(ww,H,logM,wx,H/2,wz,0),'wall'));tag(plane(4,1.0,logM,0,3.5,-L/2,0),'wall');
+    const gab=(z,ry)=>{const sh=new THREE.Shape([new THREE.Vector2(-W/2,H),new THREE.Vector2(W/2,H),new THREE.Vector2(0,H+RH)]);const m=new THREE.Mesh(new THREE.ShapeGeometry(sh),M({map:tex(logC('#6a4528',2602),[0.3,0.3]),side:THREE.DoubleSide}));m.position.z=z;scene.add(tag(m,'wall'));};gab(-L/2);gab(L/2);
+    const rM=M({map:tex(logC('#5a3a20',2603),[2,4]),side:THREE.DoubleSide,roughness:.95});const rl=Math.hypot(W/2,RH);[[W/4,-Math.atan2(RH,W/2)],[-W/4,Math.atan2(RH,W/2)]].forEach(([rx,rz])=>{const g=new THREE.Group();g.position.set(rx,H+RH/2,0);g.rotation.z=rz;scene.add(g);const p=new THREE.Mesh(new THREE.PlaneGeometry(rl,L),rM);p.rotation.x=Math.PI/2;g.add(tag(p,'roof'));});
+    // Floor walkways and the water channel
+    [[-4,4],[4,4]].forEach(([fx,fw])=>{const f=plane(fw,L,M({map:tex(logC('#8a6240',2604),[1,4]),roughness:.9}),fx,0.4,0,0);f.rotation.x=-Math.PI/2;tag(f,'floor');});
+    const wc=new THREE.Mesh(new THREE.PlaneGeometry(4,L+30),new THREE.MeshStandardMaterial({color:0x1a3a4a,roughness:.15,metalness:.3}));wc.rotation.x=-Math.PI/2;wc.position.set(0,0.05,-12);scene.add(tag(wc,'water'));
+    // Carved posts
+    for(let z=-7;z<=7;z+=3.5)[-2.2,2.2].forEach(px=>{const p=cyl(0.18,0.2,H+0.3,M({color:0x5a3a20}),px,H/2,z,null,10);tag(p,'post');});
+    // The longship
+    ship=tag(new THREE.Group(),'ship');scene.add(ship);const hm=M({map:tex(logC('#8a5a32',2605),[4,1]),roughness:.8});
+    const hull=new THREE.Mesh(new THREE.SphereGeometry(1,24,12,0,Math.PI*2,Math.PI/2,Math.PI/2),hm);hull.scale.set(1.4,0.9,6.0);hull.position.y=0.55;ship.add(hull);
+    const deck=new THREE.Mesh(new THREE.CircleGeometry(1,24),M({map:tex(logC('#9a6a40',2606),[1,4]),roughness:.85}));deck.rotation.x=-Math.PI/2;deck.scale.set(1.35,5.9,1);deck.position.y=0.5;ship.add(deck);
+    const neck=new THREE.Group();neck.position.set(0,0.6,-5.7);ship.add(neck);const nk=cyl(0.12,0.2,2.0,hm,0,0.9,-0.2,neck,10);nk.rotation.x=0.35;const dh=sph(1,M({color:0x6a2a1a}),0,1.95,-0.6,neck,0.2,0.22,0.38);[-0.1,0.1].forEach(ex=>sph(0.04,new THREE.MeshBasicMaterial({color:0xffd23a}),ex,2.02,-0.86,neck));
+    const tl=cyl(0.1,0.18,1.6,hm,0,1.2,5.9,ship,10);tl.rotation.x=-0.5;
+    a.shields=[];for(let i=0;i<8;i++)[-1,1].forEach(sd=>{const z=-3.6+i*1.0;const sw=Math.sqrt(Math.max(0,1-(z/6)**2))*1.4;const sh=cyl(0.3,0.3,0.05,[M({color:0x5a3a1a}),M({color:i%2?0xc8302a:0xe0b84a}),M({color:0x5a3a1a})],sd*(sw+0.03),0.85,z,ship,16);sh.rotation.z=Math.PI/2;});
+    for(let i=0;i<6;i++)[-1,1].forEach(sd=>{const z=-2.8+i*1.1;const o=cyl(0.03,0.03,3.0,M({color:0xb8885a}),sd*2.2,0.6,z,ship,6);o.rotation.z=sd*1.25;});
+    cyl(0.1,0.12,6,M({color:0x6a4528}),0,3.5,1.3,ship,10);const yard=cyl(0.06,0.06,3.4,M({color:0x6a4528}),0,5.8,1.3,ship,8);yard.rotation.z=Math.PI/2;
+    const sailC=mk(128,128),sx=sailC.getContext('2d');for(let i=0;i<8;i++){sx.fillStyle=i%2?'#c8302a':'#f2e6c8';sx.fillRect(i*16,0,16,128);}
+    sail=new THREE.Mesh(new THREE.PlaneGeometry(3.2,2.6,6,4),new THREE.MeshStandardMaterial({map:tex(sailC),side:THREE.DoubleSide,roughness:.9}));{const p=sail.geometry.attributes.position;for(let i=0;i<p.count;i++)p.setZ(i,-0.3*Math.cos(p.getX(i)/3.2*Math.PI));sail.geometry.computeVertexNormals();}sail.position.set(0,4.4,1.45);ship.add(tag(sail,'ship'));sail.visible=false;
+    a.furled=cyl(0.12,0.12,3.2,M({color:0xe8dcc0}),0,5.65,1.45,ship,8);a.furled.rotation.z=Math.PI/2;a.furled.visible=false;
+    // The crew on their benches
+    const crewG=tag(new THREE.Group(),'crew');ship.add(crewG);const cols=[0x2f5aa8,0x8a3a6a,0x3a7a3a,0xa85a2a,0x5a5a8a,0x6a2a1a],hairs=[0xd8b050,0xc87a2a,0x5a3a1a,0xe8c870,0x8a5a2a,0xf2d890];
+    CREW.forEach(([n],i)=>{const v=viking(crewG,0,0,cols[i],hairs[i],0.95);vikings[n]=v;});
+    // Big doors (north) and the fjord beyond
+    const dg=tag(new THREE.Group(),'doors');dg.position.set(0,0,-L/2+0.05);scene.add(dg);const dm=M({map:tex(logC('#6a4528',2607),[1,1.5]),roughness:.85});
+    doorL=new THREE.Group();doorL.position.set(-2,0,0);dg.add(doorL);box(2,3.0,0.15,dm,1,1.5,0,doorL);doorR=new THREE.Group();doorR.position.set(2,0,0);dg.add(doorR);box(2,3.0,0.15,dm,-1,1.5,0,doorR);
+    const emb=new THREE.Mesh(new THREE.CircleGeometry(0.55,24),M({map:tex((()=>{const c=mk(64,64),x=c.getContext('2d');x.fillStyle='#5a3a1a';x.beginPath();x.arc(32,32,31,0,7);x.fill();for(let r=0;r<6;r++)for(let cc=0;cc<6;cc++){const v=cc<3?LEFT[r][cc]:RIGHT0[r][cc-3];x.fillStyle=SC[v];x.fillRect(5+cc*9,5+r*9,8,8);}return c;})())}));emb.position.set(0,2.0,0.1);dg.add(emb);a.bar=box(4.2,0.25,0.2,M({color:0x3a2a1a}),0,1.5,0.2,dg);
+    fjord=plane(40,20,new THREE.MeshBasicMaterial({map:tex(fjordCanvas()),fog:false}),0,6,-30,0);
+    // Rune stone and sail chest (west)
+    const rs=tag(new THREE.Group(),'runestone');rs.position.set(-4.6,0.4,1.0);scene.add(rs);faceCenter(rs);const st=new THREE.Mesh(new THREE.BoxGeometry(1.0,1.9,0.35),M({color:0x7a7a82,roughness:1,flatShading:true}));st.position.y=0.95;rs.add(st);
+    plane(0.8,0.7,M({map:tex((()=>{const c=mk(120,105),x=c.getContext('2d');x.fillStyle='#7a7a82';x.fillRect(0,0,120,105);x.strokeStyle='#c8302a';x.lineWidth=5;KE.forEach(([p,q])=>{x.beginPath();x.moveTo(KN[p][0]/2,KN[p][1]/2);x.lineTo(KN[q][0]/2,KN[q][1]/2);x.stroke();});return c;})())}),0,1.2,0.18,0,rs);
+    const sc=tag(new THREE.Group(),'sailchest');sc.position.set(-4.4,0.4,3.0);scene.add(sc);faceCenter(sc);box(1.0,0.55,0.6,M({color:0x5a3a1a}),0,0.28,0,sc);a.scLid=new THREE.Group();a.scLid.position.set(0,0.55,-0.3);sc.add(a.scLid);box(1.02,0.1,0.62,M({color:0x6a4528}),0,0.05,0.3,a.scLid);[-0.35,0.35].forEach(bx=>box(0.06,0.57,0.62,M({color:0x9aa0a8,metalness:.6}),bx,0.28,0,sc));
+    // Fire pit (east walkway), loom, fish rack, goat, horns
+    const fp=tag(new THREE.Group(),'fire');fp.position.set(4.2,0.4,1.2);scene.add(fp);for(let i=0;i<8;i++){const an=i/8*Math.PI*2;sph(0.15,M({color:0x6a6a6a,flatShading:true}),Math.cos(an)*0.5,0.08,Math.sin(an)*0.5,fp);}fireFl=[];for(let i=0;i<4;i++){const f=new THREE.Mesh(new THREE.ConeGeometry(0.12,0.5,8),new THREE.MeshBasicMaterial({color:[0xff6a1a,0xffa030,0xffd060][i%3]}));f.position.set((i%2-0.5)*0.2,0.3,(i>1?0.1:-0.1));fp.add(f);fireFl.push(f);}a.fireL=new THREE.PointLight(0xff8a3a,1.0,10,2);a.fireL.position.set(4.2,1.2,1.2);scene.add(a.fireL);
+    const lm=tag(new THREE.Group(),'loom');lm.position.set(4.6,0.4,-3.6);scene.add(lm);faceCenter(lm);[-0.7,0.7].forEach(px=>box(0.1,2.0,0.1,M({color:0x6a4528}),px,1.0,0,lm));box(1.6,0.1,0.1,M({color:0x6a4528}),0,1.95,0,lm);const cloth=plane(1.3,1.2,M({map:tex((()=>{const c=mk(64,64),x=c.getContext('2d');for(let i=0;i<8;i++){x.fillStyle=['#2f5aa8','#e0b84a','#c8302a','#f2e6c8'][i%4];x.fillRect(0,i*8,64,8);}return c;})()),side:THREE.DoubleSide}),0,1.3,0.02,0,lm);
+    const fr=tag(new THREE.Group(),'fishrack');fr.position.set(-4.6,0.4,-4.0);scene.add(fr);faceCenter(fr);box(1.6,0.06,0.06,M({color:0x6a4528}),0,1.8,0,fr);[-0.75,0.75].forEach(px=>box(0.06,1.8,0.06,M({color:0x6a4528}),px,0.9,0,fr));for(let i=0;i<5;i++)sph(1,M({color:0xb8a080}),-0.6+i*0.3,1.5,0,fr,0.06,0.25,0.03);
+    goat=tag(new THREE.Group(),'goat');goat.position.set(4.0,0.4,5.2);scene.add(goat);beast(goat,0,0,{col:0xe8e0d0,body:[0.3,0.28,0.45],leg:0.4,neck:0.2,head:0.16,extra(g,o){[-0.05,0.05].forEach(hx=>{const h=new THREE.Mesh(new THREE.ConeGeometry(0.03,0.2,6),M({color:0x8a7a6a}));h.position.set(hx,o.hy+0.15,o.hz-0.05);h.rotation.x=-0.5;g.add(h);});sph(1,M({color:0xe8e0d0}),0,o.hy-0.15,o.hz+0.05,g,0.04,0.1,0.04);}});faceCenter(goat);
+    const hn=tag(new THREE.Group(),'horns');hn.position.set(-5.9,2.2,-1.0);hn.rotation.y=Math.PI/2;scene.add(hn);box(1.4,0.08,0.25,M({color:0x6a4528}),0,0,0.1,hn);[-0.4,0.4].forEach(hx=>{const h=new THREE.Mesh(new THREE.ConeGeometry(0.08,0.6,10),M({color:0xe8d8b0}));h.position.set(hx,0.3,0.15);h.rotation.z=hx*0.8;hn.add(h);});
+    scene.add(new THREE.AmbientLight(0xffd8b0,0.45));scene.add(new THREE.HemisphereLight(0xffe0c0,0x3a2010,0.4));a.dayL=new THREE.DirectionalLight(0xc8dcff,0);a.dayL.position.set(0,6,-20);scene.add(a.dayL);
+    return{animate,onTap(id){if(id==='goat')tone(500,.35,'sawtooth',.06,420);if(id==='horns')tone(147,1.2,'sawtooth',.1);},onWin(){startFly(ext);}};
+  }
+  function animate(t,dt,k){
+    if(!REDUCED){fireFl.forEach((f,i)=>f.scale.y=1+0.3*Math.sin(t*11+i*2));a.fireL.intensity=0.9+Math.sin(t*9)*0.1;ship.position.y=Math.sin(t*0.8)*0.03;ship.rotation.z=Math.sin(t*0.6)*0.01;}
+    // Crew seats: port (left, -x) and starboard (right, +x)
+    const port=CREW.filter(([n])=>S.side[n]==='P'),stb=CREW.filter(([n])=>S.side[n]==='S');
+    port.forEach(([n],i)=>{const v=vikings[n];v.position.x=lerp(v.position.x,-0.75,k);v.position.z=lerp(v.position.z,-2.6+i*1.1+ (i>=2?1.6:0),k);v.position.y=0.5;v.rotation.y=Math.PI/2;});
+    stb.forEach(([n],i)=>{const v=vikings[n];v.position.x=lerp(v.position.x,0.75,k);v.position.z=lerp(v.position.z,-2.6+i*1.1+(i>=2?1.6:0),k);v.position.y=0.5;v.rotation.y=-Math.PI/2;});
+    const wP=port.reduce((p,c)=>p+c[1],0),wS=stb.reduce((p,c)=>p+c[1],0);ship.rotation.z=lerp(ship.rotation.z,Math.max(-0.08,Math.min(0.08,(wP-wS)*0.006)),k*0.5);
+    sail.visible=S.sailUp;a.furled.visible=S.sailOn&&!S.sailUp;a.scLid.rotation.x=lerp(a.scLid.rotation.x,S.knotDone?-1.4:0,k);
+    a.bar.visible=!S.shieldDone;a.doors=lerp(a.doors,S.shieldDone?1:0,k*0.6);doorL.rotation.y=a.doors*1.4;doorR.rotation.y=-a.doors*1.4;a.dayL.intensity=a.doors*0.8;
+    if(ext.t>0){ext.t=Math.min(1,ext.t+dt/(REDUCED?0.6:4.0));const p=easeIO(ext.t);ship.position.z=-p*22;camera.position.set(0,1.9,ship.position.z);}
+  }
+  const panels={
+    doors:()=>{
+      if(S.shieldDone)return{eye:'North',title:'The boathouse doors',html:`<p>The jarl’s shield is whole again, and the great doors have swung open onto the fjord!</p>`};
+      return{eye:'North',title:'The boathouse doors',html:`<p>The great doors are barred. The jarl’s shield hangs on them, but someone has painted the right half wrong. Vikings say the shield must be a perfect <b>mirror image</b>: the right half must match the left half, flipped across the line. Tap the squares on the right to change their color.</p>
+        ${shieldSVG(true)}<p class="msg">${S.msg}</p>`,
+        bind(){document.querySelectorAll('#p-body .scell').forEach(el=>el.addEventListener('click',()=>{const r=+el.dataset.r,c=+el.dataset.c;S.shield[r][c]=(S.shield[r][c]+1)%3;SFX.click();
+          if(S.shield.every((row,i)=>row.every((v,j)=>v===RIGHT_OK[i][j]))){S.shieldDone=true;SFX.ding();setTimeout(()=>tone(80,1.2,'sine',.3,50),300);updateHud();}renderPanel();}));}};
+    },
+    crew:()=>{
+      const wP=CREW.filter(([n])=>S.side[n]==='P').reduce((p,c)=>p+c[1],0),wS=40-wP;
+      return{eye:'On the benches',title:'The rowing crew',html:`<p>Six Vikings sit on the rowing benches, but the ship is tipping to one side! The captain shouts: <i>“Both sides of the ship must carry the same weight, or we’ll row in circles!”</i> Tap a Viking to move them to the other side. The numbers show how heavy each one is, in stones.</p>
+        <div class="crew"><div class="side"><b>Port (left): ${wP}</b>${CREW.filter(([n])=>S.side[n]==='P').map(([n,w])=>`<button class="btn" data-n="${n}">${n} · ${w}</button>`).join('')}</div><div class="side"><b>Starboard (right): ${wS}</b>${CREW.filter(([n])=>S.side[n]==='S').map(([n,w])=>`<button class="btn" data-n="${n}">${n} · ${w}</button>`).join('')}</div></div>
+        <p class="readout">${wP===wS?'Balanced!':wP>wS?'Tipping left':'Tipping right'}</p>`,
+        bind(){on('button[data-n]',el=>{const n=el.dataset.n;S.side[n]=S.side[n]==='P'?'S':'P';SFX.click();updateHud();renderPanel();});}};
+    },
+    runestone:()=>{
+      if(S.knotDone)return{eye:'West',title:'The rune stone',html:`<p>You traced the whole knot in one line! With a clunk, the iron lock on the sail chest beside the stone fell open.</p>`};
+      return{eye:'West',title:'The rune stone',html:`<p>A carved stone with a knot pattern. The runes say: <i>“Trace the knot in one line. Never lift your finger and never go over the same line twice, and the sail chest shall open.”</i> Tap a dot to start, then tap the next dot along a line.</p>
+        ${knotSVG()}<p class="readout">Lines traced: ${S.used.length} of ${KE.length}</p><div class="row" style="justify-content:center"><button class="btn quiet" id="kreset">Start over</button></div><p class="msg">${S.msg}</p>`,
+        bind(){document.querySelectorAll('#p-body .knode').forEach(el=>el.addEventListener('click',()=>{const k2=el.dataset.k;S.msg='';
+            if(!S.knotAt){S.knotAt=k2;SFX.click();renderPanel();return;}
+            const e=ekey(S.knotAt,k2);if(!KE.some(([p,q])=>ekey(p,q)===e)){S.msg='There’s no line between those two dots.';}else if(S.used.includes(e)){S.msg='You already traced that line!';}else{S.used.push(e);S.knotAt=k2;tone(400+S.used.length*40,.08,'sine',.08);
+              if(S.used.length===KE.length){S.knotDone=true;SFX.ding();updateHud();}else{const left=KE.some(([p,q])=>(p===k2||q===k2)&&!S.used.includes(ekey(p,q)));if(!left)S.msg='Stuck! No more lines from this dot. Hint: try starting from a dot with an odd number of lines.';}}renderPanel();}));
+          $('#kreset').addEventListener('click',()=>{S.used=[];S.knotAt=null;S.msg='';renderPanel();});}};
+    },
+    sailchest:()=>{
+      if(!S.knotDone)return{eye:'West',title:'The sail chest',html:`<p>A heavy chest with an iron lock shaped like a knot. It must be connected to the rune stone next to it.</p>`};
+      return{eye:'West',title:'The sail chest',html:S.hasSail||S.sailOn?'<p>The chest is empty.</p>':`<p>Inside, neatly folded, is the ship’s red and white striped <b>sail</b>!</p><div class="row"><button class="btn brass" id="take">Take the sail</button></div>`,bind(){const b=$('#take');if(b)b.addEventListener('click',()=>{S.hasSail=true;SFX.click();updateHud();renderPanel();});}};
+    },
+    ship:()=>{const bal=CREW.filter(([n])=>S.side[n]==='P').reduce((p,c)=>p+c[1],0)===20;
+      return{eye:'Under your feet',title:'The longship',html:`<p>You’re standing on a Viking longship, floating in the boathouse. Ready to sail out onto the fjord, almost!</p>
+        <div class="parts">${rowPart(S.sailUp,'Sail','Hoisted.','The mast is bare.',S.hasSail&&!S.sailUp?'<button class="btn brass" id="hoist">Hoist the sail</button>':'')}${rowPart(bal,'Crew','Balanced, 20 stones each side.','The ship is tipping.')}${rowPart(S.shieldDone,'Boathouse doors','Open.','Barred shut.')}</div>
+        <div class="row" style="justify-content:center"><button class="btn brass" id="rowOut" ${S.sailUp&&bal&&S.shieldDone?'':'disabled'}>Row out!</button></div>`,
+        bind(){const h=$('#hoist');if(h)h.addEventListener('click',()=>{S.sailUp=true;S.hasSail=false;SFX.ding();updateHud();renderPanel();});$('#rowOut').addEventListener('click',()=>{closePanel();win();});}};
+    },
+    fire:()=>({eye:'East',title:'The fire pit',html:`<span class="tag">Just for looking</span><p>A crackling fire keeps the longhouse warm. Vikings cooked, told stories and sang songs around the fire.</p>`}),
+    loom:()=>({eye:'Northeast',title:'A loom',html:`<span class="tag">Just for looking</span><p>A tall loom for weaving cloth. Viking sails were woven from wool, and could take a whole year to make!</p>`}),
+    fishrack:()=>({eye:'Northwest',title:'Drying fish',html:`<span class="tag">Just for looking</span><p>Fish hanging up to dry. Dried fish could last for months on a long sea voyage.</p>`}),
+    goat:()=>({eye:'Southeast',title:'A goat',html:`<span class="tag">Just for looking</span><p>Maaa! A goat chews on a bit of rope. Vikings kept goats for milk and cheese.</p>`}),
+    horns:()=>({eye:'West wall',title:'Horns',html:`<span class="tag">Just for looking</span><p>Animal horns on the wall. Vikings used horns for drinking and for blowing signals.</p>`}),
+    post:()=>({eye:'All around',title:'Carved posts',html:`<p>Thick wooden posts, carved with twisting patterns, hold up the roof.</p>`}),
+    water:()=>({eye:'Below',title:'The water',html:`<p>A channel of cold fjord water runs right through the boathouse.</p>`}),
+    wall:()=>({eye:'All around',title:'The longhouse',html:`<p>Walls of thick logs and a steep roof.</p>`}),
+    roof:()=>panels.wall(),
+    floor:()=>({eye:'On either side',title:'The walkways',html:`<p>Wooden walkways run along both sides of the water.</p>`})
+  };
+  return{
+    id:'viking',num:26,name:'The Viking Longhouse',
+    blurb:'Fix a mirror-image shield, balance the rowers and trace a knot in one line.',
+    eyebrow:'Room 26',titleHTML:'The Viking <em>Longhouse</em>',
+    story:'You’re standing on the deck of a Viking longship, tied up inside a boathouse on a cold fjord. The crew is ready to row, but the doors are barred, the sail is locked away and the ship is tipping to one side.',
+    goal:'Open the doors, hoist the sail, balance the crew and row out.',
+    winTitle:'Skål!',winText:'The crew pulls the oars together, the striped sail fills with wind, and the longship glides out onto the sparkling fjord.',
+    bg:0x2a1a10,toneMapping:THREE.NoToneMapping,exposure:1,far:80,eyeY:1.9,winDelay:4200,
+    total:3,progress:()=>[S.shieldDone,CREW.filter(([n])=>S.side[n]==='P').reduce((p,c)=>p+c[1],0)===20,S.knotDone].filter(Boolean).length,goalsTitle:'Setting sail',howTo:'Mirror images are flipped. Odd numbers matter.',
+    goalRows:()=>[['Jarl’s shield',S.shieldDone],['Crew balanced',CREW.filter(([n])=>S.side[n]==='P').reduce((p,c)=>p+c[1],0)===20],['Sail',S.sailUp,S.hasSail||S.knotDone]].map(([n,ok,got])=>({icon:statusDot(ok,got),text:`<b>${n}</b>: ${ok?'done':got?'almost':'not yet'}`})),
+    icon:()=>'',
+    fresh:()=>({shield:RIGHT0.map(r=>r.slice()),shieldDone:false,side:{Erik:'P',Astrid:'P',Bjorn:'P',Freya:'S',Leif:'S',Sigrid:'S'},used:[],knotAt:null,knotDone:false,hasSail:false,sailOn:false,sailUp:false}),
+    items:()=>{const it=[];if(S.hasSail)it.push({label:'Sail',svg:svgIcon('<path d="M6 4v16M6 5l12 6-12 6"/>')});return it;},
+    build,panels
+  };
+})();
+
+const ROOM27=(function(){
+  const FOUNDED='MCMXXVI',CODE='1926';
+  const INV=[['wheel','The wheel','Long, long ago, before Rome was even built'],['press','The printing press','MCDXL'],['phone','The telephone','MDCCCLXXVI'],['plane','The airplane','MCMIII'],['moon','The moon landing','MCMLXIX']];
+  const INV_ORDER=['wheel','press','phone','plane','moon'];
+  const SHOW_ORDER=['phone','moon','wheel','plane','press'];
+  const STARS={dubhe:[198,150],merak:[190,190],phecda:[140,200],megrez:[135,160],alioth:[100,150],mizar:[70,140],alkaid:[40,152],polaris:[222,40],ld1:[205,62],ld2:[188,78],ld3:[176,104],ld4:[156,98],ld5:[150,120],ld6:[170,126],cas1:[22,40],cas2:[46,22],cas3:[68,44],cas4:[92,26],cas5:[114,48]};
+  const DIPPER=[['merak','dubhe'],['dubhe','megrez'],['megrez','phecda'],['phecda','merak'],['megrez','alioth'],['alioth','mizar'],['mizar','alkaid']];
+  let ext,lasers,armor,globe,mammoth;
+  const a={};
+  function invSVG(k,s){s=s||46;const P={wheel:'<circle cx="20" cy="20" r="15" fill="none" stroke="#6a4a2a" stroke-width="4"/><circle cx="20" cy="20" r="3" fill="#6a4a2a"/><path d="M20 5V35M5 20H35M9 9l22 22M31 9L9 31" stroke="#6a4a2a" stroke-width="2"/>',
+    press:'<rect x="6" y="26" width="28" height="8" fill="#6a4a2a"/><rect x="10" y="8" width="4" height="18" fill="#6a4a2a"/><rect x="26" y="8" width="4" height="18" fill="#6a4a2a"/><rect x="8" y="6" width="24" height="4" fill="#6a4a2a"/><rect x="14" y="18" width="12" height="6" fill="#c9a46a"/><path d="M20 10v8" stroke="#3a2a1a" stroke-width="2"/>',
+    phone:'<rect x="8" y="24" width="24" height="12" rx="2" fill="#2a2a2a"/><path d="M6 14c0-6 28-6 28 0l-4 4h-6l-2-3h-4l-2 3h-6z" fill="#2a2a2a"/><circle cx="20" cy="30" r="3" fill="#c9a46a"/>',
+    plane:'<path d="M4 20h32M20 10v20M14 26h12" stroke="#5a6a7a" stroke-width="4" stroke-linecap="round"/><path d="M4 16h32v8H4z" fill="#c8b890" opacity=".7"/>',
+    moon:'<path d="M10 30l4-10h12l4 10M14 20l2-8h8l2 8" stroke="#c9a46a" stroke-width="2.5" fill="#e8e0c8"/><path d="M8 34l4-4M32 34l-4-4" stroke="#8a8a92" stroke-width="2"/><circle cx="32" cy="8" r="4" fill="#d8d8e0"/>'};
+    return `<svg viewBox="0 0 40 40" width="${s}" height="${s}" aria-hidden="true">${P[k]}</svg>`;}
+  function starSVG(){let s=`<svg viewBox="0 0 250 230" id="sky" style="width:100%;max-width:300px;align-self:center;background:radial-gradient(circle at 50% 30%,#1a2a5a,#050a1a);border-radius:14px" role="img" aria-label="Star map of the northern sky with the Big Dipper">`;
+    const r=rng(2701);for(let i=0;i<40;i++){s+=`<circle cx="${(r()*250).toFixed(0)}" cy="${(r()*230).toFixed(0)}" r="${(0.6+r()*0.8).toFixed(1)}" fill="rgba(255,255,255,.55)"/>`;}
+    DIPPER.forEach(([p,q])=>s+=`<path d="M${STARS[p][0]} ${STARS[p][1]}L${STARS[q][0]} ${STARS[q][1]}" stroke="rgba(160,200,255,.45)" stroke-width="1.5"/>`);
+    s+=`<text x="120" y="222" text-anchor="middle" font-size="10" fill="#a8c8ff">The Big Dipper</text>`;
+    Object.entries(STARS).forEach(([k,[x,y]])=>{const big=k==='dubhe'||k==='merak';s+=`<circle class="star" data-s="${k}" cx="${x}" cy="${y}" r="${S.starPick===k?7:(big?4.2:3.4)}" fill="${S.starPick===k?'#ffd23a':'#ffffff'}" style="cursor:pointer"/><circle class="star" data-s="${k}" cx="${x}" cy="${y}" r="11" fill="transparent" style="cursor:pointer"/>`;});
+    return s+'</svg>';}
+  function marbleC(){const N=256,c=mk(N,N),x=c.getContext('2d');for(let i=0;i<4;i++)for(let j=0;j<4;j++){x.fillStyle=(i+j)%2?'#d8d0c0':'#efe8da';x.fillRect(i*64,j*64,64,64);}x.strokeStyle='rgba(120,110,90,.25)';x.lineWidth=1.5;const r=rng(2702);for(let i=0;i<30;i++){x.beginPath();x.moveTo(r()*N,r()*N);x.bezierCurveTo(r()*N,r()*N,r()*N,r()*N,r()*N,r()*N);x.stroke();}return c;}
+  function wallC(){const W=256,H=256,c=mk(W,H),x=c.getContext('2d');x.fillStyle='#3a2a4a';x.fillRect(0,0,W,H);x.fillStyle='#4a3a5a';for(let i=0;i<W;i+=64)x.fillRect(i+4,20,56,H-60);x.fillStyle='#c9a46a';x.fillRect(0,H-30,W,6);x.fillRect(0,10,W,4);return c;}
+  function plaqueC(){return signC(300,150,{bg:'#2a2a2a',border:'#c9a46a',bw:6,r:6,top:42,color:'#e8d8b0',lines:[['THIS MUSEUM WAS',`22px ${CINZEL}`,null,30],['FOUNDED IN',`22px ${CINZEL}`,null,38],[FOUNDED,`700 30px ${CINZEL}`,'#ffd36a',0]]});}
+  function romanC(){return signC(300,230,{bg:'#f6efe0',border:'#5a3a1a',bw:5,r:6,top:30,color:'#2a1a0a',lines:[['Roman Numerals',`24px ${CINZEL}`,'#8a2a10',34],['I = 1   V = 5   X = 10   L = 50',`700 16px ${NUN}`,null,24],['C = 100   D = 500   M = 1000',`700 16px ${NUN}`,null,32],['Add the letters up. But when a',`italic 15px ${FELL}`,null,22],['smaller letter comes before a bigger',`italic 15px ${FELL}`,null,22],['one, subtract it: IV = 4, IX = 9, CM = 900.',`italic 15px ${FELL}`,null,22]]});}
+
+  function build(){
+    ext={t:0};lasers=[];a.door=0;
+    scene.fog=new THREE.Fog(0x1a1424,16,36);
+    const W=14,H=7;const wm=M({map:tex(wallC(),[4,1.5]),roughness:.8});[[0,-W/2,0],[W/2,0,-Math.PI/2],[0,W/2,Math.PI],[-W/2,0,Math.PI/2]].forEach(([wx,wz,ry])=>tag(plane(W,H,wm,wx,H/2,wz,ry),'wall'));
+    const fl=plane(W,W,M({map:tex(marbleC(),[5,5]),roughness:.25,metalness:.1}),0,0,0,0);fl.rotation.x=-Math.PI/2;tag(fl,'floor');
+    const ce=plane(W,W,M({color:0x2a2034}),0,H,0,0);ce.rotation.x=Math.PI/2;tag(ce,'ceiling');
+    const sky=new THREE.Mesh(new THREE.CircleGeometry(2.6,32),new THREE.MeshBasicMaterial({map:tex(starCanvas(2703,'#0a1030',200)),fog:false}));sky.rotation.x=Math.PI/2;sky.position.y=H-0.01;scene.add(tag(sky,'skylight'));const skr=new THREE.Mesh(new THREE.TorusGeometry(2.6,0.12,8,40),M({color:0xc9a46a,metalness:.6}));skr.rotation.x=Math.PI/2;skr.position.y=H-0.05;scene.add(noRay(skr));
+    // Your plinth with velvet ropes
+    const pl=tag(new THREE.Group(),'plinth');scene.add(pl);cyl(0.9,1.0,0.6,M({color:0xe8e0d0,roughness:.4}),0,0.3,0,pl,24);for(let i=0;i<4;i++){const an=i/4*Math.PI*2+Math.PI/4;cyl(0.04,0.06,1.0,M({color:0xc9a46a,metalness:.7}),Math.cos(an)*1.5,0.5,Math.sin(an)*1.5,pl,8);}
+    for(let i=0;i<4;i++){const an=i/4*Math.PI*2+Math.PI/4,an2=an+Math.PI/2;const p1=new THREE.Vector3(Math.cos(an)*1.5,0.9,Math.sin(an)*1.5),p2=new THREE.Vector3(Math.cos(an2)*1.5,0.9,Math.sin(an2)*1.5);const c=new THREE.CatmullRomCurve3([p1,p1.clone().lerp(p2,0.5).setY(0.7),p2]);pl.add(new THREE.Mesh(new THREE.TubeGeometry(c,12,0.03,6),M({color:0xa8202a})));}
+    const sg=plane(0.6,0.3,M({map:tex(signC(120,60,{bg:'#f6efe0',border:'#a8202a',bw:4,r:4,top:26,color:'#a8202a',lines:[['PLEASE',`700 15px ${NUN}`,null,18],['DO NOT TOUCH',`700 13px ${NUN}`,null,0]]}))}),0,0.4,1.01,0,pl);
+    // Front doors (north) with lasers and security panel
+    const dr=tag(new THREE.Group(),'doors');dr.position.set(0,0,-W/2+0.05);scene.add(dr);const dm=M({color:0x5a3a1a,roughness:.6});a.dL=new THREE.Group();a.dL.position.set(-1.4,0,0);dr.add(a.dL);box(1.4,3.4,0.12,dm,0.7,1.7,0,a.dL);a.dR=new THREE.Group();a.dR.position.set(1.4,0,0);dr.add(a.dR);box(1.4,3.4,0.12,dm,-0.7,1.7,0,a.dR);
+    const fr=M({color:0xc9a46a,metalness:.6});box(3.4,0.25,0.3,fr,0,3.5,0.05,dr);box(0.25,3.6,0.3,fr,-1.55,1.8,0.05,dr);box(0.25,3.6,0.3,fr,1.55,1.8,0.05,dr);plane(2.8,3.4,new THREE.MeshBasicMaterial({color:0x2a3a6a,fog:false}),0,1.7,-0.2,0,dr);
+    for(let i=0;i<4;i++){const l=box(2.9,0.02,0.02,new THREE.MeshBasicMaterial({color:0xff2a2a}),0,0.5+i*0.6,0.4,dr);lasers.push(l);}
+    const sp=box(0.5,0.7,0.12,M({color:0x2a2a32,metalness:.4}),2.3,1.5,0.1,dr);a.secLight=sph(0.05,new THREE.MeshBasicMaterial({color:0xff2a2a}),2.3,1.8,0.17,dr);
+    // Hall of Inventions (east)
+    const hi=tag(new THREE.Group(),'timeline');hi.position.set(6.2,0,0.3);scene.add(hi);faceCenter(hi);
+    plane(5.6,0.9,M({map:tex(signC(560,90,{bg:'#2a2a2a',border:'#c9a46a',bw:5,r:6,top:58,color:'#e8d8b0',lines:[['HALL OF INVENTIONS',`34px ${CINZEL}`,null,0]]}))}),0,4.2,0,0,hi);
+    a.peds=[];SHOW_ORDER.forEach((k,i)=>{const px=-2.2+i*1.1;cyl(0.35,0.4,1.0,M({color:0xe8e0d0}),px,0.5,0.4,hi,16);const c=new THREE.Mesh(new THREE.BoxGeometry(0.6,0.6,0.6),new THREE.MeshStandardMaterial({color:0xcfe8ff,transparent:true,opacity:.2,roughness:.05}));c.position.set(px,1.3,0.4);hi.add(c);
+      const col=[0x2a2a2a,0xe8e0c8,0x6a4a2a,0xc8b890,0x6a4a2a][i];const o=k==='wheel'?cyl(0.22,0.22,0.06,M({color:0x6a4a2a}),px,1.25,0.4,hi,16):k==='moon'?cyl(0.15,0.22,0.3,M({color:0xe8e0c8,metalness:.4}),px,1.2,0.4,hi,8):box(0.3,0.22,0.22,M({color:col}),px,1.18,0.4,hi);if(k==='wheel')o.rotation.x=Math.PI/2;a.peds.push(o);});
+    a.card=box(0.25,0.15,0.02,M({color:0xffffff,emissive:0x2a5ab8,emissiveIntensity:.3}),1.45,1.08,0.85,hi);
+    // Roman statue and the numeral chart (south)
+    const stG=tag(new THREE.Group(),'statue');stG.position.set(-1.8,0,6.2);scene.add(stG);faceCenter(stG);const mb=M({color:0xf2efe6,roughness:.5});box(1.2,1.0,1.0,mb,0,0.5,0,stG);cyl(0.28,0.4,1.4,mb,0,1.7,0,stG,12);sph(0.22,mb,0,2.65,0,stG);const arm=cyl(0.07,0.07,0.8,mb,0.35,2.1,0.15,stG,8);arm.rotation.z=-0.8;const tg=new THREE.Mesh(new THREE.TorusGeometry(0.18,0.03,6,16,Math.PI),M({color:0x7aa04a}));tg.position.set(0,2.75,0);tg.rotation.x=-0.3;stG.add(tg);
+    plane(0.9,0.45,M({map:tex(plaqueC())}),0,0.55,0.51,0,stG);
+    const rc=plane(1.2,0.92,M({map:tex(romanC())}),1.3,1.8,6.95,Math.PI);tag(rc,'romanchart');
+    // Planetarium console (west)
+    const pc=tag(new THREE.Group(),'stars');pc.position.set(-6.2,0,0.4);scene.add(pc);faceCenter(pc);box(1.6,1.0,0.8,M({color:0x2a2a3a,metalness:.4}),0,0.5,0,pc);const scr=plane(1.4,0.5,new THREE.MeshBasicMaterial({map:tex(starCanvas(2704,'#0a1030',120))}),0,1.15,0.3,0,pc);scr.rotation.x=-0.6;
+    const dome=new THREE.Mesh(new THREE.SphereGeometry(1.8,24,12,0,Math.PI*2,0,Math.PI/2),new THREE.MeshBasicMaterial({map:tex(starCanvas(2705,'#0a1030',260)),side:THREE.DoubleSide}));dome.position.set(0,3.2,-0.6);dome.scale.y=0.6;pc.add(dome);
+    const pj=sph(0.25,M({color:0x1a1a1a,metalness:.6}),0,1.8,-0.2,pc);
+    // Just for looking: knight, mammoth, globe, ship in a bottle, guard desk
+    armor=tag(new THREE.Group(),'armor');armor.position.set(-5.0,0,-5.0);scene.add(armor);faceCenter(armor);const am=M({color:0xb8c0c8,metalness:.8,roughness:.3});box(0.8,0.3,0.8,M({color:0x5a3a1a}),0,0.15,0,armor);cyl(0.26,0.2,0.85,am,0,1.4,0,armor,12);sph(0.2,am,0,2.05,0,armor);[-0.12,0.12].forEach(lx=>cyl(0.08,0.08,0.95,am,lx,0.75,0,armor,8));a.arm=new THREE.Group();a.arm.position.set(0.3,1.75,0);armor.add(a.arm);cyl(0.06,0.06,0.6,am,0,-0.3,0,a.arm,8);
+    mammoth=tag(new THREE.Group(),'mammoth');mammoth.position.set(4.6,0,5.2);scene.add(mammoth);faceCenter(mammoth);const bn=M({color:0xe8dcc0,roughness:.6});[[-0.5,-0.7],[0.5,-0.7],[-0.5,0.7],[0.5,0.7]].forEach(([lx,lz])=>cyl(0.08,0.08,1.6,bn,lx,0.8,lz,mammoth,6));for(let i=0;i<7;i++){const r=new THREE.Mesh(new THREE.TorusGeometry(0.55,0.04,6,16,Math.PI),bn);r.position.set(0,1.6,-0.6+i*0.2);r.rotation.y=Math.PI/2;mammoth.add(r);}cyl(0.05,0.05,1.8,bn,0,2.1,0,mammoth,6).rotation.x=Math.PI/2;sph(0.35,bn,0,2.2,1.1,mammoth);[-1,1].forEach(sd=>{const t=new THREE.Mesh(new THREE.TorusGeometry(0.5,0.05,6,16,Math.PI*0.9),bn);t.position.set(sd*0.25,1.8,1.5);t.rotation.set(0,Math.PI/2,0.4);mammoth.add(t);});
+    globe=tag(new THREE.Group(),'globe');globe.position.set(-4.6,0,4.8);scene.add(globe);cyl(0.06,0.3,1.0,M({color:0x5a3a1a}),0,0.5,0,globe,12);a.gl=new THREE.Mesh(new THREE.SphereGeometry(0.55,24,16),M({map:tex(earthStyle()),roughness:.5}));a.gl.position.y=1.6;globe.add(a.gl);
+    const sb=tag(new THREE.Group(),'shipbottle');sb.position.set(4.9,0,-4.8);scene.add(sb);faceCenter(sb);cyl(0.3,0.35,1.0,M({color:0xe8e0d0}),0,0.5,0,sb,12);const bt=cyl(0.18,0.18,0.7,new THREE.MeshStandardMaterial({color:0x9ad8b8,transparent:true,opacity:.35,roughness:.05}),0,1.3,0,sb,16);bt.rotation.z=Math.PI/2;box(0.35,0.08,0.1,M({color:0x6a4a2a}),0,1.25,0,sb);box(0.02,0.2,0.15,M({color:0xf2efe6}),0,1.38,0,sb);
+    const gd=tag(new THREE.Group(),'guarddesk');gd.position.set(3.0,0,-5.6);scene.add(gd);box(1.4,0.9,0.6,M({color:0x5a3a1a}),0,0.45,0,gd);box(0.25,0.12,0.25,M({color:0xff9ac8}),0.3,0.96,0,gd);cyl(0.05,0.06,0.25,M({color:0x2a2a2a}),-0.3,1.0,0,gd,8).rotation.z=Math.PI/2;
+    scene.add(new THREE.AmbientLight(0xc8b8e8,0.45));scene.add(new THREE.HemisphereLight(0xd8d0ff,0x3a2a4a,0.4));const ml=new THREE.PointLight(0xc8d8ff,0.7,18,2);ml.position.set(0,6.5,0);scene.add(ml);[[6,0],[-6,0],[0,6]].forEach(([lx,lz])=>{const s=new THREE.SpotLight(0xfff0d0,0.8,12,0.6,0.5);s.position.set(lx*0.6,6,lz*0.6);s.target.position.set(lx,1,lz);scene.add(s);scene.add(s.target);});
+    return{animate,onTap(id){if(id==='armor')a.wave=1;if(id==='globe')a.spin=2;if(id==='mammoth')tone(110,1.0,'sawtooth',.08,180);},onWin(){startFly(ext);}};
+  }
+  function earthStyle(){const W=256,H=128,c=mk(W,H),x=c.getContext('2d');x.fillStyle='#3a7ab8';x.fillRect(0,0,W,H);x.fillStyle='#d8c890';[[40,40,30,22],[70,85,18,26],[140,40,40,20],[150,80,16,20],[210,90,22,12]].forEach(([cx,cy,rx,ry])=>{x.beginPath();x.ellipse(cx,cy,rx,ry,0.3,0,7);x.fill();});return c;}
+  function animate(t,dt,k){
+    lasers.forEach((l,i)=>{l.visible=!S.alarmOff;if(!REDUCED&&!S.alarmOff)l.material.color.setHSL(0,1,0.45+0.1*Math.sin(t*8+i));});a.secLight.material.color.set(S.codeOk?0x2fbf5a:0xff2a2a);
+    if(!REDUCED){a.gl.rotation.y+=dt*(0.1+(a.spin||0));a.spin=Math.max(0,(a.spin||0)-dt);if(a.wave>0){a.wave=Math.max(0,a.wave-dt*0.5);a.arm.rotation.z=Math.sin(t*10)*0.8*a.wave;}}
+    a.card.visible=S.tlDone&&!S.hasCard&&!S.cardUsed;
+    a.door=lerp(a.door,S.won?1:0,k*0.5);a.dL.rotation.y=a.door*1.3;a.dR.rotation.y=-a.door*1.3;
+    if(ext.t>0){ext.t=Math.min(1,ext.t+dt/(REDUCED?0.6:3.0));const p=easeIO(ext.t);camera.position.set(0,lerp(2.2,1.6,p),lerp(0,-10,p));}
+  }
+  const panels={
+    statue:()=>({eye:'South',title:'A Roman statue',html:`<p>A marble statue of a Roman with a laurel wreath. The plaque on its base says:</p><img class="figure" style="max-width:300px;align-self:center" alt="Plaque: This museum was founded in MCMXXVI" src="${plaqueC().toDataURL('image/png')}">`,bind(){addClue('founded','The museum was founded in MCMXXVI.');}}),
+    romanchart:()=>({eye:'South wall',title:'Roman numerals',html:`<img class="figure" style="max-width:300px;align-self:center" alt="Roman numerals: I equals 1, V equals 5, X equals 10, L equals 50, C equals 100, D equals 500, M equals 1000. Add the letters up, but when a smaller letter comes before a bigger one, subtract it: IV is 4, IX is 9, CM is 900." src="${romanC().toDataURL('image/png')}"><p class="muted">Example: MDCLXVI = 1000 + 500 + 100 + 50 + 10 + 5 + 1 = 1666.</p>`}),
+    timeline:()=>{
+      if(S.tlDone)return{eye:'East · Hall of Inventions',title:'Hall of Inventions',html:S.hasCard||S.cardUsed?'<p>The inventions are in order, from the wheel to the moon landing.</p>':`<p>Every invention is in the right order! A hidden drawer under the moon-landing display pops open. Inside is a <b>security keycard</b>!</p><div class="row"><button class="btn brass" id="take">Take the keycard</button></div>`,bind(){const b=$('#take');if(b)b.addEventListener('click',()=>{S.hasCard=true;SFX.click();updateHud();renderPanel();});}};
+      return{eye:'East · Hall of Inventions',title:'Hall of Inventions',html:`<p>A night-time cleaner mixed up the exhibits! A sign says: <i>“Arrange the inventions from oldest to newest.”</i> Each one has its year written in <b>Roman numerals</b>. Pick an invention, then tap its spot on the timeline.</p>
+        <div class="ppt" style="grid-template-columns:repeat(5,1fr)">${[0,1,2,3,4].map(i=>{const k=S.tl[i];const inv=k&&INV.find(v=>v[0]===k);return`<button class="ppslot ${k?'ok':''}" data-s="${i}" style="min-height:84px"><span>${i===0?'Oldest':i===4?'Newest':i+1}</span>${inv?invSVG(k,34)+`<small>${inv[1]}</small>`:''}</button>`;}).join('')}</div>
+        <div class="opts" style="grid-template-columns:1fr">${SHOW_ORDER.filter(k=>!S.tl.includes(k)).map(k=>{const inv=INV.find(v=>v[0]===k);return`<button class="opt" data-k="${k}" aria-pressed="${S.sel===k}" style="flex-direction:row;justify-content:flex-start;gap:10px">${invSVG(k,40)}<span style="text-align:left">${inv[1]}<br><span class="muted" style="font-family:${CINZEL}">${inv[2]}</span></span></button>`;}).join('')}</div>
+        <div class="row" style="justify-content:center"><button class="btn brass" id="check" ${S.tl.every(Boolean)?'':'disabled'}>Check the timeline</button></div><p class="msg">${S.msg}</p>`,
+        bind(){on('.opt',el=>{S.sel=el.dataset.k;S.msg='';SFX.click();renderPanel();});
+          on('.ppslot',el=>{const i=+el.dataset.s;if(S.sel){S.tl[i]=S.sel;S.sel=null;SFX.click();}else S.tl[i]=null;renderPanel();});
+          $('#check').addEventListener('click',()=>{if(S.tl.every((k,i)=>k===INV_ORDER[i])){S.tlDone=true;SFX.ding();updateHud();renderPanel();}else{S.msg='Bzzt! The display lights flash red. Something is out of order.';SFX.thud();renderPanel();}});}};
+    },
+    stars:()=>{
+      if(S.alarmOff)return{eye:'West · The planetarium',title:'The planetarium',html:`<p>You found <b>Polaris</b>, the North Star! The console clicks, and the red laser alarm across the front doors switches off.</p>`};
+      return{eye:'West · The planetarium',title:'The planetarium',html:`<p>A planetarium console. Its screen says: <i>“SECURITY QUIZ: Tap the North Star to switch off the laser alarm.”</i> A guidebook is clipped beside it:</p>${quote('Find the Big Dipper. The two stars at the end of its cup are called the Pointer Stars. Follow a line from the bottom pointer through the top pointer, and keep going. The first bright star you reach is Polaris, the North Star, at the end of the Little Dipper’s handle.','Stargazer’s Guide')}
+        ${starSVG()}<p class="msg">${S.msg}</p>`,
+        bind(){document.querySelectorAll('#p-body .star').forEach(el=>el.addEventListener('click',()=>{const k2=el.dataset.s;S.starPick=k2;if(k2==='polaris'){S.alarmOff=true;SFX.ding();updateHud();}else{S.msg=k2==='dubhe'||k2==='merak'?'That’s one of the Pointer Stars. Follow their line!':'That star isn’t the North Star.';SFX.thud();}renderPanel();}));}};
+    },
+    doors:()=>{
+      return{eye:'North · Front doors',title:'The front doors',html:`<p>The museum’s front doors, locked for the night. A security panel on the right has a card slot and a keypad.</p>
+        <div class="parts">${rowPart(S.alarmOff,'Laser alarm','Switched off.','Red lasers cross the doorway!')}${rowPart(S.cardUsed,'Keycard','Swiped.','The card slot blinks: SWIPE CARD.',S.hasCard&&!S.cardUsed?'<button class="btn brass" id="swipe">Swipe the card</button>':'')}${rowPart(S.codeOk,'Year code','Accepted.','ENTER THE YEAR THE MUSEUM WAS FOUNDED.')}</div>
+        ${S.codeOk?'':`<div class="dials" style="background:linear-gradient(#3a3a42,#1a1a22)">${S.code.map((d,i)=>`<div class="dial"><button data-i="${i}" data-d="-1" aria-label="Digit ${i+1} back">${CHEV_UP}</button><span>${d}</span><button data-i="${i}" data-d="1" aria-label="Digit ${i+1} forward">${CHEV_DN}</button></div>`).join('')}</div><div class="row" style="justify-content:center"><button class="btn" id="enter">Enter</button></div>`}
+        <div class="row" style="justify-content:center"><button class="btn brass" id="leave" ${S.alarmOff&&S.cardUsed&&S.codeOk?'':'disabled'}>Open the doors</button></div><p class="msg">${S.msg}</p>`,
+        bind(){const sw=$('#swipe');if(sw)sw.addEventListener('click',()=>{S.cardUsed=true;S.hasCard=false;tone(1200,.1,'square',.06);updateHud();renderPanel();});
+          on('.dial button',el=>{const i=+el.dataset.i;S.code[i]=(S.code[i]+(+el.dataset.d)+10)%10;S.msg='';SFX.click();renderPanel();});
+          const en=$('#enter');if(en)en.addEventListener('click',()=>{if(S.code.join('')===CODE){S.codeOk=true;tone(1200,.1,'square',.06);setTimeout(()=>tone(1500,.15,'square',.06),120);updateHud();}else{S.msg='ACCESS DENIED.';SFX.thud();}renderPanel();});
+          $('#leave').addEventListener('click',()=>{closePanel();win();});}};
+    },
+    plinth:()=>({eye:'Under your feet',title:'An empty display plinth',html:`<p>You climbed up here during the school trip to take a photo, and fell asleep! Now you’re the only exhibit in the museum… after closing time.</p>`}),
+    armor:()=>({eye:'Northwest',title:'A suit of armor',html:`<span class="tag">Just for looking</span><p>A knight’s armor from long ago. Did it just wave at you? It must be the museum at night…</p>`}),
+    mammoth:()=>({eye:'Southeast',title:'A mammoth skeleton',html:`<span class="tag">Just for looking</span><p>The bones of a woolly mammoth, with huge curly tusks. Mammoths were related to elephants.</p>`}),
+    globe:()=>({eye:'Southwest',title:'A giant globe',html:`<span class="tag">Just for looking</span><p>A huge spinning globe of the Earth. Give it a spin!</p>`}),
+    shipbottle:()=>({eye:'Northeast',title:'A ship in a bottle',html:`<span class="tag">Just for looking</span><p>A tiny ship inside a glass bottle. How did they get it in there?</p>`}),
+    guarddesk:()=>({eye:'North',title:'The guard’s desk',html:`<span class="tag">Just for looking</span><p>The night guard’s desk, with a flashlight and a box of pink donuts. The guard must be on rounds.</p>`}),
+    skylight:()=>({eye:'Overhead',title:'The skylight',html:`<p>A round glass skylight. You can see the stars outside.</p>`}),
+    wall:()=>({eye:'All around',title:'The museum hall',html:`<p>A grand hall with purple walls and gold trim.</p>`}),
+    floor:()=>({eye:'Below',title:'The floor',html:`<p>A shiny marble floor.</p>`}),
+    ceiling:()=>({eye:'Overhead',title:'The ceiling',html:`<p>A high ceiling with a round skylight.</p>`})
+  };
+  return{
+    id:'museum',num:27,name:'The Museum at Night',
+    blurb:'Read Roman numerals, put history in order and find the North Star.',
+    eyebrow:'Room 27',titleHTML:'The Museum <em>at Night</em>',
+    story:'You climbed onto an empty display stand during a school trip to the museum and… fell asleep. Now it’s the middle of the night, everyone has gone home, and the front doors are locked tight with an alarm.',
+    goal:'Switch off the alarm, get the guard’s keycard and enter the code to open the front doors.',
+    winTitle:'Free at last!',winText:'The doors swing open and you step out into the night. Behind you, the knight in armor gives you one last wave.',
+    bg:0x1a1424,toneMapping:THREE.NoToneMapping,exposure:1,far:80,eyeY:2.2,winDelay:3400,
+    total:3,progress:()=>[S.alarmOff,S.tlDone,S.codeOk].filter(Boolean).length,goalsTitle:'The front doors',howTo:'History and the stars are both clues.',
+    goalRows:()=>[['Laser alarm off',S.alarmOff],['Guard’s keycard',S.cardUsed,S.hasCard],['Year code',S.codeOk]].map(([n,ok,got])=>({icon:statusDot(ok,got),text:`<b>${n}</b>: ${ok?'done':got?'found, not used yet':'not yet'}`})),
+    icon:()=>'',
+    fresh:()=>({tl:[null,null,null,null,null],sel:null,tlDone:false,hasCard:false,cardUsed:false,starPick:null,alarmOff:false,code:[0,0,0,0],codeOk:false}),
+    onOpen(){S.sel=null;},
+    items:()=>{const it=[];if(S.hasCard)it.push({label:'Keycard',svg:svgIcon('<rect x="4" y="7" width="16" height="10" rx="2"/><path d="M4 11h16"/>')});return it;},
+    build,panels
+  };
+})();
+
+const ROOM28=(function(){
+  const PATUA='"Patua One", Georgia, serif';
+  // Flour is counted in twelfths so 1/3 and 1/4 can mix.
+  const CUPS=[['1','1 cup',12],['h','½ cup',6],['t','⅓ cup',4],['q','¼ cup',3]];
+  const NEED=21; // 1¾ cups = 21/12
+  const DONE_H=7,DONE_M=15;
+  const FLAV={choc:['Chocolate','#5a3020','#7a4630'],van:['Vanilla','#f2e2b0','#fff4d0'],straw:['Strawberry','#f29ab0','#ffc0d0']};
+  const CAKE=['choc','van','straw'];
+  let ext,a={};
+  function frac(n){const w=Math.floor(n/12),r=n%12;if(!r)return`${w}`;const g=(p,q)=>q?g(q,p%q):p,d=g(r,12);const f=`${r/d}/${12/d}`;return w?`${w} and ${f}`:f;}
+  function clockC(h,m){const N=300,c=mk(N,N),x=c.getContext('2d');x.fillStyle='#8a5a2a';x.beginPath();x.arc(150,150,146,0,7);x.fill();x.fillStyle='#fffaf0';x.beginPath();x.arc(150,150,130,0,7);x.fill();x.fillStyle='#3a2a1a';x.font=`700 28px ${NUN}`;x.textAlign='center';x.textBaseline='middle';for(let i=1;i<=12;i++){const an=i/12*Math.PI*2-Math.PI/2;x.fillText(i,150+Math.cos(an)*104,150+Math.sin(an)*104);}
+    for(let i=0;i<60;i++){const an=i/60*Math.PI*2;x.fillRect(0,0,0,0);x.save();x.translate(150,150);x.rotate(an);x.fillRect(-1,-128,2,i%5?6:12);x.restore();}
+    const ha=((h%12)+m/60)/12*Math.PI*2-Math.PI/2,ma=m/60*Math.PI*2-Math.PI/2;x.lineCap='round';x.strokeStyle='#2a1a0a';x.lineWidth=10;x.beginPath();x.moveTo(150,150);x.lineTo(150+Math.cos(ha)*62,150+Math.sin(ha)*62);x.stroke();x.lineWidth=6;x.beginPath();x.moveTo(150,150);x.lineTo(150+Math.cos(ma)*100,150+Math.sin(ma)*100);x.stroke();x.fillStyle='#c83a2a';x.beginPath();x.arc(150,150,8,0,7);x.fill();return c;}
+  function recipeC(){return signC(320,380,{bg:'#fff8e8',border:'#c83a2a',bw:6,r:10,top:44,color:'#3a2a1a',lines:[['Grandma’s Bread',`34px ${PATUA}`,'#c83a2a',44],['1¾ cups flour',`700 22px ${NUN}`,null,32],['1 cup warm water',`700 22px ${NUN}`,null,32],['1 spoon of yeast',`700 22px ${NUN}`,null,32],['a pinch of salt',`700 22px ${NUN}`,null,48],['Bake for',`italic 22px ${FELL}`,null,30],['1 hour 25 minutes.',`700 24px ${NUN}`,'#c83a2a',40],['Set the oven to the time it',`italic 18px ${FELL}`,null,24],['will be DONE, not how long!',`italic 18px ${FELL}`,null,0]]});}
+  function orderC(){return signC(320,300,{bg:'#ffffff',border:'#4a8ab8',bw:5,r:8,top:40,color:'#2a2a3a',lines:[['ORDER #28',`26px ${PATUA}`,'#4a8ab8',38],['A three-layer birthday cake:',`700 18px ${NUN}`,null,28],['chocolate, vanilla and strawberry.',`700 18px ${NUN}`,null,40],['“The birthday girl hates pink on',`italic 18px ${FELL}`,null,24],['top, so strawberry must NOT be the',`italic 18px ${FELL}`,null,24],['top layer. And chocolate must sit',`italic 18px ${FELL}`,null,24],['right on top of vanilla.”',`italic 18px ${FELL}`,null,0]]});}
+  function chalkC(){return signC(400,260,{bg:'#2a3a2e',border:'#8a5a2a',bw:12,r:4,top:50,color:'#f2f2e8',lines:[['Today’s Specials',`34px ${PATUA}`,'#ffd36a',48],['Cinnamon rolls … 3 for $2',`22px ${NUN}`,null,36],['Blueberry muffins … $1',`22px ${NUN}`,null,36],['Pretzels … ½ off!',`22px ${NUN}`,null,0]]});}
+  function cupSVG(k,s){const sz={'1':1,'h':.82,'t':.7,'q':.6}[k];const w=26*sz,h=22*sz;return`<svg viewBox="0 0 40 40" width="${s}" height="${s}" aria-hidden="true"><path d="M${20-w/2} ${30-h}h${w}l-2 ${h}h${-w+4}z" fill="#c0c8d0" stroke="#5a6470" stroke-width="1.5"/><path d="M${20+w/2-1} ${32-h}q8 2 1 ${h*0.6}" fill="none" stroke="#5a6470" stroke-width="2.5"/></svg>`;}
+  function cakeSVG(){const L=S.layers;let s='<svg viewBox="0 0 160 130" width="180" height="146" style="align-self:center" role="img" aria-label="Cake on a stand">';s+='<path d="M20 116h120M80 116v10M60 126h40" stroke="#b8c0c8" stroke-width="5" stroke-linecap="round"/>';
+    [2,1,0].forEach((pos,j)=>{const y=86-j*28,k=L[pos];const f=k?FLAV[k]:null;s+=`<rect x="30" y="${y}" width="100" height="26" rx="4" fill="${f?f[1]:'none'}" stroke="${f?'rgba(0,0,0,.2)':'#c8b8a8'}" stroke-dasharray="${f?'':'5 4'}" stroke-width="2"/>`;if(f)s+=`<path d="M30 ${y+4}h100" stroke="${f[2]}" stroke-width="4"/>`;});
+    if(L.every(Boolean))s+='<path d="M76 30v-10M84 30v-10" stroke="#4ab8d8" stroke-width="4"/><circle cx="76" cy="17" r="3" fill="#ffb02a"/><circle cx="84" cy="17" r="3" fill="#ffb02a"/>';return s+'</svg>';}
+  function build(){
+    ext={t:0};a={door:0,steam:[]};
+    scene.fog=new THREE.Fog(0xf0dcc0,14,30);
+    const W=12,H=5;const tile=(()=>{const c=mk(256,256),x=c.getContext('2d');x.fillStyle='#fff6e6';x.fillRect(0,0,256,256);x.strokeStyle='#e8d8c0';x.lineWidth=3;for(let i=0;i<=256;i+=32){x.beginPath();x.moveTo(i,0);x.lineTo(i,256);x.moveTo(0,i);x.lineTo(256,i);x.stroke();}x.fillStyle='#c83a2a';x.fillRect(0,200,256,14);return c;})();
+    const wm=M({map:tex(tile,[4,1.5]),roughness:.7});[[0,-W/2,0],[W/2,0,-Math.PI/2],[0,W/2,Math.PI],[-W/2,0,Math.PI/2]].forEach(([wx,wz,ry])=>tag(plane(W,H,wm,wx,H/2,wz,ry),'wall'));
+    const ck=(()=>{const c=mk(256,256),x=c.getContext('2d');for(let i=0;i<8;i++)for(let j=0;j<8;j++){x.fillStyle=(i+j)%2?'#c83a2a':'#f6efe0';x.fillRect(i*32,j*32,32,32);}return c;})();
+    const fl=plane(W,W,M({map:tex(ck,[3,3]),roughness:.5}),0,0,0,0);fl.rotation.x=-Math.PI/2;tag(fl,'floor');const ce=plane(W,W,M({color:0xf6ead8}),0,H,0,0);ce.rotation.x=Math.PI/2;tag(ce,'ceiling');
+    const wood=M({color:0x9a6a3a,roughness:.7}),dark=M({color:0x5a3a1a,roughness:.7}),steel=M({color:0xc0c8d0,metalness:.7,roughness:.3});
+    // Brick oven (north)
+    const ov=tag(new THREE.Group(),'oven');ov.position.set(0,0,-5.4);scene.add(ov);const brick=M({map:tex(brickCanvas(),[2,2]),roughness:.9});box(3.2,2.8,1.1,brick,0,1.4,0,ov);const dome=new THREE.Mesh(new THREE.SphereGeometry(1.6,20,10,0,Math.PI*2,0,Math.PI/2),brick);dome.position.set(0,2.8,0);dome.scale.set(1,0.5,0.7);ov.add(dome);
+    a.mouth=plane(1.4,0.9,new THREE.MeshBasicMaterial({color:0x2a0a00}),0,1.3,0.56,0,ov);a.glow=new THREE.PointLight(0xff8a2a,0,4,2);a.glow.position.set(0,1.3,1.0);ov.add(a.glow);a.ovDoor=box(1.5,1.0,0.06,M({color:0x2a2a2a,metalness:.6}),0,1.3,0.6,ov);
+    a.timerC=mk(256,96);a.timerT=tex(a.timerC);plane(0.9,0.34,new THREE.MeshBasicMaterial({map:a.timerT}),0,2.25,0.57,0,ov);drawTimer();
+    cyl(0.12,0.12,1.4,brick,1.1,4.0,-0.2,ov,8);
+    a.loaf=new THREE.Mesh(new THREE.SphereGeometry(0.3,16,10),M({color:0xc8843a,roughness:.6}));a.loaf.scale.set(1.3,0.6,0.8);a.loaf.position.set(0,1.0,0.25);ov.add(a.loaf);a.loaf.visible=false;
+    // Flour station (east)
+    const fs=tag(new THREE.Group(),'flour');fs.position.set(5.2,0,0.6);scene.add(fs);faceCenter(fs);box(2.6,0.95,0.9,wood,0,0.475,0,fs);box(2.7,0.06,1.0,M({color:0xe8e0d0}),0,0.98,0,fs);
+    a.bowl=cyl(0.32,0.2,0.28,M({color:0x4a8ab8,roughness:.4}),-0.6,1.15,0,fs,20);a.flourIn=cyl(0.29,0.29,0.02,M({color:0xffffff}),-0.6,1.05,0,fs,20);a.dough=sph(0.22,M({color:0xf2dcb0}),-0.6,1.18,0,fs);a.dough.scale.y=0.7;
+    [0.3,0.65,0.95,1.2].forEach((cx,i)=>{const s=[0.13,0.11,0.095,0.085][i];cyl(s,s*0.8,s*1.1,steel,cx,1.01+s*0.55,0.15,fs,14);});
+    const sack=cyl(0.3,0.36,0.7,M({color:0xe8dcc0,roughness:.95}),0.5,1.36,-0.25,fs,12);
+    // Recipe card on the wall above
+    const rc=plane(0.95,1.13,M({map:tex(recipeC())}),5.97,2.4,1.9,-Math.PI/2);tag(rc,'recipe');
+    // Clock (south-east wall)
+    a.clk=plane(1.0,1.0,M({map:tex(clockC(5,50))}),3.4,3.3,5.97,Math.PI);tag(a.clk,'clock');
+    // Cake station (west)
+    const cs=tag(new THREE.Group(),'cake');cs.position.set(-5.2,0,0.4);scene.add(cs);faceCenter(cs);box(2.4,0.95,0.9,wood,0,0.475,0,cs);box(2.5,0.06,1.0,M({color:0xf2e8f0}),0,0.98,0,cs);
+    cyl(0.05,0.08,0.25,steel,0,1.13,0,cs,10);cyl(0.42,0.42,0.03,steel,0,1.27,0,cs,24);a.layers=[0,1,2].map(i=>{const m=cyl(0.36,0.36,0.17,M({color:0xffffff}),0,1.37+(2-i)*0.18,0,cs,24);m.visible=false;return m;});
+    [['choc',-0.9],['van',-0.6],['straw',0.75]].forEach(([k,lx])=>{const m=cyl(0.15,0.15,0.18,M({color:new THREE.Color(FLAV[k][1])}),lx,1.1,0.15,cs,16);});
+    const os=plane(0.9,0.84,M({map:tex(orderC())}),-5.97,2.4,-1.4,Math.PI/2);tag(os,'order');
+    // Dumbwaiter (south)
+    const dw=tag(new THREE.Group(),'lift');dw.position.set(-0.6,0,5.95);dw.rotation.y=Math.PI;scene.add(dw);box(1.7,2.3,0.12,dark,0,2.25,0.05,dw);plane(1.3,1.3,new THREE.MeshBasicMaterial({color:0x1a0e06}),0,1.9,0.12,0,dw);a.box=new THREE.Group();a.box.position.set(0,1.25,0.08);dw.add(a.box);box(1.25,0.06,0.5,wood,0,0,0,a.box);
+    a.gate=box(1.3,1.3,0.04,M({color:0xb8a060,metalness:.7,wireframe:false,transparent:true,opacity:.55}),0,1.9,0.16,dw);box(0.12,0.4,0.08,M({color:0xc83a2a}),1.0,1.9,0.12,dw);
+    plane(1.2,0.3,M({map:tex(signC(240,60,{bg:'#c83a2a',border:'#fff',bw:3,r:4,top:40,color:'#fff',lines:[['UP TO THE SHOP',`26px ${PATUA}`,null,0]]}))}),0,3.2,0.12,0,dw);
+    // Just for looking
+    const mx=tag(new THREE.Group(),'mixer');mx.position.set(4.4,0,-4.4);scene.add(mx);faceCenter(mx);box(1.2,0.9,0.7,wood,0,0.45,0,mx);const mc=M({color:0xe85a7a,roughness:.3,metalness:.2});box(0.4,0.12,0.4,mc,0,0.96,0,mx);box(0.14,0.6,0.16,mc,0,1.3,-0.12,mx);a.mxHead=new THREE.Group();a.mxHead.position.set(0,1.62,-0.12);mx.add(a.mxHead);box(0.2,0.2,0.55,mc,0,0,0.12,a.mxHead);cyl(0.18,0.12,0.26,steel,0,1.15,0.08,mx,14);
+    const cd=tag(new THREE.Group(),'cupcakes');cd.position.set(-4.3,0,-4.5);scene.add(cd);faceCenter(cd);box(1.6,0.9,0.7,dark,0,0.45,0,cd);box(1.6,0.7,0.7,new THREE.MeshStandardMaterial({color:0xdff4ff,transparent:true,opacity:.25,roughness:.05}),0,1.25,0,cd);
+    const cols=[0xff9ac8,0x9ad8ff,0xfff09a,0xb8f0a8,0xd8b0ff];for(let i=0;i<5;i++){cyl(0.08,0.06,0.09,M({color:0xc8843a}),-0.6+i*0.3,0.95,0,cd,10);sph(0.09,M({color:cols[i]}),-0.6+i*0.3,1.04,0,cd);}
+    const ch=plane(1.6,1.04,M({map:tex(chalkC())}),-2.4,3.2,-5.97,0);tag(ch,'specials');
+    const sk=tag(new THREE.Group(),'sacks');sk.position.set(-4.6,0,4.6);scene.add(sk);[[0,0,0],[0.5,0,0.2],[0.25,0.6,0.1]].forEach(([sx,sy,sz])=>{const s=cyl(0.3,0.36,0.6,M({color:0xe8dcc0,roughness:.95}),sx,0.3+sy,sz,sk,12);});
+    const ct=tag(new THREE.Group(),'cat');ct.position.set(4.5,0,4.5);scene.add(ct);faceCenter(ct);cyl(0.3,0.3,0.7,dark,0,0.35,0,ct,12);const fur=M({color:0xe8a04a,roughness:.9});a.cat=new THREE.Group();a.cat.position.y=0.7;ct.add(a.cat);const bd=sph(0.25,fur,0,0.18,0,a.cat);bd.scale.set(1,0.7,1.2);sph(0.15,fur,0,0.36,0.22,a.cat);[-1,1].forEach(sd=>{const e=new THREE.Mesh(new THREE.ConeGeometry(0.05,0.1,4),fur);e.position.set(sd*0.08,0.5,0.22);a.cat.add(e);});a.tail=cyl(0.03,0.03,0.4,fur,0,0.2,-0.3,a.cat,6);a.tail.rotation.x=0.8;
+    const rp=tag(new THREE.Group(),'pin');rp.position.set(5.2,0,0.6);scene.add(rp);faceCenter(rp);const pin=cyl(0.06,0.06,0.6,M({color:0xd8b080}),-1.12,1.07,0.05,rp,10);pin.rotation.x=Math.PI/2;
+    scene.add(new THREE.AmbientLight(0xfff0e0,0.6));scene.add(new THREE.HemisphereLight(0xfff8f0,0xc8a080,0.5));const pl=new THREE.PointLight(0xfff0d8,0.8,18,2);pl.position.set(0,4.6,0);scene.add(pl);
+    const lamp=cyl(0.35,0.15,0.3,M({color:0xc83a2a}),0,4.75,0,null,16);noRay(lamp);
+    return{animate,onTap(id){if(id==='mixer')a.mix=2;if(id==='cat'){a.meow=1;tone(700,.25,'triangle',.06,500);}},onWin(){startFly(ext);}};
+  }
+  function brickCanvas(){const c=mk(256,256),x=c.getContext('2d');x.fillStyle='#e8d8c0';x.fillRect(0,0,256,256);const r=rng(2801);for(let j=0;j<8;j++)for(let i=-1;i<5;i++){x.fillStyle=`hsl(${10+r()*10},${50+r()*15}%,${36+r()*10}%)`;x.fillRect(i*64+(j%2)*32+3,j*32+3,58,26);}return c;}
+  function drawTimer(){const x=a.timerC.getContext("2d"),w=a.timerC._w,h=a.timerC._h;x.fillStyle='#101010';x.fillRect(0,0,w,h);x.fillStyle=S.baked?'#5aff7a':'#ff5a3a';x.font=`700 ${h*0.55}px ${NUN}`;x.textAlign='center';x.textBaseline='middle';x.fillText(S.baked?'DONE!':`${S.hr}:${String(S.mn).padStart(2,'0')}`,w/2,h/2);a.timerT.needsUpdate=true;}
+  function animate(t,dt,k){
+    a.flourIn.visible=S.scoops.length>0&&!S.dough;a.flourIn.position.y=1.05+Math.min(1,S.scoops.reduce((p,c)=>p+c,0)/24)*0.18;a.dough.visible=S.dough&&!S.inOven;
+    a.ovDoor.position.y=S.inOven&&!S.baked?1.3:1.3;a.glow.intensity=S.inOven?1.2+(REDUCED?0:0.3*Math.sin(t*6)):0;a.loaf.visible=S.baked&&!S.hasBread&&!S.won;a.ovDoor.visible=!(S.baked&&!S.hasBread);
+    S.layers.forEach((k2,i)=>{a.layers[i].visible=!!k2&&!S.cakeBoxed;if(k2)a.layers[i].material.color.set(FLAV[k2][1]);});
+    if(!REDUCED){if(a.mix>0){a.mix-=dt;a.mxHead.rotation.x=Math.sin(t*40)*0.06;}if(a.meow>0){a.meow-=dt;a.cat.rotation.y=Math.sin(t*12)*0.3*a.meow;}a.tail.rotation.z=Math.sin(t*2)*0.4;}
+    a.gate.position.y=lerp(a.gate.position.y,S.won?3.1:1.9,k*0.5);
+    if(a.lastT!==`${S.hr}${S.mn}${S.baked}`){a.lastT=`${S.hr}${S.mn}${S.baked}`;drawTimer();}
+    if(ext.t>0){ext.t=Math.min(1,ext.t+dt/(REDUCED?0.6:3.2));const p=easeIO(ext.t);const z=p<0.5?lerp(0,5.0,p*2):5.0;camera.position.set(lerp(0,-0.6,Math.min(1,p*2)),p<0.5?1.6:lerp(1.6,6,(p-0.5)*2),z);}
+  }
+  const panels={
+    recipe:()=>({eye:'East wall',title:'Grandma’s recipe card',html:`<img class="figure" style="max-width:280px;align-self:center" alt="Grandma’s Bread: 1 and three-quarter cups flour, 1 cup warm water, 1 spoon of yeast, a pinch of salt. Bake for 1 hour 25 minutes. Set the oven to the time it will be done, not how long!" src="${recipeC().toDataURL('image/png')}">`,bind(){addClue('recipe','Bread: 1¾ cups flour. Bake 1 hour 25 minutes.');}}),
+    clock:()=>({eye:'South wall',title:'The kitchen clock',html:`<img class="figure" style="max-width:220px;align-self:center" alt="An analog clock. The short hand is just before the 6. The long hand points at the 10." src="${clockC(5,50).toDataURL('image/png')}"><p class="muted">The short hand shows the hour. The long hand shows the minutes: each number is 5 minutes.</p>`}),
+    flour:()=>{
+      if(S.dough)return{eye:'East · The mixing bench',title:'The mixing bench',html:S.inOven?'<p>The bowl is empty. Your dough is in the oven.</p>':`<p>A soft, round ball of dough! Now it needs to go into the oven.</p>`};
+      const tot=S.scoops.reduce((p,c)=>p+c,0);
+      return{eye:'East · The mixing bench',title:'The mixing bench',html:`<p>A big blue mixing bowl, a sack of flour and four measuring cups. Water, yeast and salt are already in the bowl. Now add the right amount of flour. <b>Check Grandma’s recipe card</b> on the wall!</p>
+        <div class="opts" style="grid-template-columns:repeat(4,1fr)">${CUPS.map(([k,n])=>`<button class="opt" data-k="${k}">${cupSVG(k,46)}<span>${n}</span></button>`).join('')}</div>
+        <p style="text-align:center;font-size:1.1rem">Flour in the bowl: <b>${tot?frac(tot)+(tot<=12?' cup':' cups'):'none'}</b></p>
+        <div class="row" style="justify-content:center"><button class="btn" id="dump" ${tot?'':'disabled'}>Dump it out</button><button class="btn brass" id="mix" ${tot?'':'disabled'}>Mix the dough</button></div><p class="msg">${S.msg}</p>`,
+        bind(){on('.opt',el=>{const c=CUPS.find(v=>v[0]===el.dataset.k);S.scoops.push(c[2]);S.msg='';SFX.click();renderPanel();});
+          $('#dump').addEventListener('click',()=>{S.scoops=[];S.msg='';SFX.click();renderPanel();});
+          $('#mix').addEventListener('click',()=>{const t2=S.scoops.reduce((p,c)=>p+c,0);if(t2===NEED){S.dough=true;S.msg='';SFX.ding();updateHud();}else{S.msg=t2>NEED?'Way too dry and crumbly! That’s too much flour.':'Too sticky and runny! That’s not enough flour.';SFX.thud();}renderPanel();});}};
+    },
+    oven:()=>{
+      if(S.hasBread)return{eye:'North · The brick oven',title:'The brick oven',html:'<p>The oven is cooling down. You already took the bread.</p>'};
+      if(S.baked)return{eye:'North · The brick oven',title:'The brick oven',html:`<p>DING! The oven pops open. A golden loaf of bread is inside, and it smells amazing.</p><div class="row"><button class="btn brass" id="take">Take the bread</button></div>`,bind(){$('#take').addEventListener('click',()=>{S.hasBread=true;SFX.click();updateHud();renderPanel();});}};
+      if(!S.inOven)return{eye:'North · The brick oven',title:'The brick oven',html:`<p>A big brick oven, already hot. It has a digital timer above the door.</p>${S.dough?'<div class="row"><button class="btn brass" id="put">Put the dough in</button></div>':'<p class="muted">You need some bread dough to bake first.</p>'}`,bind(){const b=$('#put');if(b)b.addEventListener('click',()=>{S.inOven=true;SFX.click();renderPanel();});}};
+      return{eye:'North · The brick oven',title:'The oven timer',html:`<p>The dough is in! The timer says: <b>“SET THE TIME WHEN THE BREAD WILL BE DONE.”</b> What time is it now? How long does the bread bake?</p>
+        <div class="dials" style="background:linear-gradient(#2a2a2a,#101010)"><div class="dial"><button data-i="h" data-d="1" aria-label="Hour up">${CHEV_UP}</button><span>${S.hr}</span><button data-i="h" data-d="-1" aria-label="Hour down">${CHEV_DN}</button></div><div class="dial" style="min-width:20px;background:none;box-shadow:none"><span>:</span></div><div class="dial"><button data-i="m" data-d="5" aria-label="Minutes up">${CHEV_UP}</button><span>${String(S.mn).padStart(2,'0')}</span><button data-i="m" data-d="-5" aria-label="Minutes down">${CHEV_DN}</button></div></div>
+        <div class="row" style="justify-content:center"><button class="btn brass" id="bake">Start baking</button></div><p class="msg">${S.msg}</p>`,
+        bind(){on('.dial button',el=>{const d=+el.dataset.d;if(el.dataset.i==='h')S.hr=((S.hr-1+d+12)%12)+1;else S.mn=(S.mn+d+60)%60;S.msg='';SFX.click();renderPanel();});
+          $('#bake').addEventListener('click',()=>{if(S.hr===DONE_H&&S.mn===DONE_M){S.baked=true;S.msg='';SFX.ding();updateHud();}else{S.msg='The oven beeps: “That time would burn the bread, or leave it raw!”';SFX.thud();}renderPanel();});}};
+    },
+    order:()=>({eye:'West wall',title:'An order slip',html:`<img class="figure" style="max-width:280px;align-self:center" alt="Order number 28. A three-layer birthday cake: chocolate, vanilla and strawberry. The birthday girl hates pink on top, so strawberry must not be the top layer. And chocolate must sit right on top of vanilla." src="${orderC().toDataURL('image/png')}">`,bind(){addClue('order','Cake: strawberry not on top; chocolate right on top of vanilla.');}}),
+    cake:()=>{
+      if(S.cakeDone)return{eye:'West · The cake stand',title:'The birthday cake',html:`${cakeSVG()}<p>${S.cakeBoxed?'The cake is boxed up and ready to go.':'A perfect birthday cake, just like the order says!'}</p>${S.cakeBoxed?'':'<div class="row"><button class="btn brass" id="boxit">Put it in a cake box</button></div>'}`,bind(){const b=$('#boxit');if(b)b.addEventListener('click',()=>{S.cakeBoxed=true;SFX.click();updateHud();renderPanel();});}};
+      return{eye:'West · The cake stand',title:'The cake stand',html:`<p>Three cake layers are cooling on the bench. Stack them for the birthday order. <b>Read the order slip</b> on the wall first! Pick a flavor, then tap a spot.</p>${cakeSVG()}
+        <div class="ppt" style="grid-template-columns:repeat(3,1fr)">${['Top','Middle','Bottom'].map((n,i)=>{const k2=S.layers[i];return`<button class="ppslot ${k2?'ok':''}" data-s="${i}"><span>${n}</span>${k2?`<small>${FLAV[k2][0]}</small>`:''}</button>`;}).join('')}</div>
+        <div class="opts" style="grid-template-columns:repeat(3,1fr)">${Object.keys(FLAV).filter(k2=>!S.layers.includes(k2)).map(k2=>`<button class="opt" data-k="${k2}" aria-pressed="${S.sel===k2}"><span style="display:block;width:44px;height:20px;border-radius:4px;background:${FLAV[k2][1]};border:2px solid rgba(0,0,0,.2)"></span><span>${FLAV[k2][0]}</span></button>`).join('')}</div>
+        <div class="row" style="justify-content:center"><button class="btn brass" id="stack" ${S.layers.every(Boolean)?'':'disabled'}>Add the frosting</button></div><p class="msg">${S.msg}</p>`,
+        bind(){on('.opt',el=>{S.sel=el.dataset.k;S.msg='';SFX.click();renderPanel();});
+          on('.ppslot',el=>{const i=+el.dataset.s;if(S.sel){S.layers[i]=S.sel;S.sel=null;SFX.click();}else S.layers[i]=null;S.msg='';renderPanel();});
+          $('#stack').addEventListener('click',()=>{if(S.layers.every((k2,i)=>k2===CAKE[i])){S.cakeDone=true;SFX.ding();updateHud();}else{const L=S.layers;S.msg=L[0]==='straw'?'Pink on top? The birthday girl won’t like that!':'Hmm. Is the chocolate right on top of the vanilla?';SFX.thud();}renderPanel();});}};
+    },
+    lift:()=>({eye:'South · The dumbwaiter',title:'The dumbwaiter',html:`<p>A dumbwaiter: a tiny elevator that carries food up to the shop. It’s just big enough for you to squeeze in! A note says: <i>“Send up order #28: one loaf of bread and one birthday cake.”</i></p>
+      <div class="parts">${rowPart(S.hasBread,'Grandma’s bread','Packed.','Not baked yet.')}${rowPart(S.cakeBoxed,'Birthday cake','Boxed and packed.','Not ready yet.')}</div>
+      <div class="row" style="justify-content:center"><button class="btn brass" id="ride" ${S.hasBread&&S.cakeBoxed?'':'disabled'}>Climb in and ride up</button></div>`,
+      bind(){$('#ride').addEventListener('click',()=>{closePanel();win();});}}),
+    mixer:()=>({eye:'Northeast',title:'A stand mixer',html:'<span class="tag">Just for looking</span><p>A pink stand mixer. Whirrrr!</p>'}),
+    cupcakes:()=>({eye:'Northwest',title:'The cupcake case',html:'<span class="tag">Just for looking</span><p>A glass case of cupcakes with rainbow frosting. No snacking until the order is done!</p>'}),
+    specials:()=>({eye:'North wall',title:'Today’s specials',html:`<span class="tag">Just for looking</span><img class="figure" style="max-width:300px;align-self:center" alt="Today’s specials: cinnamon rolls 3 for 2 dollars, blueberry muffins 1 dollar, pretzels half off" src="${chalkC().toDataURL('image/png')}">`}),
+    sacks:()=>({eye:'Southwest',title:'Flour sacks',html:'<span class="tag">Just for looking</span><p>A pile of heavy flour sacks. Achoo!</p>'}),
+    cat:()=>({eye:'Southeast',title:'The bakery cat',html:'<span class="tag">Just for looking</span><p>An orange cat named Biscuit, curled up on a stool. He’s in charge of catching mice.</p>'}),
+    pin:()=>({eye:'East',title:'A rolling pin',html:'<span class="tag">Just for looking</span><p>A wooden rolling pin, dusted with flour.</p>'}),
+    wall:()=>({eye:'All around',title:'The bakery kitchen',html:'<p>White tiles with a red stripe. It’s warm and smells like bread.</p>'}),
+    floor:()=>({eye:'Below',title:'The floor',html:'<p>Red and white checkered tiles.</p>'}),
+    ceiling:()=>({eye:'Overhead',title:'The ceiling',html:'<p>A red lamp hangs in the middle.</p>'})
+  };
+  return{
+    id:'bakery',num:28,name:'The Bakery',
+    blurb:'Measure fractions, work out baking time and stack a birthday cake.',
+    eyebrow:'Room 28',titleHTML:'The <em>Bakery</em>',
+    story:'You’re helping out in Grandma’s bakery, down in the basement kitchen. The stairs door has jammed! The only way up to the shop is the little dumbwaiter, and it only goes up when the big order is ready.',
+    goal:'Bake the bread and stack the birthday cake, then ride the dumbwaiter up.',
+    winTitle:'Order up!',winText:'The dumbwaiter creaks up into the shop. Grandma laughs when you climb out with the bread and the cake. “Best helper ever!”',
+    bg:0xf0dcc0,toneMapping:THREE.NoToneMapping,exposure:1,far:60,eyeY:1.6,winDelay:3600,
+    total:3,progress:()=>[S.dough,S.baked,S.cakeDone].filter(Boolean).length,goalsTitle:'Order #28',howTo:'Recipes, clocks and order slips hold the clues.',
+    goalRows:()=>[['Bread dough',S.dough],['Baked bread',S.hasBread,S.baked],['Birthday cake',S.cakeBoxed,S.cakeDone]].map(([n,ok,got])=>({icon:statusDot(ok,got),text:`<b>${n}</b>: ${ok?'done':got?'almost: pick it up':'not yet'}`})),
+    icon:()=>'',
+    fresh:()=>({scoops:[],dough:false,inOven:false,hr:12,mn:0,baked:false,hasBread:false,layers:[null,null,null],sel:null,cakeDone:false,cakeBoxed:false}),
+    onOpen(){S.sel=null;},
+    items:()=>{const it=[];if(S.hasBread)it.push({label:'Bread',svg:svgIcon('<path d="M5 12c0-4 14-4 14 0v6H5z"/>')});if(S.cakeBoxed)it.push({label:'Cake box',svg:svgIcon('<rect x="5" y="8" width="14" height="11"/><path d="M12 8v11M8 5l4 3 4-3"/>')});return it;},
+    build,panels
+  };
+})();
+
+const ROOM29=(function(){
+  const SNIG='"Sniglet", system-ui, sans-serif';
+  const PICS=['stratus','cirrus','storm','cumulus'];
+  const CODE=[2,4,1]; // cirrus, cumulus, stratus
+  const LOAD=[['you','You',35,true],['map','The sky map',2],['rope','Rope',4],['lantern','Lantern',3],['s5','Sandbag',5],['s7','Sandbag',7],['s9','Sandbag',9],['s12','Sandbag',12]];
+  const NEED=60,MUST=['you','map','rope','lantern'];
+  const WIND={L:[1,0,'Low'],M:[0,1,'Middle'],H:[-1,0,'High']};
+  const STORMS=['1,0','2,1','1,3','0,4','3,2'],HOME=[2,3],GRID=5;
+  let ext,a={};
+  function cloudPic(kind,x,ox,oy,w,h){const g=x.createLinearGradient(0,oy,0,oy+h);g.addColorStop(0,kind==='storm'?'#5a6a7a':'#3a8ad8');g.addColorStop(1,kind==='storm'?'#9aa8b8':'#a8d8ff');x.fillStyle=g;x.fillRect(ox,oy,w,h);x.save();x.beginPath();x.rect(ox,oy,w,h);x.clip();
+    const puff=(cx,cy,s,col)=>{x.fillStyle=col;x.beginPath();x.arc(cx,cy,s,0,7);x.arc(cx+s*0.9,cy+s*0.2,s*0.8,0,7);x.arc(cx-s*0.9,cy+s*0.25,s*0.75,0,7);x.arc(cx+s*0.2,cy-s*0.55,s*0.75,0,7);x.fill();};
+    if(kind==='cirrus'){x.strokeStyle='rgba(255,255,255,.9)';x.lineCap='round';for(let i=0;i<6;i++){x.lineWidth=2+i%2;x.beginPath();const sx=ox+10+i*22,sy=oy+18+(i%3)*14;x.moveTo(sx,sy);x.quadraticCurveTo(sx+30,sy-12,sx+56,sy-4);x.stroke();}}
+    if(kind==='cumulus'){puff(ox+w*0.3,oy+h*0.45,18,'#fff');puff(ox+w*0.72,oy+h*0.55,15,'#fff');x.fillStyle='rgba(180,190,210,.6)';x.fillRect(ox,oy+h*0.82,w,h);}
+    if(kind==='stratus'){x.fillStyle='#b8c0c8';x.fillRect(ox,oy,w,h*0.55);x.fillStyle='#a0a8b0';for(let i=0;i<5;i++)x.fillRect(ox,oy+h*0.45+i*3,w,2);}
+    if(kind==='storm'){x.fillStyle='#4a5260';x.beginPath();x.moveTo(ox+w*0.3,oy+h);x.lineTo(ox+w*0.38,oy+h*0.3);x.lineTo(ox+w*0.1,oy+h*0.18);x.lineTo(ox+w*0.9,oy+h*0.18);x.lineTo(ox+w*0.62,oy+h*0.3);x.lineTo(ox+w*0.7,oy+h);x.fill();x.strokeStyle='#ffe85a';x.lineWidth=3;x.beginPath();x.moveTo(ox+w*0.5,oy+h*0.6);x.lineTo(ox+w*0.44,oy+h*0.78);x.lineTo(ox+w*0.53,oy+h*0.78);x.lineTo(ox+w*0.46,oy+h*0.98);x.stroke();}
+    x.restore();}
+  function boardC(){const W=420,H=330,c=mk(W,H),x=c.getContext('2d');x.fillStyle='#f6efe0';rr(x,0,0,W,H,12);x.fill();x.strokeStyle='#8a5a2a';x.lineWidth=8;rr(x,4,4,W-8,H-8,10);x.stroke();
+    x.fillStyle='#3a2a1a';x.font=`800 24px ${SNIG}`;x.textAlign='center';x.fillText('Cloud Spotting',W/2,38);
+    PICS.forEach((k,i)=>{const ox=24+(i%2)*192,oy=56+Math.floor(i/2)*134;cloudPic(k,x,ox,oy,180,110);x.fillStyle='#fff';x.beginPath();x.arc(ox+18,oy+18,14,0,7);x.fill();x.fillStyle='#3a2a1a';x.font=`700 18px ${NUN}`;x.textBaseline='middle';x.fillText(i+1,ox+18,oy+19);x.textBaseline='alphabetic';});return c;}
+  function guideC(){return signC(340,380,{bg:'#fffaf0',border:'#4a8ab8',bw:6,r:10,top:40,color:'#2a2a3a',lines:[['Sky Guide',`800 30px ${SNIG}`,'#4a8ab8',40],['CIRRUS means “a curl of hair”.',`700 16px ${NUN}`,null,22],['Thin, wispy white streaks',`italic 16px ${FELL}`,null,22],['very high in the sky.',`italic 16px ${FELL}`,null,36],['CUMULUS means “a heap”.',`700 16px ${NUN}`,null,22],['Puffy clouds like cotton balls',`italic 16px ${FELL}`,null,22],['on a sunny day.',`italic 16px ${FELL}`,null,36],['STRATUS means “a layer”.',`700 16px ${NUN}`,null,22],['A flat gray blanket that',`italic 16px ${FELL}`,null,22],['covers the whole sky.',`italic 16px ${FELL}`,null,36],['(Tall dark clouds with lightning are',`italic 14px ${FELL}`,null,20],['storm clouds. Stay away!)',`italic 14px ${FELL}`,null,0]]});}
+  function windC(){return signC(320,250,{bg:'#2a4a6a',border:'#ffd36a',bw:5,r:8,top:40,color:'#fff',lines:[['WEATHER STATION',`800 26px ${SNIG}`,'#ffd36a',44],['HIGH winds blow  WEST  ←',`700 20px ${NUN}`,null,40],['MIDDLE winds blow  NORTH  ↑',`700 20px ${NUN}`,null,40],['LOW winds blow  EAST  →',`700 20px ${NUN}`,null,44],['Each puff moves you one square.',`italic 16px ${FELL}`,'#c8e0ff',0]]});}
+  function mapSVG(path){const C=50,O=30,W=O*2+C*GRID;const Y=r=>O+(GRID-1-r)*C;let s=`<svg viewBox="0 0 ${W} ${W+10}" style="width:100%;max-width:300px;align-self:center;background:#e8f4ff;border-radius:12px" role="img" aria-label="Sky map: a 5 by 5 grid. Your island is in the bottom-left square. Home island is 2 squares east and 3 squares north. Storm clouds sit at: 1 east 0 north; 2 east 1 north; 1 east 3 north; 0 east 4 north; 3 east 2 north.">`;
+    for(let i=0;i<=GRID;i++){s+=`<path d="M${O+i*C} ${O}V${O+GRID*C}M${O} ${O+i*C}H${O+GRID*C}" stroke="#a8c8e8" stroke-width="1.5"/>`;}
+    STORMS.forEach(k=>{const [cx,cy]=k.split(',').map(Number);const X=O+cx*C+C/2,YY=Y(cy)+C/2;s+=`<g><circle cx="${X-8}" cy="${YY-4}" r="10" fill="#5a6270"/><circle cx="${X+6}" cy="${YY-7}" r="12" fill="#5a6270"/><circle cx="${X+12}" cy="${YY}" r="8" fill="#5a6270"/><rect x="${X-16}" y="${YY-4}" width="34" height="10" rx="5" fill="#5a6270"/><path d="M${X} ${YY+6}l-4 8h6l-4 9" stroke="#ffd23a" stroke-width="2.5" fill="none"/></g>`;});
+    const hx=O+HOME[0]*C+C/2,hy=Y(HOME[1])+C/2;s+=`<ellipse cx="${hx}" cy="${hy+10}" rx="18" ry="7" fill="#5aa04a"/><path d="M${hx-10} ${hy+8}v-12h20v12z" fill="#e8c890"/><path d="M${hx-13} ${hy-3}l13-11 13 11z" fill="#c83a2a"/><text x="${hx}" y="${hy+24}" text-anchor="middle" font-size="9" font-weight="700" fill="#2a4a2a">HOME</text>`;
+    s+=`<ellipse cx="${O+C/2}" cy="${Y(0)+C/2+12}" rx="18" ry="6" fill="#5aa04a"/><text x="${O+C/2}" y="${Y(0)+C/2+22}" text-anchor="middle" font-size="8" font-weight="700" fill="#2a4a2a">START</text>`;
+    if(path&&path.length>1){s+=`<path d="M${path.map(([px,py])=>`${O+px*C+C/2} ${Y(py)+C/2}`).join('L')}" stroke="#e85a2a" stroke-width="4" stroke-dasharray="6 4" fill="none" stroke-linecap="round"/>`;}
+    const cur=path&&path.length?path[path.length-1]:[0,0];s+=`<g transform="translate(${O+cur[0]*C+C/2},${Y(cur[1])+C/2-4})"><circle r="11" fill="#ffb02a" stroke="#c83a2a" stroke-width="2"/><rect x="-5" y="12" width="10" height="7" fill="#8a5a2a"/></g>`;
+    s+=`<g transform="translate(${W-20},${W-4})"><text text-anchor="middle" font-size="11" font-weight="700" fill="#2a2a3a" y="-14">N</text><path d="M0 -10l5 10h-10z" fill="#c83a2a"/></g>`;
+    return s+'</svg>';}
+  function walk(route){let p=[0,0];const pts=[p];for(const r of route){const w=WIND[r];p=[p[0]+w[0],p[1]+w[1]];pts.push(p);}return pts;}
+  function build(){
+    ext={t:0};a={rise:0,socks:[],birds:[]};
+    skyDome([[0,'#3a8ad8'],[0.4,'#8ac8f8'],[0.5,'#d8f0ff'],[0.62,'#f8f0e8'],[1,'#d8e8f8']],{r:300,sun:[380,120,20,'rgba(255,250,220,1)'],clouds:2901,cloudY:190});
+    scene.fog=new THREE.Fog(0xd8eeff,40,260);
+    const grass=speckle('#6ab84a',['#5aa83a','#7ac85a','#8ad86a','#4a983a'],2902);groundDisc(grass,7.2,5,{id:'floor'});
+    const rock=M({color:0x8a7a6a,roughness:1});const cone=new THREE.Mesh(new THREE.ConeGeometry(7.2,7,20,1,true),rock);cone.rotation.x=Math.PI;cone.position.y=-3.5;scene.add(tag(cone,'floor'));
+    const rimC=M({color:0x7a5a3a});const rim=new THREE.Mesh(new THREE.CylinderGeometry(7.25,7.2,0.5,40,1,true),rimC);rim.position.y=-0.25;scene.add(noRay(rim));
+    // Far floating islands and cloud puffs (look only, not tappable)
+    const far=[[50,-8,-40,6],[-60,4,-20,8],[30,10,55,5],[-35,-12,50,7],[70,2,20,4]];far.forEach(([fx,fy,fz,fr])=>{const g=new THREE.Group();g.position.set(fx,fy,fz);scene.add(g);noRay(cyl(fr,fr,0.8,M({color:0x6ab84a}),0,0,0,g,16));const cn=new THREE.Mesh(new THREE.ConeGeometry(fr,fr*1.2,12),rock);cn.rotation.x=Math.PI;cn.position.y=-fr*0.6-0.4;g.add(noRay(cn));const t=cyl(0.3,0.4,fr*0.5,M({color:0x6a4a2a}),fr*0.3,fr*0.25,0,g,6);noRay(t);noRay(sph(fr*0.35,M({color:0x3a8a3a}),fr*0.3,fr*0.6,0,g));});
+    const pm=new THREE.SpriteMaterial({map:tex(softCanvas()),transparent:true,depthWrite:false,fog:false,opacity:.9});const r=rng(2903);for(let i=0;i<26;i++){const s=new THREE.Sprite(pm);const an=r()*Math.PI*2,d=24+r()*40;s.position.set(Math.cos(an)*d,-6-r()*14,Math.sin(an)*d);s.scale.setScalar(14+r()*16);scene.add(noRay(s));}
+    // Balloon (south)
+    a.bal=tag(new THREE.Group(),'balloon');a.bal.position.set(0,0,4.4);scene.add(a.bal);const wk=M({color:0xb88a4a,roughness:.95});box(1.4,0.9,1.4,wk,0,0.45,0,a.bal);box(1.5,0.1,1.5,M({color:0x8a5a2a}),0,0.92,0,a.bal);
+    [[-0.6,-0.6],[0.6,-0.6],[-0.6,0.6],[0.6,0.6]].forEach(([rx,rz])=>{const rp=cyl(0.015,0.015,2.4,M({color:0x5a3a1a}),rx*1.2,2.1,rz*1.2,a.bal,4);rp.rotation.z=-rx*0.25;rp.rotation.x=rz*0.25;});
+    const envC=(()=>{const c=mk(512,256),x=c.getContext('2d');const cols=['#e84a3a','#ffd23a','#e84a3a','#4ab8e8','#ffd23a','#4ab8e8','#e84a3a','#ffd23a','#4ab8e8','#e84a3a','#ffd23a','#4ab8e8'];cols.forEach((cc,i)=>{x.fillStyle=cc;x.fillRect(i*512/12,0,512/12+1,256);});return c;})();
+    const env=new THREE.Mesh(new THREE.SphereGeometry(2.2,24,18),M({map:tex(envC),roughness:.6}));env.position.y=4.8;env.scale.y=1.2;a.bal.add(env);const nk=cyl(0.5,1.2,0.9,M({map:tex(envC),roughness:.6}),0,2.75,0,a.bal,24);nk.rotation.y=0.1;
+    a.flame=sph(0.12,new THREE.MeshBasicMaterial({color:0xffa02a}),0,1.55,0,a.bal);a.flame.visible=false;cyl(0.12,0.15,0.2,M({color:0x5a5a5a,metalness:.7}),0,1.35,0,a.bal,10);
+    a.bags=[];[[-0.72,0.5,0.3],[-0.72,0.5,-0.3],[0.72,0.5,0.3],[0.72,0.5,-0.3]].forEach(([bx,by,bz],i)=>{const s=[0.12,0.14,0.16,0.19][i];const b=sph(s,M({color:0xc8b890,roughness:1}),bx,by,bz,a.bal);b.scale.y=1.3;a.bags.push(b);});
+    const stake=cyl(0.05,0.05,0.6,M({color:0x6a4a2a}),0,0.3,-1.2,a.bal,6);
+    // Weather station (east)
+    const ws=tag(new THREE.Group(),'winds');ws.position.set(5.4,0,0.4);scene.add(ws);cyl(0.06,0.08,4.2,M({color:0xe8e8e8,metalness:.5}),0,2.1,0,ws,8);
+    [[1.5,1,0,0xe85a2a],[2.6,0,-1,0xffd23a],[3.7,-1,0,0x4ab8e8]].forEach(([hy,dx,dz,col])=>{const g=new THREE.Group();g.position.set(0,hy,0);ws.add(g);g.rotation.y=Math.atan2(-dz,dx);const sock=new THREE.Mesh(new THREE.CylinderGeometry(0.16,0.07,0.9,10,1,true),new THREE.MeshStandardMaterial({color:col,side:THREE.DoubleSide}));sock.rotation.z=-Math.PI/2;sock.position.x=0.5;g.add(sock);cyl(0.17,0.17,0.04,M({color:0xc0c0c0,metalness:.6}),0.05,0,0,g,12).rotation.z=Math.PI/2;a.socks.push(g);});
+    const wsign=plane(1.3,1.0,M({map:tex(windC())}),-0.25,1.0,0,-Math.PI/2,ws);const wpost=cyl(0.04,0.04,0.6,M({color:0x6a4a2a}),-0.25,0.3,0.6,ws,6);
+    // Cloud board (west) and the Sky Guide lectern (northwest)
+    const cb=tag(new THREE.Group(),'clouds');cb.position.set(-5.6,0,0.6);scene.add(cb);faceCenter(cb);[-1,1].forEach(sd=>cyl(0.06,0.06,2.6,M({color:0x6a4a2a}),sd*1.0,1.3,0,cb,6));plane(2.2,1.73,M({map:tex(boardC())}),0,2.0,0.05,0,cb);
+    const lg=tag(new THREE.Group(),'guide');lg.position.set(-4.2,0,-2.8);scene.add(lg);faceCenter(lg);cyl(0.06,0.1,1.0,M({color:0x6a4a2a}),0,0.5,0,lg,8);const tp=box(0.6,0.04,0.5,M({color:0x6a4a2a}),0,1.05,0,lg);tp.rotation.x=0.4;const bk=box(0.5,0.05,0.4,M({color:0x4a8ab8}),0,1.1,0.02,lg);bk.rotation.x=0.4;
+    // Supply chest (north)
+    const ch=tag(new THREE.Group(),'chest');ch.position.set(0.4,0,-5.0);scene.add(ch);faceCenter(ch);box(1.2,0.6,0.7,M({color:0x4a8ab8,roughness:.6}),0,0.3,0,ch);a.lid=new THREE.Group();a.lid.position.set(0,0.6,-0.35);ch.add(a.lid);box(1.24,0.18,0.74,M({color:0x3a7aa8,roughness:.6}),0,0.09,0.35,a.lid);box(0.24,0.2,0.05,M({color:0xffd23a,metalness:.6}),0,0.5,0.36,ch);
+    // Just for looking: windmill, telescope, sheep, waterfall
+    const wm=tag(new THREE.Group(),'windmill');wm.position.set(4.0,0,-4.0);scene.add(wm);faceCenter(wm);cyl(0.4,0.7,3.0,M({color:0xf6efe0}),0,1.5,0,wm,10);const rf=new THREE.Mesh(new THREE.ConeGeometry(0.6,0.7,10),M({color:0xc83a2a}));rf.position.y=3.35;wm.add(rf);a.blades=new THREE.Group();a.blades.position.set(0,2.6,0.55);wm.add(a.blades);for(let i=0;i<4;i++){const b=box(0.18,1.3,0.03,M({color:0xe8d8b8}),0,0.65,0,null);const g=new THREE.Group();g.add(b);g.rotation.z=i*Math.PI/2;a.blades.add(g);}
+    const ts=tag(new THREE.Group(),'telescope');ts.position.set(3.7,0,3.6);scene.add(ts);faceCenter(ts);[0,2.1,4.2].forEach(an=>{const l=cyl(0.025,0.025,1.2,M({color:0x5a3a1a}),Math.cos(an)*0.2,0.55,Math.sin(an)*0.2,ts,6);l.rotation.set(Math.sin(an)*0.3,0,-Math.cos(an)*0.3);});const tb=cyl(0.07,0.11,0.9,M({color:0xc9a46a,metalness:.7}),0,1.25,0,ts,12);tb.rotation.x=1.1;
+    const sh=tag(new THREE.Group(),'sheep');sh.position.set(-3.8,0,3.9);scene.add(sh);a.sheep=beast(sh,0,0,{col:0xf6f2ea,body:[0.35,0.32,0.5],leg:0.35,head:0.18,legCol:0x2a2a2a,extra(g,o){sph(1,M({color:0x2a2a2a}),0,o.hy,o.hz+0.03,g,0.14,0.14,0.18);}});faceCenter(sh);
+    const wf=tag(new THREE.Group(),'waterfall');wf.position.set(-2.6,0,-6.4);scene.add(wf);for(let i=0;i<5;i++){const st=sph(0.35,M({color:0x9a8a7a}),-0.6+i*0.3,0.1,0.2*(i%2),wf);st.scale.y=0.5;}a.wfTex=tex((()=>{const c=mk(64,256),x=c.getContext('2d');for(let i=0;i<64;i+=4){x.fillStyle=`rgba(${200+(i%3)*20},${230+(i%2)*20},255,.9)`;x.fillRect(i,0,3,256);}return c;})(),[1,2]);const fall=plane(1.0,8,new THREE.MeshBasicMaterial({map:a.wfTex,transparent:true,opacity:.85,side:THREE.DoubleSide}),0,-3.8,0.85,0,wf);const pond=cyl(0.7,0.7,0.04,M({color:0x5ab8e8,roughness:.1}),0,0.03,0.2,wf,16);
+    for(let i=0;i<5;i++){const b=new THREE.Group();scene.add(noRay(b));const wg=new THREE.Mesh(new THREE.ConeGeometry(0.1,0.6,3),new THREE.MeshBasicMaterial({color:0x2a2a3a}));wg.rotation.z=Math.PI/2;b.add(noRay(wg));a.birds.push([b,i]);}
+    scene.add(new THREE.HemisphereLight(0xe8f4ff,0x6a8a4a,0.8));const sun=new THREE.DirectionalLight(0xfff4e0,1.0);sun.position.set(20,40,10);scene.add(sun);scene.add(new THREE.AmbientLight(0xffffff,0.3));
+    return{animate,onTap(id){if(id==='sheep'){a.baa=1;tone(330,.4,'sawtooth',.05,300);}if(id==='windmill')a.spin=3;},onWin(){startFly(ext);}};
+  }
+  function animate(t,dt,k){
+    a.lid.rotation.x=lerp(a.lid.rotation.x,S.chestOpen?-1.6:0,k*0.6);a.flame.visible=S.loadOk;if(a.flame.visible&&!REDUCED)a.flame.scale.setScalar(1+0.3*Math.sin(t*20));
+    a.bags.forEach((b,i)=>b.visible=!S.load[['s5','s7','s9','s12'][i]]);
+    if(!REDUCED){a.socks.forEach((g,i)=>{g.children[0].rotation.y=Math.sin(t*3+i)*0.15;});a.blades.rotation.z+=dt*(0.4+(a.spin||0));a.spin=Math.max(0,(a.spin||0)-dt);a.wfTex.offset.y-=dt*0.8;
+      a.birds.forEach(([b,i])=>{const an=t*0.2+i*1.3;b.position.set(Math.cos(an)*(18+i*3),14+i*1.5+Math.sin(t+i),Math.sin(an)*(18+i*3));b.rotation.y=-an;});if(a.baa>0){a.baa-=dt;a.sheep.rotation.z=Math.sin(t*20)*0.05;}}
+    if(ext.t>0){ext.t=Math.min(1,ext.t+dt/(REDUCED?0.6:4.0));const p=easeIO(ext.t);const q=Math.min(1,p*2.5),u=Math.max(0,(p-0.4)/0.6);camera.position.set(0,1.6+u*30,lerp(0,4.4,q));a.bal.position.y=u*30;a.bal.position.x=u*8;camera.position.x=u*8;}
+  }
+  const total=()=>LOAD.filter(([id])=>S.load[id]).reduce((p,[,,w])=>p+w,0);
+  const panels={
+    clouds:()=>({eye:'West',title:'Cloud spotting board',html:`<img class="figure" style="max-width:320px;align-self:center" alt="Four cloud pictures. Picture 1: a flat gray layer covering the whole sky. Picture 2: thin wispy white streaks high up. Picture 3: a tall dark cloud with lightning. Picture 4: puffy white clouds like cotton balls." src="${boardC().toDataURL('image/png')}">`,bind(){addClue('clouds','Cloud board: four numbered cloud pictures.');}}),
+    guide:()=>({eye:'Northwest',title:'The Sky Guide',html:`<img class="figure" style="max-width:300px;align-self:center" alt="Sky Guide. Cirrus means a curl of hair: thin, wispy white streaks very high in the sky. Cumulus means a heap: puffy clouds like cotton balls on a sunny day. Stratus means a layer: a flat gray blanket that covers the whole sky. Tall dark clouds with lightning are storm clouds. Stay away!" src="${guideC().toDataURL('image/png')}">`}),
+    winds:()=>({eye:'East',title:'The weather station',html:`<p>Three wind socks flap on a tall pole, one at each height.</p><img class="figure" style="max-width:300px;align-self:center" alt="Weather station. High winds blow west. Middle winds blow north. Low winds blow east. Each puff moves you one square." src="${windC().toDataURL('image/png')}">`,bind(){addClue('winds','Winds: High = west, Middle = north, Low = east.');}}),
+    chest:()=>{
+      if(S.chestOpen)return{eye:'North',title:'The supply chest',html:S.hasMap?'<p>The chest is empty now.</p>':`<p>The lid pops open! Inside is a rolled-up <b>sky map</b>.</p><div class="row"><button class="btn brass" id="take">Take the map</button></div>`,bind(){const b=$('#take');if(b)b.addEventListener('click',()=>{S.hasMap=true;SFX.click();updateHud();renderPanel();});}};
+      return{eye:'North',title:'The supply chest',html:`<p>A blue supply chest with a three-number lock. Painted on the lid:</p>${quote('Which picture is CIRRUS? Which is CUMULUS? Which is STRATUS?','The lid')}
+        <div class="dials" style="background:linear-gradient(#4a8ab8,#2a5a88)">${S.lock.map((d,i)=>`<div class="dial"><button data-i="${i}" data-d="1" aria-label="${['Cirrus','Cumulus','Stratus'][i]} up">${CHEV_UP}</button><span>${d}</span><button data-i="${i}" data-d="-1" aria-label="${['Cirrus','Cumulus','Stratus'][i]} down">${CHEV_DN}</button></div>`).join('')}</div>
+        <p class="muted" style="text-align:center">Left: Cirrus · Middle: Cumulus · Right: Stratus</p><div class="row" style="justify-content:center"><button class="btn brass" id="open">Open</button></div><p class="msg">${S.msg}</p>`,
+        bind(){on('.dial button',el=>{const i=+el.dataset.i;S.lock[i]=((S.lock[i]-1+(+el.dataset.d)+4)%4)+1;S.msg='';SFX.click();renderPanel();});
+          $('#open').addEventListener('click',()=>{if(S.lock.every((d,i)=>d===CODE[i])){S.chestOpen=true;SFX.ding();updateHud();}else{S.msg='The lock won’t budge.';SFX.thud();}renderPanel();});}};
+    },
+    balloon:()=>{
+      const tot=total();
+      let html=`<p>A hot-air balloon, tied to a stake. A tag on the basket says: <i>“To fly safely, the load must be EXACTLY ${NEED} kg. Always bring a map, a rope and a lantern.”</i></p>`;
+      if(!S.loadOk){html+=`<p><b>1. Load the basket</b>. Tap things to put them in or take them out.</p><div class="opts" style="grid-template-columns:repeat(2,1fr)">${LOAD.map(([id,n,w,fixed])=>{const off=id==='map'&&!S.hasMap;return`<button class="opt ld" data-k="${id}" aria-pressed="${!!S.load[id]}" ${fixed||off?'disabled':''}><span><b>${n}</b> · ${w} kg${off?'<br><span class="muted">not found yet</span>':''}</span></button>`;}).join('')}</div>
+        <p style="text-align:center;font-size:1.15rem">Scale: <b>${tot} kg</b></p><div class="row" style="justify-content:center"><button class="btn brass" id="burn">Light the burner</button></div><p class="msg">${S.msg}</p>`;}
+      else if(!S.routeOk){const pts=walk(S.route);html+=`<p><b>2. Plan the flight.</b> The balloon has no steering wheel! You go up or down to catch a wind. Each tap catches one puff of wind at that height. Plan a way home that misses every storm.</p>${mapSVG(pts)}
+        <div class="row" style="justify-content:center">${['H','M','L'].map(k2=>`<button class="btn" data-w="${k2}">${WIND[k2][2]}</button>`).join('')}</div>
+        <div class="row" style="justify-content:center"><button class="btn" id="redo" ${S.route.length?'':'disabled'}>Start over</button></div><p class="muted" style="text-align:center">Route: ${S.route.map(k2=>WIND[k2][2]).join(' → ')||'none yet'}</p><p class="msg">${S.msg}</p>`;}
+      else html+=`${mapSVG(walk(S.route))}<p>The route is planned and the burner is roaring. Time to untie the rope!</p><div class="row" style="justify-content:center"><button class="btn brass" id="fly">Untie and fly home</button></div>`;
+      return{eye:'South',title:'The hot-air balloon',html,bind(){
+        on('.ld',el=>{const id2=el.dataset.k;S.load[id2]=!S.load[id2];S.msg='';SFX.click();renderPanel();});
+        const bn=$('#burn');if(bn)bn.addEventListener('click',()=>{const t2=total();const miss=MUST.filter(m=>!S.load[m]);if(miss.length){S.msg=miss.includes('map')&&!S.hasMap?'You need a map! Have you looked in the supply chest?':'You must bring the map, the rope and the lantern.';SFX.thud();}else if(t2!==NEED){S.msg=t2>NEED?`${t2} kg is too heavy! The balloon won’t lift.`:`${t2} kg is too light! The balloon would shoot up too fast.`;SFX.thud();}else{S.loadOk=true;S.msg='';tone(180,.6,'sawtooth',.06,90);SFX.ding();updateHud();}renderPanel();});
+        on('[data-w]',el=>{const nr=S.route.concat(el.dataset.w),pts=walk(nr),p=pts[pts.length-1];if(p[0]<0||p[1]<0||p[0]>=GRID||p[1]>=GRID){S.msg='Whoa! That wind would blow you right off the map.';SFX.thud();}else if(STORMS.includes(p.join(','))){S.msg='Crash! Thunder and lightning! You hurry back to the start.';S.route=[];SFX.thud();}else{S.route=nr;S.msg='';SFX.click();if(p[0]===HOME[0]&&p[1]===HOME[1]){S.routeOk=true;SFX.ding();updateHud();}}renderPanel();});
+        const rd=$('#redo');if(rd)rd.addEventListener('click',()=>{S.route=[];S.msg='';renderPanel();});
+        const fl=$('#fly');if(fl)fl.addEventListener('click',()=>{closePanel();win();});}};
+    },
+    windmill:()=>({eye:'Northeast',title:'A little windmill',html:'<span class="tag">Just for looking</span><p>A windmill on the edge of the island, turning in the breeze.</p>'}),
+    telescope:()=>({eye:'Southeast',title:'A telescope',html:'<span class="tag">Just for looking</span><p>You peek through. Far away, other islands float in the sky. One has a red-roofed house on it: home!</p>'}),
+    sheep:()=>({eye:'Southwest',title:'A fluffy sheep',html:'<span class="tag">Just for looking</span><p>A sheep, as fluffy as a cumulus cloud. Baaa!</p>'}),
+    waterfall:()=>({eye:'North edge',title:'The sky waterfall',html:'<span class="tag">Just for looking</span><p>A little stream pours right off the edge of the island and turns into mist far below.</p>'}),
+    floor:()=>({eye:'Below',title:'The floating island',html:'<p>A grassy island floating high above the clouds. Don’t get too close to the edge!</p>'}),
+    sky:()=>({eye:'All around',title:'The sky',html:'<p>Blue sky in every direction, with fluffy clouds far below.</p>'})
+  };
+  return{
+    id:'sky',num:29,name:'The Sky Islands',
+    blurb:'Name the clouds, balance the balloon and ride the winds home.',
+    eyebrow:'Room 29',titleHTML:'The <em>Sky Islands</em>',
+    story:'A gust of wind carried your balloon to a tiny island floating high above the clouds. The balloon is still here, but to get home you’ll have to load it just right and ride the winds.',
+    goal:'Find the sky map, balance the balloon at exactly 60 kg and plan a route home that misses the storms.',
+    winTitle:'Home sweet home!',winText:'The balloon floats up and catches the winds, just as you planned. Low, middle, low… and soon your own island and its red-roofed house come into view.',
+    bg:0xd8eeff,toneMapping:THREE.ACESFilmicToneMapping,exposure:1.1,far:400,eyeY:1.6,winDelay:4400,
+    total:3,progress:()=>[S.chestOpen,S.loadOk,S.routeOk].filter(Boolean).length,goalsTitle:'The balloon',howTo:'Clouds, winds and a scale.',
+    goalRows:()=>[['Sky map',S.hasMap,S.chestOpen],['Balanced load (60 kg)',S.loadOk],['Route home',S.routeOk]].map(([n,ok,got])=>({icon:statusDot(ok,got),text:`<b>${n}</b>: ${ok?'done':got?'found, pick it up':'not yet'}`})),
+    icon:()=>'',
+    fresh:()=>({lock:[1,1,1],chestOpen:false,hasMap:false,load:{you:true},loadOk:false,route:[],routeOk:false}),
+    items:()=>{const it=[];if(S.hasMap)it.push({label:'Sky map',svg:svgIcon('<path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/>')});return it;},
+    build,panels
+  };
+})();
+
+const ROOM30=(function(){
+  const FLOCK=23;
+  const BLANKS=[['joy',['fear','joy','gold']],['David',['Rome','Nazareth','David']],['manger',['palace','manger','boat']]];
+  const STABLE='F';
+  let ext,a={};
+  function tallySVG(){let s='<svg viewBox="0 0 300 120" style="width:100%;max-width:320px;align-self:center;background:#8a6a4a;border-radius:10px" role="img" aria-label="Tally marks carved in wood: four groups of five, then three more single marks.">';
+    for(let gI=0;gI<4;gI++){const ox=18+gI*60;for(let i=0;i<4;i++)s+=`<path d="M${ox+i*10} 30v60" stroke="#2a1a0a" stroke-width="4" stroke-linecap="round"/>`;s+=`<path d="M${ox-6} 80L${ox+38} 40" stroke="#2a1a0a" stroke-width="4" stroke-linecap="round"/>`;}
+    for(let i=0;i<3;i++)s+=`<path d="M${258+i*10} 30v60" stroke="#2a1a0a" stroke-width="4" stroke-linecap="round"/>`;return s+'</svg>';}
+  function tallyC(){const c=mk(256,96),x=c.getContext('2d');x.fillStyle='#8a6a4a';x.fillRect(0,0,256,96);x.strokeStyle='#2a1a0a';x.lineWidth=4;x.lineCap='round';for(let gI=0;gI<4;gI++){const ox=14+gI*52;for(let i=0;i<4;i++){x.beginPath();x.moveTo(ox+i*9,20);x.lineTo(ox+i*9,76);x.stroke();}x.beginPath();x.moveTo(ox-5,66);x.lineTo(ox+32,30);x.stroke();}for(let i=0;i<3;i++){x.beginPath();x.moveTo(222+i*9,20);x.lineTo(222+i*9,76);x.stroke();}return c;}
+  function townSVG(){const B={A:[40,40],B:[130,40],C:[220,40],D:[40,170],E:[130,170],F:[220,170]};let s='<svg viewBox="0 0 300 260" style="width:100%;max-width:320px;align-self:center;background:#1a2440;border-radius:12px" role="img" aria-label="Map of Bethlehem. Top row, west to east: houses A, B, C. A road runs across the middle. Bottom row, west to east: houses D, E, F. A well stands in front of house B. A palm tree grows beside house D, on its west side.">';
+    s+='<rect x="0" y="118" width="300" height="34" fill="#8a7a5a"/><text x="292" y="140" text-anchor="end" font-size="10" fill="#e8d8b0">ROAD</text><text x="150" y="252" text-anchor="middle" font-size="10" fill="#c8d0e8">W ← → E</text>';
+    Object.entries(B).forEach(([k,[x,y]])=>{const sel=S.pick===k;s+=`<g class="bld" data-b="${k}" style="cursor:pointer"><rect x="${x-4}" y="${y-4}" width="${68}" height="${68}" rx="6" fill="${sel?'rgba(255,210,58,.35)':'transparent'}"/><rect x="${x}" y="${y+14}" width="60" height="46" fill="#d8c8a0" stroke="#8a6a4a" stroke-width="2"/><rect x="${x-2}" y="${y+8}" width="64" height="8" fill="#b8a070"/><rect x="${x+24}" y="${y+36}" width="12" height="24" fill="#5a3a1a"/><rect x="${x+8}" y="${y+24}" width="9" height="9" fill="#ffd36a"/><rect x="${x+43}" y="${y+24}" width="9" height="9" fill="#ffd36a"/><text x="${x+30}" y="${y+4}" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">${k}</text></g>`;});
+    s+='<g><ellipse cx="160" cy="112" rx="13" ry="5" fill="#5a5a6a"/><rect x="148" y="100" width="24" height="12" fill="#7a7a8a"/><path d="M146 100h28M150 100v-12h20v12" stroke="#5a3a1a" stroke-width="2" fill="none"/><text x="160" y="84" text-anchor="middle" font-size="9" fill="#c8d0e8">well</text></g>';
+    s+='<g><path d="M18 236v-46" stroke="#8a5a2a" stroke-width="4"/><path d="M18 190c-14 -2 -16 8 -18 12M18 190c14 -2 16 8 18 12M18 190c-8 -10 -16 -8 -20 -6M18 190c8 -10 16 -8 20 -6" stroke="#4a9a4a" stroke-width="4" fill="none" stroke-linecap="round"/><text x="18" y="248" text-anchor="middle" font-size="9" fill="#c8d0e8">palm</text></g>';
+    return s+'</svg>';}
+  function build(){
+    ext={t:0};a={glow:0};
+    skyDome([[0,'#050816'],[0.4,'#0a1430'],[0.5,'#1a2a50'],[0.53,'#0a1020'],[1,'#05070c']],{r:300,stars:3001});
+    scene.fog=new THREE.Fog(0x0a1020,30,160);
+    groundDisc(speckle('#2a3a24',['#22321e','#32442a','#3a4a2e','#2a3220'],3002),80,16,{id:'floor'});
+    const hill=new THREE.Mesh(new THREE.SphereGeometry(30,24,10,0,Math.PI*2,0,Math.PI/2),M({color:0x2a3424,roughness:1}));hill.scale.y=0.25;hill.position.set(14,-2,52);scene.add(noRay(hill));
+    // Bethlehem on the far hill, with the bright star above
+    a.town=tag(new THREE.Group(),'town');a.town.position.set(14,5.3,48);scene.add(a.town);const r=rng(3003);const wl=new THREE.MeshBasicMaterial({color:0xffc86a,fog:false});for(let i=0;i<14;i++){const bx=(r()-0.5)*16,bz=(r()-0.5)*6,h=1.2+r()*1.4;box(1.6+r(),h,1.6,M({color:0x8a7a5a}),bx,h/2,bz,a.town);box(0.3,0.3,0.05,wl,bx+0.2,h*0.6,bz-0.82,a.town);}
+    const st=new THREE.Sprite(new THREE.SpriteMaterial({map:tex(glowCanvas()),color:0xfff4d8,transparent:true,depthWrite:false,fog:false,blending:THREE.AdditiveBlending}));st.scale.setScalar(9);st.position.set(6,16,0);a.town.add(st);a.star=st;const sc=sph(0.6,new THREE.MeshBasicMaterial({color:0xffffff,fog:false}),6,16,0,a.town);
+    const beam=new THREE.Mesh(new THREE.CylinderGeometry(0.15,1.6,14,12,1,true),new THREE.MeshBasicMaterial({color:0xfff4d8,transparent:true,opacity:.12,depthWrite:false,fog:false}));beam.position.set(6,9,0);a.town.add(beam);
+    // Sheepfold (north)
+    const fold=tag(new THREE.Group(),'fold');fold.position.set(0,0,-6.2);scene.add(fold);const stoneM=M({color:0x8a8478,roughness:1});const R=2.4;for(let i=0;i<22;i++){const an=i/22*Math.PI*2;if(Math.abs(Math.sin(an/2))<0.12)continue;const sw=box(0.75,0.85,0.5,stoneM,Math.sin(an)*R,0.42,Math.cos(an)*R,fold);sw.rotation.y=an;}
+    a.gate=new THREE.Group();a.gate.position.set(-0.45,0,R);fold.add(a.gate);const gw=M({color:0x6a4a2a});for(let i=0;i<4;i++)box(0.06,0.9,0.06,gw,0.12+i*0.24,0.45,0,a.gate);[0.25,0.7].forEach(y=>box(0.9,0.08,0.05,gw,0.45,y,0,a.gate));
+    for(let i=0;i<5;i++){const an=i*1.3,d=0.6+(i%2)*0.8;const sh=beast(fold,Math.cos(an)*d,Math.sin(an)*d-0.2,{col:0xe8e2d4,body:[0.3,0.28,0.42],leg:0.28,head:0.15,legCol:0x2a2a2a,extra(g,o){sph(1,M({color:0x2a2a2a}),0,o.hy,o.hz+0.02,g,0.12,0.12,0.15);}});sh.rotation.y=an*2;}
+    a.lamp=new THREE.Group();a.lamp.position.set(-0.8,1.15,R+0.2);fold.add(a.lamp);cyl(0.04,0.04,1.15,gw,0,-0.58,0,a.lamp,6);const lb=sph(0.12,M({color:0xc8843a,metalness:.4}),0.14,0.05,0,a.lamp);lb.scale.set(1.3,0.6,0.8);a.lampFlame=sph(0.04,new THREE.MeshBasicMaterial({color:0xffc84a}),0.28,0.1,0,a.lamp);a.lampL=new THREE.PointLight(0xffb84a,0.5,4,2);a.lampL.position.set(0.28,0.2,0);a.lamp.add(a.lampL);
+    // Tally post next to the fold
+    const tp=tag(new THREE.Group(),'tally');tp.position.set(2.5,0,-4.6);scene.add(tp);faceCenter(tp);box(0.3,1.6,0.3,M({color:0x6a4a2a}),0,0.8,0,tp);plane(0.9,0.34,M({map:tex(tallyC())}),0,1.2,0.16,0,tp);box(0.9,0.36,0.04,M({color:0x6a4a2a}),0,1.2,0.13,tp);
+    // The angel's light on the rock (west)
+    const ar=tag(new THREE.Group(),'angel');ar.position.set(-5.4,0,0.2);scene.add(ar);faceCenter(ar);const rk=sph(1.0,M({color:0x6a665e,roughness:1}),0,0.3,0,ar);rk.scale.set(1.3,0.6,1.0);const scr=cyl(0.06,0.06,0.6,M({color:0xf2e8c8}),0,0.95,0.3,ar,10);scr.rotation.z=Math.PI/2;
+    a.halo=new THREE.Sprite(new THREE.SpriteMaterial({map:tex(glowCanvas()),color:0xfff8e0,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));a.halo.scale.setScalar(3.6);a.halo.position.set(0,2.6,0);ar.add(a.halo);a.aL=new THREE.PointLight(0xfff4d8,1.0,9,2);a.aL.position.set(0,2.6,0.8);ar.add(a.aL);
+    a.spark=[];for(let i=0;i<10;i++){const s=new THREE.Sprite(new THREE.SpriteMaterial({map:tex(softCanvas()),color:0xffffff,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));s.scale.setScalar(0.35);ar.add(noRay(s));a.spark.push(s);}
+    // Signpost and path (southeast)
+    const sp=tag(new THREE.Group(),'path');sp.position.set(4.8,0,1.6);scene.add(sp);faceCenter(sp);box(0.14,1.8,0.14,gw,0,0.9,0,sp);const ar2=plane(1.1,0.32,M({map:tex(signC(220,64,{bg:'#b8945a',border:'#5a3a1a',bw:4,r:4,top:42,color:'#2a1a0a',lines:[['BETHLEHEM →',`700 26px ${CINZEL}`,null,0]]})),side:THREE.DoubleSide}),0.25,1.5,0.08,0,sp);
+    const pathM=new THREE.MeshStandardMaterial({color:0x6a5a40,roughness:1});const pth=new THREE.Mesh(new THREE.PlaneGeometry(1.6,40),pathM);pth.rotation.x=-Math.PI/2;pth.rotation.z=-0.42;pth.position.set(9,0.01,20);scene.add(noRay(pth));
+    // Just for looking: campfire, lamb, lyre, olive tree
+    const cf=tag(new THREE.Group(),'fire');cf.position.set(3.6,0,-1.6);scene.add(cf);for(let i=0;i<7;i++){const an=i/7*Math.PI*2;const s=sph(0.16,stoneM,Math.cos(an)*0.45,0.08,Math.sin(an)*0.45,cf);s.scale.y=0.6;}[0,1.1,2.2].forEach(an=>{const l=cyl(0.05,0.05,0.7,M({color:0x4a2a10}),0,0.12,0,cf,6);l.rotation.set(Math.PI/2,an,0);});a.flames=[0,1,2].map(i=>{const f=new THREE.Mesh(new THREE.ConeGeometry(0.14-i*0.03,0.5-i*0.1,8),new THREE.MeshBasicMaterial({color:[0xff6a1a,0xffa02a,0xffe06a][i]}));f.position.y=0.35;cf.add(f);return f;});a.fireL=new THREE.PointLight(0xff8a3a,1.2,10,2);a.fireL.position.set(0,0.8,0);cf.add(a.fireL);
+    const st2=cyl(0.03,0.03,1.7,gw,0.8,0.85,0.2,cf,6);st2.rotation.z=0.25;
+    const lm=tag(new THREE.Group(),'lamb');lm.position.set(-3.0,0,4.0);scene.add(lm);a.lamb=beast(lm,0,0,{col:0xf6f2ea,body:[0.22,0.2,0.3],leg:0.22,head:0.12,legCol:0x2a2a2a,extra(g,o){sph(1,M({color:0x2a2a2a}),0,o.hy,o.hz+0.02,g,0.09,0.09,0.11);}});faceCenter(lm);
+    const ly=tag(new THREE.Group(),'lyre');ly.position.set(4.0,0,-4.4);scene.add(ly);faceCenter(ly);const lr=sph(0.5,stoneM,0,0.2,0,ly);lr.scale.y=0.5;const lyM=M({color:0xc9a46a,metalness:.4});[-1,1].forEach(sd=>{const arm=cyl(0.03,0.03,0.6,lyM,sd*0.14,0.7,0,ly,6);arm.rotation.z=sd*0.2;});box(0.4,0.04,0.04,lyM,0,1.0,0,ly);box(0.3,0.06,0.06,lyM,0,0.42,0,ly);for(let i=0;i<4;i++)box(0.006,0.56,0.006,M({color:0xffffff}),-0.09+i*0.06,0.71,0,ly);
+    const ol=tag(new THREE.Group(),'olive');ol.position.set(-4.6,0,-4.6);scene.add(ol);const trunk=cyl(0.18,0.3,2.0,M({color:0x5a4a3a}),0,1.0,0,ol,8);trunk.rotation.z=0.15;[[0,2.4,0,1.1],[0.6,2.2,0.3,0.8],[-0.5,2.1,-0.2,0.8]].forEach(([tx,ty,tz,tr])=>{const c2=sph(tr,M({color:0x4a5a3a,roughness:1}),tx,ty,tz,ol);c2.scale.y=0.7;});
+    scene.add(new THREE.AmbientLight(0x6a7aa8,0.45));scene.add(new THREE.HemisphereLight(0x8a9ad8,0x1a2a1a,0.35));const moon=new THREE.DirectionalLight(0xb8c8ff,0.4);moon.position.set(-20,30,10);scene.add(moon);
+    return{animate,onTap(id){if(id==='lyre'){[392,494,587,784].forEach((f,i)=>setTimeout(()=>tone(f,.5,'triangle',.05),i*160));}if(id==='lamb'){a.hop=1;tone(520,.3,'triangle',.05,440);}},onWin(){startFly(ext);}};
+  }
+  function animate(t,dt,k){
+    a.gate.rotation.y=lerp(a.gate.rotation.y,S.flockSafe?0:-1.3,k*0.5);a.lamp.visible=!S.hasLamp;
+    a.flames.forEach((f,i)=>{if(!REDUCED){f.scale.y=1+0.25*Math.sin(t*(9+i*3)+i);f.rotation.y=t*(1+i);}});a.fireL.intensity=1.1+(REDUCED?0:0.2*Math.sin(t*13));
+    const g=S.msgDone?0.5:1;a.halo.material.opacity=0.8*g+(REDUCED?0:0.15*Math.sin(t*2));a.aL.intensity=1.0*g;
+    a.spark.forEach((s,i)=>{const an=t*0.6+i*0.63;s.position.set(Math.cos(an)*1.2,1.6+((t*0.3+i*0.1)%1)*2.2,Math.sin(an)*1.2);s.material.opacity=REDUCED?0.5:0.4+0.4*Math.sin(t*3+i);});
+    if(!REDUCED){a.star.scale.setScalar(9+Math.sin(t*1.5)*0.8);if(a.hop>0){a.hop=Math.max(0,a.hop-dt*1.5);a.lamb.position.y=Math.abs(Math.sin(t*12))*0.15*a.hop;}}
+    if(ext.t>0){ext.t=Math.min(1,ext.t+dt/(REDUCED?0.6:4.2));const p=easeIO(ext.t);const q=Math.min(1,p*3);camera.position.set(lerp(0,4.8,q)+Math.max(0,p-0.33)*1.5*7,1.6+Math.max(0,p-0.33)*1.5*2.5,lerp(0,1.6,q)+Math.max(0,p-0.33)*1.5*18);}
+  }
+  const panels={
+    tally:()=>({eye:'North',title:'The counting post',html:`<p>A wooden post by the sheepfold. Every evening, the head shepherd carves one mark for each sheep. Every fifth mark goes across the other four, to make a bundle of five.</p>${tallySVG()}`,bind(){addClue('tally','Tally post: four bundles of five, plus three.');}}),
+    fold:()=>{
+      if(S.flockSafe)return{eye:'North',title:'The sheepfold',html:S.hasLamp?'<p>The flock is safe inside the stone fold, and the gate is latched.</p>':`<p>Every sheep is safe in the fold, and you latch the gate. Hanging on the gatepost is the head shepherd’s oil lamp. You’ll need it on the dark road!</p><div class="row"><button class="btn brass" id="take">Take the lamp</button></div>`,bind(){const b=$('#take');if(b)b.addEventListener('click',()=>{S.hasLamp=true;SFX.click();updateHud();renderPanel();});}};
+      return{eye:'North',title:'The sheepfold',html:`<p>A round stone wall where the sheep sleep at night. A good shepherd never leaves until every sheep is safe! Count the sheep in through the gate. <b>How many sheep are in the flock?</b></p>
+        <div class="dials" style="background:linear-gradient(#6a4a2a,#3a2a1a)">${S.count.map((d,i)=>`<div class="dial"><button data-i="${i}" data-d="1" aria-label="${i?'Ones':'Tens'} up">${CHEV_UP}</button><span>${d}</span><button data-i="${i}" data-d="-1" aria-label="${i?'Ones':'Tens'} down">${CHEV_DN}</button></div>`).join('')}</div>
+        <div class="row" style="justify-content:center"><button class="btn brass" id="shut">Close the gate</button></div><p class="msg">${S.msg}</p>`,
+        bind(){on('.dial button',el=>{const i=+el.dataset.i;S.count[i]=(S.count[i]+(+el.dataset.d)+10)%10;S.msg='';SFX.click();renderPanel();});
+          $('#shut').addEventListener('click',()=>{const n=S.count[0]*10+S.count[1];if(n===FLOCK){S.flockSafe=true;SFX.ding();updateHud();}else{S.msg=n<FLOCK?'Baa! Some sheep are still outside.':'That’s more sheep than the flock has. Count the marks again.';SFX.thud();}renderPanel();});}};
+    },
+    angel:()=>{
+      if(S.msgDone)return{eye:'West',title:'Where the angel stood',html:`<p>The light is softer now. The angel’s good news is written on the scroll:</p>${quote('Fear not: for, behold, I bring you good tidings of great joy, which shall be to all people. For unto you is born this day in the city of David a Saviour, which is Christ the Lord. And this shall be a sign unto you; Ye shall find the babe wrapped in swaddling clothes, lying in a manger.','Luke 2:10-12')}`};
+      const t=['Fear not: for, behold, I bring you good tidings of great','which shall be to all people. For unto you is born this day in the city of','a Saviour, which is Christ the Lord. And this shall be a sign unto you; Ye shall find the babe wrapped in swaddling clothes, lying in a'];
+      return{eye:'West',title:'Where the angel stood',html:`<p>Just a little while ago, an angel of the Lord appeared right here, and the glory of the Lord shone round about. The shepherds were sore afraid! The older shepherds have already hurried off to see. They left a scroll on the rock, but they didn’t finish writing down the angel’s words. Can you fill them in?</p>
+        <div style="background:#f6efe0;color:#2a1a0a;border-radius:12px;padding:12px 14px;font-family:${FELL};font-size:1.05rem;line-height:1.7">${t.map((s,i)=>`${s} <b style="display:inline-block;min-width:70px;border-bottom:2px solid #8a5a2a;text-align:center;color:#8a2a10">${S.fill[i]||'?'}</b>${i===2?'.':i===1?'':','} `).join('')}<div style="text-align:right;font-size:.9rem">Luke 2:10-12</div></div>
+        ${BLANKS.map(([,opts],i)=>`<div class="row" style="justify-content:center;gap:6px"><span class="muted">Blank ${i+1}:</span>${opts.map(o=>`<button class="btn ${S.fill[i]===o?'brass':''}" data-b="${i}" data-o="${o}">${o}</button>`).join('')}</div>`).join('')}
+        <div class="row" style="justify-content:center"><button class="btn brass" id="done" ${S.fill.every(Boolean)?'':'disabled'}>Finish the scroll</button></div><p class="msg">${S.msg}</p>`,
+        bind(){on('[data-o]',el=>{S.fill[+el.dataset.b]=el.dataset.o;S.msg='';SFX.click();renderPanel();});
+          $('#done').addEventListener('click',()=>{const bad=BLANKS.findIndex(([ans],i)=>S.fill[i]!==ans);if(bad<0){S.msgDone=true;addClue('sign','The sign: a baby lying in a manger.');SFX.ding();updateHud();}else{S.msg=`Blank ${bad+1} doesn’t sound quite right. Think about the Christmas story.`;SFX.thud();}renderPanel();});}};
+    },
+    town:()=>{
+      if(!S.msgDone)return{eye:'Far to the south',title:'Bethlehem',html:'<p>Far away on a hill is the little town of Bethlehem. A bright star shines above it. But where in town should you go? <b>Find out what the angel said first.</b></p>'};
+      if(S.stableFound)return{eye:'Far to the south',title:'Bethlehem',html:`${townSVG()}<p>You know where to go: the stable at <b>F</b>, right next to the crowded inn. That’s where you’ll find a manger!</p>`};
+      return{eye:'Far to the south',title:'Bethlehem',html:`<p>The angel said the baby would be lying in a <b>manger</b>, a feeding box for animals. So He must be in a stable! A traveler coming up the road tells you:</p>${quote('The inn is so full, there is no room! The inn is across the road from the well. And the stable is right next to the inn, on the side away from the palm tree.','A traveler')}<p>Tap the building where the stable is.</p>${townSVG()}<p class="msg">${S.msg}</p>`,
+        bind(){document.querySelectorAll('#p-body .bld').forEach(el=>el.addEventListener('click',()=>{const b=el.dataset.b;S.pick=b;if(b===STABLE){S.stableFound=true;S.msg='';SFX.ding();updateHud();}else{S.msg=b==='E'?'That’s the inn, and it’s full! The stable is next door.':'Hmm, check the traveler’s clues again.';SFX.thud();}renderPanel();}));}};
+    },
+    path:()=>({eye:'Southeast',title:'The road to Bethlehem',html:`<p>A signpost points down the hill to Bethlehem. It’s dark, and you mustn’t get lost.</p>
+      <div class="parts">${rowPart(S.flockSafe,'The flock','All 23 sheep are safe.','The sheep aren’t all in the fold yet.')}${rowPart(S.hasLamp,'A lamp','Lit and ready.','The road is too dark without a lamp.')}${rowPart(S.stableFound,'Where to go','The stable next to the inn.','Where in Bethlehem is the baby?')}</div>
+      <div class="row" style="justify-content:center"><button class="btn brass" id="haste" ${S.flockSafe&&S.hasLamp&&S.stableFound?'':'disabled'}>Go with haste to Bethlehem</button></div>`,
+      bind(){$('#haste').addEventListener('click',()=>{closePanel();win();});}}),
+    fire:()=>({eye:'East',title:'The campfire',html:'<span class="tag">Just for looking</span><p>The shepherds’ campfire keeps away the cold and the wolves. A shepherd’s crook leans on a stone beside it.</p>'}),
+    lamb:()=>({eye:'Southwest',title:'A little lamb',html:'<span class="tag">Just for looking</span><p>A tiny lamb who won’t go to sleep. It wants to come to Bethlehem too!</p>'}),
+    lyre:()=>({eye:'Northeast',title:'A shepherd’s harp',html:`<span class="tag">Just for looking</span><p>A small harp left on a rock. Long ago, young David played a harp while he kept his father’s sheep near Bethlehem. Later he wrote:</p>${quote('The LORD is my shepherd; I shall not want.','Psalm 23:1')}`}),
+    olive:()=>({eye:'Northwest',title:'An olive tree',html:'<span class="tag">Just for looking</span><p>A twisty old olive tree. Olive trees can live for hundreds of years.</p>'}),
+    floor:()=>({eye:'Below',title:'The shepherds’ field',html:'<p>A grassy hillside outside Bethlehem, where shepherds watch their flocks by night.</p>'}),
+    sky:()=>({eye:'Overhead',title:'The night sky',html:'<p>Thousands of stars. One, over Bethlehem, shines brighter than all the rest.</p>'})
+  };
+  return{
+    id:'bethlehem',num:30,name:'The Shepherds’ Field',
+    blurb:'Count the flock, finish the angel’s message and find the stable.',
+    eyebrow:'Room 30',titleHTML:'The <em>Shepherds’</em> Field',
+    story:'You’re helping the shepherds watch their flocks by night outside Bethlehem, when an angel of the Lord appears with wonderful news! The older shepherds rush off to town, leaving you to look after the sheep. Can you follow them?',
+    goal:'Get the flock safe, finish writing the angel’s message and work out where the baby is.',
+    winTitle:'Unto us a child is born',winText:'You hurry down the hill with your lamp, past the crowded inn, to the stable next door. There, just as the angel said, is the baby lying in a manger. “And they came with haste, and found Mary, and Joseph, and the babe lying in a manger.” (Luke 2:16)',
+    bg:0x0a1020,toneMapping:THREE.NoToneMapping,exposure:1,far:400,eyeY:1.6,winDelay:4600,
+    total:3,progress:()=>[S.flockSafe,S.msgDone,S.stableFound].filter(Boolean).length,goalsTitle:'The road to Bethlehem',howTo:'Count, read and listen.',
+    goalRows:()=>[['Flock safe',S.flockSafe],['Lamp',S.hasLamp],['Angel’s message',S.msgDone],['The stable',S.stableFound]].map(([n,ok])=>({icon:statusDot(ok),text:`<b>${n}</b>: ${ok?'done':'not yet'}`})),
+    icon:()=>'',
+    fresh:()=>({count:[0,0],flockSafe:false,hasLamp:false,fill:[null,null,null],msgDone:false,pick:null,stableFound:false}),
+    items:()=>{const it=[];if(S.hasLamp)it.push({label:'Lamp',svg:svgIcon('<path d="M4 14c0-3 12-3 14 0l3-2"/><path d="M4 14c2 3 12 3 14 0"/><path d="M20 10c1-2 0-3 0-3"/>')});return it;},
+    build,panels
+  };
+})();
+
+const LEVELS=[ROOM1,ROOM2,ROOM3,ROOM4,ROOM5,ROOM6,ROOM7,ROOM8,ROOM9,ROOM10,ROOM11,ROOM12,ROOM13,ROOM14,ROOM15,ROOM16,ROOM17,ROOM18,ROOM19,ROOM20,ROOM21,ROOM22,ROOM23,ROOM24,ROOM25,ROOM26,ROOM27,ROOM28,ROOM29,ROOM30];
 
 /* =========================================================
    Panels shared by every room: the door keypad and the notebook
@@ -6517,7 +7223,7 @@ const fontsReady=document.fonts&&document.fonts.load?Promise.race([Promise.all([
   document.fonts.load('30px "IM Fell English"'),document.fonts.load('italic 30px "IM Fell English"'),
   document.fonts.load('600 30px "Fredoka"'),document.fonts.load('700 30px "Fredoka"'),document.fonts.load('400 30px "Fredoka"'),
   document.fonts.load('700 30px "Cinzel"'),document.fonts.load('30px "Rye"'),document.fonts.load('30px "Pacifico"'),document.fonts.load('700 30px "Nunito"'),
-  document.fonts.load('30px "Luckiest Guy"'),document.fonts.load('30px "Pirata One"'),document.fonts.load('30px "Chewy"'),document.fonts.load('30px "MedievalSharp"'),document.fonts.load('700 30px "Amatic SC"'),document.fonts.load('30px "Audiowide"'),document.fonts.load('30px "Bungee"'),document.fonts.load('700 30px "Shippori Mincho"'),document.fonts.load('30px "Bubblegum Sans"'),document.fonts.load('30px "Alfa Slab One"'),document.fonts.load('30px "Creepster"'),document.fonts.load('800 30px "Sniglet"'),document.fonts.load('30px "Patua One"'),
+  document.fonts.load('30px "Luckiest Guy"'),document.fonts.load('30px "Pirata One"'),document.fonts.load('30px "Chewy"'),document.fonts.load('30px "MedievalSharp"'),document.fonts.load('700 30px "Amatic SC"'),document.fonts.load('30px "Audiowide"'),document.fonts.load('30px "Bungee"'),document.fonts.load('700 30px "Shippori Mincho"'),document.fonts.load('30px "Bubblegum Sans"'),document.fonts.load('30px "Alfa Slab One"'),document.fonts.load('30px "Creepster"'),document.fonts.load('800 30px "Sniglet"'),document.fonts.load('30px "Patua One"'),document.fonts.load('600 30px "Grenze Gotisch"'),document.fonts.load('30px "Lobster"'),
   document.fonts.load('700 30px "Orbitron"'),document.fonts.load('700 30px "Cinzel Decorative"'),document.fonts.load('700 30px "Baloo 2"'),document.fonts.load('30px "Marcellus SC"'),document.fonts.load('30px "Righteous"')]),new Promise(r=>setTimeout(r,2500))]):Promise.resolve();
 fontsReady.catch(()=>{}).then(()=>{loadLevel(0);resize();showTitle();requestAnimationFrame(frame);});
 })();

@@ -796,7 +796,6 @@ body[data-level="2"] .win h1{font-weight:700}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/RGBELoader.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
@@ -1032,7 +1031,8 @@ const FX=(function(){
   // Image-based lighting
   let pmrem=null;const getPM=()=>pmrem||(pmrem=new THREE.PMREMGenerator(renderer));
   fx.envFromScene=function(build){const es=new THREE.Scene();build(es);const rt=getPM().fromScene(es,0.035);disposeScene(es);return rt.texture;};
-  fx.loadHDR=function(url){return new Promise((res,rej)=>{if(!THREE.RGBELoader)return rej('no loader');track();new THREE.RGBELoader().setDataType(THREE.UnsignedByteType).load(url,t=>{const env=getPM().fromEquirectangular(t).texture;t.dispose();done();res(env);},undefined,e=>{done();rej(e);});});};
+  // Environment lighting from an equirectangular photo (a dimmed panorama of a real room)
+  fx.loadEnv=function(url){return new Promise((res,rej)=>{track();new THREE.TextureLoader().load(url,t=>{t.encoding=THREE.sRGBEncoding;t.mapping=THREE.EquirectangularReflectionMapping;const env=getPM().fromEquirectangular(t).texture;t.dispose();done();res(env);},undefined,e=>{done();rej(e);});});};
   // Asset loading with a small progress readout on the intro screen
   function track(){fx.loading++;showLoad();}function done(){fx.loaded++;showLoad();}
   function showLoad(){const el=document.getElementById('iLoad');if(!el)return;if(fx.loaded>=fx.loading){el.textContent='';fx.loading=fx.loaded=0;}else el.textContent='Loading 3D models… '+Math.round(fx.loaded/fx.loading*100)+'%';}
@@ -1351,7 +1351,7 @@ const ROOM1=(function(){
     const envI=0.9;
     const std=o=>{const m=new THREE.MeshStandardMaterial(Object.assign({roughness:0.8,metalness:0,envMapIntensity:envI},o));a.mats.push(m);return m;};
     // Image-based lighting from a real photographed room (Poly Haven "Vintage Measuring Lab", CC0)
-    FX.loadHDR(AS+'env_lab.hdr').then(env=>{if(scene.userData.room!=='study')return env.dispose();scene.environment=env;}).catch(()=>{});
+    FX.loadEnv(AS+'env_lab.jpg').then(env=>{if(scene.userData.room!=='study')return env.dispose();scene.environment=env;}).catch(()=>{});
     scene.userData.room='study';
     scene.fog=null;
 
@@ -1488,12 +1488,12 @@ const ROOM1=(function(){
     const lampLight=new THREE.PointLight(0xffc27a,1.5,5.5,2);lampLight.position.set(-4.7,1.3,1.65);lampLight.castShadow=true;lampLight.shadow.mapSize.set(512,512);lampLight.shadow.bias=-0.004;lampLight.shadow.radius=3;scene.add(lampLight);a.lamp=lampLight;
     const lampG=new THREE.Group();lampG.position.set(-4.72,0.81,1.62);lampG.scale.setScalar(0.82);desk.add(lampG);
     const lampGlow=new THREE.Sprite(new THREE.SpriteMaterial({map:tex(glowCanvas()),color:0xffb060,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,opacity:0.55}));lampGlow.scale.set(0.9,0.6,1);lampGlow.position.set(-4.72,1.27,1.62);scene.add(noRay(lampGlow));
-    FX.gltf(AS+'lamp/StainedGlassLamp.gltf').then(m=>{if(scene.userData.room!=='study')return;m.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=false;
+    FX.gltf(AS+'lamp/StainedGlassLamp.json').then(m=>{if(scene.userData.room!=='study')return;m.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=false;
         const mt=o.material;mt.envMapIntensity=0.8;if(/glass/.test(mt.name)){mt.emissive=new THREE.Color(0xffffff);mt.emissiveIntensity=1.6;mt.side=THREE.DoubleSide;o.castShadow=false;}
         if(/bulb/.test(mt.name)){mt.emissive=new THREE.Color(0xfff0c0);mt.emissiveIntensity=2;}}});lampG.add(m);FX.touch(3);}).catch(()=>{});
     // the damask chair (real model) — the cat is asleep on it
     const chairG=new THREE.Group();chairG.position.set(-3.72,0,2.45);chairG.rotation.y=-Math.PI/2;scene.add(chairG);
-    FX.gltf(AS+'chair/ChairDamaskPurplegold.gltf').then(m=>{if(scene.userData.room!=='study')return;m.traverse(o=>{if(o.isMesh){o.castShadow=o.receiveShadow=true;const mt=o.material;mt.envMapIntensity=0.5;
+    FX.gltf(AS+'chair/ChairDamaskPurplegold.json').then(m=>{if(scene.userData.room!=='study')return;m.traverse(o=>{if(o.isMesh){o.castShadow=o.receiveShadow=true;const mt=o.material;mt.envMapIntensity=0.5;
         if(mt.name==='fabric'){mt.metalness=0;mt.metalnessMap=null;mt.roughness=0.9;mt.needsUpdate=true;}}});m.scale.setScalar(0.8);chairG.add(m);FX.touch(3);}).catch(()=>{});
     FX.blob(scene,-3.72,2.45,0.9,0.9,0.5);
 
@@ -1618,7 +1618,7 @@ const ROOM1=(function(){
     // ---- Tea: a real porcelain cup and saucer (Poly Haven model, CC0), still steaming
     const tea=tag(new THREE.Group(),'tea');tea.position.set(-4.3,0.812,0.88);scene.add(tea);
     const hit=new THREE.Mesh(new THREE.CylinderGeometry(0.08,0.08,0.08,12),new THREE.MeshBasicMaterial({visible:false}));hit.position.y=0.04;tea.add(hit);
-    FX.gltf(AS+'teacup/DiffuseTransmissionTeacup.gltf').then(m=>{if(scene.userData.room!=='study')return;m.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;o.material.envMapIntensity=0.8;}});tea.add(m);
+    FX.gltf(AS+'teacup/DiffuseTransmissionTeacup.json').then(m=>{if(scene.userData.room!=='study')return;m.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;o.material.envMapIntensity=0.8;}});tea.add(m);
       const liquid=new THREE.Mesh(new THREE.CircleGeometry(0.05,24),std({color:FX.lin(0x5a2a0a),roughness:0.1,envMapIntensity:1}));liquid.rotation.x=-Math.PI/2;liquid.position.y=0.058;tea.add(liquid);FX.touch(2);}).catch(()=>{});
     const steamTex=tex(softCanvas());
     for(let i=0;i<4;i++){const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:steamTex,depthWrite:false,transparent:true,opacity:0}));sp.userData.ph=i/4;noRay(sp);tea.add(sp);steam.push(sp);}
@@ -1737,7 +1737,7 @@ const ROOM1=(function(){
     winTitle:'You’re out.',winText:'The lock clicks, the door swings open and cool night air pours into the study.',
     bg:0x05060c,toneMapping:THREE.ACESFilmicToneMapping,exposure:1.3,
     shadows:true,post:{bloom:0.7,radius:0.6,threshold:0.8,vignette:0.4},
-    credits:'3D models: Tiffany lamp and damask chair by Eric Chadwick (CC BY 4.0), teacup by Poly Haven (CC0), via the Khronos glTF Sample Assets. Wood floor by ambientCG (CC0). Lighting: Vintage Measuring Lab and Narrow Moonlit Road HDRIs by Poly Haven (CC0). Globe map: NASA Blue Marble.',
+    credits:'3D models: Tiffany lamp and damask chair by Eric Chadwick (CC BY 4.0), teacup by Poly Haven (CC0), via the Khronos glTF Sample Assets. Wood floor by ambientCG (CC0). Lighting and window view: Vintage Measuring Lab and Narrow Moonlit Road panoramas by Poly Haven (CC0). Globe map: NASA Blue Marble.',
     order:ORDER,code:'86135',goal:'Work out the five-digit code that opens the door.',
     plaqueText:'The plaque over the door shows five symbols in a row:',
     howTo:'',

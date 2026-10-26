@@ -795,7 +795,7 @@ body[data-level="2"] .win h1{font-weight:700}
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="vendor/three-extras.js"></script>
+<script src="vendor/three-extras.js?v=2"></script>
 <script>
 (function(){
 "use strict";
@@ -7500,7 +7500,7 @@ const ROOM30=(function(){
   };
 })();
 
-const LEVELS=[ROOM1,ROOM2,ROOM3,ROOM4,ROOM5,ROOM6,ROOM7,ROOM8,ROOM9,ROOM10,ROOM11,ROOM12,ROOM13,ROOM14,ROOM15,ROOM16,ROOM17,ROOM18,ROOM19,ROOM20,ROOM21,ROOM22,ROOM23,ROOM24,ROOM25,ROOM26,ROOM27,ROOM28,ROOM29,ROOM30];
+const LEVELS=[ROOM2,ROOM3,ROOM4,ROOM5,ROOM6,ROOM7,ROOM8,ROOM9,ROOM10,ROOM11,ROOM12,ROOM13,ROOM14,ROOM15,ROOM16,ROOM17,ROOM18,ROOM19,ROOM20,ROOM21,ROOM22,ROOM23,ROOM24,ROOM25,ROOM26,ROOM27,ROOM28,ROOM29,ROOM30];
 
 /* =========================================================
    Panels shared by every room: the door keypad and the notebook
@@ -7745,7 +7745,7 @@ const fontsReady=document.fonts&&document.fonts.load?Promise.race([Promise.all([
   document.fonts.load('700 30px "Cinzel"'),document.fonts.load('30px "Rye"'),document.fonts.load('30px "Pacifico"'),document.fonts.load('700 30px "Nunito"'),
   document.fonts.load('30px "Luckiest Guy"'),document.fonts.load('30px "Pirata One"'),document.fonts.load('30px "Chewy"'),document.fonts.load('30px "MedievalSharp"'),document.fonts.load('700 30px "Amatic SC"'),document.fonts.load('30px "Audiowide"'),document.fonts.load('30px "Bungee"'),document.fonts.load('700 30px "Shippori Mincho"'),document.fonts.load('30px "Bubblegum Sans"'),document.fonts.load('30px "Alfa Slab One"'),document.fonts.load('30px "Creepster"'),document.fonts.load('800 30px "Sniglet"'),document.fonts.load('30px "Patua One"'),document.fonts.load('600 30px "Grenze Gotisch"'),document.fonts.load('30px "Lobster"'),
   document.fonts.load('700 30px "Orbitron"'),document.fonts.load('700 30px "Cinzel Decorative"'),document.fonts.load('700 30px "Baloo 2"'),document.fonts.load('30px "Marcellus SC"'),document.fonts.load('30px "Righteous"')]),new Promise(r=>setTimeout(r,2500))]):Promise.resolve();
-fontsReady.catch(()=>{}).then(()=>{try{loadLevel(1);}catch(e){console.error(e);}resize();showTitle();requestAnimationFrame(frame);});
+fontsReady.catch(()=>{}).then(()=>{try{loadLevel(0);}catch(e){console.error(e);}resize();showTitle();requestAnimationFrame(frame);});
 })();
 </script>
 

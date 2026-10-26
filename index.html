@@ -795,13 +795,7 @@ body[data-level="2"] .win h1{font-weight:700}
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<script src="vendor/three-extras.js"></script>
 <script>
 (function(){
 "use strict";
@@ -1014,12 +1008,13 @@ const FX=(function(){
     fx.resize();return true;
   }
   fx.resize=function(){if(!composer)return;const w=stage.clientWidth||innerWidth,h=stage.clientHeight||innerHeight;composer.setPixelRatio(Math.min(window.devicePixelRatio||1,fx.low?1.25:1.75));composer.setSize(w,h);};
-  fx.postOn=()=>!!(LV&&LV.post&&ensureComposer());
+  fx.postOn=()=>{if(fx.broken||!(LV&&LV.post))return false;try{return ensureComposer();}catch(e){console.error(e);fx.broken=true;return false;}};
   fx.render=function(t){
     if(fx.dirty>0){renderer.shadowMap.needsUpdate=true;fx.dirty--;}
     if(fx.postOn()){const p=LV.post;renderPass.scene=scene;renderPass.camera=camera;
       bloomPass.enabled=!fx.low;bloomPass.strength=p.bloom==null?0.6:p.bloom;bloomPass.radius=p.radius==null?0.5:p.radius;bloomPass.threshold=p.threshold==null?0.85:p.threshold;
-      finalPass.uniforms.vig.value=p.vignette==null?0.3:p.vignette;finalPass.uniforms.time.value=t;composer.render();}
+      finalPass.uniforms.vig.value=p.vignette==null?0.3:p.vignette;finalPass.uniforms.time.value=t;
+      try{composer.render();}catch(e){console.error(e);fx.broken=true;renderer.render(scene,camera);}}
     else renderer.render(scene,camera);
   };
   // Per-room setup from loadLevel
@@ -1632,7 +1627,8 @@ const ROOM1=(function(){
       const cnd=FX.lathe([[0,0],[0.018,0],[0.018,0.16],[0.003,0.165],[0,0.165]],wax,12);cnd.position.set(0,0.03,0.09);g.add(cnd);
       const fl=FX.flame(g,0,0.198,0.09,0.035,0.08,{intensity:2});flames.push(fl);
       const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,color:0xffc070,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:0.75}));sp.scale.set(0.25,0.3,1);sp.position.set(0,0.24,0.09);g.add(noRay(sp));
-      const l=new THREE.PointLight(0xffb868,0.9,4.5,2);l.position.set(0,0.3,0.25);g.add(l);a.sconce.push(l);FX.shadow(g,true,false);});
+      if(ry===-Math.PI/2){const l=new THREE.PointLight(0xffb868,0.9,4.5,2);l.position.set(0,0.3,0.25);g.add(l);a.sconce.push(l);}FX.shadow(g,true,false);});
+    {const l=new THREE.PointLight(0xffb868,1.2,6,2);l.position.set(0,2.3,-4.55);scene.add(l);a.sconce.push(l);}
     // ---- Light: the fire is the key light, then the lamp, the candles and the moon
     scene.add(new THREE.AmbientLight(0xffe8d0,0.05));
     scene.add(new THREE.HemisphereLight(0xffe2c0,0x2a1c10,0.12));
@@ -7679,7 +7675,7 @@ function showTitle(){
 }
 function showIntro(i){
   pendingLevel=i;const L=LEVELS[i];
-  loadLevel(i);idleSpin=true;S.running=false;
+  try{loadLevel(i);}catch(e){console.error(e);}idleSpin=true;S.running=false;
   document.body.dataset.level=String(L.num);
   $('#iCredit').textContent=L.credits||'';$('#iEye').textContent=L.eyebrow+' of '+LEVELS.length;$('#iTitle').innerHTML=L.titleHTML;$('#iStory').textContent=L.story;$('#iGoal').textContent=L.goal;
   hideScreens();$('#intro').hidden=false;$('#intro').scrollTop=0;
@@ -7749,7 +7745,7 @@ const fontsReady=document.fonts&&document.fonts.load?Promise.race([Promise.all([
   document.fonts.load('700 30px "Cinzel"'),document.fonts.load('30px "Rye"'),document.fonts.load('30px "Pacifico"'),document.fonts.load('700 30px "Nunito"'),
   document.fonts.load('30px "Luckiest Guy"'),document.fonts.load('30px "Pirata One"'),document.fonts.load('30px "Chewy"'),document.fonts.load('30px "MedievalSharp"'),document.fonts.load('700 30px "Amatic SC"'),document.fonts.load('30px "Audiowide"'),document.fonts.load('30px "Bungee"'),document.fonts.load('700 30px "Shippori Mincho"'),document.fonts.load('30px "Bubblegum Sans"'),document.fonts.load('30px "Alfa Slab One"'),document.fonts.load('30px "Creepster"'),document.fonts.load('800 30px "Sniglet"'),document.fonts.load('30px "Patua One"'),document.fonts.load('600 30px "Grenze Gotisch"'),document.fonts.load('30px "Lobster"'),
   document.fonts.load('700 30px "Orbitron"'),document.fonts.load('700 30px "Cinzel Decorative"'),document.fonts.load('700 30px "Baloo 2"'),document.fonts.load('30px "Marcellus SC"'),document.fonts.load('30px "Righteous"')]),new Promise(r=>setTimeout(r,2500))]):Promise.resolve();
-fontsReady.catch(()=>{}).then(()=>{loadLevel(0);resize();showTitle();requestAnimationFrame(frame);});
+fontsReady.catch(()=>{}).then(()=>{try{loadLevel(1);}catch(e){console.error(e);}resize();showTitle();requestAnimationFrame(frame);});
 })();
 </script>
 

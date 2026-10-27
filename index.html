@@ -604,6 +604,59 @@ body[data-level="19"] .p-title,body[data-level="19"] .intro h1,body[data-level="
 .crew .side{display:flex;flex-direction:column;gap:6px;background:var(--parchment-2);border-radius:12px;padding:8px}
 .crew .side b{text-align:center}
 .dial .muted{display:block;text-align:center}
+/* ---- theme ---- */
+body[data-level="31"]{
+  --parchment:#f6ecd8; --parchment-2:#e6d2ac; --ink:#2a1a12; --ink-soft:#6a5040;
+  --brass:#e6ac52; --brass-deep:#9a6420; --oxblood:#8a2a1a;
+  --veil:rgba(30,16,14,.86); --rule:rgba(230,172,82,.5); --pill-fg:#ffe2b0; --badge-fg:#2a1a12;
+  --f-display:"IM Fell English SC",Georgia,serif; --f-note:"IM Fell English",Georgia,serif; --f-body:"Nunito",system-ui,sans-serif;
+  --scr-bg:radial-gradient(120px 120px at 50% 30%,rgba(255,236,200,.95),rgba(255,180,110,.55) 45%,rgba(255,150,90,0) 72%),linear-gradient(180deg,#3e3470 0%,#8a4a78 38%,#e8785a 66%,#3a2236 67%,#1a1018 100%);
+  --scr-fg:#fff4e0; --scr-fg2:#f0d8c0; --scr-accent:#ffc870; --scr-accent-deep:#a86a20; --scr-btn-fg:#2a1408;
+}
+/* ---- room card ---- */
+.room.r31{background:radial-gradient(34px 34px at 76% 30%,rgba(255,236,200,.95),rgba(255,170,100,.4) 60%,transparent 75%),linear-gradient(180deg,#3e3470,#8a4a78 45%,#e8785a 70%,#3a2236 71%,#1a1018);color:#fff4e0}.room.r31 .rname{font-family:"IM Fell English SC",Georgia,serif;font-size:24px;color:#ffc870}
+/* ---- Room 31 widgets ---- */
+.slide{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;width:min(100%,300px);align-self:center;background:#1a120c;padding:6px;border-radius:10px;box-shadow:0 4px 14px rgba(42,27,16,.3)}
+.slide button{position:relative;aspect-ratio:1;border:0;border-radius:6px;background-size:300% 300%;background-repeat:no-repeat;cursor:pointer;padding:0}
+.slide button span{position:absolute;top:3px;left:6px;font:700 14px var(--f-body);color:#fff;text-shadow:0 1px 2px #000,0 0 4px #000}
+.slide .blank{background:#0a0604;cursor:default}
+
+body[data-level="32"]{
+  --parchment:#f6efdc; --parchment-2:#e6d8b4; --ink:#13244a; --ink-soft:#4a5a80;
+  --brass:#e8b440; --brass-deep:#a07418; --oxblood:#1d4e9a;
+  --veil:rgba(8,18,44,.86); --rule:rgba(232,180,64,.5); --pill-fg:#ffe6a0; --badge-fg:#13244a;
+  --f-display:"Marcellus SC",Georgia,serif; --f-note:"IM Fell English",Georgia,serif; --f-body:"Nunito",system-ui,sans-serif;
+  --scr-bg:radial-gradient(70px 70px at 50% 8%,rgba(255,230,170,.85),rgba(255,210,140,.18) 45%,transparent 72%),repeating-linear-gradient(0deg,rgba(4,10,30,.35) 0 2px,transparent 2px 22px),linear-gradient(180deg,#0a1838 0%,#163a80 55%,#1d4e9a 75%,#0c1a3a 100%);
+  --scr-fg:#f6efdc; --scr-fg2:#d8e0f4; --scr-accent:#ffd060; --scr-accent-deep:#a07418; --scr-btn-fg:#13244a;
+}
+.room.r32{background:radial-gradient(34px 34px at 50% 14%,rgba(255,226,160,.95),transparent 72%),repeating-linear-gradient(0deg,rgba(4,10,30,.3) 0 2px,transparent 2px 16px),linear-gradient(180deg,#0e2a66,#1d4e9a 62%,#0a1838);color:#f6efdc}.room.r32 .rname{font-family:"Cinzel",Georgia,serif;font-weight:700;font-size:23px;color:#ffd060;text-shadow:0 2px 0 #0a1838}
+body[data-level="32"] #p-body .r32-wall{display:flex;flex-direction:column;align-items:center;gap:6px;background:#e8dcc0;border-radius:10px;padding:10px;color:#a8700a}
+body[data-level="32"] #p-body .r32-wall div{display:flex;gap:4px;flex-wrap:wrap;justify-content:center}
+body[data-level="32"] #p-body .r32-key{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px 6px;background:#e8d4a8;border-radius:10px;padding:8px;color:#5a3a0a}
+body[data-level="32"] #p-body .r32-key span{display:flex;align-items:center;gap:3px;font-family:var(--f-mono);font-weight:700;font-size:16px;color:var(--ink)}
+body[data-level="32"] #p-body .r32-key svg{color:#8a5a0a;flex:none}
+body[data-level="32"] #p-body .r32-words{display:flex;flex-direction:column;gap:8px}
+body[data-level="32"] #p-body .r32-w{display:flex;flex-wrap:wrap;gap:3px;justify-content:center;border:3px solid transparent;border-radius:12px;padding:6px 4px;background:rgba(29,78,154,.1);cursor:pointer;color:var(--ink);font:inherit}
+body[data-level="32"] #p-body .r32-w.on{border-color:var(--brass);background:rgba(232,180,64,.18)}
+body[data-level="32"] #p-body .r32-w.ok{background:rgba(47,191,90,.18);cursor:default}
+body[data-level="32"] #p-body .r32-g{display:flex;flex-direction:column;align-items:center;width:32px}
+body[data-level="32"] #p-body .r32-g svg{color:#a8700a}
+body[data-level="32"] #p-body .r32-g b{height:22px;line-height:22px;font-family:var(--f-mono);font-size:18px;border-bottom:2px solid var(--ink-soft);width:24px;text-align:center}
+body[data-level="32"] #p-body .r32-keys{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+body[data-level="32"] #p-body .r32-keys button{height:42px;border:0;border-radius:8px;background:var(--ink);color:var(--parchment);font-family:var(--f-mono);font-size:19px;font-weight:700;cursor:pointer}
+body[data-level="32"] #p-body .r32-mean{display:flex;flex-direction:column;gap:4px}
+body[data-level="32"] #p-body .r32-mean b{font-family:var(--f-mono);letter-spacing:.08em}
+body[data-level="32"] #p-body .r32-chip{display:inline-block;width:18px;height:18px;border-radius:4px;vertical-align:-3px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.35)}
+body[data-level="32"] #p-body .r32-slot{border:0;width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer}
+body[data-level="32"] #p-body .r32-pc{font-family:var(--f-body);font-size:15px;font-weight:700;padding:8px 10px}
+body[data-level="32"] #p-body .r32-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+body[data-level="32"] #p-body .r32-lion{display:flex;flex-direction:column;gap:6px;background:rgba(29,78,154,.1);border-radius:12px;padding:8px}
+body[data-level="32"] #p-body .r32-lhead{display:flex;align-items:center;gap:6px;font-size:14px;line-height:1.25}
+body[data-level="32"] #p-body .r32-lion .btn{font-size:17px;padding:8px 6px}
+body[data-level="32"] #p-body .r32-dec{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+body[data-level="32"] #p-body .r32-dec>div{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;font-size:14px}
+body[data-level="32"] #p-body .r32-tally{align-self:stretch}
+
 /* Rooms 21-25 widgets */
 .flashbox{display:grid;place-items:center;height:110px;background:#0a1420;border-radius:12px}
 .fdot{width:34px;height:34px;border-radius:50%;background:#2a3440;transition:background .08s,box-shadow .08s}
@@ -8888,7 +8941,7 @@ const ROOM23=(function(){
     jobs:()=>{
       if(S.jobsDone)return{eye:'West · The job board',title:'Bee jobs',html:`<p>Bea is a <b>nurse</b>, Honey is a <b>builder</b>, Stinger is a <b>guard</b>, and Buzzby is a <b>forager</b>. Only foragers fly out to gather nectar!</p>`};
       return{eye:'West · The job board',title:'Who does which job?',html:`<p>Every bee in a hive has a job. Four bees have scribbled clues on this wax tablet. Work out each bee’s job.</p>
-        <ul class="clues"><li>Bea and Honey never leave the hive.</li><li>Stinger has never even seen a flower.</li><li>The builder’s name doesn’t start with <b>B</b>.</li></ul>
+        <ul class="clues"><li>Bea and Honey never leave the hive.</li><li>Stinger has never even seen a flower.</li><li>The builder’s name doesn’t start with <b>B</b>.</li><li>Stinger stands at the hive door all day.</li></ul>
         <div class="parts">${BEES.map(b=>`<div class="part" style="grid-template-columns:1fr auto"><b>${b}</b><button class="btn" data-b="${b}">${S.jobs[b]||'Choose a job'}</button></div>`).join('')}</div>
         <p class="muted">Nurses feed the babies. Guards stand at the door. Builders make wax. Foragers fly out to flowers.</p>
         <div class="row" style="justify-content:center"><button class="btn brass" id="check">Check</button></div><p class="msg">${S.msg}</p>`,
@@ -10851,7 +10904,1163 @@ const ROOM30=(function(){
   };
 })();
 
-const LEVELS=[ROOM1,ROOM2,ROOM3,ROOM4,ROOM5,ROOM6,ROOM7,ROOM8,ROOM9,ROOM10,ROOM11,ROOM12,ROOM13,ROOM14,ROOM15,ROOM16,ROOM17,ROOM18,ROOM19,ROOM20,ROOM21,ROOM22,ROOM23,ROOM24,ROOM25,ROOM26,ROOM27,ROOM28,ROOM29,ROOM30];
+const ROOM31=(function(){
+  /* ---------- Puzzle data (every answer is fixed by the clues; see notes.txt) ---------- */
+  const NOTE='TMZSX',WORD='PIVOT';                 // 4 bells overhead: shift each letter back 4
+  const BELLS=[{k:'moon',n:'Moon',r:0.42,f:329.6},{k:'sun',n:'Sun',r:0.86,f:196},{k:'key',n:'Key',r:0.56,f:293.7},{k:'star',n:'Star',r:0.70,f:261.6}]; // left to right
+  const LVL={sun:1,star:2,key:3,moon:4};          // bigger bell = lower note
+  const TUNE=['moon','star','key','sun','sun','key','moon','star'];
+  const TUNE_H=TUNE.map(k=>LVL[k]);               // heights on the music sheet (1 = lowest line)
+  const PHASES=['Full moon','Waning gibbous','Last quarter','Waning crescent','New moon','Waxing crescent','First quarter','Waxing gibbous'];
+  const MOON_OK=4;                                 // 16th is 15 days after full: 15 / 3.7 = 4 steps
+  const TEETH={d10:10,g15:15,g20:20,g25:25,d30:30};
+  const SUMS=[35,45,35,45],MOTOR=10,DIALT=30;
+  const RODS=[0.5,1,2,3],BOBS=[1,5,20];
+  const HANDS_OK=315;                              // 5:15 (paper 3:40 pm + 1 h 35 min)
+  const ROMAN=['XII','I','II','III','IIII','V','VI','VII','VIII','IX','X','XI'];
+  const AX=[[-1.69,-0.4],[-1.084,-0.05],[-0.238,-0.358],[0.396,-0.062],[1.282,-0.218]];
+  const LAB=i=>{const [u0,v0]=AX[i],[u1,v1]=AX[i+1],du=u1-u0,dv=v1-v0,L=Math.hypot(du,dv),sd=i%2?-1:1;return[(u0+u1)/2-dv/L*0.6*sd,(v0+v1)/2+du/L*0.6*sd];}; // motor, A, B, C, dial (metres on the board)
+  const LN=FX.lin,FY=3.0;
+  const std=o=>new THREE.MeshStandardMaterial(Object.assign({roughness:0.8,metalness:0,envMapIntensity:0.7},o));
+  let ext,a={};
+  const hhmm=T=>{const h=Math.floor(T/60)%12||12,m=T%60;return`${h}:${String(m).padStart(2,'0')}`;};
+  function scramble(){const r=rng(3131);const t=[1,2,3,4,5,6,7,8,0];let b=8,prev=-1;
+    for(let k=0;k<22;k++){const nb=[b-3,b+3,b%3?b-1:-1,b%3<2?b+1:-1].filter(i=>i>=0&&i<9&&i!==prev);const n=nb[Math.floor(r()*nb.length)];t[b]=t[n];t[n]=0;prev=b;b=n;}return t;}
+  const near=(i,j)=>(Math.abs(i-j)===3)||(Math.abs(i-j)===1&&Math.floor(i/3)===Math.floor(j/3));
+
+  /* ---------- Painters ---------- */
+  function sky(x,W,H,hz){const g=x.createLinearGradient(0,0,0,H*hz);g.addColorStop(0,'#3e3470');g.addColorStop(0.35,'#8a4a78');g.addColorStop(0.65,'#e8785a');g.addColorStop(0.88,'#ffb466');g.addColorStop(1,'#ffd890');x.fillStyle=g;x.fillRect(0,0,W,H);
+    const r=rng(3120);x.fillStyle='rgba(255,210,170,.35)';for(let i=0;i<7;i++){const y=H*hz*(0.25+r()*0.5),w=W*(0.2+r()*0.4);x.beginPath();x.ellipse(r()*W,y,w/2,3+r()*5,0,0,7);x.fill();}}
+  function city(x,W,H,hz,seed){const r=rng(seed),base=H*hz;let px=-10;
+    // far row (hazy) then near row
+    [['#8a4a62',0.55,0.06],['#3a2236',1,0.14]].forEach(([col,sc,hh],row)=>{px=-10;while(px<W){const w=(18+r()*40)*W/512,h=(10+r()*60)*sc*W/512+H*hh*0.3;const y=base+(row?H*0.02:0)-h;
+        x.fillStyle=col;x.fillRect(px,y,w,H-y);
+        if(r()<0.35){x.beginPath();x.moveTo(px-2,y);x.lineTo(px+w/2,y-h*0.35);x.lineTo(px+w+2,y);x.fill();}
+        else if(r()<0.12){x.fillRect(px+w*0.4,y-h*0.9,w*0.2,h*0.9);x.beginPath();x.moveTo(px+w*0.35,y-h*0.9);x.lineTo(px+w*0.5,y-h*1.6);x.lineTo(px+w*0.65,y-h*0.9);x.fill();}
+        else if(r()<0.15){x.beginPath();x.arc(px+w/2,y,w*0.42,Math.PI,0);x.fill();}
+        if(row){for(let wy=y+5;wy<H-4;wy+=9*W/512)for(let wx=px+3;wx<px+w-4;wx+=7*W/512)if(r()<0.28){x.fillStyle=r()<0.7?'#ffd27a':'#ffb050';x.fillRect(wx,wy,3*W/512,4*W/512);}x.fillStyle=col;}
+        px+=w+(r()<0.3?r()*8:0);}});}
+  function faceC(){const N=512,c=mk(N,N),x=c.getContext('2d'),R=N/2;sky(x,N,N,0.72);city(x,N,N,0.72,3111);
+    x.fillStyle='rgba(255,236,212,0.24)';x.fillRect(0,0,N,N);
+    const g=x.createRadialGradient(R,R*0.95,10,R,R,R);g.addColorStop(0,'rgba(255,248,230,.26)');g.addColorStop(1,'rgba(255,190,140,0)');x.fillStyle=g;x.fillRect(0,0,N,N);
+    // the numbers are painted on the outside of the glass, so from in here they are back to front
+    x.save();x.translate(N,0);x.scale(-1,1);x.strokeStyle='rgba(40,18,22,.6)';x.lineWidth=4;x.beginPath();x.arc(R,R,R*0.965,0,7);x.stroke();x.lineWidth=3;x.beginPath();x.arc(R,R,R*0.72,0,7);x.stroke();
+    for(let i=0;i<60;i++){x.save();x.translate(R,R);x.rotate(i/60*Math.PI*2);x.fillStyle='rgba(40,18,22,.62)';x.fillRect(-1.5,-R*0.955,3,i%5?R*0.035:R*0.07);x.restore();}
+    x.font=`700 ${Math.round(R*0.16)}px ${CINZEL}`;x.textAlign='center';x.textBaseline='middle';x.fillStyle='rgba(36,14,18,.8)';
+    ROMAN.forEach((s,i)=>{x.save();x.translate(R,R);x.rotate(i/12*Math.PI*2);x.fillText(s,0,-R*0.83);x.restore();});x.restore();return c;}
+  function windowC(seed){const W=128,H=256,c=mk(W,H),x=c.getContext('2d');sky(x,W,H,0.72);city(x,W,H,0.72,seed);return c;}
+  function ashlarSet(){const N=512,{A,Hc,a,h}=FX.pair(N,N,'#6a5a4a');const r=rng(3101),bw=N/2,bh=N/4;
+    for(let j=0;j<4;j++)for(let i=-1;i<3;i++){const x=i*bw+(j%2)*bw/2,y=j*bh,t=r()-0.5;a.fillStyle=`hsl(${24+r()*16},${14+r()*12}%,${40+t*14}%)`;a.fillRect(x+3,y+3,bw-6,bh-6);
+      const gr=a.createLinearGradient(0,y,0,y+bh);gr.addColorStop(0,'rgba(255,240,220,.18)');gr.addColorStop(0.15,'rgba(255,240,220,0)');gr.addColorStop(1,'rgba(40,20,10,.16)');a.fillStyle=gr;a.fillRect(x+3,y+3,bw-6,bh-6);
+      h.fillStyle=`rgb(${200+r()*40},${200+r()*40},${200+r()*40})`;h.fillRect(x+5,y+5,bw-10,bh-10);}
+    FX.noise(a,N,N,3102,[8,32,128,256],[0.07,0.12,0.14,0.1]);FX.noise(h,N,N,3103,[32,128,256],[0.3,0.3,0.25]);return{A,H:FX.blur(Hc,1)};}
+  function plankSet(base,seed){const N=512,{A,Hc,a,h}=FX.pair(N,N,base);const r=rng(seed),pw=N/8;
+    for(let i=0;i<8;i++){const t=(r()-0.5)*0.32;a.fillStyle=t>0?`rgba(255,220,170,${t*0.6})`:`rgba(30,15,5,${-t})`;a.fillRect(i*pw,0,pw,N);
+      for(let k=0;k<14;k++){a.strokeStyle=`rgba(${r()<.5?'40,20,8':'210,160,110'},${0.08+r()*0.15})`;a.lineWidth=0.6+r()*1.2;a.beginPath();const x=i*pw+r()*pw;a.moveTo(x,0);a.bezierCurveTo(x+(r()-0.5)*8,N*0.33,x+(r()-0.5)*8,N*0.66,x,N);a.stroke();}
+      a.fillStyle='rgba(20,10,4,.7)';a.fillRect(i*pw,0,2,N);h.fillStyle='#303030';h.fillRect(i*pw,0,2,N);const jy=Math.floor(r()*N);a.fillRect(i*pw,jy,pw,2);h.fillRect(i*pw,jy,pw,2);
+      a.fillStyle='rgba(20,20,20,.55)';[jy-9,jy+8].forEach(y=>{a.fillRect(i*pw+8,(y+N)%N,3,3);a.fillRect(i*pw+pw-11,(y+N)%N,3,3);});}
+    FX.noise(a,N,N,seed+1,[16,64,256],[0.12,0.1,0.08]);FX.noise(h,N,N,seed+2,[64,256],[0.2,0.2]);return{A,H:FX.blur(Hc,1)};}
+  function paper(W,H,seed){const c=mk(W,H),x=c.getContext('2d');x.fillStyle='#f2e6c8';x.fillRect(0,0,W,H);const g=x.createRadialGradient(W/2,H/2,Math.min(W,H)*0.3,W/2,H/2,Math.max(W,H)*0.75);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(120,80,30,.35)');x.fillStyle=g;x.fillRect(0,0,W,H);
+    const r=rng(seed);for(let i=0;i<5;i++){x.fillStyle=`rgba(150,110,50,${0.04+r()*0.05})`;x.beginPath();x.arc(r()*W,r()*H,10+r()*30,0,7);x.fill();}return{c,x};}
+  function noteC(){const {c,x}=paper(300,200,3140);x.fillStyle='#3a2410';x.textAlign='center';x.font=`italic 20px ${FELL}`;x.fillText('For the keeper only:',150,40);
+    x.font=`700 46px ${CINZEL}`;x.fillStyle='#7a1a1a';x.fillText(NOTE.split('').join(' '),150,100);x.fillStyle='#3a2410';x.font=`italic 19px ${FELL}`;x.fillText('Shift each letter BACK by the',150,146);x.fillText('number of bells above you.',150,172);return c;}
+  function musicC(){const {c,x}=paper(420,250,3141);x.fillStyle='#3a2410';x.textAlign='center';x.font=`30px ${CINZEL}`;x.fillText('The Tower Chime',210,40);
+    x.strokeStyle='#3a2410';x.lineWidth=1.6;for(let i=0;i<5;i++){x.beginPath();x.moveTo(22,78+i*16);x.lineTo(398,78+i*16);x.stroke();}
+    x.lineWidth=2.2;[22,210,398].forEach((bx,i)=>{x.beginPath();x.moveTo(bx,78);x.lineTo(bx,142);x.stroke();if(i===2){x.lineWidth=5;x.beginPath();x.moveTo(bx-4,78);x.lineTo(bx-4,142);x.stroke();}});
+    TUNE_H.forEach((lv,i)=>{const nx=58+i*44+(i>=4?14:0),ny=142-(lv-1)*16;x.save();x.translate(nx,ny);x.rotate(-0.35);x.fillStyle='#1a1008';x.beginPath();x.ellipse(0,0,9,6.5,0,0,7);x.fill();x.restore();x.lineWidth=2;x.beginPath();x.moveTo(nx+8,ny-2);x.lineTo(nx+8,ny-44);x.stroke();});
+    x.font=`italic 18px ${FELL}`;x.fillText('Big bells sing low. Small bells sing high.',210,188);x.fillText('Higher on the lines = a higher note.',210,214);return c;}
+  function calC(){const {c,x}=paper(300,330,3142);x.textAlign='center';x.fillStyle='#7a1a1a';x.font=`32px ${CINZEL}`;x.fillText('OCTOBER',150,44);x.font=`700 15px ${NUN}`;x.fillStyle='#3a2410';
+    ['S','M','T','W','T','F','S'].forEach((d,i)=>x.fillText(d,30+i*40,80));x.font=`700 17px ${NUN}`;
+    for(let d=1;d<=31;d++){const k=d+2,cx=30+(k%7)*40,cy=112+Math.floor(k/7)*40;x.fillStyle='#3a2410';x.fillText(String(d),cx,cy);
+      if(d===1){x.strokeStyle='#7a1a1a';x.lineWidth=2.5;x.beginPath();x.arc(cx,cy-1,16,0,7);x.stroke();x.fillStyle='#fff8d0';x.beginPath();x.arc(cx+14,cy-16,7,0,7);x.fill();x.strokeStyle='#8a6a20';x.lineWidth=1.2;x.stroke();}}
+    x.font=`italic 18px ${FELL}`;x.fillStyle='#7a1a1a';x.fillText('Full moon: the 1st',150,318);return c;}
+  function paperC(){const {c,x}=paper(300,390,3143);x.fillStyle='#1a1410';x.textAlign='center';x.font=`34px ${CINZEL}`;x.fillText('The Evening Post',150,46);
+    x.fillRect(16,58,268,2);x.font=`700 14px ${NUN}`;x.textAlign='left';x.fillText('THURSDAY, OCTOBER 16',18,78);x.textAlign='right';x.fillText('PRICE 2d',282,78);x.fillRect(16,86,268,1);
+    x.textAlign='center';x.font=`700 25px ${FELL}`;x.fillText('OLD KEEPER RETIRES',150,122);x.fillText('AFTER FIFTY YEARS',150,150);
+    x.fillStyle='rgba(30,20,10,.55)';const r=rng(3144);for(let i=0;i<9;i++){x.fillRect(18,170+i*13,124-(i===8?50:r()*12),5);x.fillRect(158,170+i*13,124-r()*12,5);}
+    x.fillStyle='#e6d6b0';x.fillRect(30,292,240,76);x.strokeStyle='#1a1410';x.lineWidth=2;x.strokeRect(30,292,240,76);x.fillStyle='#1a1410';x.font=`700 18px ${NUN}`;x.fillText('This paper was printed at',150,318);
+    x.font=`700 26px ${NUN}`;x.fillText('15:40',150,348);x.font=`italic 15px ${FELL}`;x.fillText('(3:40 in the afternoon)',150,364);return c;}
+  function logC(){const {c,x}=paper(320,260,3145);x.fillStyle='#2a1a0a';x.textAlign='center';x.font=`24px ${CINZEL}`;x.fillText("Keeper's Log",160,38);x.font=`italic 19px ${FELL}`;
+    ['The great clock stopped exactly','1 hour 35 minutes after the','evening paper came off the press.','','Rule of the tower: set the hands','back to the moment it stopped,','then let the weight down.'].forEach((s,i)=>x.fillText(s,160,76+i*25));return c;}
+  function pchartC(){const {c,x}=paper(340,330,3146);x.fillStyle='#2a1a0a';x.textAlign='center';x.font=`24px ${CINZEL}`;x.fillText('Pendulum Tests',170,36);x.font=`italic 16px ${FELL}`;x.fillText('time for one swing THERE AND BACK',170,60);
+    x.font=`700 15px ${NUN}`;x.textAlign='left';['Rod','Bob','Time'].forEach((s,i)=>x.fillText(s,[34,140,240][i],90));x.fillRect(28,98,284,2);
+    [['0.25 m','1 kg','1 s'],['0.25 m','20 kg','1 s'],['2.25 m','5 kg','3 s'],['4 m','1 kg','4 s'],['4 m','20 kg','4 s'],['9 m','5 kg','6 s']].forEach((row,j)=>row.forEach((s,i)=>{x.font=`${i===2?700:400} 17px ${NUN}`;x.fillText(s,[34,140,240][i],124+j*26);}));
+    x.textAlign='center';x.font=`italic 16px ${FELL}`;x.fillStyle='#7a1a1a';x.fillText('A rod 4 times as long takes twice as long.',170,292);x.fillText('The heavy bobs? No difference at all!',170,314);return c;}
+  function moonDisc(x,cx,cy,r,i){x.fillStyle='#2a2a3a';x.beginPath();x.arc(cx,cy,r,0,7);x.fill();x.strokeStyle='rgba(255,250,220,.5)';x.lineWidth=1.2;x.stroke();
+    const th=i<=4?Math.PI-i*Math.PI/4:(i-4)*Math.PI/4,wax=i>4,k=Math.cos(th);if(i===4)return;x.fillStyle='#fff6d0';x.beginPath();
+    if(i===0){x.arc(cx,cy,r,0,7);x.fill();return;}
+    // lit half-disc on one side, then the terminator ellipse
+    x.moveTo(cx,cy-r);x.ellipse(cx,cy,r,r,0,-Math.PI/2,Math.PI/2,!wax);x.ellipse(cx,cy,Math.abs(k)*r,r,0,Math.PI/2,-Math.PI/2,(k>0)===wax);x.fill();}
+  function moonSVG(i,sz){const th=i<=4?Math.PI-i*Math.PI/4:(i-4)*Math.PI/4,wax=i>4,k=Math.cos(th),r=40,rx=Math.abs(k)*r;let lit='';
+    if(i===0)lit='<circle cx="50" cy="50" r="40" fill="#fff6d0"/>';
+    else if(i!==4){const s1=wax?1:0,s2=wax?(k>0?0:1):(k>0?1:0);lit=`<path d="M50 10A40 40 0 0 ${s1} 50 90A${rx.toFixed(2)} 40 0 0 ${s2} 50 10Z" fill="#fff6d0"/>`;}
+    return`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="#2a2a3a" stroke="#c8b880" stroke-width="2"/>${lit}</svg>`;}
+  function mchartC(){const {c,x}=paper(360,380,3147);x.fillStyle='#2a1a0a';x.textAlign='center';x.font=`24px ${CINZEL}`;x.fillText('Phases of the Moon',180,36);
+    const cx=180,cy=196,R=118;x.strokeStyle='rgba(60,40,20,.45)';x.lineWidth=1.5;x.setLineDash([5,5]);x.beginPath();x.arc(cx,cy,R,0,7);x.stroke();x.setLineDash([]);
+    for(let i=0;i<8;i++){const an=-Math.PI/2+i*Math.PI/4,px=cx+Math.cos(an)*R,py=cy+Math.sin(an)*R;moonDisc(x,px,py,19,i);x.fillStyle='#2a1a0a';x.font=`700 11px ${NUN}`;const ly=py+(Math.sin(an)>0.3?32:Math.sin(an)<-0.3?-26:30);x.fillText(PHASES[i],px,ly);
+      const a2=an+Math.PI/8,ax=cx+Math.cos(a2)*R,ay=cy+Math.sin(a2)*R;x.save();x.translate(ax,ay);x.rotate(a2+Math.PI/2);x.fillStyle='#7a1a1a';x.beginPath();x.moveTo(5,0);x.lineTo(-4,-4);x.lineTo(-4,4);x.fill();x.restore();}
+    x.font=`italic 17px ${FELL}`;x.fillStyle='#2a1a0a';x.fillText('Each picture comes',cx,cy-22);x.fillText('about 3.7 days',cx,cy);x.fillText('after the one before.',cx,cy+22);
+    x.font=`italic 15px ${FELL}`;x.fillStyle='#7a1a1a';x.fillText('Full moon to full moon: 29.5 days',cx,364);return c;}
+  function emblemC(){if(a.emb)return a.emb;const N=300,c=mk(N,N),x=c.getContext('2d');
+    [['#8a1a22',0,0],['#1e3a6a',1,0],['#1e3a6a',0,1],['#8a1a22',1,1]].forEach(([col,i,j])=>{x.fillStyle=col;x.fillRect(i*150,j*150,150,150);});
+    x.strokeStyle='#e8c060';x.lineWidth=10;x.strokeRect(5,5,290,290);x.lineWidth=4;x.beginPath();x.moveTo(150,0);x.lineTo(150,300);x.moveTo(0,150);x.lineTo(300,150);x.stroke();
+    x.fillStyle='#f0c860';x.strokeStyle='#5a3a10';x.lineWidth=3;x.beginPath();x.moveTo(126,82);x.quadraticCurveTo(150,62,174,82);x.quadraticCurveTo(184,96,184,124);x.quadraticCurveTo(184,170,214,206);x.lineTo(86,206);x.quadraticCurveTo(116,170,116,124);x.quadraticCurveTo(116,96,126,82);x.closePath();x.fill();x.stroke();
+    x.beginPath();x.arc(150,218,11,0,7);x.fill();x.stroke();x.fillRect(142,58,16,14);
+    const star=(sx,sy,r)=>{x.beginPath();for(let i=0;i<10;i++){const an=-Math.PI/2+i*Math.PI/5,rr2=i%2?r*0.45:r;x.lineTo(sx+Math.cos(an)*rr2,sy+Math.sin(an)*rr2);}x.closePath();x.fill();};
+    x.fillStyle='#fff0c0';star(56,56,22);star(244,56,22);star(56,244,22);star(244,244,22);
+    x.fillStyle='#e8c060';x.font=`700 22px ${CINZEL}`;x.textAlign='center';x.fillText('TEMPUS',150,40);x.fillText('FUGIT',150,282);a.emb=c;return c;}
+  function tilesC(){const c=a.tilesC,x=c.getContext('2d'),e=emblemC(),s=e.width/3,W=c._w,cw=W/3;x.fillStyle='#120c08';x.fillRect(0,0,W,W);
+    S.tiles.forEach((v,i)=>{if(!v)return;const sv=v-1;x.drawImage(e,(sv%3)*s,Math.floor(sv/3)*s,s,s,(i%3)*cw+2,Math.floor(i/3)*cw+2,cw-4,cw-4);});a.tilesT.needsUpdate=true;}
+  function wheelC(){const N=256,c=mk(N,N),x=c.getContext('2d'),R=N/2;x.fillStyle='#c8a04a';x.beginPath();x.arc(R,R,R-2,0,7);x.fill();x.fillStyle='#e0bc66';x.beginPath();x.arc(R,R,R*0.74,0,7);x.fill();
+    x.strokeStyle='#5a3a10';x.lineWidth=2;[0.98,0.74,0.5].forEach(k=>{x.beginPath();x.arc(R,R,R*k,0,7);x.stroke();});x.fillStyle='#3a2208';x.textAlign='center';x.textBaseline='middle';
+    for(let i=0;i<26;i++){x.save();x.translate(R,R);x.rotate(i/26*Math.PI*2);x.font=`700 15px ${NUN}`;x.fillText(String.fromCharCode(65+i),0,-R*0.86);x.font=`700 12px ${NUN}`;x.fillText(String.fromCharCode(65+i),0,-R*0.62);x.restore();}
+    x.fillStyle='#8a6a2a';x.beginPath();x.arc(R,R,R*0.12,0,7);x.fill();return c;}
+  function portraitC(){const W=240,H=300,c=mk(W,H),x=c.getContext('2d');const g=x.createRadialGradient(W*0.5,H*0.4,10,W*0.5,H*0.45,H*0.7);g.addColorStop(0,'#5a4a3a');g.addColorStop(1,'#1a120c');x.fillStyle=g;x.fillRect(0,0,W,H);
+    x.fillStyle='#1c2430';x.beginPath();x.moveTo(30,H);x.quadraticCurveTo(40,190,120,180);x.quadraticCurveTo(200,190,210,H);x.fill();x.fillStyle='#e8dcc8';x.beginPath();x.moveTo(104,184);x.lineTo(120,214);x.lineTo(136,184);x.fill();
+    x.fillStyle='#d8a888';x.beginPath();x.ellipse(120,128,40,50,0,0,7);x.fill();x.fillStyle='#d8d8d0';x.beginPath();x.ellipse(120,166,34,24,0,0,Math.PI);x.fill();x.fillRect(86,150,68,16);
+    x.fillStyle='#c8c8c0';x.beginPath();x.ellipse(120,86,42,18,0,Math.PI,0);x.fill();x.fillStyle='#2a1a10';[[104,124],[136,124]].forEach(([ex,ey])=>{x.beginPath();x.arc(ex,ey,4,0,7);x.fill();});
+    x.strokeStyle='#c8a04a';x.lineWidth=2;x.beginPath();x.arc(104,124,9,0,7);x.arc(136,124,9,0,7);x.stroke();x.fillStyle='#e0c060';x.beginPath();x.arc(160,232,7,0,7);x.fill();x.strokeStyle='#e0c060';x.beginPath();x.moveTo(160,232);x.quadraticCurveTo(140,250,110,236);x.stroke();
+    FX.noise(x,W,H,3148,[16,64],[0.08,0.08]);return c;}
+  function boardC(){const W=512,H=218,c=mk(W,H),x=c.getContext('2d');x.fillStyle='#24382c';x.fillRect(0,0,W,H);FX.noise(x,W,H,3149,[16,64],[0.12,0.1]);
+    x.strokeStyle='#c8a04a';x.lineWidth=3;x.strokeRect(6,6,W-12,H-12);x.fillStyle='#8a7a5a';for(let i=0;i<12;i++){[[14+i*44,14],[14+i*44,H-14]].forEach(([rx,ry])=>{x.beginPath();x.arc(rx,ry,3,0,7);x.fill();});}
+    const P=([u,v])=>[(u+2.0)/4.0*W,(0.67-v)/1.7*H];x.textAlign='center';x.textBaseline='middle';
+    for(let i=0;i<4;i++){const [lx,ly]=P(LAB(i)),[x0,y0]=P(AX[i]),[x1,y1]=P(AX[i+1]);x.strokeStyle='rgba(242,226,176,.45)';x.lineWidth=1.5;x.setLineDash([3,3]);x.beginPath();x.moveTo(lx,ly);x.lineTo((x0+x1)/2,(y0+y1)/2);x.stroke();x.setLineDash([]);
+      x.fillStyle='#f2e2b0';x.beginPath();x.arc(lx,ly,14,0,7);x.fill();x.fillStyle='#24382c';x.font=`700 16px ${NUN}`;x.fillText(String(SUMS[i]),lx,ly+1);}
+    x.fillStyle='#f2e2b0';x.font=`700 12px ${NUN}`;['MOTOR','A','B','C','DIAL'].forEach((s,i)=>{const [px,py]=P(AX[i]);x.fillText(s,px,py+(i===4?(0.64*H/1.7):i===0?(0.3*H/1.7):(i%2?-1:1)*(0.6*H/1.7)));});
+    x.font=`italic 13px ${FELL}`;x.fillText('Gears that touch must add up to the number between them.',W/2,16);return c;}
+  function dialC(){const c=a.dialC,x=c.getContext('2d'),N=c._w,R=N/2;x.fillStyle='#1c2440';x.beginPath();x.arc(R,R,R-2,0,7);x.fill();const r=rng(3150);x.fillStyle='#fff8e0';for(let i=0;i<30;i++){x.globalAlpha=0.3+r()*0.6;x.beginPath();x.arc(r()*N,r()*N*0.6,r()*1.4+0.3,0,7);x.fill();}x.globalAlpha=1;
+    x.strokeStyle='#c8a04a';x.lineWidth=8;x.beginPath();x.arc(R,R,R-6,0,7);x.stroke();moonDisc(x,R,R*0.82,R*0.42,S.moonI);
+    x.fillStyle='#f2e2b0';x.font=`700 17px ${NUN}`;x.textAlign='center';x.fillText(PHASES[S.moonI].toUpperCase(),R,R*1.62);a.dialT.needsUpdate=true;}
+  /* ---------- Geometry helpers ---------- */
+  const gearCache={};
+  function gearGeo(n){if(gearCache[n])return gearCache[n];const r=n*0.02,ro=r+0.022,ri=r-0.026,p=Math.PI*2/n,s=new THREE.Shape();
+    for(let i=0;i<n;i++){const a0=i*p;[[ri,a0],[ro,a0+0.22*p],[ro,a0+0.46*p],[ri,a0+0.68*p]].forEach(([rr2,an],k)=>{const px=Math.cos(an)*rr2,py=Math.sin(an)*rr2;if(!i&&!k)s.moveTo(px,py);else s.lineTo(px,py);});}
+    const hole=new THREE.Path();hole.absarc(0,0,0.035,0,Math.PI*2,true);s.holes.push(hole);
+    if(n>=20){const k=n>=40?6:5;for(let i=0;i<k;i++){const an=i/k*Math.PI*2,hp=new THREE.Path();hp.absarc(Math.cos(an)*r*0.55,Math.sin(an)*r*0.55,r*0.22,0,Math.PI*2,true);s.holes.push(hp);}}
+    const g=new THREE.ExtrudeGeometry(s,{depth:0.035,bevelEnabled:true,bevelSize:0.005,bevelThickness:0.005,bevelSegments:1,curveSegments:5});g.translate(0,0,-0.0175);g.computeVertexNormals();gearCache[n]=g;return g;}
+  function bellMesh(r,mat){const P=[[0,1.12],[0.2,1.12],[0.34,1.08],[0.42,0.98],[0.46,0.8],[0.5,0.55],[0.6,0.3],[0.78,0.12],[0.96,0.02],[1.0,0],[0.97,-0.02],[0.86,0.03],[0.68,0.12],[0.52,0.3],[0.42,0.56],[0.38,0.82],[0.3,1.02],[0,1.05]].map(([u,v])=>[u*r,v*r]);
+    const m=FX.lathe(P.slice(0,10),mat,40),inn=FX.lathe(P.slice(9),a.bellIn,40);m.add(inn);return m;}
+  function ring(k,quiet){const b=BELLS.find(v=>v.k===k);if(!quiet){tone(b.f,1.8,'sine',0.28);tone(b.f*2.76,0.9,'sine',0.05);tone(b.f*2,1.2,'triangle',0.04);}const i=BELLS.indexOf(b);if(a.bells)a.bells[i].swing=1;}
+
+  function build(){
+    ext={t:0};a={flames:[],parts:[],bells:[],emb:a.emb};
+    scene.fog=null;
+    const W=12,H=8;
+    try{scene.environment=FX.envFromScene(es=>{es.background=new THREE.Color(0x4a3a30);const sh=new THREE.Mesh(new THREE.BoxGeometry(12,8,12),new THREE.MeshBasicMaterial({color:0x9a8670,side:THREE.BackSide}));sh.position.y=4;es.add(sh);
+      const fl=new THREE.Mesh(new THREE.PlaneGeometry(12,12),new THREE.MeshBasicMaterial({color:0x5a3a24}));fl.rotation.x=-Math.PI/2;fl.position.y=0.02;es.add(fl);
+      const fc=new THREE.Mesh(new THREE.CircleGeometry(2.6,32),new THREE.MeshBasicMaterial({color:0xffc890}));fc.position.set(0,3.0,-5.9);es.add(fc);
+      [[-2.6,2.0],[2.4,1.2]].forEach(([x,z])=>{const s=new THREE.Mesh(new THREE.SphereGeometry(0.35,10,8),new THREE.MeshBasicMaterial({color:0xffe0b0}));s.position.set(x,3.5,z);es.add(s);});
+      const wd=new THREE.Mesh(new THREE.PlaneGeometry(1,2),new THREE.MeshBasicMaterial({color:0xffa070}));wd.position.set(5.9,2.8,2.6);wd.rotation.y=-Math.PI/2;es.add(wd);});}catch(e){}
+    /* ---- Materials ---- */
+    const as=ashlarSet(),pk=plankSet('#6a4428',3104),bm=plankSet('#5a3a22',3105),asN=FX.normalFromCanvas(as.H,3.5),bmN=FX.normalFromCanvas(bm.H,2),MC={};
+    const memo=(k,f)=>MC[k]||(MC[k]=f());
+    const stone=(rx,ry)=>memo('s'+rx+','+ry,()=>std({map:tex(as.A,[rx,ry]),normalMap:FX.linTex(asN,[rx,ry]),roughness:0.9,envMapIntensity:0.45}));
+    const oak=(rx,ry)=>memo('o'+rx+','+ry,()=>std({map:tex(bm.A,[rx,ry]),normalMap:FX.linTex(bmN,[rx,ry]),roughness:0.7}));
+    const iron=std({color:LN(0x2c2a2a),metalness:0.8,roughness:0.5,envMapIntensity:0.8});
+    const brass=std({color:LN(0xd9b25a),metalness:1,roughness:0.3,envMapIntensity:1.1});
+    const bronze=std({color:LN(0xb07a3e),metalness:1,roughness:0.36,envMapIntensity:1.2,side:THREE.DoubleSide});a.bellIn=std({color:LN(0x4a3018),metalness:0.8,roughness:0.5,envMapIntensity:0.4,side:THREE.DoubleSide});
+    const darkM=new THREE.MeshBasicMaterial({color:LN(0x0a0806)});
+    /* ---- North wall: stone with the round hole for the clock face ---- */
+    {const s=new THREE.Shape();s.moveTo(-6,0);s.lineTo(6,0);s.lineTo(6,H);s.lineTo(-6,H);s.lineTo(-6,0);const hp=new THREE.Path();hp.absarc(0,FY,2.4,0,Math.PI*2,true);s.holes.push(hp);
+      const g=new THREE.ShapeGeometry(s,48);const m=new THREE.Mesh(g,stone(1/2.4,1/2.4));m.position.z=-6;m.receiveShadow=true;m.castShadow=true;scene.add(tag(m,'wall'));
+      const tun=new THREE.Mesh(new THREE.CylinderGeometry(2.4,2.4,0.5,64,1,true),std({map:tex(as.A,[4,0.2]),roughness:0.9,side:THREE.DoubleSide,envMapIntensity:0.45}));tun.rotation.x=Math.PI/2;tun.position.set(0,FY,-6.25);scene.add(noRay(tun));}
+    // the translucent face: dusk sky and city seen through frosted glass, the numerals back to front
+    a.face=new THREE.Mesh(new THREE.CircleGeometry(2.42,72),new THREE.MeshBasicMaterial({map:tex(faceC()),toneMapped:false,fog:false}));a.face.position.set(0,FY,-6.12);scene.add(tag(a.face,'face'));
+    const glow=new THREE.Sprite(new THREE.SpriteMaterial({map:tex(glowCanvas()),color:0xffb880,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:0.35,fog:false}));glow.scale.set(7,7,1);glow.position.set(0,FY,-5.8);scene.add(noRay(glow));
+    // the hands are outside the glass: from in here they are dark silhouettes, turning the "wrong" way
+    const handM=new THREE.MeshBasicMaterial({color:LN(0x2a161a),transparent:true,opacity:0.88,toneMapped:false});
+    {const hs=new THREE.Shape();hs.moveTo(-0.06,-0.3);hs.lineTo(0.06,-0.3);hs.lineTo(0.045,0.85);hs.quadraticCurveTo(0.24,0.98,0,1.45);hs.quadraticCurveTo(-0.24,0.98,-0.045,0.85);hs.lineTo(-0.06,-0.3);
+      const ms=new THREE.Shape();ms.moveTo(-0.04,-0.55);ms.lineTo(0.04,-0.55);ms.lineTo(0.028,1.9);ms.lineTo(0,2.2);ms.lineTo(-0.028,1.9);ms.lineTo(-0.04,-0.55);
+      a.hHand=new THREE.Mesh(new THREE.ShapeGeometry(hs),handM);a.mHand=new THREE.Mesh(new THREE.ShapeGeometry(ms),handM);
+      [a.hHand,a.mHand].forEach((m,i)=>{m.position.set(0,FY,-6.09+i*0.01);m.scale.setScalar(0.916);m.castShadow=true;scene.add(noRay(m));});
+      const hub=new THREE.Mesh(new THREE.CircleGeometry(0.13,24),handM);hub.position.set(0,FY,-6.075);scene.add(noRay(hub));}
+    // cast-iron frame inside the glass: rim, inner ring, spokes and the hub of the motion work
+    {const fr=new THREE.Group();scene.add(fr);fr.position.set(0,FY,-5.97);fr.scale.set(0.916,0.916,1);
+      const rim=new THREE.Mesh(new THREE.TorusGeometry(2.62,0.09,10,96),iron);fr.add(rim);const inner=new THREE.Mesh(new THREE.TorusGeometry(1.88,0.035,8,80),iron);fr.add(inner);
+      for(let i=0;i<4;i++){const sp=new THREE.Mesh(new THREE.BoxGeometry(0.07,2.3,0.05),iron);const an=Math.PI/4+i*Math.PI/2;sp.position.set(Math.sin(an)*1.45,Math.cos(an)*1.45,0);sp.rotation.z=-an;fr.add(sp);}
+      const hub=FX.lathe([[0,0],[0.22,0],[0.22,0.08],[0.14,0.12],[0.1,0.42],[0,0.42]],iron,20);hub.rotation.x=Math.PI/2;fr.add(hub);
+      const bolt=new THREE.SphereGeometry(0.035,8,6);for(let i=0;i<24;i++){const an=i/24*Math.PI*2;const b=new THREE.Mesh(bolt,iron);b.position.set(Math.cos(an)*2.62,Math.sin(an)*2.62,0.08);fr.add(b);}
+      fr.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=false;noRay(o);}});}
+    /* ---- Other walls ---- */
+    const wallM=stone(5,3.33);
+    [[W/2,0,-Math.PI/2],[0,W/2,Math.PI],[-W/2,0,Math.PI/2]].forEach(([wx,wz,ry])=>{const p=plane(W,H,wallM,wx,H/2,wz,ry);p.receiveShadow=true;tag(p,'wall');
+      const base=FX.rbox(W,0.18,0.06,0.02,oak(4,0.1));base.position.set(wx*0.995,0.09,wz*0.995);base.rotation.y=ry;scene.add(noRay(base));});
+    // stone string course under the bell floor
+    [[0,-W/2+0.06,0],[W/2-0.06,0,Math.PI/2],[0,W/2-0.06,0],[-W/2+0.06,0,Math.PI/2]].forEach(([x,z,ry])=>{const sc=FX.rbox(W,0.22,0.16,0.04,stone(5,0.1));sc.position.set(x,6.9,z);sc.rotation.y=ry;scene.add(noRay(sc));});
+    /* ---- Floor with the pendulum pit and the counterweight shaft ---- */
+    {const s=new THREE.Shape();s.moveTo(-6,-6);s.lineTo(6,-6);s.lineTo(6,6);s.lineTo(-6,6);s.lineTo(-6,-6);
+      const hole=(x0,x1,z0,z1)=>{const p=new THREE.Path();p.moveTo(x0,-z0);p.lineTo(x0,-z1);p.lineTo(x1,-z1);p.lineTo(x1,-z0);p.lineTo(x0,-z0);s.holes.push(p);};
+      hole(-5.0,-3.8,2.0,3.2);hole(3.6,5.2,3.6,5.2);
+      const fm=std({map:tex(pk.A,[0.5,0.5]),normalMap:FX.normalTex(pk.H,2,[0.5,0.5]),roughness:0.62,envMapIntensity:0.6});
+      const fl=new THREE.Mesh(new THREE.ShapeGeometry(s),fm);fl.rotation.x=-Math.PI/2;fl.receiveShadow=true;scene.add(tag(fl,'floor'));
+      const pitM=std({color:LN(0x2a221c),roughness:1,side:THREE.BackSide});
+      const well=(cx,cz,w,d,depth,id,rep)=>{const side=rep?std({map:tex(as.A,rep),normalMap:FX.linTex(asN,rep),color:LN(0x9a8070),roughness:0.95,side:THREE.BackSide,envMapIntensity:0.2}):pitM;const mats=[0,1,2,3,4,5].map(i=>i===2?new THREE.MeshBasicMaterial({visible:false}):side);
+        const b=new THREE.Mesh(new THREE.BoxGeometry(w,depth,d),mats);b.position.set(cx,-depth/2,cz);b.receiveShadow=true;scene.add(noRay(b));return b;};
+      well(-4.4,2.6,1.2,1.2,1.4,null);a.shaft=well(4.4,4.4,1.6,1.6,14.2,null,[0.67,5.9]);
+      [[-4.4,2.0,1.3,0.06],[-4.4,3.2,1.3,0.06],[-5.0,2.6,0.06,1.3],[-3.8,2.6,0.06,1.3],[4.4,3.6,1.7,0.06],[3.6,4.4,0.06,1.7]].forEach(([x,z,w,d])=>{const e=FX.rbox(w,0.05,d,0.01,oak(1,0.1));e.position.set(x,0.0,z);scene.add(noRay(e));});}
+    /* ---- Ceiling, beams and the belfry with exactly four bells ---- */
+    {const ce=new THREE.Mesh(new THREE.PlaneGeometry(W,W),std({map:tex(bm.A,[3,3]),normalMap:FX.linTex(bmN,[3,3]),roughness:0.85,color:LN(0x9a8a7a)}));ce.rotation.x=Math.PI/2;ce.position.y=H;scene.add(tag(ce,'ceiling'));
+      const beam=oak(3,0.3);for(let x=-4.5;x<=4.5;x+=3){const b=FX.rbox(0.32,0.36,W,0.03,beam,1);b.position.set(x,H-0.18,0);scene.add(noRay(b));}
+      const bf=tag(new THREE.Group(),'bells');scene.add(bf);
+      [-0.55,0.95].forEach(z=>{const b=FX.rbox(7.4,0.32,0.3,0.03,beam,1);b.position.set(0,7.25,z);bf.add(b);});
+      [-3.6,3.6].forEach(x=>{const p=FX.rbox(0.3,1.0,1.8,0.03,beam,1);p.position.set(x,7.5,0.2);bf.add(p);});
+      BELLS.forEach((b,i)=>{const x=-2.55+i*1.7;const g=new THREE.Group();g.position.set(x,7.1,0.2);bf.add(g);a.bells.push({g,swing:0,ph:i});
+        const head=FX.rbox(0.3+b.r*0.5,0.22,0.3,0.03,beam,1);head.position.y=0.05;g.add(head);
+        const axle=cyl(0.03,0.03,1.6,iron,0,0.05,0,g,8);axle.rotation.x=Math.PI/2;
+        const bell=bellMesh(b.r,bronze);bell.position.y=-0.06-b.r*1.12;g.add(bell);
+        const cl=cyl(0.015,0.015,b.r*0.8,iron,0,-0.06-b.r*0.5,0,g,6);const ball=sph(b.r*0.12,iron,0,-0.06-b.r*0.92,0,g);void cl;void ball;
+        const crown=new THREE.Mesh(new THREE.TorusGeometry(b.r*0.12,0.025,6,16),bronze);crown.position.y=-0.06;g.add(crown);});
+      // bell ropes down to a cleat on the north-west wall
+      FX.shadow(bf,true,false);}
+    /* ---- Dusk sunlight through the face, a dust shaft and hanging lanterns ---- */
+    const sun=new THREE.SpotLight(LN(0xffb070),3.2,30,0.62,0.55,1);sun.position.set(0.6,6.2,-10.5);sun.target.position.set(0,0.4,2.5);scene.add(sun);scene.add(sun.target);
+    sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);sun.shadow.bias=-0.0006;sun.shadow.normalBias=0.02;sun.shadow.camera.near=3;sun.shadow.camera.far=26;
+        a.parts.push(FX.particles(scene,{count:140,min:[-2.4,0.3,-5.6],max:[2.4,5.4,2.4],size:0.018,color:0xffe0b0,opacity:0.55,rise:0.025,drift:0.04}));
+    a.lamps=[];[[-2.6,3.1,2.0,true],[2.4,3.1,1.2,false]].forEach(([x,y,z,sh],i)=>{const g=new THREE.Group();g.position.set(x,y,z);scene.add(g);
+      const ch=cyl(0.008,0.008,H-y-0.4,iron,0,(H-y)/2+0.15,0,g,4);noRay(ch);
+      const top=FX.lathe([[0,0.42],[0.06,0.42],[0.18,0.3],[0.2,0.28],[0,0.28]],iron,6);g.add(noRay(top));const bot=cyl(0.17,0.15,0.05,iron,0,-0.02,0,g,6);noRay(bot);
+      for(let k=0;k<6;k++){const an=k/6*Math.PI*2;const bar=box(0.015,0.3,0.015,iron,Math.cos(an)*0.16,0.13,Math.sin(an)*0.16,g);noRay(bar);}
+      const gl=cyl(0.15,0.15,0.28,new THREE.MeshBasicMaterial({color:LN(0xffc070),transparent:true,opacity:0.22,blending:THREE.AdditiveBlending,depthWrite:false}),0,0.14,0,g,6);noRay(gl);
+      const f=FX.flame(g,0,0.02,0,0.07,0.16,{intensity:1.6});a.flames.push(f);
+      const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tex(glowCanvas()),color:0xffd090,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:0.7}));sp.scale.set(0.9,0.9,1);sp.position.y=0.12;g.add(noRay(sp));
+      const l=new THREE.PointLight(LN(0xffc888),1.5,13,1.6);l.position.set(x,y+0.1,z);scene.add(l);a.lamps.push(l);
+      if(sh){l.castShadow=true;l.shadow.mapSize.set(512,512);l.shadow.bias=-0.004;l.shadow.radius=4;l.shadow.camera.near=0.2;}});
+    scene.add(new THREE.AmbientLight(LN(0xffe0d0),0.1));scene.add(new THREE.HemisphereLight(LN(0xd8b8c8),LN(0x4a2a1a),0.2));
+    /* ---- The hands-setting box (north-west of the face) ---- */
+    {const g=tag(new THREE.Group(),'hands');g.position.set(-3.3,0,-5.3);scene.add(g);faceCenter(g);
+      const ped=FX.lathe([[0,0],[0.3,0],[0.3,0.06],[0.12,0.12],[0.09,0.9],[0.16,1.0],[0,1.0]],iron,20);g.add(ped);
+      const bx=FX.rbox(0.62,0.5,0.24,0.04,brass);bx.position.set(0,1.25,0);g.add(bx);
+      const dl=new THREE.Mesh(new THREE.CircleGeometry(0.2,32),std({color:LN(0xf2e6c8),roughness:0.6}));dl.position.set(0,1.28,0.165);g.add(dl);
+      a.mini=[0.13,0.18].map((L,i)=>{const m=box(i?0.012:0.018,L,0.006,std({color:LN(0x1a1410)}),0,1.28,0.17+i*0.004,g);m.geometry.translate(0,L/2,0);m.position.y=1.28;return m;});
+      [-0.2,0.2].forEach(x=>{const kn=cyl(0.045,0.045,0.06,iron,x,1.07,0.17,g,12);kn.rotation.x=Math.PI/2;});
+      FX.shadow(g,true,true);}
+    /* ---- Automaton jacks (north-east of the face) ---- */
+    {const g=tag(new THREE.Group(),'automaton');g.position.set(3.4,0,-5.4);scene.add(g);
+      const pl=FX.rbox(1.3,0.9,0.6,0.04,oak(1,0.5));pl.position.y=0.45;g.add(pl);const pt=FX.rbox(1.4,0.08,0.7,0.02,brass);pt.position.y=0.94;g.add(pt);
+      const paint=[0xb83a2a,0x2a5a9a];a.jacks=[];
+      [-0.3,0.3].forEach((x,i)=>{const j=new THREE.Group();j.position.set(x,1.0,0);g.add(j);a.jacks.push(j);const cm=std({color:LN(paint[i]),roughness:0.5});
+        const bd=FX.lathe([[0,0],[0.14,0],[0.12,0.3],[0.09,0.45],[0,0.48]],cm,14);j.add(bd);const hd=sph(0.08,std({color:LN(0xe8c8a0),roughness:0.6}),0,0.55,0,j);void hd;
+        const hat=FX.lathe([[0,0],[0.09,0],[0.05,0.08],[0,0.14]],std({color:LN(i?0xe0b040:0x3a3a3a),roughness:0.4,metalness:i?1:0}),12);hat.position.y=0.61;j.add(hat);
+        const arm=new THREE.Group();arm.position.set(i?-0.12:0.12,0.38,0);j.add(arm);const ah=box(0.04,0.04,0.32,cm,0,0,0.14,arm);void ah;const hm=box(0.12,0.05,0.05,std({color:LN(0x5a4a3a)}),0,0,0.3,arm);void hm;j.userData.arm=arm;});
+      FX.shadow(g,true,true);}
+    /* ---- Music stand (north-west) ---- */
+    {const g=tag(new THREE.Group(),'music');g.position.set(-4.5,0,-3.9);scene.add(g);faceCenter(g);
+      [0,2.1,4.2].forEach(an=>{const l=cyl(0.012,0.012,0.6,iron,Math.sin(an)*0.18,0.24,Math.cos(an)*0.18,g,6);l.rotation.set(Math.cos(an)*0.6,0,-Math.sin(an)*0.6);});
+      cyl(0.015,0.015,1.0,iron,0,0.95,0,g,6);const desk=FX.rbox(0.62,0.42,0.02,0.01,iron);desk.position.set(0,1.45,0.03);desk.rotation.x=-0.35;g.add(desk);
+      const sh=plane(0.58,0.35,std({map:tex(musicC()),roughness:0.9}),0,1.47,0.07,0,g);sh.rotation.x=-0.35;FX.shadow(g,true,true);}
+    /* ---- Maintenance cabinet with the sliding-tile lock (north-east) ---- */
+    {const g=tag(new THREE.Group(),'cabinet');g.position.set(4.9,0,-4.1);scene.add(g);faceCenter(g);
+      const cw=oak(0.6,1);[[0,1.05,-0.25,1.2,2.1,0.04],[-0.58,1.05,0,0.04,2.1,0.5],[0.58,1.05,0,0.04,2.1,0.5],[0,2.08,0,1.2,0.04,0.5],[0,0.02,0,1.2,0.04,0.5]].forEach(([x,y,z,w,h,d])=>{const p=FX.rbox(w,h,d,0.01,cw);p.position.set(x,y,z);g.add(p);});
+      plane(1.1,2.0,darkM,0,1.05,-0.215,0,g);
+      a.lever=new THREE.Group();a.lever.position.set(0,1.2,0.0);g.add(a.lever);{const r2=cyl(0.025,0.025,1.0,iron,0,0,0,a.lever,8);void r2;const hd=sph(0.06,std({color:LN(0xb83a2a),roughness:0.3}),0,0.52,0,a.lever);void hd;}
+      a.cabDoor=new THREE.Group();a.cabDoor.position.set(-0.6,1.05,0.275);g.add(a.cabDoor);const dr=FX.rbox(1.18,2.06,0.03,0.01,oak(0.6,1));dr.position.x=0.6;a.cabDoor.add(dr);
+      a.tilesC=mk(256,256);a.tilesT=tex(a.tilesC);plane(0.7,0.7,std({map:a.tilesT,roughness:0.45}),0.6,0.25,0.05,0,a.cabDoor);const tf=FX.rbox(0.8,0.8,0.01,0.005,brass);tf.position.set(0.6,0.25,0.03);a.cabDoor.add(tf);
+      const pl=plane(0.6,0.16,std({map:tex(signC(240,64,{bg:'#c8a04a',border:'#5a3a10',bw:4,r:6,top:34,color:'#2a1a08',lines:[['MAINTENANCE',`700 26px ${CINZEL}`,null,0]]})),metalness:0.6,roughness:0.4}),0.6,0.82,0.035,0,a.cabDoor);void pl;
+      const hd2=sph(0.035,brass,1.08,0.0,0.04,a.cabDoor);void hd2;FX.shadow(g,true,true);tilesC();
+      const oc=tag(new THREE.Group(),'tools');oc.position.set(5.25,0,-2.5);scene.add(oc);const can=FX.lathe([[0,0],[0.12,0],[0.12,0.16],[0.04,0.24],[0.03,0.3],[0,0.3]],std({color:LN(0xb83a2a),metalness:0.5,roughness:0.4}),18);oc.add(can);
+      const sp=cyl(0.008,0.014,0.3,brass,0.1,0.32,0,oc,6);sp.rotation.z=-1.0;const can2=can.clone();can2.position.set(-0.32,0,0.15);can2.scale.setScalar(0.75);oc.add(can2);
+      const wr=FX.rbox(0.45,0.02,0.05,0.01,iron);wr.position.set(-0.1,0.012,0.3);wr.rotation.y=0.6;oc.add(wr);FX.shadow(oc,true,true);}
+    /* ---- West wall: moon dial, moon chart, calendar ---- */
+    {const g=tag(new THREE.Group(),'moondial');g.position.set(-5.93,2.7,-2.8);g.rotation.y=Math.PI/2;scene.add(g);
+      a.dialC=mk(256,256);a.dialT=tex(a.dialC);dialC();const d=new THREE.Mesh(new THREE.CircleGeometry(0.55,48),std({map:a.dialT,roughness:0.5,metalness:0.1}));d.position.z=0.03;g.add(d);
+      const rimM=new THREE.Mesh(new THREE.TorusGeometry(0.57,0.04,8,48),brass);rimM.position.z=0.03;g.add(rimM);[-1,1].forEach(sd=>{const k=cyl(0.05,0.05,0.05,brass,sd*0.75,-0.4,0.04,g,12);k.rotation.x=Math.PI/2;});
+      a.moonDoor=box(0.3,0.22,0.03,brass,0,-0.78,0.03,g);FX.shadow(g,true,true);}
+    const wallPic=(c,w,h,x,y,z,id,frame)=>{const m=plane(w,h,std({map:tex(c),roughness:0.85}),x,y,z,Math.PI/2);tag(m,id);if(frame){const f=FX.rbox(0.02,h+0.08,w+0.08,0.01,frame);f.position.set(x-0.035,y,z);scene.add(noRay(f));}return m;};
+    wallPic(mchartC(),0.98,1.03,-5.93,2.5,-1.1,'moonchart',oak(0.4,0.4));wallPic(calC(),0.72,0.79,-5.95,2.4,0.4,'calendar');
+    {const nail=sph(0.02,iron,-5.94,2.8,0.4);noRay(nail);}
+    /* ---- West: the pendulum pit, bracket, rod rack and chart ---- */
+    {const g=tag(new THREE.Group(),'pendulum');scene.add(g);
+      const arm=FX.rbox(1.7,0.12,0.12,0.02,iron);arm.position.set(-5.15,1.36,2.6);g.add(arm);const br=FX.rbox(0.1,0.7,0.5,0.02,iron);br.position.set(-5.95,1.36,2.6);g.add(br);
+      const strut=box(1.0,0.06,0.06,iron,-5.55,1.05,2.6,g);strut.rotation.z=0.65;
+      const box2=FX.rbox(0.36,0.3,0.36,0.03,brass);box2.position.set(-4.4,1.36,2.6);g.add(box2);
+      a.pend=new THREE.Group();a.pend.position.set(-4.4,1.22,2.6);g.add(a.pend);const rod=cyl(0.012,0.012,1.0,brass,0,-0.5,0,a.pend,8);void rod;
+      const bob=FX.lathe([[0,-0.06],[0.12,-0.05],[0.17,0],[0.12,0.05],[0,0.06]],brass,28);bob.rotation.x=Math.PI/2;bob.position.y=-1.0;a.pend.add(bob);a.pend.visible=false;
+      a.hook=box(0.03,0.12,0.03,iron,-4.4,1.16,2.6,g);
+      const rail=iron;[[-5.0,2.0],[-3.8,2.0],[-3.8,3.2],[-5.0,3.2]].forEach(([x,z])=>cyl(0.022,0.022,0.8,rail,x,0.4,z,g,8));
+      [[-4.4,2.0,1.2,0],[-4.4,3.2,1.2,0],[-3.8,2.6,1.2,Math.PI/2]].forEach(([x,z,L,ry])=>{const r=cyl(0.018,0.018,L,rail,x,0.78,z,g,8);r.rotation.set(0,ry,Math.PI/2);});
+      // spare rods and bobs on the wall
+      RODS.forEach((L,i)=>{const z=1.25+i*0.18;cyl(0.012,0.012,L,brass,-5.92,3.4-L/2,z,g,8);sph(0.025,iron,-5.94,3.42,z,g);});
+      BOBS.forEach((kg,i)=>{const s=0.09+i*0.035;const b=FX.lathe([[0,-0.04],[s*0.7,-0.035],[s,0],[s*0.7,0.035],[0,0.04]],brass,20);b.rotation.z=Math.PI/2;b.position.set(-5.88,0.96+s,3.5+i*0.32);g.add(b);});
+      const shelf=FX.rbox(0.22,0.04,1.1,0.01,oak(0.3,0.3));shelf.position.set(-5.88,0.94,3.82);g.add(shelf);
+      FX.shadow(g,true,true);[a.pend].forEach(o=>o.traverse(m=>{if(m.isMesh)m.castShadow=false;}));}
+    wallPic(pchartC(),0.86,0.83,-5.93,2.1,4.6,'pendchart',oak(0.4,0.4));
+    /* ---- East wall: the going-train board, arched window, huge strike gears ---- */
+    {const g=tag(new THREE.Group(),'gears');g.position.set(5.9,2.05,-0.6);g.rotation.y=-Math.PI/2;scene.add(g);
+      plane(4.0,1.7,std({map:tex(boardC()),roughness:0.6,metalness:0.2}),0,-0.18,0.012,0,g);const fr=FX.rbox(4.12,1.82,0.04,0.015,brass);fr.position.set(0,-0.18,-0.03);g.add(fr);
+      a.gearM={};const gm=std({color:LN(0xd9b25a),metalness:1,roughness:0.32,envMapIntensity:1.1}),gm2=std({color:LN(0xb08a4a),metalness:1,roughness:0.4,envMapIntensity:1});
+      a.axles=AX.map(([u,v],i)=>{const p=cyl(0.03,0.03,0.12,iron,u,v,0.06,g,10);p.rotation.x=Math.PI/2;return{u,v};});
+      const mk1=(n,mat)=>{const m=new THREE.Mesh(gearGeo(n),mat);g.add(m);return m;};
+      a.motorG=mk1(MOTOR,gm2);a.motorG.position.set(AX[0][0],AX[0][1],0.07);a.dialG=mk1(DIALT,gm2);a.dialG.position.set(AX[4][0],AX[4][1],0.07);
+      const motor=FX.rbox(0.4,0.32,0.18,0.03,iron);motor.position.set(AX[0][0],AX[0][1]-0.5,0.09);g.add(motor);
+      Object.keys(TEETH).forEach(k=>{a.gearM[k]=mk1(TEETH[k],k[0]==='d'?gm2:gm);a.gearM[k].visible=false;});}
+    {const wg=tag(new THREE.Group(),'city');scene.add(wg);
+      const win=(x,y,z,ry,seed)=>{const g=new THREE.Group();g.position.set(x,y,z);g.rotation.y=ry;wg.add(g);
+        const v=new THREE.Mesh(new THREE.PlaneGeometry(0.9,1.9),new THREE.MeshBasicMaterial({map:tex(windowC(seed)),toneMapped:false,fog:false}));v.position.z=0.0;g.add(v);
+        const sh=new THREE.Shape();sh.moveTo(-0.6,-1.1);sh.lineTo(0.6,-1.1);sh.lineTo(0.6,1.25);sh.lineTo(-0.6,1.25);sh.lineTo(-0.6,-1.1);const hp=new THREE.Path();hp.moveTo(-0.45,-0.95);hp.lineTo(0.45,-0.95);hp.lineTo(0.45,0.5);hp.absarc(0,0.5,0.45,0,Math.PI,false);hp.lineTo(-0.45,-0.95);sh.holes.push(hp);
+        const fr=new THREE.Mesh(new THREE.ExtrudeGeometry(sh,{depth:0.08,bevelEnabled:false,curveSegments:16}),stone(0.5,0.5));fr.position.z=-0.015;g.add(fr);
+        box(0.03,1.9,0.03,iron,0,-0.05,0.02,g);[-0.5,0.1].forEach(yy=>box(0.9,0.03,0.03,iron,0,yy,0.02,g));
+        const sill=FX.rbox(1.1,0.08,0.3,0.02,stone(0.4,0.1));sill.position.set(0,-1.0,0.1);g.add(sill);
+        const gl=new THREE.Sprite(new THREE.SpriteMaterial({map:tex(glowCanvas()),color:0xff9a60,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:0.25}));gl.scale.set(2.2,3,1);gl.position.z=0.1;g.add(noRay(gl));FX.shadow(g,false,true);return g;};
+      win(5.98,2.9,2.7,-Math.PI/2,3160);a.southWin=win(-3.9,2.9,5.98,Math.PI,3161);}
+    const pl2=new THREE.PointLight(LN(0xff9a70),0.6,7,2);pl2.position.set(5.2,2.8,2.7);scene.add(pl2);
+    {const g=tag(new THREE.Group(),'biggears');g.position.set(5.85,5.1,-1.2);g.rotation.y=-Math.PI/2;scene.add(g);const gm=std({color:LN(0xc8a050),metalness:1,roughness:0.35,envMapIntensity:1.1});
+      a.big=[[48,0,0],[30,1.56,-0.12],[24,-1.45,0.3]].map(([n,u,v])=>{const m=new THREE.Mesh(gearGeo(n),gm);m.position.set(u,v,0.1+(n===30?0.05:0));g.add(m);const ax=cyl(0.06,0.06,0.25,iron,u,v,0.08,g,10);ax.rotation.x=Math.PI/2;return{m,n};});
+      const br=FX.rbox(4.2,0.14,0.1,0.02,iron);br.position.set(0,0,0.02);g.add(br);FX.shadow(g,false,true);}
+    /* ---- South: desk with the cipher wheel, note, drawer, hand mirror; portrait; chair ---- */
+    {const g=new THREE.Group();g.position.set(1.4,0,5.3);scene.add(g);const dm=oak(1,0.5);
+      const top=FX.rbox(2.2,0.04,0.95,0.02,dm);top.position.y=0.82;g.add(noRay(top));tag(top,'desk');
+      [[-1.0,-0.38],[1.0,-0.38],[-1.0,0.38],[1.0,0.38]].forEach(([x,z])=>{const l=FX.rbox(0.08,0.78,0.08,0.02,dm);l.position.set(x,0.39,z);g.add(tag(l,'desk'));});
+      const apron=FX.rbox(2.0,0.2,0.04,0.01,dm);apron.position.set(0,0.68,-0.42);g.add(tag(apron,'desk'));
+      a.drawer=new THREE.Group();a.drawer.position.set(0.45,0.68,-0.43);g.add(tag(a.drawer,'drawer'));const df=FX.rbox(0.7,0.17,0.04,0.01,oak(0.4,0.2));a.drawer.add(df);const dbx=box(0.66,0.12,0.6,dm,0,0,0.3,a.drawer);void dbx;
+      const kn=sph(0.025,brass,0,0,-0.03,a.drawer);void kn;a.lock=FX.rbox(0.22,0.06,0.02,0.01,brass);a.lock.position.set(0.2,0,-0.03);a.drawer.add(a.lock);
+      a.gearIn=new THREE.Mesh(gearGeo(25),brass);a.gearIn.rotation.x=-Math.PI/2;a.gearIn.position.set(-0.1,0.07,0.3);a.drawer.add(a.gearIn);
+      const wh=tag(new THREE.Group(),'wheel');wh.position.set(-0.55,0.87,-0.05);g.add(wh);const disc=FX.lathe([[0,0],[0.22,0],[0.23,0.012],[0.22,0.022],[0,0.022]],brass,40);wh.add(disc);
+      const face=new THREE.Mesh(new THREE.CircleGeometry(0.215,40),std({map:tex(wheelC()),metalness:0.6,roughness:0.35}));face.rotation.x=-Math.PI/2;face.position.y=0.024;wh.add(face);
+      const nt=plane(0.36,0.24,std({map:tex(noteC()),roughness:0.9}),0.1,0.865,-0.15,0,g);nt.rotation.set(-Math.PI/2,0,0.12);tag(nt,'note');
+      a.mirror=tag(new THREE.Group(),'handmirror');a.mirror.position.set(0.7,0.86,0.05);a.mirror.rotation.y=0.6;g.add(a.mirror);{const fr2=FX.lathe([[0,0],[0.1,0],[0.11,0.015],[0.1,0.025],[0,0.025]],brass,28);fr2.scale.set(1,1,1.3);a.mirror.add(fr2);
+        const gl=new THREE.Mesh(new THREE.CircleGeometry(0.09,28),std({color:LN(0xe8eef4),metalness:1,roughness:0.05,envMapIntensity:1.6}));gl.rotation.x=-Math.PI/2;gl.position.y=0.027;gl.scale.set(1,1.3,1);a.mirror.add(gl);
+        const hd=FX.rbox(0.035,0.02,0.18,0.008,brass);hd.position.set(0,0.012,0.22);a.mirror.add(hd);}
+      const hg=tag(new THREE.Group(),'hourglass');hg.position.set(-0.95,0.86,0.2);g.add(hg);[0,0.3].forEach(y=>{const p=cyl(0.09,0.09,0.03,dm,0,y,0,hg,16);void p;});[[0.07,0.07],[-0.07,0.07],[0.07,-0.07],[-0.07,-0.07]].forEach(([x,z])=>cyl(0.008,0.008,0.3,brass,x,0.15,z,hg,6));
+      const gls=FX.lathe([[0,0.015],[0.06,0.03],[0.065,0.08],[0.012,0.15],[0.065,0.22],[0.06,0.27],[0,0.285]],new THREE.MeshStandardMaterial({color:LN(0xfff4e0),transparent:true,opacity:0.3,roughness:0.05,envMapIntensity:1.5,depthWrite:false}),20);hg.add(gls);
+      const sand=FX.lathe([[0,0.03],[0.05,0.035],[0.04,0.08],[0,0.1]],std({color:LN(0xe8c890),roughness:1}),16);hg.add(sand);const sand2=FX.lathe([[0,0.2],[0.03,0.21],[0.012,0.15],[0,0.15]],std({color:LN(0xe8c890),roughness:1}),12);hg.add(sand2);
+      // candle lamp
+      const cs=FX.lathe([[0,0],[0.08,0],[0.08,0.015],[0.02,0.03],[0.02,0.06],[0.04,0.07],[0,0.07]],brass,16);cs.position.set(-0.85,0.86,-0.2);g.add(noRay(cs));const cnd=cyl(0.022,0.022,0.16,std({color:LN(0xf2e6d0),roughness:0.6}),-0.85,1.01,-0.2,g,12);noRay(cnd);
+      a.flames.push(FX.flame(g,-0.85,1.09,-0.2,0.05,0.11,{intensity:1.5}));const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tex(glowCanvas()),color:0xffd090,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:0.55}));sp.scale.set(0.45,0.45,1);sp.position.set(-0.85,1.14,-0.2);g.add(noRay(sp));
+      const cl=new THREE.PointLight(LN(0xffc080),0.9,6,2);cl.position.set(0.55,1.35,4.9);scene.add(cl);a.candle=cl;
+      FX.shadow(g,true,true);FX.blob(scene,1.4,5.3,2.6,1.3,0.35);}
+    {const p=plane(1.0,1.25,std({map:tex(portraitC()),roughness:0.6}),1.4,2.75,5.955,Math.PI);tag(p,'portrait');const f=FX.rbox(1.14,1.39,0.02,0.02,std({color:LN(0xb88a3a),metalness:0.8,roughness:0.35}));f.position.set(1.4,2.75,5.99);scene.add(noRay(f));
+      const pl=plane(0.5,0.12,std({map:tex(signC(200,48,{bg:'#c8a04a',r:3,top:26,color:'#2a1a08',lines:[['KEEPER A. HALE',`700 18px ${NUN}`,null,0]]})),metalness:0.6,roughness:0.4}),1.4,1.98,5.94,Math.PI);noRay(pl);}
+    {const g=tag(new THREE.Group(),'newspaper');g.position.set(-1.9,0,5.0);g.rotation.y=Math.PI+0.3;scene.add(g);const cm=oak(0.5,0.5);
+      const seat=FX.rbox(0.5,0.05,0.48,0.015,cm);seat.position.y=0.46;g.add(seat);[[-0.21,-0.2],[0.21,-0.2],[-0.21,0.2],[0.21,0.2]].forEach(([x,z])=>{const l=FX.rbox(0.045,0.46,0.045,0.01,cm);l.position.set(x,0.23,z);g.add(l);});
+      [-0.21,0.21].forEach(x=>{const p=FX.rbox(0.045,0.55,0.045,0.01,cm);p.position.set(x,0.75,-0.21);g.add(p);});const bk=FX.rbox(0.47,0.2,0.03,0.01,cm);bk.position.set(0,0.9,-0.21);g.add(bk);
+      const np=plane(0.3,0.39,std({map:tex(paperC()),roughness:0.9}),0.02,0.505,0.04,0,g);np.rotation.set(-Math.PI/2,0,0.25);FX.shadow(g,true,true);FX.blob(scene,-1.9,5.0,0.9,0.9,0.35);}
+    {const g=tag(new THREE.Group(),'pigeons');g.position.set(-3.9,1.95,5.85);scene.add(g);const pm=std({color:LN(0x8a8a94),roughness:0.8}),nm=std({color:LN(0x5a7a7a),roughness:0.5,metalness:0.3});a.pig=[];
+      [-0.2,0.22].forEach((x,i)=>{const p=new THREE.Group();p.position.set(x,0,0);p.rotation.y=i?0.6:-0.5;g.add(p);a.pig.push(p);const bd=sph(0.08,pm,0,0.08,0,p,1,0.85,1.35);void bd;const nk=sph(0.05,nm,0,0.15,-0.07,p);void nk;
+        const hd=sph(0.04,pm,0,0.2,-0.1,p);void hd;const bk=new THREE.Mesh(new THREE.ConeGeometry(0.012,0.04,6),std({color:LN(0xe0a080)}));bk.rotation.x=-Math.PI/2;bk.position.set(0,0.2,-0.15);p.add(bk);const tl=box(0.08,0.015,0.12,pm,0,0.07,0.13,p);tl.rotation.x=0.3;});}
+    /* ---- South-east: the counterweight shaft (the exit) ---- */
+    {const g=tag(new THREE.Group(),'weight');scene.add(g);a.wg=g;
+      a.weight=new THREE.Group();a.weight.position.set(4.4,0,4.4);g.add(a.weight);
+      const wt=FX.lathe([[0,-1.2],[0.42,-1.2],[0.46,-1.15],[0.46,-0.08],[0.38,0],[0.12,0.04],[0,0.04]],std({color:LN(0x3a3634),metalness:0.7,roughness:0.55,envMapIntensity:0.7}),28);a.weight.add(wt);
+      const eye=new THREE.Mesh(new THREE.TorusGeometry(0.07,0.025,8,16),iron);eye.position.y=0.1;a.weight.add(eye);
+      const bands=[-0.3,-0.9].map(y=>{const b=cyl(0.47,0.47,0.06,brass,0,y,0,a.weight,28);return b;});void bands;
+      const lc=FX.plainCanvas(32,64),lx=lc.getContext('2d');lx.strokeStyle='#fff';lx.lineWidth=5;lx.beginPath();lx.ellipse(16,16,9,13,0,0,7);lx.stroke();lx.fillRect(13,34,6,30);
+      a.chainT=FX.linTex(lc);a.chainT.wrapS=a.chainT.wrapT=THREE.RepeatWrapping;
+      a.chain=new THREE.Mesh(new THREE.PlaneGeometry(0.06,1),new THREE.MeshStandardMaterial({map:a.chainT,color:LN(0x3a3a3a),metalness:0.8,roughness:0.5,alphaTest:0.5,side:THREE.DoubleSide}));g.add(a.chain);
+      a.chain2=a.chain.clone();a.chain2.rotation.y=Math.PI/2;g.add(a.chain2);
+      const pul=new THREE.Mesh(new THREE.TorusGeometry(0.28,0.05,8,24),iron);pul.position.set(4.4,7.5,4.4);g.add(pul);a.pulley=pul;const pb=box(0.12,0.5,0.12,iron,4.4,7.75,4.4,g);void pb;
+      [[3.6,3.6],[3.6,5.2],[5.2,3.6]].forEach(([x,z])=>cyl(0.025,0.025,1.0,iron,x,0.5,z,g,8));
+      [[3.6,4.4,1.6,Math.PI/2],[4.4,3.6,1.6,0]].forEach(([x,z,L,ry])=>{[0.98,0.55].forEach(y=>{const r=cyl(0.02,0.02,L,brass,x,y,z,g,8);r.rotation.set(0,ry,Math.PI/2);});});
+      a.release=new THREE.Group();a.release.position.set(3.6,1.0,4.0);g.add(a.release);const sock=FX.rbox(0.14,0.2,0.14,0.02,brass);a.release.add(sock);
+      a.relLever=new THREE.Group();a.relLever.position.y=0.05;a.release.add(a.relLever);const lv=cyl(0.022,0.022,0.8,iron,0,0.4,0,a.relLever,8);void lv;sph(0.05,std({color:LN(0xb83a2a),roughness:0.3}),0,0.82,0,a.relLever);a.relLever.visible=false;a.relLever.rotation.z=0.4;
+      FX.shadow(g,true,true);a.chain.castShadow=a.chain2.castShadow=false;
+      // the street at the bottom of the shaft
+      const st=FX.plainCanvas(256,256),sx=st.getContext('2d');sx.fillStyle='#4a3a30';sx.fillRect(0,0,256,256);const r=rng(3170);for(let i=0;i<16;i++)for(let j=0;j<16;j++){sx.fillStyle=`hsl(25,${10+r()*10}%,${24+r()*16}%)`;sx.beginPath();sx.ellipse(i*16+8+(j%2)*8,j*16+8,7,6,0,0,7);sx.fill();}
+      const street=plane(1.58,1.58,new THREE.MeshStandardMaterial({map:FX.linTex(st),roughness:0.9}),4.4,-13.95,4.4,0);street.rotation.x=-Math.PI/2;noRay(street);
+      const door=plane(1.0,2.0,new THREE.MeshBasicMaterial({map:tex(windowC(3171)),toneMapped:false}),4.4,-12.95,5.19,Math.PI);noRay(door);
+      a.streetL=new THREE.PointLight(LN(0xffc080),0,14,1.4);a.streetL.position.set(4.4,-12.2,4.4);scene.add(a.streetL);}
+    [[0,-5.4,3,1.4],[3.4,-5.4,1.6,0.9],[4.9,-4.1,1.6,1.0],[-4.5,-3.9,0.9,0.9],[-3.3,-5.3,0.9,0.9]].forEach(([x,z,w,d])=>FX.blob(scene,x,z,w,d,0.35));
+    FX.touch(4);a.lastT=-1;a.dT=S.T;a.run=0;a.moonI=-1;a.tilesKey='';
+    return{animate,onTap(id){if(id==='pigeons')a.flap=1.2;if(id==='automaton')a.jack=1.5;},onWin(){startFly(ext);a.rideBells=0;TUNE.forEach((k,i)=>setTimeout(()=>ring(k),300+i*520));}};
+  }
+  function animate(t,dt,k){
+    // clock hands follow S.T (outside time); once the clock is running they creep on
+    const target=S.handsDone?(HANDS_OK+a.run):S.T;if(S.handsDone&&S.pendDone&&S.gearsDone&&!REDUCED)a.run+=dt/6;
+    let diff=((target-a.dT)%720+1080)%720-360;a.dT+=diff*Math.min(1,k*0.35+0.02);if(Math.abs(diff)<0.05)a.dT=target;
+    const T=((a.dT%720)+720)%720;a.hHand.rotation.z=T/720*Math.PI*2;a.mHand.rotation.z=(T%60)/60*Math.PI*2;a.mini[0].rotation.z=T/720*Math.PI*2;a.mini[1].rotation.z=(T%60)/60*Math.PI*2;
+    if(Math.abs(diff)>0.05||(S.handsDone&&Math.floor(t*2)!==a.lastT)){FX.touch(1);a.lastT=Math.floor(t*2);}
+    FX.tickFlames(a.flames,t);
+    if(!REDUCED){a.parts.forEach(p=>p.userData.tick(t,dt));a.lamps.forEach((l,i)=>{l.intensity=1.5+0.12*Math.sin(t*7+i*2)+0.06*Math.sin(t*17+i);});a.candle.intensity=0.9+0.1*Math.sin(t*9);}
+    // bells swing when rung
+    a.bells.forEach(b=>{b.swing=Math.max(0,b.swing-dt*0.4);b.g.rotation.x=REDUCED?0:Math.sin(t*3.2+b.ph)*0.22*b.swing;});
+    // pendulum: 2 s there and back
+    a.pend.visible=S.pendDone;a.hook.visible=!S.pendDone;if(S.pendDone)a.pend.rotation.x=REDUCED?0:Math.sin(t*Math.PI)*0.13;
+    // gears on the board
+    Object.keys(TEETH).forEach(kk=>{const ix=S.axle.indexOf(kk),m=a.gearM[kk];m.visible=ix>=0;if(ix>=0)m.position.set(AX[ix+1][0],AX[ix+1][1],0.07+(ix%2)*0.004);});
+    if(S.gearsDone&&!REDUCED){const w=t*1.2;a.motorG.rotation.z=w;S.axle.forEach((kk,i)=>{a.gearM[kk].rotation.z=-w*MOTOR/TEETH[kk]*(i%2?-1:1)+(i%2?Math.PI/TEETH[kk]:0);});a.dialG.rotation.z=w*MOTOR/DIALT;
+      a.big.forEach((b,i)=>{b.m.rotation.z=(i%2?-1:1)*t*0.25*48/b.n;});}
+    // drawer, cabinet door, release lever, moon dial
+    a.drawer.position.z=lerp(a.drawer.position.z,S.drawerOpen?-0.75:-0.43,k*0.4);a.gearIn.visible=S.drawerOpen&&!S.has.g25;a.lock.visible=!S.drawerOpen;
+    const cd=a.cabDoor.rotation.y,ct=S.tilesDone?-1.9:0;a.cabDoor.rotation.y=lerp(cd,ct,k*0.3);if(Math.abs(cd-ct)>0.002)FX.touch(1);a.lever.visible=!S.hasLever;
+    a.relLever.visible=S.leverIn;a.relLever.rotation.z=lerp(a.relLever.rotation.z,S.won?-0.5:0.4,k*0.3);
+    a.mirror.visible=!S.hasMirror;a.moonDoor.rotation.x=lerp(a.moonDoor.rotation.x,S.moonDone?-1.4:0,k*0.3);
+    if(a.moonI!==S.moonI){a.moonI=S.moonI;dialC();}
+    const key=S.tiles.join('');if(key!==a.tilesKey){a.tilesKey=key;tilesC();}
+    if(!REDUCED){if(a.flap>0){a.flap-=dt;a.pig.forEach((p,i)=>{p.position.y=Math.abs(Math.sin(t*14+i))*0.05*a.flap;});}a.pig.forEach((p,i)=>{p.children[2].position.z=-0.1+Math.sin(t*3+i*2)*0.01;});
+      if(a.jack>0||S.won){a.jack=Math.max(0,(a.jack||0)-dt);a.jacks.forEach((j,i)=>{j.userData.arm.rotation.x=-Math.abs(Math.sin(t*5+i*1.6))*0.9;});}}
+    // the ride down
+    let wy=1.0;
+    if(ext.t>0){ext.t=Math.min(1,ext.t+dt/(REDUCED?0.8:6.2));const p=ext.t;
+      if(p<0.24){const e=easeIO(p/0.24);camera.position.set(lerp(ext.from.x,4.05,e),lerp(ext.from.y,2.5,e),lerp(ext.from.z,4.05,e));}
+      else{const e=easeIO((p-0.24)/0.76);wy=lerp(1.0,-12.6,e);camera.position.set(4.05,wy+1.5,4.05);}
+      a.streetL.intensity=Math.min(2.2,p*3);a.pulley.rotation.z=-p*20;}
+    a.weight.position.y=wy;const top=7.25,len=top-(wy+0.12);[a.chain,a.chain2].forEach(c=>{c.scale.y=len;c.position.set(4.4,wy+0.12+len/2,4.4);});a.chainT.repeat.set(1,len/0.08);
+    if(ext.t>0&&ext.t<1)FX.touch(1);
+  }
+  /* ---------- Panel art ---------- */
+  function symSVG(k){return{sun:'<circle cx="12" cy="12" r="4.5"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/>',moon:'<path d="M15 3a9 9 0 1 0 6 13A7 7 0 0 1 15 3z"/>',key:'<circle cx="7" cy="12" r="4"/><path d="M11 12h10M17 12v4M20 12v3"/>',star:'<path d="M12 2l3 7h7l-5.5 4.5 2 7.5-6.5-4.5-6.5 4.5 2-7.5L2 9h7z"/>'}[k];}
+  function bellSVG(b,sz){const s=b.r/0.86;return`<svg viewBox="0 0 100 104" width="${sz}" height="${sz}" aria-hidden="true"><defs><linearGradient id="bz${b.k}" x1="0" x2="1"><stop offset="0" stop-color="#6a4218"/><stop offset=".45" stop-color="#e0a858"/><stop offset="1" stop-color="#6a4218"/></linearGradient></defs><g transform="translate(50 92) scale(${s.toFixed(3)}) translate(-50 -92)"><path d="M38 14Q50 6 62 14Q68 20 68 34Q68 62 82 80Q90 88 90 90L10 90Q10 88 18 80Q32 62 32 34Q32 20 38 14Z" fill="url(#bz${b.k})" stroke="#4a2a0a" stroke-width="2"/><circle cx="50" cy="96" r="6" fill="#3a2a1a"/><g transform="translate(38 42)" fill="none" stroke="#2a1404" stroke-width="2.2" stroke-linejoin="round">${symSVG(b.k)}</g></g></svg>`;}
+  function staffSVG(){let s='<svg viewBox="0 0 330 110" style="width:100%;max-width:340px;align-self:center;background:#f2e6c8;border-radius:8px" role="img" aria-label="Your copy of the tune: eight notes. Heights from the bottom line: 4, 2, 3, 1, then 1, 3, 4, 2.">';
+    for(let i=0;i<5;i++)s+=`<path d="M10 ${26+i*14}H320" stroke="#3a2410" stroke-width="1.3"/>`;s+='<path d="M10 26V82M165 26V82M320 26V82" stroke="#3a2410" stroke-width="2"/>';
+    TUNE_H.forEach((lv,i)=>{const x=36+i*36+(i>=4?14:0),y=82-(lv-1)*14;s+=`<ellipse cx="${x}" cy="${y}" rx="8" ry="5.6" transform="rotate(-20 ${x} ${y})" fill="#1a1008"/><path d="M${x+7} ${y-2}V${y-36}" stroke="#1a1008" stroke-width="2"/>`;});return s+'</svg>';}
+  function faceSVG(T,mir){const hA=T/720*360,mA=(T%60)*6;let s=`<svg viewBox="0 0 240 240" style="width:100%;max-width:250px;align-self:center" role="img" aria-label="${mir?'The clock face in the hand mirror, the right way round.':'The clock face seen from inside the tower, back to front.'}"><defs><radialGradient id="fg31"><stop offset="0" stop-color="#fff2d8"/><stop offset="1" stop-color="#f0b880"/></radialGradient></defs><circle cx="120" cy="120" r="116" fill="#2a1a14"/><circle cx="120" cy="120" r="108" fill="url(#fg31)"/>`;
+    s+=`<g transform="${mir?'':'translate(240 0) scale(-1 1)'}">`;for(let i=0;i<60;i++)s+=`<path d="M120 ${i%5?16:14}V${i%5?20:26}" stroke="#3a1a14" stroke-width="${i%5?1.2:2.4}" transform="rotate(${i*6} 120 120)"/>`;
+    ROMAN.forEach((r,i)=>{const an=i*30*Math.PI/180,x=120+Math.sin(an)*80,y=120-Math.cos(an)*80;s+=`<text x="${x.toFixed(1)}" y="${(y+6).toFixed(1)}" text-anchor="middle" font-family="Cinzel,Georgia,serif" font-weight="700" font-size="17" fill="#3a1a14">${r}</text>`;});
+    s+=`<path d="M116 132L120 56L124 132Z" fill="#1a0e0a" transform="rotate(${hA} 120 120)"/>`;
+    s+=`<path d="M118.5 140L120 26L121.5 140Z" fill="#1a0e0a" transform="rotate(${mA} 120 120)"/><circle cx="120" cy="120" r="7" fill="#1a0e0a"/></g>`;
+    return s+'</svg>';}
+  function gearBoardSVG(){const P=([u,v])=>[(u+2.0)*100,(0.67-v)*100];let s='<svg viewBox="0 0 400 172" style="width:100%;align-self:center;background:#24382c;border-radius:8px" role="img" aria-label="The gear board: the motor gear has 10 teeth, the dial gear has 30. Between them are three empty axles, A, B and C. The numbers painted between neighbouring axles are 35, 45, 35 and 45.">';
+    for(let i=0;i<4;i++){const [lx,ly]=P(LAB(i)),[x0,y0]=P(AX[i]),[x1,y1]=P(AX[i+1]);s+=`<path d="M${lx.toFixed(1)} ${ly.toFixed(1)}L${((x0+x1)/2).toFixed(1)} ${((y0+y1)/2).toFixed(1)}" stroke="#f2e2b0" stroke-opacity=".5" stroke-dasharray="3 3"/><circle cx="${lx.toFixed(1)}" cy="${ly.toFixed(1)}" r="14" fill="#f2e2b0"/><text x="${lx.toFixed(1)}" y="${(ly+5).toFixed(1)}" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="700" font-size="14" fill="#24382c">${SUMS[i]}</text>`;}
+    const gearAt=(i,n,col,lab)=>{const [x,y]=P(AX[i]),r=n*2;s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${col}" stroke="#7a5a1a" stroke-width="5" stroke-dasharray="3 3"/><text x="${x.toFixed(1)}" y="${(y+5).toFixed(1)}" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="700" font-size="14" fill="#2a1a08">${lab}</text>`;};
+    gearAt(0,MOTOR,'#b08a4a','10');gearAt(4,DIALT,'#b08a4a','30');
+    S.axle.forEach((kk,i)=>{const [x,y]=P(AX[i+1]);if(kk)gearAt(i+1,TEETH[kk],'#e8c068',TEETH[kk]);else s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="13" fill="none" stroke="#f2e2b0" stroke-width="2" stroke-dasharray="4 3"/><text x="${x.toFixed(1)}" y="${(y+5).toFixed(1)}" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="700" font-size="14" fill="#f2e2b0">${'ABC'[i]}</text>`;});
+    return s+'</svg>';}
+  const gearIco=svgIcon('<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/><circle cx="12" cy="12" r="7"/>');
+  const img=(c,mw,alt)=>`<img class="figure" style="max-width:${mw}px;align-self:center" alt="${alt}" src="${c.toDataURL('image/png')}">`;
+  const look=(eye,title,txt)=>()=>({eye,title,html:`<span class="tag">Just for looking</span><p>${txt}</p>`});
+
+  const panels={
+    note:()=>({eye:'South · The desk',title:'A note on the desk',html:img(noteC(),300,'For the keeper only: T M Z S X. Shift each letter back by the number of bells above you.'),bind(){addClue('note','Note: TMZSX. Shift each letter BACK by the number of bells above you.');}}),
+    wheel:()=>{const sh=S.shift;let s='<svg viewBox="0 0 280 280" style="width:100%;max-width:280px;align-self:center" role="img" aria-label="A brass cipher wheel. The outer ring has the alphabet. The inner ring turns.">';
+      s+='<circle cx="140" cy="140" r="136" fill="#c8a04a" stroke="#5a3a10" stroke-width="3"/><circle cx="140" cy="140" r="104" fill="#e8c878" stroke="#5a3a10" stroke-width="2"/><circle cx="140" cy="140" r="74" fill="#d8b060" stroke="#5a3a10" stroke-width="2"/>';
+      for(let i=0;i<26;i++){const an=i/26*Math.PI*2,ch=String.fromCharCode(65+i),inn=String.fromCharCode(65+((i-sh)%26+26)%26),hot=NOTE.includes(ch);
+        const xo=140+Math.sin(an)*120,yo=140-Math.cos(an)*120,xi=140+Math.sin(an)*89,yi=140-Math.cos(an)*89;
+        if(hot)s+=`<circle cx="${xo.toFixed(1)}" cy="${yo.toFixed(1)}" r="10" fill="#8a1a1a"/>`;
+        s+=`<text x="${xo.toFixed(1)}" y="${(yo+5).toFixed(1)}" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="700" font-size="14" fill="${hot?'#fff':'#2a1a08'}">${ch}</text><text x="${xi.toFixed(1)}" y="${(yi+4.5).toFixed(1)}" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="700" font-size="13" fill="#5a2a08">${inn}</text>`;
+        s+=`<path d="M${(140+Math.sin(an+Math.PI/26)*74).toFixed(1)} ${(140-Math.cos(an+Math.PI/26)*74).toFixed(1)}L${(140+Math.sin(an+Math.PI/26)*104).toFixed(1)} ${(140-Math.cos(an+Math.PI/26)*104).toFixed(1)}" stroke="rgba(90,58,16,.35)"/>`;}
+      s+=`<text x="140" y="136" text-anchor="middle" font-family="Cinzel,Georgia,serif" font-size="13" fill="#2a1a08">BACK</text><text x="140" y="158" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="700" font-size="22" fill="#2a1a08">${sh}</text></svg>`;
+      return{eye:'South · The desk',title:'The brass cipher wheel',html:`<p>Turn the inner ring. Each outer letter then sits above the letter that many places <b>back</b> in the alphabet.</p>${s}
+        <div class="row" style="justify-content:center"><button class="btn" id="wl" aria-label="Turn back one fewer">◀</button><span class="readout" style="min-width:110px">Back ${sh}</span><button class="btn" id="wr" aria-label="Turn back one more">▶</button></div>`,
+        bind(){$('#wl').addEventListener('click',()=>{S.shift=(S.shift+25)%26;SFX.click();renderPanel();});$('#wr').addEventListener('click',()=>{S.shift=(S.shift+1)%26;SFX.click();renderPanel();});}};},
+    drawer:()=>{
+      if(!S.drawerOpen)return{eye:'South · The desk',title:'A locked drawer',html:`<p>The desk drawer has a brass lock with five letter wheels.</p>
+        <div class="dials">${S.code.map((ch,i)=>`<div class="dial"><button data-i="${i}" data-d="1" aria-label="Letter ${i+1} up">${CHEV_UP}</button><span>${String.fromCharCode(65+ch)}</span><button data-i="${i}" data-d="-1" aria-label="Letter ${i+1} down">${CHEV_DN}</button></div>`).join('')}</div>
+        <div class="row" style="justify-content:center"><button class="btn brass" id="pull">Pull the drawer</button></div><p class="msg">${S.msg}</p>`,
+        bind(){on('.dial button',el=>{const i=+el.dataset.i;S.code[i]=(S.code[i]+(+el.dataset.d)+26)%26;S.msg='';SFX.click();renderPanel();});
+          $('#pull').addEventListener('click',()=>{if(S.code.map(c=>String.fromCharCode(65+c)).join('')===WORD){S.drawerOpen=true;SFX.ding();updateHud();}else{S.msg='Locked tight. That isn’t the word.';SFX.thud();}renderPanel();});}};
+      return{eye:'South · The desk',title:'The open drawer',html:`<p>The drawer slides open with the word <b>PIVOT</b>. Inside: ${S.has.g25?'nothing else.':'a brass <b>gear with 25 teeth</b> and a page torn from the keeper’s log.'}</p>${img(logC(),300,'Keeper’s Log: The great clock stopped exactly 1 hour 35 minutes after the evening paper came off the press. Rule of the tower: set the hands back to the moment it stopped, then let the weight down.')}
+        ${S.has.g25?'':'<div class="row" style="justify-content:center"><button class="btn brass" id="take">Take the gear and the page</button></div>'}`,
+        bind(){addClue('log','Log: the clock stopped 1 hour 35 minutes after the evening paper was printed. Set the hands to that time.');const b=$('#take');if(b)b.addEventListener('click',()=>{S.has.g25=true;S.hasLog=true;SFX.click();updateHud();renderPanel();});}};
+    },
+    handmirror:()=>S.hasMirror?{eye:'South · The desk',title:'The desk',html:'<p>You already have the hand mirror.</p>'}:{eye:'South · The desk',title:'A hand mirror',html:'<p>A little brass hand mirror. In a mirror, everything is flipped left to right.</p><div class="row" style="justify-content:center"><button class="btn brass" id="take">Take the mirror</button></div>',bind(){$('#take').addEventListener('click',()=>{S.hasMirror=true;SFX.click();updateHud();renderPanel();});}},
+    music:()=>({eye:'North-west',title:'A music stand',html:`${img(musicC(),340,'The Tower Chime. Eight notes on five lines, split into two groups of four. From the bottom line, the notes sit on lines 4, 2, 3, 1, then 1, 3, 4, 2. Big bells sing low, small bells sing high. Higher on the lines means a higher note.')}<p class="muted">Every evening the four bells overhead play this chime.</p>`,bind(){S.sawMusic=true;addClue('music','Tower Chime: heights 4 2 3 1 | 1 3 4 2. Big bells low, small bells high.');}}),
+    bells:()=>{
+      if(S.bellsDone)return{eye:'Overhead',title:'The four bells',html:`<p>The chime rang out perfectly over the city${S.has.g20?'.':', and a brass <b>gear with 20 teeth</b> dropped out of the biggest bell!'}</p><div class="opts" style="grid-template-columns:repeat(4,1fr)">${BELLS.map(b=>`<button class="opt" data-k="${b.k}" aria-label="${b.n} bell">${bellSVG(b,64)}<span>${b.n}</span></button>`).join('')}</div>`,
+        bind(){on('.opt',el=>ring(el.dataset.k));}};
+      return{eye:'Overhead',title:'The four bells',html:`<p>Four bronze bells hang above you, each marked with a sign. Pull the ropes to play the tower’s evening chime: <b>eight notes</b>.</p>
+        <div class="opts" style="grid-template-columns:repeat(4,1fr)">${BELLS.map(b=>`<button class="opt bell" data-k="${b.k}" aria-label="Ring the ${b.n} bell">${bellSVG(b,64)}<span>${b.n}</span></button>`).join('')}</div>
+        ${S.sawMusic?staffSVG():'<p class="muted">You don’t know the tune yet. Is there music somewhere?</p>'}
+        <p style="text-align:center;font-size:1.1rem;letter-spacing:.2em" aria-label="${S.seq.length} of 8 notes played">${Array.from({length:8},(_,i)=>i<S.seq.length?'●':'○').join(' ')}</p>
+        <div class="row" style="justify-content:center"><button class="btn" id="again" ${S.seq.length?'':'disabled'}>Start again</button></div><p class="msg">${S.msg}</p>`,
+        bind(){on('.bell',el=>{ring(el.dataset.k);S.seq.push(el.dataset.k);S.msg='';
+            if(S.seq.length===8){if(S.seq.every((k2,i)=>k2===TUNE[i])){S.bellsDone=true;S.has.g20=true;SFX.ding();updateHud();}else{S.msg='CLANG! That’s not the tower’s chime. Try again.';S.seq=[];}}renderPanel();});
+          $('#again').addEventListener('click',()=>{S.seq=[];S.msg='';renderPanel();});}};
+    },
+    calendar:()=>({eye:'West wall',title:'A calendar',html:img(calC(),280,'October. The 1st is a Wednesday and is circled with a little moon: Full moon, the 1st.'),bind(){addClue('cal','Calendar: full moon on October 1st.');}}),
+    moonchart:()=>({eye:'West wall',title:'Phases of the Moon',html:img(mchartC(),330,'A circle of eight moon pictures in order: full moon, waning gibbous, last quarter, waning crescent, new moon, waxing crescent, first quarter, waxing gibbous, then back to full. Each picture comes about 3.7 days after the one before. Full moon to full moon is 29.5 days.'),bind(){addClue('mchart','Moon phases: one picture every 3.7 days. Full, waning gibbous, last quarter, waning crescent, new, waxing crescent, first quarter, waxing gibbous.');}}),
+    newspaper:()=>({eye:'South · A chair',title:'The Evening Post',html:img(paperC(),290,'The Evening Post. Thursday, October 16. Old keeper retires after fifty years. This paper was printed at 15:40, which is 3:40 in the afternoon.'),bind(){addClue('paper','Newspaper: Thursday, October 16. Printed at 15:40 (3:40 pm).');}}),
+    moondial:()=>{
+      if(S.moonDone)return{eye:'West wall',title:'The moon dial',html:`<div style="align-self:center">${moonSVG(S.moonI,150)}</div><p>The dial shows tonight’s <b>new moon</b>: no moon in the sky at all${S.has.g15?'.':'. A little brass door popped open under the dial: a <b>gear with 15 teeth</b>!'}</p>`};
+      return{eye:'West wall',title:'The moon dial',html:`<p>The great clock also shows the moon. The dial is stuck on the wrong picture. Set it to <b>tonight’s moon</b>.</p><div style="align-self:center">${moonSVG(S.moonI,150)}</div><p class="readout">${PHASES[S.moonI]}</p>
+        <div class="row" style="justify-content:center"><button class="btn" id="ml" aria-label="Previous picture">◀</button><button class="btn brass" id="mset">Set the dial</button><button class="btn" id="mr" aria-label="Next picture">▶</button></div><p class="msg">${S.msg}</p>`,
+        bind(){$('#ml').addEventListener('click',()=>{S.moonI=(S.moonI+7)%8;S.msg='';SFX.click();renderPanel();});$('#mr').addEventListener('click',()=>{S.moonI=(S.moonI+1)%8;S.msg='';SFX.click();renderPanel();});
+          $('#mset').addEventListener('click',()=>{if(S.moonI===MOON_OK){S.moonDone=true;S.has.g15=true;SFX.ding();updateHud();}else{S.msg='Clunk. The dial slips back. That isn’t tonight’s moon. What day is it today?';SFX.thud();}renderPanel();});}};
+    },
+    cabinet:()=>{
+      if(S.tilesDone)return{eye:'North-east',title:'The maintenance cabinet',html:`<p>The picture is whole and the cabinet door swings open.${S.hasLever?' It’s empty now.':' Inside hangs a long iron <b>release lever</b>.'}</p>${S.hasLever?'':'<div class="row" style="justify-content:center"><button class="btn brass" id="take">Take the lever</button></div>'}`,bind(){const b=$('#take');if(b)b.addEventListener('click',()=>{S.hasLever=true;SFX.click();updateHud();renderPanel();});}};
+      const url=emblemC().toDataURL('image/png');
+      return{eye:'North-east',title:'The maintenance cabinet',html:`<p>The lock is a sliding puzzle of the tower’s crest. Slide the tiles into the empty space until the picture is whole, with tile 1 at the top left and the gap at the bottom right.</p>
+        <div class="slide">${S.tiles.map((v,i)=>v?`<button data-i="${i}" aria-label="Tile ${v}" style="background-image:url(${url});background-position:${(v-1)%3*50}% ${Math.floor((v-1)/3)*50}%"><span>${v}</span></button>`:'<button class="blank" disabled aria-label="Empty space"></button>').join('')}</div>
+        <p class="muted" style="text-align:center">Moves: ${S.moves}</p><div class="row" style="justify-content:center"><button class="btn" id="treset">Scramble back</button></div>`,
+        bind(){on('.slide button[data-i]',el=>{const i=+el.dataset.i,b=S.tiles.indexOf(0);if(!near(i,b))return;S.tiles[b]=S.tiles[i];S.tiles[i]=0;S.moves++;SFX.click();
+            if(S.tiles.every((v,j)=>v===(j<8?j+1:0))){S.tilesDone=true;SFX.ding();updateHud();}renderPanel();});
+          $('#treset').addEventListener('click',()=>{S.tiles=scramble();S.moves=0;renderPanel();});}};
+    },
+    gears:()=>{
+      if(S.gearsDone)return{eye:'East wall',title:'The going train',html:`${gearBoardSVG()}<p>Whirr! The motor turns every gear, and the dial gear spins. The going train works! The big gears up on the wall are turning too.</p>`};
+      const tray=Object.keys(TEETH).filter(kk=>(kk[0]==='d'||S.has[kk])&&!S.axle.includes(kk));
+      return{eye:'East wall',title:'The going train',html:`<p>The gears that drive the hands are missing. The motor gear has <b>10</b> teeth and the dial gear has <b>30</b>. Fill axles A, B and C. A note on the board says: <b>gears that touch must add up to the number painted between them.</b></p>${gearBoardSVG()}
+        <div class="ppt" style="grid-template-columns:repeat(3,1fr)">${S.axle.map((kk,i)=>`<button class="ppslot ${kk?'ok':''}" data-s="${i}"><span>Axle ${'ABC'[i]}</span>${kk?`<small>${TEETH[kk]} teeth</small>`:'<small>empty</small>'}</button>`).join('')}</div>
+        <p class="muted">${tray.length?'Your gears (and two spares from the pegboard). Pick one, then tap an axle:':'All your gears are on the board.'}</p>
+        <div class="opts" style="grid-template-columns:repeat(${Math.max(1,Math.min(5,tray.length))},1fr)">${tray.map(kk=>`<button class="opt" data-k="${kk}" aria-pressed="${S.selG===kk}">${gearIco}<span>${TEETH[kk]} teeth</span></button>`).join('')}</div>
+        ${['g25','g20','g15'].every(kk=>S.has[kk])?'':'<p class="muted">Some gears are still hidden somewhere in the tower.</p>'}
+        <div class="row" style="justify-content:center"><button class="btn brass" id="motor">Start the motor</button></div><p class="msg">${S.msg}</p>`,
+        bind(){on('.opt',el=>{S.selG=S.selG===el.dataset.k?null:el.dataset.k;S.msg='';SFX.click();renderPanel();});
+          on('.ppslot',el=>{const i=+el.dataset.s;if(S.selG){S.axle[i]=S.selG;S.selG=null;SFX.click();}else S.axle[i]=null;S.msg='';renderPanel();});
+          $('#motor').addEventListener('click',()=>{const tt=S.axle.map(kk=>kk?TEETH[kk]:0);if(tt.includes(0)){S.msg='Fill all three empty axles first.';SFX.thud();}
+            else if(MOTOR+tt[0]===SUMS[0]&&tt[0]+tt[1]===SUMS[1]&&tt[1]+tt[2]===SUMS[2]&&tt[2]+DIALT===SUMS[3]){S.gearsDone=true;SFX.ding();updateHud();}
+            else{S.msg='CRUNCH! The gears jam. Check the painted numbers: touching gears must add up to them.';SFX.thud();}renderPanel();});}};
+    },
+    pendchart:()=>({eye:'West wall',title:'Pendulum tests',html:img(pchartC(),320,'Pendulum tests. Time for one swing there and back. Rod 0.25 metres with a 1 kilogram bob: 1 second. 0.25 metres with 20 kilograms: 1 second. 2.25 metres with 5 kilograms: 3 seconds. 4 metres with 1 kilogram: 4 seconds. 4 metres with 20 kilograms: 4 seconds. 9 metres with 5 kilograms: 6 seconds. A rod 4 times as long takes twice as long. The heavy bobs make no difference at all.'),bind(){addClue('pend','Pendulum: 0.25 m takes 1 s there and back; 4 times as long takes twice as long. Weight makes no difference.');}}),
+    pendulum:()=>{
+      if(S.pendDone)return{eye:'West · The pendulum pit',title:'The pendulum',html:`<p>Tick... tock... The 1 metre pendulum swings over the pit: one second each way, two seconds there and back. Perfect!${S.bob!==null&&BOBS[S.bob]===20?' (The heavy bob works just as well as a light one.)':''}</p>`};
+      return{eye:'West · The pendulum pit',title:'The pendulum',html:`<p>The pendulum is missing! A brass plate on the bracket says: <b>“BEAT: ONE SECOND EACH WAY.”</b> Pick a rod and a bob from the rack and hang them.</p>
+        <p class="sub">Rod</p><div class="opts" style="grid-template-columns:repeat(4,1fr)">${RODS.map((L,i)=>`<button class="opt" data-r="${i}" aria-pressed="${S.rod===i}"><svg viewBox="0 0 20 60" width="20" height="44" aria-hidden="true"><path d="M10 2V${2+L/3*56}" stroke="#a87a1a" stroke-width="3"/></svg><span>${L} m</span></button>`).join('')}</div>
+        <p class="sub">Bob</p><div class="opts" style="grid-template-columns:repeat(3,1fr)">${BOBS.map((kg,i)=>`<button class="opt" data-b="${i}" aria-pressed="${S.bob===i}"><svg viewBox="0 0 40 40" width="${24+i*7}" height="${24+i*7}" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="#d9b25a" stroke="#7a5a1a" stroke-width="3"/></svg><span>${kg} kg</span></button>`).join('')}</div>
+        <div class="row" style="justify-content:center"><button class="btn brass" id="hang">Hang it and give it a push</button></div><p class="msg">${S.msg}</p>`,
+        bind(){on('.opt[data-r]',el=>{S.rod=+el.dataset.r;S.msg='';SFX.click();renderPanel();});on('.opt[data-b]',el=>{S.bob=+el.dataset.b;S.msg='';SFX.click();renderPanel();});
+          $('#hang').addEventListener('click',()=>{if(S.rod===null||S.bob===null){S.msg='Pick a rod and a bob first.';SFX.thud();}else if(RODS[S.rod]===1){S.pendDone=true;SFX.ding();updateHud();}
+            else{const tt=2*Math.sqrt(RODS[S.rod]);S.msg=tt<2?'Tick-tock-tick-tock! Much too fast. Take it down.':'Tiiick... toooock... Much too slow. Take it down.';SFX.thud();}renderPanel();});}};
+    },
+    hands:()=>{
+      if(S.handsDone)return{eye:'North · The setting dial',title:'The hands',html:`${faceSVG(HANDS_OK,S.mirrorOn)}<p>The hands are locked at <b>5:15</b>, the moment the clock stopped. Down in the square, people look up and check their watches.</p>`};
+      if(!S.gearsDone)return{eye:'North · The setting dial',title:'The setting dial',html:'<p>A brass box with two knobs for setting the hands of the great clock. The knobs spin freely: nothing is driving the hands. <b>The gear train on the east wall must be fixed first.</b></p>'};
+      const mir=S.mirrorOn;
+      return{eye:'North · The setting dial',title:'Set the hands',html:`<p>You’re behind the clock, so this little dial shows the face <b>from inside, back to front</b>. Set the hands so that people down in the square see the right time.</p>${faceSVG(S.T,mir)}
+        <p class="muted" style="text-align:center">${mir?'In the hand mirror: the way the city sees it.':'From inside the tower: back to front.'}</p>
+        <div class="opts" style="grid-template-columns:repeat(2,1fr)"><button class="opt" data-h="m" data-d="cw">↻ Minute hand</button><button class="opt" data-h="m" data-d="ccw">↺ Minute hand</button><button class="opt" data-h="h" data-d="cw">↻ Hour hand</button><button class="opt" data-h="h" data-d="ccw">↺ Hour hand</button></div>
+        <div class="row" style="justify-content:center">${S.hasMirror?`<button class="btn" id="mirror">${mir?'Put the mirror down':'Hold up the hand mirror'}</button>`:''}<button class="btn brass" id="lock">Lock the hands</button></div><p class="msg">${S.msg}</p>`,
+        bind(){on('.opt[data-h]',el=>{const step=el.dataset.h==='m'?5:60;const cw=el.dataset.d==='cw';const sgn=(cw?1:-1)*(S.mirrorOn?1:-1);S.T=((S.T+sgn*step)%720+720)%720;S.msg='';SFX.click();renderPanel();});
+          const mb=$('#mirror');if(mb)mb.addEventListener('click',()=>{S.mirrorOn=!S.mirrorOn;SFX.click();renderPanel();});
+          $('#lock').addEventListener('click',()=>{if(S.T===HANDS_OK){S.handsDone=true;SFX.ding();updateHud();}else{S.msg=`Down in the square, the clock now reads ${hhmm(S.T)}. Is that when it stopped?`;SFX.thud();}renderPanel();});}};
+    },
+    weight:()=>{const ok=S.gearsDone&&S.pendDone&&S.handsDone&&S.leverIn;
+      return{eye:'South-east · The weight shaft',title:'The great counterweight',html:`<p>A huge iron weight hangs on a chain in a shaft that drops all the way to the street. When the clock runs, the weight slowly sinks. Ride it down! But it’s locked until the clock is going.</p>
+        <div class="parts">${rowPart(S.gearsDone,'Going train','The gears are turning.','Gears are missing on the east wall.')}${rowPart(S.pendDone,'Pendulum','Swinging: one second each way.','No pendulum in the pit.')}${rowPart(S.handsDone,'Hands','Set to the moment it stopped.','The hands show the wrong time.')}${rowPart(S.leverIn,'Release lever','Fitted in its socket.',S.hasLever?'You have it. Fit it!':'The lever is missing.',S.hasLever&&!S.leverIn?'<button class="btn" id="fit">Fit</button>':'')}</div>
+        <div class="row" style="justify-content:center"><button class="btn brass" id="ride" ${ok?'':'disabled'}>Pull the lever and grab the chain!</button></div>`,
+        bind(){const f=$('#fit');if(f)f.addEventListener('click',()=>{S.leverIn=true;SFX.click();updateHud();renderPanel();});$('#ride').addEventListener('click',()=>{if(!ok)return;closePanel();win();});}};},
+    face:()=>({eye:'North wall',title:'The great clock face',html:`<p>The back of the huge glass clock face. The sunset glows through it, and you can see the rooftops of the city outside. The numbers are painted on the <b>outside</b> of the glass, so from in here they look back to front, and the hands seem to turn the wrong way!</p><p class="muted">Right now the hands seem to say ${S.handsDone?'it’s stopped at the right time':'some time in the middle of the afternoon'}.</p>`}),
+    desk:()=>({eye:'South',title:'The keeper’s desk',html:'<p>An old oak desk. There’s a cipher wheel, a note, a little hand mirror, a candle and an hourglass, and a drawer with a letter lock.</p>'}),
+    portrait:look('South wall','The old keeper','A painting of Keeper Albert Hale, who looked after the great clock for fifty years. He has a twinkle in his eye, as if he likes puzzles.'),
+    city:look('Windows','The city at dusk','Rooftops, chimneys and church spires glow orange and pink in the sunset. Lights are coming on in the windows far below.'),
+    automaton:look('North','The clock jacks','Two carved wooden figures called jacks, a red one and a blue one. When the clock runs, they swing their little hammers.'),
+    pigeons:look('South window','Pigeons','Two pigeons on the window ledge. Coo! They live up here and don’t mind the noise.'),
+    hourglass:look('South · The desk','An hourglass','The sand trickles down. Every grain is a tiny bit of time.'),
+    tools:look('East','Oil cans and a wrench','The keeper’s oil cans. A clock this big needs lots of oil to keep its gears smooth.'),
+    biggears:look('East wall, high up','The great gears','Huge brass gears that drive the clock. Some are wider than you are tall!'),
+    wall:()=>({eye:'All around',title:'The clock room',html:'<p>Thick stone walls, high up in the tower. The wind whistles past the windows.</p>'}),
+    floor:()=>({eye:'Below',title:'The floor',html:'<p>Wide oak boards. There’s a pit for the pendulum, and a deep square shaft where the counterweight hangs.</p>'}),
+    ceiling:()=>({eye:'Overhead',title:'The ceiling',html:'<p>Dark beams high above, and four bronze bells.</p>'})
+  };
+  return{
+    id:'clock',num:31,name:'The Clock Tower',
+    blurb:'Crack a cipher, ring the chime, read the moon, mend the gears and set the hands of a giant clock.',
+    eyebrow:'Room 31',titleHTML:'The <em>Clock</em> Tower',
+    story:'You climbed the old clock tower to watch the sunset over the city, and the trapdoor slammed shut behind you! The great clock has stopped. The only other way down is the counterweight shaft, but the weight is locked until the clock runs again.',
+    goal:'Mend the gears, hang the pendulum and set the hands to the moment the clock stopped. Then ride the counterweight down to the street.',
+    winTitle:'Right on time!',winText:'The great clock ticks back to life and the bells ring out over the city. You grab the chain and ride the counterweight down, down, down the shaft, and step out into the street as the lamps come on.',
+    bg:0x2a1e1a,toneMapping:THREE.ACESFilmicToneMapping,exposure:1.1,far:60,eyeY:1.7,winDelay:7000,shadows:true,post:{bloom:0.5,radius:0.5,threshold:1.0,vignette:0.32},
+    total:7,progress:()=>[S.drawerOpen,S.bellsDone,S.moonDone,S.tilesDone,S.gearsDone,S.pendDone,S.handsDone].filter(Boolean).length,goalsTitle:'Restart the great clock',howTo:'Many answers need two clues. Read everything!',
+    goalRows:()=>[['Desk drawer',S.drawerOpen,false],['Bell chime',S.bellsDone,false],['Moon dial',S.moonDone,false],['Cabinet',S.tilesDone,false],['Going train',S.gearsDone,S.has.g25&&S.has.g20&&S.has.g15],['Pendulum',S.pendDone,false],['Hands',S.handsDone,false]].map(([n,ok,got])=>({icon:statusDot(ok,got),text:`<b>${n}</b>: ${ok?'done':got?'gears found: fit them':'not yet'}`})),
+    icon:()=>'',
+    fresh:()=>({shift:0,code:[0,0,0,0,0],drawerOpen:false,hasLog:false,hasMirror:false,mirrorOn:false,has:{g25:false,g20:false,g15:false},sawMusic:false,seq:[],bellsDone:false,moonI:1,moonDone:false,
+      tiles:scramble(),moves:0,tilesDone:false,hasLever:false,leverIn:false,axle:[null,null,null],selG:null,gearsDone:false,rod:null,bob:null,pendDone:false,T:170,handsDone:false}),
+    onOpen(id){S.selG=null;if(id==='bells')S.seq=[];},
+    items:()=>{const it=[];const g=['g25','g20','g15'].filter(kk=>S.has[kk]&&!S.axle.includes(kk)).length;if(g)it.push({label:g+(g>1?' gears':' gear'),svg:gearIco});
+      if(S.hasMirror)it.push({label:'Hand mirror',svg:svgIcon('<circle cx="10" cy="9" r="6"/><path d="M14 13l6 7"/>')});if(S.hasLever&&!S.leverIn)it.push({label:'Lever',svg:svgIcon('<path d="M5 20L18 5"/><circle cx="18" cy="5" r="2.5"/>')});
+      if(S.hasLog)it.push({label:'Log page',svg:svgIcon('<path d="M6 3h9l4 4v14H6z"/><path d="M9 11h7M9 15h7"/>')});return it;},
+    build,panels
+  };
+})();
+const ROOM32=(function(){
+  /* Room 32: Daniel in Babylon. A round lions' den under the ruins, Ishtar-blue glazed walls, eight chained puzzles. */
+  const R=4.75,SC=R/5.2,WH=4.8,GY=7.0,HR=0.85,DEG=Math.PI/180;
+  const at=(d,r)=>polar(d*DEG,r);
+  function put(o,d,r,y){const p=at(d,r*SC);o.position.set(p[0],y||0,p[1]);faceCenter(o);scene.add(o);return o;}
+  const rb=(w,h,d,r,m)=>FX.rbox(Math.max(0.004,w-2*r),Math.max(0.004,h-2*r),d,r,m);
+  /* ---------- puzzle data ---------- */
+  const METAL=[{k:'gold',n:'Gold',css:'#f2c040'},{k:'silver',n:'Silver',css:'#dfe4ea'},{k:'brass',n:'Brass',css:'#c58a3a'},{k:'iron',n:'Iron',css:'#5a5e66'},{k:'clay',n:'Iron and clay',css:'linear-gradient(90deg,#5a5e66 50%,#b8643a 50%)'}];
+  const SLOT=['Head','Breast and arms','Belly and thighs','Legs','Feet'];
+  const MN=k=>METAL.find(m=>m.k===k).n;
+  // Cuneiform-style cipher: each letter is a cluster of wedges (v down, h across, d slanted, u hook)
+  // (shapes are deliberately unlike the Latin letters they stand for, so the key is needed)
+  const GL={A:[['v',12,3]],B:[['v',6,3],['v',18,3],['h',4,12]],D:[['v',5,3],['h',5,20]],E:[['u',7,7],['u',15,7],['u',11,18]],H:[['u',12,12]],I:[['d',2,5],['d',10,5]],K:[['u',7,12],['u',17,12]],L:[['d',3,4],['v',17,3]],M:[['v',12,3],['h',3,12]],N:[['u',8,6],['u',8,18],['v',19,3]],O:[['h',3,4],['v',12,7]],P:[['d',3,4],['h',3,19]],R:[['h',3,4],['h',3,11.5],['h',3,19]],S:[['u',9,12],['v',18,3]],T:[['v',4,3],['v',12,3],['v',20,3]],U:[['h',3,7],['h',3,17],['v',21,3]]};
+  const KEY1=['A','B','E','K','L','M','N','T'],KEY2=['D','H','I','O','P','R','S','U'],KEYS=KEY1.concat(KEY2).sort();
+  const WORDS=['MENE','MENE','TEKEL','UPHARSIN'];
+  const MEAN=['God hath numbered thy kingdom, and finished it.','Thou art weighed in the balances, and art found wanting.','Thy kingdom is divided, and given to the Medes and Persians.'];
+  const MWORD=['MENE','TEKEL','PERES'],MCYCLE=[1,2,0];
+  const DISH=[['meat','The king\u2019s meat'],['wine','The king\u2019s wine'],['pulse','Pulse: beans and lentils'],['water','Water'],['cakes','Honey cakes']];
+  const DEC=[1,2,0,3,1],FUR=[4,3,7],DIRS=['North','East','South','West'];
+  const CORN=['NW','NE','SW','SE'],CDEG={NE:45,SE:135,SW:225,NW:315},CNAME={NE:'Northeast',SE:'Southeast',SW:'Southwest',NW:'Northwest'};
+  const GLAZE={NE:['gold',0xe2b23e,'#e2b23e'],SE:['blue',0x2c5cc0,'#2c5cc0'],SW:['green',0x3a9050,'#3a9050'],NW:['white',0xece6d6,'#ece6d6']};
+  const LNAME=['Ari','Kephir','Labi','Shachal'],LANS={NE:'Shachal',SE:'Kephir',SW:'Ari',NW:'Labi'};
+  const HEB={Ari:'\u05D0\u05B2\u05E8\u05B4\u05D9',Kephir:'\u05DB\u05BC\u05B0\u05E4\u05B4\u05D9\u05E8',Labi:'\u05DC\u05B8\u05D1\u05B4\u05D9\u05D0',Shachal:'\u05E9\u05C1\u05B7\u05D7\u05B7\u05DC'};
+  const LMEAN={Ari:'a grown lion',Kephir:'a young lion',Labi:'a lioness',Shachal:'a fierce lion'};
+  const CLUES=['The fierce lion keeps watch where the sun rises.','The young lion and the lioness stand in opposite corners of the den.','The grown lion is glazed neither gold nor white.','The young lion stands on the south side of the den, the lioness on the north.'];
+  // Signet rings: [lion faces, moon side, number of stars]. The impression in the wax is ring A seen in a mirror; ring B looks just like the impression.
+  const RINGS={A:{f:'R',m:'L',n:3},B:{mirror:'A'},C:{f:'R',m:'L',n:2},D:{f:'R',m:'R',n:3}},RORD=['B','D','A','C'];
+  const ANSW=[['Blessed be the name of God for ever and ever: for wisdom and might are his','Daniel 2:20','Daniel said that when God showed him the king\u2019s dream. It doesn\u2019t answer the king\u2019s question.'],
+    ['\u2026our God whom we serve is able to deliver us from the burning fiery furnace','Daniel 3:17','Those words belong to Shadrach, Meshach and Abed-nego, at the furnace.'],
+    ['My God hath sent his angel, and hath shut the lions\u2019 mouths, that they have not hurt me','Daniel 6:22',''],
+    ['Let thy gifts be to thyself, and give thy rewards to another','Daniel 5:17','Daniel said that to King Belshazzar, before he read the writing on the wall.']];
+  let ext,a={};
+  /* ---------- SVG helpers for the panels ---------- */
+  function wedge(t,x,y){
+    if(t==='v')return `M${x-3} ${y}L${x+3} ${y}L${x+0.9} ${y+5}L${x+0.9} ${y+17}L${x-0.9} ${y+17}L${x-0.9} ${y+5}Z`;
+    if(t==='h')return `M${x} ${y-3}L${x} ${y+3}L${x+5} ${y+0.9}L${x+17} ${y+0.9}L${x+17} ${y-0.9}L${x+5} ${y-0.9}Z`;
+    if(t==='d')return `M${x-2.2} ${y+2.2}L${x+2.2} ${y-2.2}L${x+4.8} ${y+3.6}L${x+13.6} ${y+12.4}L${x+12.4} ${y+13.6}L${x+3.6} ${y+4.8}Z`;
+    return `M${x+5} ${y-6}L${x-4} ${y}L${x+5} ${y+6}L${x+5} ${y+3.6}L${x-0.4} ${y}L${x+5} ${y-3.6}Z`;}
+  const gPath=k=>GL[k].map(w=>wedge(w[0],w[1],w[2])).join('');
+  const gSVG=(k,sz)=>`<svg viewBox="-2 -2 28 28" width="${sz}" height="${sz}" aria-hidden="true"><path d="${gPath(k)}" fill="currentColor"/></svg>`;
+  const SYM={sun:'<circle cx="12" cy="12" r="4.6"/><path d="M12 1.6v4M12 18.4v4M1.6 12h4M18.4 12h4M4.6 4.6l2.8 2.8M16.6 16.6l2.8 2.8M4.6 19.4l2.8-2.8M16.6 7.4l2.8-2.8" fill="none" stroke-width="2.4" stroke-linecap="round"/>',
+    moon:'<path d="M15.5 3.2A9.2 9.2 0 1 0 15.5 20.8A8.8 8.8 0 1 1 15.5 3.2Z"/>',star:'<path d="M12 1l2.6 6.5L21.5 6l-4.3 5.8 4.3 5.9-6.9-1.6L12 22.6l-2.6-6.5-6.9 1.6 4.3-5.9L2.5 6l6.9 1.5z"/>'};
+  const SYMN={sun:'sun',moon:'moon',star:'star'};
+  const symSVG=(k,sz,col)=>`<svg viewBox="0 0 24 24" width="${sz}" height="${sz}" fill="${col}" stroke="${col}" role="img" aria-label="${SYMN[k]} sign">${SYM[k]}</svg>`;
+  const LIONP='M18 84C18 69 30 62 45 62L62 62C66 50 74 44 82 46C90 48 94 56 92 64L96 68L90 72C88 76 84 78 80 77L78 92L72 92L70 78L52 78L50 92L44 92L42 78C34 78 28 84 26 92L20 92Z',TAILP='M20 76C8 72 6 60 12 54';
+  const MOONP=x=>`M${x+5} 10A12 12 0 1 0 ${x+5} 34A11.5 11.5 0 1 1 ${x+5} 10Z`;
+  const STARP=(x,y)=>{let d='';for(let i=0;i<10;i++){const an=-Math.PI/2+i*Math.PI/5,r=i%2?2.6:6;d+=(i?'L':'M')+(x+Math.cos(an)*r).toFixed(1)+' '+(y+Math.sin(an)*r).toFixed(1);}return d+'Z';};
+  function ringArt(id){const d=RINGS[id];if(d.mirror)return{flip:true,base:RINGS[d.mirror]};return{flip:false,base:d};}
+  function sealSVG(id,mode,sz){const r=ringArt(id),b=r.base,lionFlip=b.f==='L';let inner='';
+    inner+=`<g transform="${lionFlip?'translate(100,0) scale(-1,1)':''}"><path d="${LIONP}"/><path d="${TAILP}" fill="none" stroke-width="4" stroke-linecap="round"/></g>`;
+    const mx=b.m==='L'?14:62;inner+=`<path d="${MOONP(mx)}"/>`;const sx=b.m==='L'?86:14;for(let i=0;i<b.n;i++)inner+=`<path d="${STARP(sx,10+i*13)}"/>`;
+    if(r.flip)inner=`<g transform="translate(100,0) scale(-1,1)">${inner}</g>`;
+    const bg=mode==='wax'?'<circle cx="50" cy="52" r="50" fill="#9a1a1a"/><circle cx="50" cy="52" r="44" fill="none" stroke="#c8443a" stroke-width="3"/>':'<circle cx="50" cy="52" r="50" fill="#e8b440"/><circle cx="50" cy="52" r="44" fill="#2a2a38"/>';
+    const col=mode==='wax'?'#d86050':'#f2d27a';
+    return `<svg class="r32-ring" viewBox="-4 -2 108 108" width="${sz}" height="${sz}" style="width:${sz}px;height:${sz}px" aria-hidden="true">${bg}<g transform="translate(11,12) scale(0.78)" fill="${col}" stroke="${col}">${inner}</g></svg>`;}
+  const LIONICO=c=>`<svg viewBox="0 0 100 100" width="44" height="44" aria-hidden="true"><path d="${LIONP}" transform="translate(0,-14)" fill="${c}" stroke="#13244a" stroke-width="2.5"/></svg>`;
+  /* ---------- canvas painters ---------- */
+  function E(c,x,y,rx,ry,rot){c.beginPath();c.ellipse(x,y,rx,ry,rot||0,0,Math.PI*2);c.fill();}
+  function seg(c,x1,y1,x2,y2){c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.stroke();}
+  function stoneBg(x,W,H,seed,base){x.fillStyle=base;x.fillRect(0,0,W,H);const r=rng(seed);
+    for(let i=0;i<W*H/140;i++){x.fillStyle=r()<.5?'rgba(255,245,220,.07)':'rgba(40,25,10,.08)';x.beginPath();x.arc(r()*W,r()*H,1+r()*5,0,7);x.fill();}
+    x.strokeStyle='rgba(40,25,10,.2)';x.lineWidth=1;for(let i=0;i<W*H/9000;i++){let cx=r()*W,cy=r()*H;x.beginPath();x.moveTo(cx,cy);for(let j=0;j<4;j++){cx+=r()*14-7;cy+=r()*10;x.lineTo(cx,cy);}x.stroke();}}
+  function carve(x,t,px,py,font,dark,light){x.font=font;x.fillStyle=light||'rgba(255,240,210,.5)';x.fillText(t,px+1.2,py+1.2);x.fillStyle=dark||'#3a2412';x.fillText(t,px,py);}
+  function wrapT(x,t,px,py,maxW,lh){const words=t.split(' ');let line='',y=py;words.forEach(w=>{const tt=line?line+' '+w:w;if(x.measureText(tt).width>maxW&&line){x.fillText(line,px,y);line=w;y+=lh;}else line=tt;});if(line)x.fillText(line,px,y);return y+lh;}
+  function symC(x,k,cx,cy,r,col){x.save();x.fillStyle=col;x.strokeStyle=col;x.lineWidth=r*0.17;x.lineCap='round';
+    if(k==='sun'){x.beginPath();x.arc(cx,cy,r*0.45,0,7);x.fill();for(let i=0;i<8;i++){const an=i*Math.PI/4;seg(x,cx+Math.cos(an)*r*0.64,cy+Math.sin(an)*r*0.64,cx+Math.cos(an)*r,cy+Math.sin(an)*r);}}
+    else if(k==='moon'){x.beginPath();x.arc(cx,cy,r*0.85,Math.PI*0.3,Math.PI*1.7,false);x.arc(cx+r*0.38,cy,r*0.68,Math.PI*1.62,Math.PI*0.38,true);x.closePath();x.fill();}
+    else{x.beginPath();for(let i=0;i<12;i++){const an=-Math.PI/2+i*Math.PI/6,rr=i%2?r*0.42:r;x.lineTo(cx+Math.cos(an)*rr,cy+Math.sin(an)*rr);}x.closePath();x.fill();}
+    x.restore();}
+  function glyphC(x,k,px,py,s){x.save();x.translate(px,py);x.scale(s/24,s/24);x.fill(new Path2D(gPath(k)));x.restore();}
+  // Ishtar Gate animals, drawn in a 100 x 60 box facing right. hm = height-map pass (white, no detail)
+  function lion2D(c,ox,oy,s,hm){c.save();c.translate(ox,oy);c.scale(s,s);const body=hm?'#fff':'#f2e6c0',mane=hm?'#fff':'#e4a632';
+    c.fillStyle=body;c.strokeStyle=body;c.lineCap='round';c.lineWidth=7;
+    [[16,34,10,56],[28,36,27,56],[62,36,61,56],[71,35,77,56]].forEach(p=>seg(c,p[0],p[1],p[2],p[3]));
+    [[10,57],[27,57],[62,57],[79,57]].forEach(p=>E(c,p[0],p[1],5,2.4));
+    E(c,45,30,28,11);E(c,21,30,11,12.5);E(c,64,30,12,13);
+    c.lineWidth=2.6;c.beginPath();c.moveTo(12,25);c.bezierCurveTo(4,22,2,12,8,8);c.stroke();c.fillStyle=hm?'#fff':mane;E(c,8,7,3,4);
+    c.fillStyle=mane;c.beginPath();for(let i=0;i<=26;i++){const an=i/26*Math.PI*2,rr=i%2?12.5:16;c.lineTo(71+Math.cos(an)*rr*0.85,21+Math.sin(an)*rr);}c.fill();
+    c.fillStyle=body;E(c,80,18,8,8);E(c,87,22,6,4.5);c.beginPath();c.moveTo(74,10);c.lineTo(77,3);c.lineTo(80,10);c.fill();
+    if(!hm){c.strokeStyle='rgba(150,80,10,.75)';c.lineWidth=0.9;for(let i=0;i<14;i++){const an=i/14*Math.PI*2;seg(c,71+Math.cos(an)*5,21+Math.sin(an)*6,71+Math.cos(an)*11,21+Math.sin(an)*13);}
+      c.fillStyle='#22305a';E(c,83,16,1.2,1.2);c.strokeStyle='rgba(30,40,80,.55)';c.lineWidth=0.8;c.beginPath();c.moveTo(91,24);c.lineTo(85,25);c.stroke();
+      c.strokeStyle='rgba(120,90,40,.4)';[[40,22,52,22],[34,38,56,38]].forEach(p=>seg(c,p[0],p[1],p[2],p[3]));}
+    c.restore();}
+  function dragon2D(c,ox,oy,s,hm){c.save();c.translate(ox,oy);c.scale(s,s);const body=hm?'#fff':'#ecc060',dark='rgba(140,90,20,.7)';
+    c.fillStyle=body;c.strokeStyle=body;c.lineCap='round';c.lineWidth=6;
+    [[62,34,61,55],[69,34,73,55],[26,34,21,55],[33,34,31,55]].forEach(p=>seg(c,p[0],p[1],p[2],p[3]));
+    c.lineWidth=1.8;[[21,55],[31,55]].forEach(p=>{seg(c,p[0],p[1],p[0]-5,p[1]+3);seg(c,p[0],p[1],p[0]+5,p[1]+3);seg(c,p[0],p[1],p[0]-2,p[1]+4);});E(c,61,56,4.5,2.2);E(c,74,56,4.5,2.2);
+    E(c,46,31,26,8.5);c.lineWidth=7;c.beginPath();c.moveTo(64,30);c.bezierCurveTo(72,28,74,18,78,13);c.stroke();E(c,86,12,10,3.4);E(c,80,13,4,4.2);
+    c.lineWidth=2;seg(c,81,9,86,0);c.lineWidth=0.9;seg(c,95,12,100,10);seg(c,95,12,100,14);for(let i=0;i<5;i++){const t=i/4,px=66+t*11,py=27-t*15;c.beginPath();c.moveTo(px-2,py-1);c.lineTo(px-3,py-6);c.lineTo(px+2,py-3);c.fill();}
+    c.lineWidth=4;c.beginPath();c.moveTo(21,29);c.bezierCurveTo(8,32,3,20,9,13);c.stroke();c.beginPath();c.moveTo(9,13);c.lineTo(14,8);c.lineTo(12,15);c.fill();
+    if(!hm){c.strokeStyle=dark;c.lineWidth=0.7;for(let i=0;i<9;i++)for(let j=0;j<2;j++){c.beginPath();c.arc(28+i*4.5,28+j*5,2,0,Math.PI);c.stroke();}c.fillStyle='#22305a';E(c,84,11,1,1);}
+    c.restore();}
+  function bull2D(c,ox,oy,s,hm){c.save();c.translate(ox,oy);c.scale(s,s);const body=hm?'#fff':'#f0dcb0';c.fillStyle=body;c.strokeStyle=body;c.lineCap='round';c.lineWidth=7;
+    [[22,36,18,56],[32,38,31,56],[62,38,62,56],[70,36,76,56]].forEach(p=>seg(c,p[0],p[1],p[2],p[3]));E(c,46,30,27,12);E(c,64,22,10,8);E(c,82,30,7,6);E(c,88,33,4,3.5);
+    c.lineWidth=2.4;c.beginPath();c.moveTo(80,24);c.quadraticCurveTo(84,14,92,13);c.stroke();c.lineWidth=2;c.beginPath();c.moveTo(19,26);c.quadraticCurveTo(10,32,12,44);c.stroke();
+    c.fillStyle=hm?'#fff':'#2a6ac0';E(c,12,45,2.2,3);if(!hm){c.fillStyle='#22305a';E(c,83,28,1,1);c.strokeStyle='rgba(110,80,40,.45)';c.lineWidth=0.8;for(let i=0;i<6;i++)seg(c,56+i*2,16,58+i*2,30);}c.restore();}
+  function rosette(c,x,y,r,hm){c.fillStyle=hm?'#fff':'#f4f0e4';for(let i=0;i<8;i++){const an=i*Math.PI/4;E(c,x+Math.cos(an)*r*0.55,y+Math.sin(an)*r*0.55,r*0.42,r*0.2,an);}c.fillStyle=hm?'#fff':'#e8b030';E(c,x,y,r*0.3,r*0.3);}
+  function ishtarSet(){const W=1024,H=1024,A=FX.plainCanvas(W,H),a2=A.getContext('2d'),HC=FX.plainCanvas(512,512),h=HC.getContext('2d'),r=rng(3201);
+    const ym=m=>H-m/WH*H,rows=52,rh=H/rows,cols=12,cw=W/cols;const tone=[];for(let j=0;j<rows;j++){tone[j]=[];for(let i=0;i<cols;i++)tone[j][i]=[214+r()*12,52+r()*22,22+r()*13,0.04+r()*0.08];}
+    for(let j=0;j<rows;j++){const off=(j%2)*cw/2;for(let i=-1;i<=cols;i++){const t=tone[j][(i+cols)%cols],x0=i*cw+off,y0=j*rh;a2.fillStyle=`hsl(${t[0]},${t[1]}%,${t[2]}%)`;a2.fillRect(x0,y0,cw,rh);a2.fillStyle=`rgba(140,190,255,${t[3]})`;a2.fillRect(x0+3,y0+2,cw-6,rh*0.4);}}
+    FX.noise(a2,W,H,3202,[16,64,256],[0.12,0.1,0.08]);h.fillStyle='#707070';h.fillRect(0,0,512,512);
+    const band=(m,col)=>{a2.fillStyle=col;a2.fillRect(0,ym(m)-rh*0.55,W,rh*1.1);h.fillStyle='#a0a0a0';h.fillRect(0,(ym(m)-rh*0.55)/2,512,rh*0.55);};
+    [[0.95,'#e8b030'],[1.15,'#f2ecd8'],[2.25,'#f2ecd8'],[2.45,'#e8b030'],[3.65,'#e8b030'],[3.85,'#f2ecd8'],[4.72,'#e8b030']].forEach(b=>band(b[0],b[1]));
+    [[1.05],[2.35],[3.75]].forEach(b=>{for(let i=0;i<cols;i++){rosette(a2,i*cw+cw/2,ym(b[0]),18,false);rosette(h,(i*cw+cw/2)/2,ym(b[0])/2,9,true);}});
+    const sL=(ym(1.18)-ym(2.22))/60;[60,572].forEach(x=>{lion2D(a2,x,ym(2.22),sL,false);lion2D(h,x/2,ym(2.22)/2,sL/2,true);});
+    const sD=(ym(2.5)-ym(3.6))/60;dragon2D(a2,50,ym(3.6),sD,false);dragon2D(h,25,ym(3.6)/2,sD/2,true);bull2D(a2,575,ym(3.6),sD,false);bull2D(h,287,ym(3.6)/2,sD/2,true);
+    {const g=a2.createLinearGradient(0,0,0,H);g.addColorStop(0,'rgba(2,6,20,.5)');g.addColorStop(.45,'rgba(2,6,20,.12)');g.addColorStop(.7,'rgba(2,6,20,0)');a2.fillStyle=g;a2.fillRect(0,0,W,H);}
+    // brick joints over everything, as on the real gate
+    a2.fillStyle='rgba(12,20,44,.55)';h.fillStyle='#202020';
+    for(let j=0;j<=rows;j++){a2.fillRect(0,j*rh-1.2,W,2.4);h.fillRect(0,j*rh/2-0.7,512,1.4);const off=(j%2)*cw/2;for(let i=0;i<=cols;i++){const x0=i*cw+off;a2.fillRect(x0-1.2,j*rh,2.4,rh);h.fillRect(x0/2-0.7,j*rh/2,1.4,rh/2);}}
+    return{alb:A,nrm:FX.normalFromCanvas(FX.blur(HC,1.1),2.6)};}
+  function floorSet(){const N=512,P=FX.pair(N,N,'#8e7a58'),r=rng(3211);FX.noise(P.a,N,N,3212,[8,32,128],[0.25,0.2,0.15]);const n=4,s=N/n;
+    for(let j=0;j<n;j++){const off=(j%2)*s/2;for(let i=-1;i<=n;i++){const x0=i*s+off,y0=j*s,t=r();P.a.fillStyle=`rgba(${t<.5?'255,240,210':'40,28,14'},${0.06+r()*0.1})`;P.a.fillRect(x0+3,y0+3,s-6,s-6);}
+      for(let i=0;i<=n;i++){const x0=i*s+off;P.a.fillStyle='rgba(30,20,10,.55)';P.a.fillRect(x0-2,j*s,4,s);P.h.fillStyle='#202020';P.h.fillRect(x0-3,j*s,6,s);}P.a.fillRect(0,j*s-2,N,4);P.h.fillRect(0,j*s-3,N,6);}
+    for(let i=0;i<70;i++){P.a.fillStyle=`rgba(214,190,140,${0.08+r()*0.12})`;E(P.a,r()*N,r()*N,10+r()*40,5+r()*16,r()*3);}
+    FX.noise(P.h,N,N,3213,[32,128],[0.3,0.2]);return{alb:P.A,hgt:P.Hc};}
+  function brickSet(){const N=256,P=FX.pair(N,N,'#a07a52'),r=rng(3221),rows=8,cols=4,rh=N/rows,cw=N/cols;
+    for(let j=0;j<rows;j++){const off=(j%2)*cw/2;for(let i=-1;i<=cols;i++){P.a.fillStyle=`hsl(${24+r()*10},${30+r()*15}%,${30+r()*14}%)`;P.a.fillRect(i*cw+off,j*rh,cw,rh);}}
+    FX.noise(P.a,N,N,3222,[8,32,128],[0.2,0.18,0.14]);P.a.fillStyle='rgba(40,28,18,.7)';P.h.fillStyle='#202020';
+    for(let j=0;j<=rows;j++){P.a.fillRect(0,j*rh-1.5,N,3);P.h.fillRect(0,j*rh-2,N,4);const off=(j%2)*cw/2;for(let i=0;i<=cols;i++){P.a.fillRect(i*cw+off-1.5,j*rh,3,rh);P.h.fillRect(i*cw+off-2,j*rh,4,rh);}}
+    FX.noise(P.h,N,N,3223,[16,64],[0.3,0.2]);return{alb:P.A,hgt:P.Hc};}
+  function sandSet(seed,base){const N=256,P=FX.pair(N,N,base);FX.noise(P.a,N,N,seed,[8,32,128],[0.22,0.18,0.12]);FX.noise(P.h,N,N,seed+1,[16,64,128],[0.4,0.3,0.2]);return{alb:P.A,hgt:P.Hc};}
+  function crackleN(){const N=256,c=FX.plainCanvas(N,N),x=c.getContext('2d'),r=rng(3231);x.fillStyle='#808080';x.fillRect(0,0,N,N);x.strokeStyle='#505050';x.lineWidth=1.4;
+    for(let i=0;i<60;i++){let px=r()*N,py=r()*N;x.beginPath();x.moveTo(px,py);for(let j=0;j<5;j++){px+=r()*30-15;py+=r()*30-15;x.lineTo(px,py);}x.stroke();}FX.noise(x,N,N,3232,[32,128],[0.15,0.1]);return FX.normalFromCanvas(c,1.5);}
+  function writingC(glow){const W=512,H=320,c=mk(W,H),x=c.getContext('2d');
+    if(glow){x.fillStyle='#000';x.fillRect(0,0,W,H);}else{stoneBg(x,W,H,3241,'#c8b898');x.fillStyle='rgba(90,60,30,.14)';for(let i=0;i<5;i++)E(x,80+i*90,40+((i*53)%240),60,30);}
+    const rowsY=[22,94,166,238],sz=56,gap=62;
+    WORDS.forEach((w,i)=>{const x0=W/2-(w.length*gap-10)/2;for(let j=0;j<w.length;j++){const px=x0+j*gap,py=rowsY[i];
+      if(glow){x.shadowColor='rgba(255,170,60,1)';x.shadowBlur=10;x.fillStyle='#ffb040';}else x.fillStyle='#5a2a06';glyphC(x,w[j],px,py,sz);x.shadowBlur=0;}});
+    return c;}
+  function furnaceC(){const W=512,H=384,c=mk(W,H),x=c.getContext('2d');stoneBg(x,W,H,3251,'#b89c72');x.strokeStyle='rgba(70,45,20,.6)';x.lineWidth=6;x.strokeRect(10,10,W-20,H-20);
+    const arch=()=>{x.beginPath();x.moveTo(170,H-36);x.lineTo(170,170);x.arc(320,170,150,Math.PI,0);x.lineTo(470,H-36);x.closePath();};
+    x.fillStyle='#6a3018';arch();x.fill();x.save();arch();x.clip();const g=x.createLinearGradient(0,H-40,0,30);g.addColorStop(0,'#ffe070');g.addColorStop(.45,'#ff9a28');g.addColorStop(1,'#c43a10');x.fillStyle=g;
+    const r=rng(3252);for(let i=0;i<26;i++){const fx0=176+i*12,hgt=150+r()*140;x.beginPath();x.moveTo(fx0-18,H-36);x.quadraticCurveTo(fx0-10,H-36-hgt*0.6,fx0+r()*10-5,H-36-hgt);x.quadraticCurveTo(fx0+12,H-36-hgt*0.5,fx0+18,H-36);x.fill();}
+    // four men walking loose in the fire; the fourth shines
+    [[218,'#3a1a0a'],[272,'#3a1a0a'],[326,'#3a1a0a'],[392,'#fff6d8']].forEach((f,i)=>{const fx0=f[0],gy=H-40;if(i===3){x.shadowColor='#fff8c0';x.shadowBlur=26;}x.fillStyle=f[1];
+      x.beginPath();x.arc(fx0,gy-118,13,0,7);x.fill();x.beginPath();x.moveTo(fx0-15,gy-102);x.lineTo(fx0+15,gy-102);x.lineTo(fx0+22,gy-6);x.lineTo(fx0-22,gy-6);x.closePath();x.fill();
+      x.strokeStyle=f[1];x.lineWidth=7;x.lineCap='round';seg(x,fx0+12,gy-94,fx0+30,gy-66);seg(x,fx0-12,gy-94,fx0-24,gy-62);x.lineWidth=8;seg(x,fx0-8,gy-8,fx0-14,gy);seg(x,fx0+8,gy-8,fx0+16,gy);x.shadowBlur=0;});
+    x.restore();
+    // the king outside the furnace, pointing
+    x.fillStyle='#4a2a14';const kx=84,ky=H-40;x.beginPath();x.arc(kx,ky-124,13,0,7);x.fill();x.beginPath();x.moveTo(kx-16,ky-108);x.lineTo(kx+16,ky-108);x.lineTo(kx+26,ky);x.lineTo(kx-26,ky);x.closePath();x.fill();
+    x.fillStyle='#d8a030';x.beginPath();x.moveTo(kx-12,ky-134);x.lineTo(kx-12,ky-152);x.lineTo(kx-5,ky-142);x.lineTo(kx,ky-156);x.lineTo(kx+5,ky-142);x.lineTo(kx+12,ky-152);x.lineTo(kx+12,ky-134);x.closePath();x.fill();
+    x.strokeStyle='#4a2a14';x.lineWidth=7;x.lineCap='round';seg(x,kx+12,ky-100,kx+50,ky-122);x.fillStyle='rgba(60,35,15,.8)';x.fillRect(40,ky,90,8);
+    symC(x,'sun',462,52,22,'#5a3412');x.textAlign='center';x.textBaseline='middle';carve(x,'How many walk',462,90,`700 13px ${CINZEL}`);carve(x,'in the fire?',462,106,`700 13px ${CINZEL}`);
+    return c;}
+  function dreamC(){const W=384,H=512,c=mk(W,H),x=c.getContext('2d');stoneBg(x,W,H,3261,'#c0a47c');x.strokeStyle='rgba(70,45,20,.6)';x.lineWidth=6;x.strokeRect(10,10,W-20,H-20);
+    x.textAlign='center';x.textBaseline='middle';carve(x,'THE KING\u2019S DREAM',W/2,40,`700 22px ${CINZEL}`);
+    const cx=170;x.fillStyle='rgba(90,60,30,.32)';x.strokeStyle='rgba(60,38,16,.85)';x.lineWidth=3;
+    const shape=()=>{x.beginPath();x.arc(cx,98,24,0,7);x.moveTo(cx-48,130);x.lineTo(cx+48,130);x.lineTo(cx+60,250);x.lineTo(cx+44,250);x.lineTo(cx+36,170);x.lineTo(cx+34,300);x.lineTo(cx+24,452);x.lineTo(cx+4,452);x.lineTo(cx,320);x.lineTo(cx-4,452);x.lineTo(cx-24,452);x.lineTo(cx-34,300);x.lineTo(cx-36,170);x.lineTo(cx-44,250);x.lineTo(cx-60,250);x.closePath();};
+    shape();x.fill();shape();x.stroke();x.setLineDash([5,5]);[128,214,300,440].forEach(yy=>seg(x,cx-50,yy,cx+50,yy));x.setLineDash([]);
+    x.fillStyle='rgba(60,38,16,.85)';x.beginPath();x.moveTo(312,470);x.lineTo(268,470);x.lineTo(290,420);x.closePath();x.fill();
+    x.beginPath();x.arc(258,428,13,0,7);x.fill();x.lineWidth=2;x.setLineDash([3,6]);seg(x,272,420,244,432);x.setLineDash([]);
+    carve(x,'Read the dream',W/2,486,`italic 16px ${FELL}`);return c;}
+  function steleC(){const W=192,H=440,c=mk(W,H),x=c.getContext('2d');stoneBg(x,W,H,3263,'#b49a72');x.textAlign='center';x.textBaseline='middle';carve(x,'THE KING\u2019S',W/2,20,`700 14px ${CINZEL}`);carve(x,'IMAGE',W/2,38,`700 14px ${CINZEL}`);
+    const cx=W/2;x.strokeStyle='rgba(60,38,16,.7)';x.lineWidth=2.5;x.setLineDash([6,4]);x.beginPath();x.arc(cx,84,22,0,7);x.moveTo(cx-44,112);x.lineTo(cx+44,112);x.lineTo(cx+54,214);x.lineTo(cx+40,214);x.lineTo(cx+32,150);x.lineTo(cx+30,262);x.lineTo(cx+22,410);x.lineTo(cx+4,410);x.lineTo(cx,290);x.lineTo(cx-4,410);x.lineTo(cx-22,410);x.lineTo(cx-30,262);x.lineTo(cx-32,150);x.lineTo(cx-40,214);x.lineTo(cx-54,214);x.closePath();x.stroke();x.setLineDash([]);return c;}
+  function decreeC(){const W=320,H=240,c=mk(W,H),x=c.getContext('2d');stoneBg(x,W,H,3271,'#b07a4a');x.textAlign='center';x.textBaseline='middle';
+    carve(x,'THE DECREE OF DARIUS',W/2,28,`700 15px ${CINZEL}`,'#3a1a08');x.font=`italic 16px ${FELL}`;x.fillStyle='#2a1206';
+    wrapT(x,'It pleased Darius to set over the kingdom an hundred and twenty princes, which should be over the whole kingdom; And over these three presidents; of whom Daniel was first',W/2,62,276,22);return c;}
+  function pillarC(){const W=128,H=512,c=mk(W,H),x=c.getContext('2d');stoneBg(x,W,H,3281,'#c8b08a');x.strokeStyle='rgba(70,45,20,.55)';x.lineWidth=4;x.strokeRect(8,8,W-16,H-16);x.textAlign='center';x.textBaseline='middle';
+    symC(x,'moon',W/2,52,24,'#4a2a10');[['HANANIAH','SHADRACH'],['MISHAEL','MESHACH'],['AZARIAH','ABED-NEGO']].forEach((p,i)=>{const y=126+i*104;carve(x,p[0],W/2,y,`700 14px ${CINZEL}`);carve(x,'is',W/2,y+22,`italic 14px ${FELL}`);carve(x,p[1],W/2,y+44,`700 14px ${CINZEL}`);});
+    carve(x,'How many',W/2,448,`italic 15px ${FELL}`);carve(x,'friends?',W/2,468,`italic 15px ${FELL}`);return c;}
+  function tabletC(title,lines,seed,base){const W=320,H=256,c=mk(W,H),x=c.getContext('2d');stoneBg(x,W,H,seed,base||'#b8845a');x.textAlign='center';x.textBaseline='middle';carve(x,title,W/2,26,`700 15px ${CINZEL}`,'#3a1a08');
+    x.font=`italic 13px ${FELL}`;x.fillStyle='#2a1206';x.textAlign='left';let y=54;lines.forEach((l,i)=>{y=wrapT(x,l,18,y,W-36,16)+5;});return c;}
+  function mapC(){const W=384,H=256,c=mk(W,H),x=c.getContext('2d');stoneBg(x,W,H,3291,'#d8c49a');x.fillStyle='#8ab0c0';x.beginPath();x.moveTo(0,0);x.lineTo(46,0);x.bezierCurveTo(60,70,40,150,58,256);x.lineTo(0,256);x.fill();
+    x.fillStyle='rgba(160,120,60,.35)';const r=rng(3292);for(let i=0;i<260;i++){x.beginPath();x.arc(110+r()*170,60+r()*170,1.2,0,7);x.fill();}
+    x.strokeStyle='#4a8ab0';x.lineWidth=3;x.beginPath();x.moveTo(250,10);x.bezierCurveTo(270,70,300,120,316,170);x.bezierCurveTo(326,200,340,230,356,250);x.stroke();x.lineWidth=2;x.beginPath();x.moveTo(300,8);x.bezierCurveTo(330,70,340,150,360,220);x.stroke();
+    x.textAlign='center';x.textBaseline='middle';x.fillStyle='#2a1a0a';x.font=`italic 13px ${FELL}`;x.fillText('The Great Sea',26,128);x.fillText('desert',190,190);
+    [['Jerusalem',86,118,'#8a2a10'],['Babylon',318,170,'#1d4e9a']].forEach(p=>{x.fillStyle=p[3];x.beginPath();x.arc(p[1],p[2],6,0,7);x.fill();x.font=`700 15px ${NUN}`;x.fillText(p[0],p[1],p[2]-15);});
+    x.font=`italic 12px ${FELL}`;x.fillStyle='#2a1a0a';x.fillText('(this den)',318,188);
+    const cx=344,cy=56;x.fillStyle='#3a2a1a';x.beginPath();x.moveTo(cx,cy-24);x.lineTo(cx+7,cy);x.lineTo(cx,cy+18);x.lineTo(cx-7,cy);x.fill();x.font=`700 14px ${NUN}`;x.fillText('N',cx,cy-32);return c;}
+  function plateC(name){const c=mk(160,44),x=c.getContext('2d');brassFill(x,0,0,160,44);x.strokeStyle='#6a4a18';x.lineWidth=3;x.strokeRect(3,3,154,38);x.textAlign='center';x.textBaseline='middle';x.fillStyle='#3a2408';x.font=`700 20px ${CINZEL}`;x.fillText(name||'\u00B7 \u00B7 \u00B7',80,24);return c;}
+  function waxC(){const c=mk(256,256),x=c.getContext('2d');const g=x.createRadialGradient(118,110,10,128,128,128);g.addColorStop(0,'#c8302a');g.addColorStop(1,'#6a0e0e');x.fillStyle=g;x.beginPath();x.arc(128,128,124,0,7);x.fill();
+    x.strokeStyle='rgba(255,140,120,.5)';x.lineWidth=5;x.beginPath();x.arc(128,128,108,0,7);x.stroke();
+    // the impression: ring A seen in a mirror
+    const b=RINGS.A;x.save();x.translate(256,0);x.scale(-1,1);x.translate(48,40);x.scale(1.6,1.6);
+    const draw=(col,dx,dy)=>{x.save();x.translate(dx,dy);x.fillStyle=col;x.strokeStyle=col;x.lineWidth=4;x.lineCap='round';x.save();if(b.f==='L'){x.translate(100,0);x.scale(-1,1);}x.fill(new Path2D(LIONP));x.stroke(new Path2D(TAILP));x.restore();
+      x.fill(new Path2D(MOONP(b.m==='L'?14:62)));const sx=b.m==='L'?86:14;for(let i=0;i<b.n;i++)x.fill(new Path2D(STARP(sx,10+i*13)));x.restore();};
+    draw('rgba(40,0,0,.6)',1.2,1.2);draw('#e8705e',0,0);x.restore();return c;}
+  function skyC(dawn){const c=mk(128,192),x=c.getContext('2d'),g=x.createLinearGradient(0,0,0,192);
+    if(dawn){g.addColorStop(0,'#4a6aa8');g.addColorStop(.55,'#e8a0a0');g.addColorStop(1,'#ffd890');}else{g.addColorStop(0,'#0a1438');g.addColorStop(1,'#1e3266');}
+    x.fillStyle=g;x.fillRect(0,0,128,192);const r=rng(dawn?3301:3302);for(let i=0;i<50;i++){x.fillStyle=`rgba(255,255,255,${dawn?0.25*r():0.4+0.6*r()})`;x.fillRect(r()*128,r()*120,1.3,1.3);}
+    if(!dawn){x.fillStyle='#f4f0d8';x.beginPath();x.arc(88,50,11,0,7);x.fill();x.fillStyle='#16285a';x.beginPath();x.arc(94,46,10,0,7);x.fill();}return c;}
+  function domeSkyC(){const W=512,H=512,c=mk(W,H),x=c.getContext('2d'),g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#3a5a9a');g.addColorStop(.32,'#7aa0d0');g.addColorStop(.44,'#f0c0a0');g.addColorStop(.5,'#ffd890');g.addColorStop(.52,'#c89060');g.addColorStop(1,'#6a4a2a');x.fillStyle=g;x.fillRect(0,0,W,H);
+    const sg=x.createRadialGradient(256,240,4,256,240,90);sg.addColorStop(0,'rgba(255,250,220,1)');sg.addColorStop(.12,'rgba(255,240,180,1)');sg.addColorStop(1,'rgba(255,200,120,0)');x.fillStyle=sg;x.fillRect(150,150,212,190);
+    const r=rng(3311);x.fillStyle='rgba(255,226,210,.32)';for(let i=0;i<14;i++){const cx=r()*W,cy=160+r()*60,s=4+r()*6;E(x,cx,cy,s*2.4,s*0.6);}return c;}
+  function compassC(){const W=256,c=mk(W,W),x=c.getContext('2d');x.fillStyle='#1d3c7a';x.beginPath();x.arc(128,128,126,0,7);x.fill();
+    const r=rng(3321);for(let i=0;i<500;i++){const an=r()*7,rr=r()*120;x.fillStyle=`hsla(${210+r()*20},60%,${25+r()*20}%,.6)`;x.fillRect(128+Math.cos(an)*rr,128+Math.sin(an)*rr,5,5);}
+    x.strokeStyle='#e8b440';x.lineWidth=5;x.beginPath();x.arc(128,128,120,0,7);x.stroke();x.lineWidth=2;x.beginPath();x.arc(128,128,96,0,7);x.stroke();
+    for(let i=0;i<4;i++){const an=-Math.PI/2+i*Math.PI/2;x.fillStyle=i===0?'#f2c040':'#e8dcc0';x.beginPath();x.moveTo(128+Math.cos(an)*92,128+Math.sin(an)*92);x.lineTo(128+Math.cos(an+1.3)*20,128+Math.sin(an+1.3)*20);x.lineTo(128,128);x.lineTo(128+Math.cos(an-1.3)*20,128+Math.sin(an-1.3)*20);x.closePath();x.fill();}
+    x.textAlign='center';x.textBaseline='middle';x.font=`700 20px ${CINZEL}`;x.fillStyle='#ffe08a';[['N',0],['E',1],['S',2],['W',3]].forEach(p=>{const an=-Math.PI/2+p[1]*Math.PI/2;x.fillText(p[0],128+Math.cos(an)*108,128+Math.sin(an)*108);});return c;}
+  function frondC(){const c=FX.plainCanvas(64,256),x=c.getContext('2d');x.strokeStyle='#4a7a2a';x.lineWidth=3;seg(x,32,0,32,256);x.lineWidth=2.2;for(let y=6;y<250;y+=7){const l=28*Math.sin(y/256*Math.PI)+4;x.strokeStyle=y%2?'#3a6a22':'#5a8a32';seg(x,32,y,32-l,y+14);seg(x,32,y,32+l,y+14);}return c;}
+  function furC(base){const c=FX.plainCanvas(256,256),x=c.getContext('2d');x.fillStyle=base||'#b88446';x.fillRect(0,0,256,256);FX.noise(x,256,256,3331,[32,128],[0.1,0.08]);const r=rng(3332);x.lineWidth=1;for(let i=0;i<900;i++){const px=r()*256,py=r()*256;x.strokeStyle=r()<.5?'rgba(90,55,20,.18)':'rgba(240,200,140,.16)';seg(x,px,py,px+r()*2-1,py+4+r()*4);}return c;}
+  function ropeC(){const c=FX.plainCanvas(64,64),x=c.getContext('2d');x.fillStyle='#b8925a';x.fillRect(0,0,64,64);x.strokeStyle='#7a5a2a';x.lineWidth=5;for(let i=-64;i<128;i+=14)seg(x,i,0,i+64,64);return c;}
+  function clothC(){const c=mk(256,128),x=c.getContext('2d');x.fillStyle='#e8dcc0';x.fillRect(0,0,256,128);x.fillStyle='#1d4e9a';x.fillRect(0,10,256,8);x.fillRect(0,110,256,8);x.fillStyle='#c8902a';for(let i=0;i<16;i++){x.beginPath();x.arc(8+i*16,14,3,0,7);x.fill();x.beginPath();x.arc(8+i*16,114,3,0,7);x.fill();}return c;}
+  function lentilC(){const c=FX.plainCanvas(128,128),x=c.getContext('2d'),r=rng(3341);x.fillStyle='#7a4a1a';x.fillRect(0,0,128,128);for(let i=0;i<500;i++){x.fillStyle=['#c8803a','#a8602a','#d8a050','#8a6a2a'][i%4];E(x,r()*128,r()*128,3.4,2.6,r()*3);}return c;}
+  /* ---------- 3D builders ---------- */
+  function lionModel(m,mm,dm,pose){const g=new THREE.Group(),parts={};
+    const Sp=(r,x,y,z,sx,sy,sz,mat)=>{const s=new THREE.Mesh(new THREE.SphereGeometry(r,22,14),mat||m);s.position.set(x,y,z);if(sx)s.scale.set(sx,sy,sz);g.add(s);return s;};
+    const Cy=(r1,r2,h,x,y,z,rx,mat)=>{const c=new THREE.Mesh(new THREE.CylinderGeometry(r1,r2,h,14),mat||m);c.position.set(x,y,z);c.rotation.x=rx||0;g.add(c);return c;};
+    const maneGeo=new THREE.SphereGeometry(1,26,18);{const p=maneGeo.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i);const k=1+0.1*Math.sin(x*11+y*7)*Math.cos(z*9+y*5)+0.05*Math.sin(y*23+x*13);p.setXYZ(i,x*k,y*k,z*k);}maneGeo.computeVertexNormals();}
+    const tail=pts=>{const t=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts.map(p=>new THREE.Vector3(p[0],p[1],p[2]))),20,0.026,6),m);g.add(t);};
+    if(pose==='sit'){Sp(0.27,0,0.27,-0.2,1.05,0.95,1.15);const tor=Sp(0.24,0,0.5,0,0.85,1.25,0.9);tor.rotation.x=-0.35;Sp(0.19,0,0.56,0.15);
+      [-1,1].forEach(sd=>{Cy(0.058,0.066,0.5,sd*0.1,0.26,0.21);Sp(0.074,sd*0.1,0.04,0.26,1.1,0.6,1.5);Sp(0.08,sd*0.2,0.045,0.0,1,0.6,1.6);Sp(0.16,sd*0.17,0.22,-0.12,0.7,1.0,1.2);
+        Sp(0.042,sd*0.095,0.97,0.22,1,1,0.5);Sp(0.017,sd*0.052,0.87,0.385,1.2,0.55,0.6,dm);});
+      const mane=new THREE.Mesh(maneGeo,mm);mane.position.set(0,0.78,0.08);mane.scale.set(0.27,0.3,0.22);g.add(mane);
+      Sp(0.13,0,0.83,0.27,1,0.95,1);Sp(0.078,0,0.77,0.38,1.15,0.8,1);Sp(0.025,0,0.8,0.457,1.3,0.8,1,dm);
+      tail([[-0.04,0.12,-0.42],[0.15,0.03,-0.46],[0.3,0.03,-0.26],[0.33,0.05,-0.06]]);Sp(0.045,0.33,0.06,-0.03,1,1,1,mm);}
+    else{parts.body=Sp(0.3,0,0.3,-0.1,0.98,0.82,1.5);Sp(0.22,0.1,0.29,-0.5,1,1,1.1);Sp(0.25,0,0.34,0.28,1.02,1.05,1);
+      const mane=new THREE.Mesh(maneGeo,mm);mane.position.set(0,0.44,0.5);mane.scale.set(0.32,0.36,0.24);g.add(mane);parts.mane=mane;
+      parts.head=new THREE.Group();g.add(parts.head);const hs=(r,x,y,z,sx,sy,sz,mat)=>{const s=Sp(r,x,y,z,sx,sy,sz,mat);parts.head.add(s);return s;};
+      hs(0.17,0,0.4,0.74,1,0.9,1);hs(0.095,0,0.32,0.88,1.15,0.75,1);hs(0.07,0,0.27,0.83,1,0.8,1);hs(0.03,0,0.36,0.965,1.4,0.8,1,dm);
+      [-1,1].forEach(sd=>{hs(0.05,sd*0.12,0.55,0.7,1,1,0.5);const e=new THREE.Mesh(new THREE.BoxGeometry(0.05,0.01,0.012),dm);e.position.set(sd*0.066,0.44,0.893);e.rotation.z=sd*0.25;parts.head.add(e);
+        Cy(0.062,0.07,0.36,sd*0.14,0.072,0.72,Math.PI/2);Sp(0.08,sd*0.14,0.062,0.92,1.1,0.62,1.25);});
+      Sp(0.1,0.25,0.08,-0.28,1,0.6,1.7);Sp(0.085,0.27,0.065,0.02,1.1,0.6,1.4);tail([[0,0.16,-0.74],[0.22,0.05,-0.8],[0.4,0.04,-0.5],[0.47,0.03,-0.1]]);Sp(0.05,0.47,0.05,-0.06,1,1,1,mm);}
+    return{g,parts};}
+  function ingot(mat,clayM){const g=new THREE.Group();if(clayM){const i1=rb(0.13,0.07,0.12,0.015,mat);i1.position.set(-0.065,0.035,0);g.add(i1);const i2=rb(0.13,0.07,0.12,0.015,clayM);i2.position.set(0.065,0.035,0);g.add(i2);}
+    else{const i=rb(0.26,0.07,0.12,0.02,mat);i.position.y=0.035;g.add(i);}return FX.shadow(g);}
+  function oilLamp(clayM){const g=new THREE.Group();const b=FX.lathe([[0,0],[0.07,0],[0.09,0.03],[0.07,0.05],[0.02,0.055],[0,0.055]],clayM,18);b.scale.z=1.4;g.add(b);const sp=cyl(0.018,0.026,0.08,clayM,0,0.035,0.1,g,8);sp.rotation.x=Math.PI/2;return g;}
+  function palm(parent,x,z,h,frM,trunkM){const g=new THREE.Group();g.position.set(x,0,z);parent.add(g);const tr=new THREE.Mesh(new THREE.CylinderGeometry(0.07,0.11,h,10,6),trunkM);tr.position.y=h/2;g.add(tr);
+    for(let i=0;i<9;i++){const pg=new THREE.PlaneGeometry(0.46,1.4,1,6);const p=pg.attributes.position;for(let j=0;j<p.count;j++){const y=p.getY(j)+0.65;p.setY(j,y);p.setZ(j,-y*y*0.35);}pg.computeVertexNormals();
+      const f=new THREE.Mesh(pg,frM);f.position.y=h;f.rotation.order='YXZ';f.rotation.y=i/9*Math.PI*2+0.3;f.rotation.x=-0.9-(i%3)*0.18;g.add(f);}return g;}
+  /* ---------- build ---------- */
+  function build(){
+    ext={t:0};a={flames:[],dawn:0,exitT:0,slotKey:'',plates:{},open:{}};
+    scene.fog=new THREE.FogExp2(0x0a1430,0.02);
+    try{scene.environment=FX.envFromScene(es=>{es.background=new THREE.Color(0x0c1a3a);const sh=new THREE.Mesh(new THREE.SphereGeometry(6,24,12),new THREE.MeshBasicMaterial({color:0x1a3060,side:THREE.BackSide}));es.add(sh);
+      [[-1.2,1.9,-3.8,0xffb060,0.6],[0,0.8,4.6,0xff7020,0.7],[2.4,1.2,-1.8,0xffc070,0.4],[0,5.5,0,0x8aa8ff,0.9],[-4,2.4,-1,0xffd090,0.35]].forEach(p=>{const b=new THREE.Mesh(new THREE.SphereGeometry(p[4],10,8),new THREE.MeshBasicMaterial({color:p[3]}));b.position.set(p[0],p[1],p[2]);es.add(b);});});}catch(e){}
+    // ---- materials
+    const ish=ishtarSet(),crN=crackleN();
+    const wallM=new THREE.MeshStandardMaterial({map:tex(ish.alb,[8,1]),normalMap:FX.linTex(ish.nrm,[8,1]),normalScale:new THREE.Vector2(0.9,0.9),roughness:0.32,metalness:0,side:THREE.BackSide,envMapIntensity:1.1});
+    const fl=floorSet(),floorM=new THREE.MeshStandardMaterial({map:tex(fl.alb,[3,3]),normalMap:FX.normalTex(fl.hgt,2.5,[3,3]),roughness:0.9,envMapIntensity:0.5});
+    const bk=brickSet(),domeM=new THREE.MeshStandardMaterial({map:tex(bk.alb,[16,5]),normalMap:FX.normalTex(bk.hgt,3,[16,5]),roughness:0.85,side:THREE.DoubleSide,envMapIntensity:0.5});
+    const ss=sandSet(3351,'#b09a74'),ssN=FX.normalFromCanvas(ss.hgt,2),SM={},stoneM=rp=>{rp=rp||[1,1];const k=rp.join('x');return SM[k]||(SM[k]=new THREE.MeshStandardMaterial({map:tex(ss.alb,rp),normalMap:FX.linTex(ssN,rp),roughness:0.85,envMapIntensity:0.6}));};
+    const cs=sandSet(3361,'#a86a42'),clayM=new THREE.MeshStandardMaterial({map:tex(cs.alb),normalMap:FX.normalTex(cs.hgt,2),roughness:0.8,envMapIntensity:0.6});
+    const bronzeM=new THREE.MeshStandardMaterial({color:FX.lin(0x9a7040),metalness:0.85,roughness:0.38,envMapIntensity:1.3});
+    const darkM=new THREE.MeshStandardMaterial({color:FX.lin(0x14100c),roughness:0.6});
+    const woodM=new THREE.MeshStandardMaterial({color:FX.lin(0x6a4424),roughness:0.6,envMapIntensity:0.6});
+    a.metal={gold:new THREE.MeshStandardMaterial({color:FX.lin(0xf2c040),metalness:1,roughness:0.24,envMapIntensity:1.6}),silver:new THREE.MeshStandardMaterial({color:FX.lin(0xe2e6ec),metalness:1,roughness:0.2,envMapIntensity:1.6}),
+      brass:new THREE.MeshStandardMaterial({color:FX.lin(0xc88a3a),metalness:1,roughness:0.3,envMapIntensity:1.5}),iron:new THREE.MeshStandardMaterial({color:FX.lin(0x5a5e66),metalness:0.85,roughness:0.42,envMapIntensity:1.2}),
+      clayP:new THREE.MeshStandardMaterial({color:FX.lin(0xb8643a),roughness:0.8,envMapIntensity:0.6})};
+    a.metal.clay=a.metal.iron;
+    // ---- the den: wall, floor, corbelled dome, opening
+    const wall=new THREE.Mesh(new THREE.CylinderGeometry(R,R,WH,96,1,true),wallM);wall.position.y=WH/2;wall.receiveShadow=true;scene.add(tag(wall,'wall'));
+    const floor=new THREE.Mesh(new THREE.CircleGeometry(R,64),floorM);floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;scene.add(tag(floor,'floor'));
+    const comp=new THREE.Mesh(new THREE.CircleGeometry(0.95,48),new THREE.MeshStandardMaterial({map:tex(compassC()),roughness:0.35,envMapIntensity:1,polygonOffset:true,polygonOffsetFactor:-2}));comp.rotation.x=-Math.PI/2;comp.position.y=0.006;comp.receiveShadow=true;scene.add(tag(comp,'floor'));
+    const dome=FX.lathe([[R,WH],[5.05*SC,5.35],[4.5*SC,5.85],[3.6*SC,6.22],[2.5*SC,6.48],[1.5*SC,6.6],[HR,6.66]],domeM,64);scene.add(tag(dome,'dome'));
+    const shaft=new THREE.Mesh(new THREE.CylinderGeometry(HR,HR,0.36,32,1,true),domeM);shaft.position.y=6.84;scene.add(tag(shaft,'stone'));
+    a.stone=new THREE.Group();a.stone.position.set(0,GY+0.16,0);scene.add(tag(a.stone,'stone'));const stn=cyl(1.08,1.12,0.32,stoneM([2,1]),0,0,0,a.stone,40);stn.castShadow=true;
+    const crack=new THREE.Mesh(new THREE.RingGeometry(0.815,HR,48),new THREE.MeshBasicMaterial({color:0x9ab8ff,fog:false,toneMapped:false,transparent:true,opacity:0.6,side:THREE.DoubleSide}));crack.rotation.x=Math.PI/2;crack.position.y=GY-0.01;scene.add(noRay(crack));a.crack=crack;
+    // the king's seal and the lords' seal, hanging on cords below the stone
+    a.sealG=tag(new THREE.Group(),'seal');scene.add(a.sealG);const cordM=new THREE.MeshStandardMaterial({color:FX.lin(0x8a6a3a),roughness:0.8});a.cords=[];
+    for(let i=0;i<4;i++){const an=i*Math.PI/2+0.4,ex=Math.cos(an)*0.82,ez=Math.sin(an)*0.82;const cv=new THREE.CatmullRomCurve3([new THREE.Vector3(ex,GY-0.02,ez),new THREE.Vector3(ex*0.5,6.78,ez*0.5),new THREE.Vector3(0,6.62,0)]);const t=new THREE.Mesh(new THREE.TubeGeometry(cv,12,0.012,5),cordM);a.sealG.add(t);a.cords.push(t);}
+    a.waxM=new THREE.MeshStandardMaterial({map:tex(waxC()),roughness:0.35,envMapIntensity:1,emissive:FX.lin(0x200404),emissiveIntensity:1});
+    a.seal=new THREE.Mesh(new THREE.CylinderGeometry(0.26,0.27,0.045,40),[new THREE.MeshStandardMaterial({color:FX.lin(0x7a1010),roughness:0.4}),new THREE.MeshStandardMaterial({color:FX.lin(0x7a1010),roughness:0.4}),a.waxM]);a.seal.position.set(0,6.6,0);a.sealG.add(a.seal);
+    a.seal2=cyl(0.11,0.12,0.03,new THREE.MeshStandardMaterial({color:FX.lin(0x8a2a12),roughness:0.4}),0.34,6.68,0.1,a.sealG,24);
+    a.waxBits=[];for(let i=0;i<5;i++){const b=sph(0.05,new THREE.MeshStandardMaterial({color:FX.lin(0x8a1a14),roughness:0.4}),0,0,0,scene,1.2,0.4,1);b.visible=false;a.waxBits.push(noRay(b));}
+    // ---- lights
+    scene.add(new THREE.HemisphereLight(0x8aa0d8,0x3a2814,0.45));scene.add(new THREE.AmbientLight(0x3a4870,0.22));
+    a.moon=new THREE.SpotLight(0xa8c0ff,1.6,10,0.5,0.7,1.2);a.moon.position.set(0,6.7,0);a.moon.target.position.set(0,0,0);scene.add(a.moon);scene.add(a.moon.target);
+    a.moon.castShadow=true;a.moon.shadow.mapSize.set(512,512);a.moon.shadow.bias=-0.002;a.moon.shadow.camera.near=0.5;a.moon.shadow.camera.far=10;
+    a.dust=FX.particles(scene,{count:110,min:[-0.9,0.2,-0.9],max:[0.9,5.6,0.9],size:0.025,color:0xb8ccff,opacity:0.5,rise:0.03,drift:0.04});
+    const beam=FX.shaft(scene,{w:1.7,len:5.4,color:0x9ab4ff,opacity:0.12});beam.position.set(0,3.9,0);a.beam=beam;const beam2=FX.shaft(scene,{w:1.7,len:5.4,color:0x9ab4ff,opacity:0.12});beam2.position.set(0,3.9,0);beam2.rotation.y=Math.PI/2;a.beam2=beam2;
+    // ---- North: the writing on the wall, the lampstand, the scales
+    const wr=new THREE.Group();put(tag(wr,'writing'),0,5.0,2.5);const frame=rb(2.62,1.72,0.1,0.03,stoneM([2,1]));wr.add(frame);
+    a.wrGlowC=writingC(true);a.wrM=new THREE.MeshStandardMaterial({map:tex(writingC(false)),emissiveMap:tex(a.wrGlowC),emissive:new THREE.Color(0xffffff),emissiveIntensity:0.55,roughness:0.85,envMapIntensity:0.4});
+    plane(2.4,1.5,a.wrM,0,0,0.056,0,wr);const ledge=rb(1.2,0.12,0.22,0.02,stoneM());ledge.position.set(0,-0.98,0.1);wr.add(ledge);
+    a.keySlots=[];[-0.27,0.27].forEach((x,i)=>{box(0.42,0.04,0.16,darkM,x,-0.91,0.1,wr);const k=rb(0.4,0.05,0.15,0.01,clayM);k.position.set(x,-0.88,0.1);k.visible=false;wr.add(k);a.keySlots.push(k);});
+    const ls=new THREE.Group();put(tag(ls,'lampstand'),342,4.1,0);ls.add(FX.lathe([[0,0],[0.22,0],[0.2,0.05],[0.06,0.12],[0.04,0.3],[0.035,1.5],[0.06,1.58],[0.2,1.66],[0.22,1.72],[0,1.72]],bronzeM,24));
+    [-1,1].forEach(sd=>{const arm=new THREE.Mesh(new THREE.TorusGeometry(0.18,0.016,8,20,Math.PI),bronzeM);arm.position.set(sd*0.18,1.32,0);arm.rotation.z=Math.PI;ls.add(arm);cyl(0.05,0.03,0.06,bronzeM,sd*0.36,1.34,0,ls,12);a.flames.push(FX.flame(ls,sd*0.36,1.37,0,0.07,0.16,{intensity:1.3}));});
+    a.flames.push(FX.flame(ls,0,1.72,0,0.1,0.24,{intensity:1.5}));FX.shadow(ls);
+    a.lsL=new THREE.PointLight(0xffb060,1.6,9,2);a.lsL.position.set(0,1.95,0.15);ls.add(a.lsL);a.lsL.castShadow=true;a.lsL.shadow.mapSize.set(512,512);a.lsL.shadow.bias=-0.004;a.lsL.shadow.radius=3;a.lsL.shadow.camera.near=0.2;
+    const sc=new THREE.Group();put(tag(sc,'scales'),21,4.4,0);const st=rb(0.8,0.7,0.46,0.03,woodM);st.position.y=0.35;sc.add(st);
+    sc.add(FX.lathe([[0,0.7],[0.09,0.7],[0.03,0.76],[0.02,1.28],[0.04,1.32],[0,1.34]],bronzeM,16));const beamS=box(0.6,0.02,0.02,bronzeM,0,1.3,0,sc);
+    [-1,1].forEach(sd=>{const pan=FX.lathe([[0,0],[0.1,0.01],[0.12,0.04],[0,0.02]],bronzeM,18);pan.position.set(sd*0.28,1.0,0);sc.add(pan);[0,1,2].forEach(k=>{const an=k*2.1;const c=cyl(0.003,0.003,0.3,bronzeM,sd*0.28+Math.cos(an)*0.05,1.15,Math.sin(an)*0.05,sc,4);c.rotation.z=-Math.cos(an)*0.16;});});
+    const duck=new THREE.MeshStandardMaterial({color:FX.lin(0x3a3438),roughness:0.25,metalness:0.4,envMapIntensity:1.4});[[-0.26,0.11,0.6],[0.04,0.08,0.45],[0.24,0.06,0.32]].forEach(p=>{const d=sph(p[1],duck,p[0],0.7+p[1]*0.55,0.08,sc,1.3,0.7,1);sph(p[1]*0.45,duck,p[0]+p[1]*0.7,0.7+p[1]*1.05,0.08,sc);});FX.shadow(sc);
+    // ---- the four stone lions on their pedestals
+    a.ped={};CORN.forEach(c=>{const g=new THREE.Group();put(tag(g,'lion_'+c.toLowerCase()),CDEG[c],4.25,0);const pd=rb(0.84,0.56,0.84,0.03,stoneM([1,0.7]));pd.position.y=0.28;g.add(pd);
+      const pc=plateC(null);a.plates[c]={c:pc,t:tex(pc)};plane(0.4,0.11,new THREE.MeshStandardMaterial({map:a.plates[c].t,metalness:0.6,roughness:0.35,envMapIntensity:1.2}),0,0.32,0.425,0,g);
+      const gm=new THREE.MeshStandardMaterial({color:FX.lin(GLAZE[c][1]),roughness:0.2,metalness:0,normalMap:FX.linTex(crN),normalScale:new THREE.Vector2(0.35,0.35),envMapIntensity:1.4});
+      const mm=gm.clone();mm.color=FX.lin(GLAZE[c][1]).multiplyScalar(0.8);const L=lionModel(gm,mm,new THREE.MeshStandardMaterial({color:FX.lin(0x141420),roughness:0.2}),'sit');L.g.position.y=0.56;L.g.scale.setScalar(1.12);g.add(L.g);
+      if(c==='SE'){const niche=box(0.5,0.3,0.3,darkM,0,0.2,0.28,g);a.door=rb(0.52,0.32,0.04,0.01,stoneM());a.door.position.set(0,0.2,0.44);g.add(a.door);
+        a.rope=new THREE.Group();a.rope.position.set(-0.08,0.07,0.32);g.add(a.rope);const rM=new THREE.MeshStandardMaterial({map:tex(ropeC(),[8,1]),roughness:0.9});for(let i=0;i<3;i++){const t=new THREE.Mesh(new THREE.TorusGeometry(0.1-i*0.01,0.022,8,24),rM);t.rotation.x=Math.PI/2;t.position.y=i*0.035;a.rope.add(t);}
+        const pouch=sph(0.06,new THREE.MeshStandardMaterial({color:FX.lin(0x6a3a1a),roughness:0.7}),0.16,0.06,0,a.rope,1,0.8,1);a.ropeM=rM;}
+      FX.shadow(g);FX.blob(scene,g.position.x,g.position.z,1.2,1.2,0.5);a.ped[c]=g;});
+    // ---- East: the king's dream relief and the image on its plinth
+    const dr=new THREE.Group();put(tag(dr,'dream'),68,5.06,2.2);dr.add(rb(1.36,1.8,0.08,0.03,stoneM()));plane(1.24,1.65,new THREE.MeshStandardMaterial({map:tex(dreamC()),roughness:0.85,envMapIntensity:0.5}),0,0,0.045,0,dr);
+    const stt=new THREE.Group();put(tag(stt,'statue'),92,4.35,0);const pl=rb(0.76,0.62,0.6,0.03,stoneM([1,0.8]));pl.position.y=0.31;stt.add(pl);
+    const stele=rb(0.7,1.5,0.1,0.03,stoneM([1,2]));stele.position.set(0,1.37,-0.24);stt.add(stele);plane(0.62,1.42,new THREE.MeshStandardMaterial({map:tex(steleC()),roughness:0.85,envMapIntensity:0.5}),0,1.37,-0.185,0,stt);
+    a.niche=box(0.3,0.18,0.06,darkM,0,0.32,0.28,stt);a.nDoor=rb(0.32,0.2,0.03,0.01,stoneM());a.nDoor.position.set(0,0.32,0.31);stt.add(a.nDoor);
+    a.half1=rb(0.22,0.04,0.12,0.01,clayM);a.half1.position.set(0,0.27,0.27);a.half1.visible=false;stt.add(a.half1);
+    a.slotG=[];const y0=0.62,S_=(geo,x,y,z,list,g)=>{const mm=new THREE.Mesh(geo,a.metal.gold);mm.position.set(x,y,z);g.add(mm);list.push(mm);return mm;};
+    for(let i=0;i<5;i++){const g=new THREE.Group();stt.add(g);g.userData.ms=[];a.slotG.push(g);g.visible=false;}
+    S_(new THREE.SphereGeometry(0.1,20,14),0,y0+1.24,0,a.slotG[0].userData.ms,a.slotG[0]);S_(new THREE.CylinderGeometry(0.045,0.05,0.08,12),0,y0+1.12,0,a.slotG[0].userData.ms,a.slotG[0]);
+    {const g=a.slotG[1];const t=rb(0.34,0.3,0.2,0.05,a.metal.gold);t.position.set(0,y0+0.93,0);g.add(t);g.userData.ms.push(t);[-1,1].forEach(sd=>{const ar=S_(new THREE.CylinderGeometry(0.04,0.035,0.42,10),sd*0.21,y0+0.86,0,g.userData.ms,g);ar.rotation.z=sd*0.08;});}
+    {const g=a.slotG[2];const t=rb(0.3,0.26,0.19,0.06,a.metal.gold);t.position.set(0,y0+0.66,0);g.add(t);g.userData.ms.push(t);}
+    [-1,1].forEach(sd=>S_(new THREE.CylinderGeometry(0.05,0.042,0.46,12),sd*0.07,y0+0.33,0,a.slotG[3].userData.ms,a.slotG[3]));
+    [-1,1].forEach(sd=>{const f=S_(new THREE.BoxGeometry(0.1,0.1,0.18),sd*0.07,y0+0.05,0.03,a.slotG[4].userData.ms,a.slotG[4]);});FX.shadow(stt);FX.blob(scene,stt.position.x,stt.position.z,1,0.9,0.5);
+    // ---- Daniel's food table (east-southeast)
+    const tb=new THREE.Group();put(tag(tb,'food'),116,4.05,0);const top=rb(1.3,0.06,0.7,0.02,woodM);top.position.y=0.72;tb.add(top);[[-0.58,-0.28],[0.58,-0.28],[-0.58,0.28],[0.58,0.28]].forEach(p=>cyl(0.035,0.03,0.7,woodM,p[0],0.35,p[1],tb,8));
+    const cl=plane(1.32,0.5,new THREE.MeshStandardMaterial({map:tex(clothC()),roughness:0.95,side:THREE.DoubleSide}),0,0.755,0,0,tb);cl.rotation.x=-Math.PI/2;
+    const hang=plane(1.32,0.16,new THREE.MeshStandardMaterial({map:tex(clothC()),roughness:0.95,side:THREE.DoubleSide}),0,0.68,0.252,0,tb);
+    a.drawer=new THREE.Group();a.drawer.position.set(0.3,0.6,0.1);tb.add(a.drawer);const dbx=box(0.44,0.1,0.42,woodM,0,0,0,a.drawer);const dfr=rb(0.46,0.12,0.03,0.01,woodM);dfr.position.set(0,0,0.22);a.drawer.add(dfr);sph(0.02,bronzeM,0,0,0.245,a.drawer);
+    const plat=FX.lathe([[0,0],[0.17,0],[0.19,0.025],[0,0.01]],bronzeM,24);plat.position.set(-0.45,0.76,-0.05);tb.add(plat);const meatM=new THREE.MeshStandardMaterial({color:FX.lin(0x7a3a1a),roughness:0.55});sph(0.08,meatM,-0.45,0.82,-0.05,tb,1.3,0.7,1);sph(0.05,meatM,-0.36,0.8,0.02,tb,1.4,0.6,1);
+    const jug=FX.lathe([[0,0],[0.06,0],[0.09,0.08],[0.07,0.17],[0.035,0.22],[0.045,0.26],[0,0.26]],clayM,18);jug.position.set(-0.18,0.755,-0.18);tb.add(jug);
+    const gob=FX.lathe([[0,0],[0.04,0],[0.01,0.02],[0.01,0.07],[0.05,0.1],[0.045,0.13],[0,0.11]],a.metal.gold,16);gob.position.set(-0.12,0.755,0.05);tb.add(gob);
+    const bowl=FX.lathe([[0,0],[0.06,0],[0.12,0.05],[0.14,0.09],[0.12,0.085],[0,0.04]],clayM,20);bowl.position.set(0.12,0.755,-0.08);tb.add(bowl);const len=new THREE.Mesh(new THREE.CircleGeometry(0.115,20),new THREE.MeshStandardMaterial({map:tex(lentilC()),roughness:0.7}));len.rotation.x=-Math.PI/2;len.position.set(0.12,0.83,-0.08);tb.add(len);
+    const wj=FX.lathe([[0,0],[0.05,0],[0.075,0.07],[0.06,0.15],[0.03,0.19],[0.04,0.22],[0,0.22]],new THREE.MeshStandardMaterial({color:FX.lin(0xd8c8a8),roughness:0.6}),18);wj.position.set(0.38,0.755,-0.16);tb.add(wj);
+    const cup=FX.lathe([[0,0],[0.04,0],[0.05,0.06],[0,0.05]],clayM,14);cup.position.set(0.42,0.755,0.05);tb.add(cup);const wat=new THREE.Mesh(new THREE.CircleGeometry(0.045,16),new THREE.MeshStandardMaterial({color:FX.lin(0x6aa0c8),roughness:0.05,metalness:0.3,envMapIntensity:2}));wat.rotation.x=-Math.PI/2;wat.position.set(0.42,0.81,0.05);tb.add(wat);
+    const cakeM=new THREE.MeshStandardMaterial({color:FX.lin(0xd8963a),roughness:0.5});[[0.0,0.14],[0.08,0.18],[-0.04,0.22]].forEach(p=>cyl(0.045,0.045,0.025,cakeM,p[0]+0.15,0.77,p[1],tb,14));
+    const tl=oilLamp(clayM);tl.position.set(0.56,0.755,-0.2);tb.add(tl);a.flames.push(FX.flame(tb,0.56,0.79,-0.06,0.05,0.12,{intensity:1.3}));
+    a.tbL=new THREE.PointLight(0xffc070,1.1,6,2);a.tbL.position.set(0.5,1.15,0.1);tb.add(a.tbL);FX.shadow(tb);FX.blob(scene,tb.position.x,tb.position.z,1.6,1.0,0.45);
+    a.pc={};a.pc.clay=ingot(a.metal.iron,a.metal.clayP);a.pc.clay.position.set(0,0.05,0);a.drawer.add(tag(a.pc.clay,'pc_clay'));
+    // ---- date palm in its pot (gold piece in the soil)
+    const pp=new THREE.Group();put(tag(pp,'palm'),155,4.45,0);const pot=FX.lathe([[0,0],[0.24,0],[0.34,0.18],[0.36,0.42],[0.3,0.6],[0.34,0.66],[0.3,0.68],[0,0.62]],clayM,28);pp.add(pot);
+    const soil=new THREE.Mesh(new THREE.CircleGeometry(0.3,24),new THREE.MeshStandardMaterial({color:FX.lin(0x3a2a1a),roughness:1}));soil.rotation.x=-Math.PI/2;soil.position.y=0.64;pp.add(soil);
+    const frM=new THREE.MeshStandardMaterial({map:tex(frondC()),alphaTest:0.4,transparent:false,side:THREE.DoubleSide,roughness:0.7});const trM=new THREE.MeshStandardMaterial({map:tex(bk.alb,[1,6]),color:FX.lin(0x9a7a5a),roughness:0.9});
+    const pa=palm(pp,0,-0.05,2.0,frM,trM);pa.position.y=0.62;pa.scale.setScalar(0.85);FX.shadow(pp);
+    a.pc.gold=ingot(a.metal.gold);a.pc.gold.position.set(0.13,0.645,0.12);a.pc.gold.rotation.y=0.4;pp.add(tag(a.pc.gold,'pc_gold'));
+    // ---- South: the fiery furnace relief, the furnace and its lock
+    const fr=new THREE.Group();put(tag(fr,'fiery'),180,5.05,2.65);fr.add(rb(1.98,1.5,0.08,0.03,stoneM()));const frc=furnaceC();plane(1.86,1.4,new THREE.MeshStandardMaterial({map:tex(frc),emissiveMap:tex(frc),emissive:new THREE.Color(0xffffff),emissiveIntensity:0.18,roughness:0.85,envMapIntensity:0.5}),0,0,0.045,0,fr);
+    const fu=new THREE.Group();put(tag(fu,'furnace'),180,4.7,0);const fb=rb(1.5,1.2,0.6,0.04,new THREE.MeshStandardMaterial({map:tex(bk.alb,[3,2.5]),normalMap:FX.normalTex(bk.hgt,3,[3,2.5]),roughness:0.85}));fb.position.y=0.6;fu.add(fb);
+    const mouth=new THREE.Mesh(new THREE.CircleGeometry(0.3,24,0,Math.PI),new THREE.MeshBasicMaterial({color:0xff7a20}));mouth.position.set(-0.36,0.32,0.305);fu.add(mouth);box(0.6,0.32,0.01,new THREE.MeshBasicMaterial({color:0xff6010}),-0.36,0.16,0.304,fu);
+    [-0.5,-0.36,-0.22].forEach(x=>a.flames.push(FX.flame(fu,x,0.08,0.28,0.12,0.3,{intensity:1.6})));
+    a.fDoor=new THREE.Group();a.fDoor.position.set(0.16,0.55,0.31);fu.add(a.fDoor);const fd=rb(0.46,0.62,0.04,0.02,bronzeM);fd.position.x=0.23;a.fDoor.add(fd);
+    a.fDials=[];['sun','moon','star'].forEach((k,i)=>{const d=cyl(0.055,0.055,0.03,a.metal.brass,0.23,0.16-i*0.16,0.03,a.fDoor,18);d.rotation.x=Math.PI/2;const c=mk(64,64),x=c.getContext('2d');x.fillStyle='#c88a3a';x.fillRect(0,0,64,64);symC(x,k,32,32,24,'#3a2008');plane(0.09,0.09,new THREE.MeshStandardMaterial({map:tex(c),metalness:0.6,roughness:0.4}),0.1,0.16-i*0.16,0.045,0,a.fDoor);});
+    a.half2=rb(0.22,0.04,0.12,0.01,clayM);a.half2.position.set(0.39,0.42,0.18);a.half2.visible=false;fu.add(a.half2);box(0.4,0.5,0.02,darkM,0.39,0.55,0.29,fu);
+    a.fuL=new THREE.PointLight(0xff7a2a,1.5,7,2);a.fuL.position.set(-0.36,0.5,0.7);fu.add(a.fuL);a.fuL.castShadow=true;a.fuL.shadow.mapSize.set(512,512);a.fuL.shadow.bias=-0.004;a.fuL.shadow.camera.near=0.2;
+    a.embers=FX.particles(fu,{count:40,min:[-0.6,0.2,0.3],max:[-0.1,1.4,0.6],size:0.03,color:0xffa040,opacity:0.8,rise:0.35,drift:0.06});FX.shadow(fu);
+    // ---- the pillar of names (brass piece on its base)
+    const pi=new THREE.Group();put(tag(pi,'pillar'),202,4.05,0);const pM=stoneM([1,6]);const pb=rb(0.76,0.22,0.76,0.03,pM);pb.position.y=0.11;pi.add(pb);
+    const shaftP=box(0.5,4.3,0.5,[pM,pM,pM,pM,new THREE.MeshStandardMaterial({map:tex(pillarC()),roughness:0.85}),pM],0,2.37,0,pi);const cap=rb(0.72,0.26,0.72,0.03,pM);cap.position.y=4.62;pi.add(cap);FX.shadow(pi);
+    a.pc.brass=ingot(a.metal.brass);a.pc.brass.position.set(0.12,0.22,0.27);a.pc.brass.rotation.y=-0.3;pi.add(tag(a.pc.brass,'pc_brass'));
+    // ---- West-southwest: the bronze decree chest and the decree tablet
+    const ch=new THREE.Group();put(tag(ch,'chest'),247,4.3,0);const cb=rb(0.92,0.5,0.56,0.03,bronzeM);cb.position.y=0.25;ch.add(cb);
+    a.lid=new THREE.Group();a.lid.position.set(0,0.5,-0.28);ch.add(a.lid);const lidm=rb(0.94,0.1,0.58,0.03,bronzeM);lidm.position.set(0,0.05,0.28);a.lid.add(lidm);
+    [-0.32,0.32].forEach(x=>{box(0.06,0.52,0.58,a.metal.brass,x,0.25,0,ch);});
+    for(let i=0;i<5;i++){const d=cyl(0.035,0.035,0.03,a.metal.brass,-0.2+i*0.1,0.3,0.29,ch,14);d.rotation.x=Math.PI/2;}
+    const inside=plane(0.8,0.44,new THREE.MeshStandardMaterial({color:FX.lin(0x2a1a0e),roughness:0.9}),0,0.502,0,0,ch);inside.rotation.x=-Math.PI/2;
+    a.lamp=oilLamp(clayM);a.lamp.position.set(-0.18,0.503,0);ch.add(tag(a.lamp,'chest'));a.scroll=new THREE.Group();a.scroll.position.set(0.18,0.545,0);ch.add(tag(a.scroll,'scroll7'));
+    const scM=new THREE.MeshStandardMaterial({color:FX.lin(0xe8d8b0),roughness:0.8});const sr=cyl(0.04,0.04,0.3,scM,0,0,0,a.scroll,12);sr.rotation.z=Math.PI/2;[-1,1].forEach(sd=>{const k=cyl(0.015,0.015,0.36,woodM,0,0,0,a.scroll,6);k.rotation.z=Math.PI/2;});
+    a.lamp.visible=false;a.scroll.visible=false;FX.shadow(ch);FX.blob(scene,ch.position.x,ch.position.z,1.3,0.9,0.5);
+    const dt=new THREE.Group();put(tag(dt,'decree'),247,5.08,1.75);dt.add(rb(0.78,0.6,0.06,0.03,clayM));plane(0.72,0.54,new THREE.MeshStandardMaterial({map:tex(decreeC()),roughness:0.85,envMapIntensity:0.5}),0,0,0.032,0,dt);
+    // wall lamp over the chest
+    const wl=new THREE.Group();put(tag(wl,'wall'),259,5.08,2.25);box(0.08,0.24,0.1,bronzeM,0,0,0,wl);const wlb=cyl(0.05,0.08,0.1,bronzeM,0,0.1,0.12,wl,12);a.flames.push(FX.flame(wl,0,0.15,0.12,0.07,0.18,{intensity:1.4}));
+    a.wlL=new THREE.PointLight(0xffc080,1.2,7,2);a.wlL.position.set(0,0.35,0.4);wl.add(a.wlL);
+    // ---- clay tablets and the cylinder seal
+    const tp=new THREE.Group();put(tag(tp,'tablets'),264,4.55,0);[[0,0.03,0,0.1],[0.05,0.09,0.02,-0.15],[-0.04,0.15,-0.02,0.3]].forEach(p=>{const t=rb(0.34,0.06,0.24,0.02,clayM);t.position.set(p[0],p[1],p[2]);t.rotation.y=p[3];tp.add(t);});
+    [[-0.3,0.3],[0.32,-0.25]].forEach(p=>{const t=rb(0.3,0.42,0.06,0.02,clayM);t.position.set(p[0],0.2,-0.12);t.rotation.x=-0.25;t.rotation.y=p[1];tp.add(t);});
+    const cy=new THREE.Group();put(tag(cy,'cylinder'),271,4.35,0);const cst=rb(0.4,0.32,0.3,0.02,woodM);cst.position.y=0.16;cy.add(cst);
+    const csl=cyl(0.04,0.04,0.12,new THREE.MeshStandardMaterial({color:FX.lin(0x4a5a6a),roughness:0.3,metalness:0.2}),-0.08,0.36,0,cy,16);csl.rotation.z=Math.PI/2;const cstrip=rb(0.24,0.03,0.1,0.01,clayM);cstrip.position.set(0.08,0.335,0);cy.add(cstrip);FX.shadow(tp);FX.shadow(cy);
+    // ---- West: the window toward Jerusalem
+    const wn=new THREE.Group();put(tag(wn,'window'),278,5.1,3.0);
+    const arch=new THREE.Shape();arch.moveTo(-0.62,-0.82);arch.lineTo(0.62,-0.82);arch.lineTo(0.62,0.35);arch.absarc(0,0.35,0.62,0,Math.PI,false);arch.lineTo(-0.62,-0.82);
+    const hole=new THREE.Path();hole.moveTo(-0.42,-0.66);hole.lineTo(0.42,-0.66);hole.lineTo(0.42,0.35);hole.absarc(0,0.35,0.42,0,Math.PI,false);hole.lineTo(-0.42,-0.66);arch.holes.push(hole);
+    const ag=new THREE.ExtrudeGeometry(arch,{depth:0.14,bevelEnabled:false,curveSegments:20});const am=new THREE.Mesh(ag,stoneM());wn.add(am);
+    const inner=new THREE.Shape();inner.moveTo(-0.42,-0.66);inner.lineTo(0.42,-0.66);inner.lineTo(0.42,0.35);inner.absarc(0,0.35,0.42,0,Math.PI,false);inner.lineTo(-0.42,-0.66);
+    a.skyN=new THREE.Mesh(new THREE.ShapeGeometry(inner,20),new THREE.MeshBasicMaterial({map:tex(skyC(false)),fog:false,toneMapped:false}));a.skyN.position.z=0.01;wn.add(a.skyN);
+    a.skyD=new THREE.Mesh(new THREE.ShapeGeometry(inner,20),new THREE.MeshBasicMaterial({map:tex(skyC(true)),fog:false,toneMapped:false,transparent:true,opacity:0,depthWrite:false}));a.skyD.position.z=0.012;wn.add(noRay(a.skyD));
+    [a.skyN.geometry,a.skyD.geometry].forEach(g=>{const p=g.attributes.position,uv=g.attributes.uv;for(let i=0;i<p.count;i++)uv.setXY(i,(p.getX(i)+0.42)/0.84,(p.getY(i)+0.66)/1.43);});
+    a.shut=new THREE.Group();a.shut.position.set(-0.42,0,0.08);wn.add(a.shut);const shC=mk(128,192),shx=shC.getContext('2d');stoneBg(shx,128,192,3371,'#a08a66');shx.strokeStyle='rgba(50,32,14,.6)';shx.lineWidth=3;shx.strokeRect(8,8,112,176);shx.save();shx.globalAlpha=0.85;lion2D(shx,14,70,1.0,false);shx.restore();
+    shx.fillStyle='rgba(60,38,16,.55)';[[34,34],[94,34],[34,160],[94,160]].forEach(p=>{for(let i=0;i<8;i++){const an=i*Math.PI/4;E(shx,p[0]+Math.cos(an)*7,p[1]+Math.sin(an)*7,5,2.4,an);}});
+    const shG=new THREE.ShapeGeometry(inner,20);{const p=shG.attributes.position,uv=shG.attributes.uv;for(let i=0;i<p.count;i++)uv.setXY(i,(p.getX(i)+0.42)/0.84,(p.getY(i)+0.66)/1.43);}shG.translate(0.42,0,0);
+    const shm=new THREE.Mesh(shG,new THREE.MeshStandardMaterial({map:tex(shC),roughness:0.85,side:THREE.DoubleSide}));a.shut.add(shm);
+    a.winL=new THREE.PointLight(0xffb8a0,0,8,2);a.winL.position.set(0,0,0.9);wn.add(a.winL);
+    const wd=new THREE.Group();put(tag(wd,'window'),278,5.12,1.55);const dp=cyl(0.2,0.2,0.04,bronzeM,0,0,0,wd,28);dp.rotation.x=Math.PI/2;a.wNeedle=new THREE.Group();a.wNeedle.position.z=0.03;wd.add(a.wNeedle);box(0.025,0.3,0.015,new THREE.MeshStandardMaterial({color:FX.lin(0x2a1a0a)}),0,0.08,0,a.wNeedle);
+    const rod=cyl(0.008,0.008,0.6,bronzeM,0,-0.32,0.03,wd,6);rod.rotation.z=Math.PI/2;a.beads=[];for(let i=0;i<9;i++){const b=sph(0.025,a.metal.brass,-0.26+i*0.065,-0.32,0.03,wd);a.beads.push(b);}
+    // ---- the sleeping lion (real, calm, mouth shut)
+    const fc=furC(),furM=new THREE.MeshStandardMaterial({map:tex(fc,[2,2]),roughness:0.9,envMapIntensity:0.4}),maneM=new THREE.MeshStandardMaterial({map:tex(furC('#8a5a2a'),[3,3]),roughness:0.95,envMapIntensity:0.3});
+    const RL=lionModel(furM,maneM,new THREE.MeshStandardMaterial({color:FX.lin(0x1a120c),roughness:0.5}),'lie');a.real=RL;const rl=RL.g;tag(rl,'reallion');const rp=at(290,3.5*SC);
+    const spot=new THREE.Group();spot.position.set(rp[0],0,rp[1]);spot.rotation.y=Math.atan2(-rp[0],-rp[1])+1.05;scene.add(spot);rl.scale.setScalar(1.25);spot.add(rl);FX.shadow(rl);FX.blob(spot,0,0,1.0,2.4,0.45);
+    a.pc.silver=ingot(a.metal.silver);a.pc.silver.position.set(0.05,0,1.62);a.pc.silver.rotation.y=1.3;spot.add(tag(a.pc.silver,'pc_silver'));
+    // the keeper's word tablet on a wall shelf
+    const lx=new THREE.Group();put(tag(lx,'lexicon'),302,5.06,1.25);const shf=rb(0.6,0.05,0.26,0.01,woodM);shf.position.set(0,0,0.06);lx.add(shf);box(0.04,0.18,0.18,woodM,-0.24,-0.1,0.04,lx);box(0.04,0.18,0.18,woodM,0.24,-0.1,0.04,lx);
+    const lxt=new THREE.Group();lxt.position.set(0,0.2,0.05);lxt.rotation.x=-0.2;lx.add(lxt);lxt.add(rb(0.5,0.4,0.05,0.02,clayM));plane(0.46,0.37,new THREE.MeshStandardMaterial({map:tex(tabletC('WORDS FOR LION',['ARI: a grown lion','KEPHIR: a young lion','LABI: a lioness','SHACHAL: a fierce lion'],3381)),roughness:0.85}),0,0,0.027,0,lxt);
+    // ---- North-northwest: the dark alcove
+    const al=new THREE.Group();put(tag(al,'alcove'),333,4.62,0);const alS=stoneM([1,2]);
+    const back=plane(1.2,1.9,new THREE.MeshStandardMaterial({map:tex(bk.alb,[2,4]),color:FX.lin(0x6a5a4a),roughness:0.9}),0,1.5,-0.5,0,al);
+    [-1,1].forEach(sd=>{const s=box(0.12,2.0,0.6,alS,sd*0.66,1.5,-0.22,al);});const lnt=rb(1.5,0.24,0.62,0.03,alS);lnt.position.set(0,2.58,-0.22);al.add(lnt);const sill=rb(1.44,0.14,0.62,0.02,alS);sill.position.set(0,0.52,-0.22);al.add(sill);
+    box(0.08,0.04,0.04,bronzeM,0,2.4,-0.12,al);a.hook=new THREE.Mesh(new THREE.TorusGeometry(0.04,0.008,6,14),bronzeM);a.hook.position.set(0,2.34,-0.1);al.add(a.hook);
+    a.inAl=new THREE.Group();al.add(a.inAl);
+    const lt=new THREE.Group();lt.position.set(-0.3,0.82,-0.36);lt.rotation.x=-0.18;lt.rotation.y=0.2;a.inAl.add(tag(lt,'liontab'));lt.add(rb(0.46,0.36,0.05,0.02,clayM));plane(0.43,0.33,new THREE.MeshStandardMaterial({map:tex(tabletC('THE KEEPER\u2019S NOTES',CLUES,3391)),roughness:0.85}),0,0,0.027,0,lt);
+    const mt=new THREE.Group();mt.position.set(0.3,0.8,-0.36);mt.rotation.x=-0.18;mt.rotation.y=-0.2;a.inAl.add(tag(mt,'map'));mt.add(rb(0.5,0.34,0.05,0.02,clayM));a.mapC=mapC();plane(0.47,0.31,new THREE.MeshStandardMaterial({map:tex(a.mapC),roughness:0.85}),0,0,0.027,0,mt);
+    a.pc.iron=ingot(a.metal.iron);a.pc.iron.position.set(0.02,0.6,-0.1);a.pc.iron.rotation.y=0.25;a.inAl.add(tag(a.pc.iron,'pc_iron'));a.inAl.visible=false;
+    a.alLamp=oilLamp(clayM);a.alLamp.position.set(0,2.18,-0.1);al.add(a.alLamp);a.alLamp.visible=false;[-1,1,0].forEach(i=>{const c=cyl(0.003,0.003,0.16,bronzeM,i*0.04,2.27,-0.1,al,4);c.rotation.z=i*0.25;a.alLamp.add(c);c.position.set(i*0.04,0.09,0);});
+    a.alFlame=FX.flame(a.alLamp,0,0.04,0.1,0.06,0.15,{intensity:1.4});a.flames.push(a.alFlame);a.alL=new THREE.PointLight(0xffc070,0,4.5,2);a.alL.position.set(0,1.6,0.25);al.add(a.alL);FX.shadow(al,true,true);
+    a.dark=noRay(plane(1.2,1.95,new THREE.MeshBasicMaterial({color:0x000000,transparent:true,opacity:0.82,depthWrite:false}),0,1.5,-0.12,0,al));
+    // ---- above ground (shown when you climb out)
+    a.up=new THREE.Group();a.up.visible=false;scene.add(noRay(a.up));const gs=sandSet(3401,'#9a7c54');
+    const grd=new THREE.Mesh(new THREE.RingGeometry(HR,90,48,1),new THREE.MeshStandardMaterial({map:tex(gs.alb,[1,1]),roughness:1}));grd.rotation.x=-Math.PI/2;grd.position.y=GY;a.up.add(grd);
+    {const p=grd.geometry.attributes.position,uv=grd.geometry.attributes.uv;for(let i=0;i<p.count;i++)uv.setXY(i,p.getX(i)/4,p.getY(i)/4);}
+    const sky=new THREE.Mesh(new THREE.SphereGeometry(140,32,16),new THREE.MeshBasicMaterial({map:tex(domeSkyC()),side:THREE.BackSide,fog:false,toneMapped:false}));sky.position.y=GY;a.up.add(sky);
+    const ruinM=new THREE.MeshStandardMaterial({map:tex(bk.alb,[3,2]),roughness:0.9});[[-6,-9,4,1.6,0.7,0.2],[7,-5,3,1.1,0.7,-0.6],[-8,4,5,2.2,0.8,1.1],[5,9,2.4,0.9,0.7,0.3],[12,-14,6,3,1,0.1],[15,6,0.8,1.8,5,0.2],[22,-3,0.9,3.2,7,-0.1],[9,3,2,0.7,0.6,0.9]].forEach(p=>{const b=box(p[2],p[3],p[4],ruinM,p[0],GY+p[3]/2,p[1],a.up);b.rotation.y=p[5];});
+    [[3,-6],[-4,-7],[-6,7],[11,-2.5],[11,2.5]].forEach(p=>{cyl(0.35,0.4,0.8+Math.abs(p[0])*0.15,stoneM(),p[0],GY+0.5,p[1],a.up,16);});
+    [[9,2,4.5],[-10,-3,5],[-3,12,4],[14,8,5.5]].forEach(p=>{const pl2=palm(a.up,p[0],p[1],p[2],frM,trM);pl2.position.y=GY;});
+    for(let i=0;i<5;i++){const s=10-i*1.8;const z=box(s,1.4,s,ruinM,0,GY+0.7+i*1.4,-70,a.up);}
+    a.sun=new THREE.DirectionalLight(0xffd8a0,0);a.sun.position.set(30,12,0);scene.add(a.sun);
+    FX.touch(4);
+    return{animate,onTap(id){if(id.indexOf('lion_')===0)tone(140,.5,'sine',.08,110);if(id==='reallion')tone(80,1.1,'sine',.18,60);if(id==='wall'||id==='dome')tone(520,.25,'sine',.05,500);},
+      onWin(){a.exitT=0.0001;a.up.visible=true;SFX.horn();}};
+  }
+  function animate(t,dt,k){
+    FX.tickFlames(a.flames,t);if(!REDUCED){a.dust.userData.tick(t,dt);a.embers.userData.tick(t,dt);}
+    const fl=REDUCED?1:1+Math.sin(t*9)*0.05+Math.sin(t*23)*0.03;a.lsL.intensity=1.6*fl;a.fuL.intensity=1.5*(REDUCED?1:1+Math.sin(t*7)*0.1);a.tbL.intensity=1.1*fl;a.wlL.intensity=1.2*fl;
+    // the writing glows; brighter once the key is set
+    a.wrM.emissiveIntensity=(S.keysSet?1.8:1.2)+(REDUCED?0:Math.sin(t*1.7)*0.15);a.keySlots.forEach(s=>s.visible=S.keysSet);
+    if(!REDUCED&&a.real){const b=1+Math.sin(t*1.3)*0.025;a.real.parts.body.scale.set(0.95*b,0.8*b,2.0);a.real.parts.head.rotation.x=Math.sin(t*1.3)*0.01;}
+    // statue pieces
+    const key=S.slots.join(',');if(key!==a.slotKey){a.slotKey=key;S.slots.forEach((m,i)=>{a.slotG[i].visible=!!m;if(m)a.slotG[i].userData.ms.forEach(o=>o.material=m==='clay'?(o.position.x<0?a.metal.iron:a.metal.clayP):a.metal[m]);});FX.touch(2);}
+    ['gold','silver','brass'].forEach(m=>a.pc[m].visible=!S.got[m]);a.pc.iron.visible=!S.got.iron;a.pc.clay.visible=S.foodDone&&!S.got.clay;
+    a.half1.visible=S.statueDone&&!S.half1;a.half2.visible=S.furOpen&&!S.half2;a.lamp.visible=S.chestOpen&&!S.lamp;a.scroll.visible=S.chestOpen&&!S.scroll;
+    a.inAl.visible=S.lampHung;a.alLamp.visible=S.lampHung;a.alL.intensity=S.lampHung?1.3*fl:0;a.dark.material.opacity=lerp(a.dark.material.opacity,S.lampHung?0:0.82,k);a.dark.visible=a.dark.material.opacity>0.01;
+    a.rope.visible=!S.rope;
+    // moving parts (refresh the static shadow map while they move)
+    const mv=(o,prop,target)=>{const v=o[prop];if(Math.abs(v-target)>0.002){o[prop]=lerp(v,target,k);FX.touch(1);}};
+    mv(a.lid.rotation,'x',S.chestOpen?-1.5:0);mv(a.fDoor.rotation,'y',S.furOpen?-1.7:0);mv(a.drawer.position,'z',S.foodDone?0.36:0.1);mv(a.door.position,'y',S.lionsDone?-0.12:0.2);mv(a.nDoor.position,'y',S.statueDone?0.12:0.32);mv(a.shut.rotation,'y',S.winOpen?-1.9:0);
+    a.wNeedle.rotation.z=lerp(a.wNeedle.rotation.z,S.wdir*Math.PI/2,k);a.beads.forEach((b,i)=>b.position.x=lerp(b.position.x,i<S.wcount?-0.26+i*0.065:0.26-(8-i)*0.03,k));
+    Object.keys(a.plates).forEach(c=>{const n=S.plate[c]||'';const p=a.plates[c];if(p.n!==n){p.n=n;p.t.image=plateC(n);p.t.needsUpdate=true;}});
+    // dawn
+    const target=a.exitT>0||S.morning?1:S.winOpen?0.4:0;a.dawn=lerp(a.dawn,target,REDUCED?1:Math.min(1,dt*0.6));const dn=a.dawn;
+    a.skyD.material.opacity=Math.min(1,dn*1.6);a.winL.intensity=dn*1.6;a.crack.material.color.setRGB(lerp(0.6,1.0,dn),lerp(0.72,0.82,dn),lerp(1.0,0.6,dn));a.moon.color.setRGB(lerp(0.66,1,dn),lerp(0.75,0.85,dn),lerp(1,0.65,dn));
+    a.waxM.emissiveIntensity=S.winOpen?2.2:0.6;a.beam.material.color.copy(a.moon.color);a.beam2.material.color.copy(a.moon.color);
+    if(S.sealDone){a.seal.visible=false;a.seal2.visible=false;a.cords.forEach(c=>c.visible=false);a.waxBits.forEach((b,i)=>{if(!b.visible){b.visible=true;b.position.set(Math.cos(i*1.3)*0.6,0.03,Math.sin(i*1.3)*0.6);b.rotation.y=i;}});}
+    // climbing out at dawn
+    if(a.exitT>0){a.exitT=Math.min(1,a.exitT+dt/(REDUCED?1.2:6));const e=a.exitT;const s=Math.min(1,e/0.25),es=easeIO(s);
+      a.stone.position.set(es*2.3,GY+0.16+Math.sin(s*Math.PI)*0.25,0);a.stone.rotation.z=-es*0.25;a.crack.visible=e<0.05;
+      a.moon.intensity=lerp(1.6,4,es);a.beam.material.opacity=a.beam2.material.opacity=0.12+es*0.12;a.sun.intensity=es*1.1;scene.fog.color.setRGB(lerp(0.04,0.78,es),lerp(0.08,0.6,es),lerp(0.19,0.5,es));scene.fog.density=lerp(0.02,0.008,es);FX.touch(1);
+      const c=Math.max(0,(e-0.2)/0.8),ec=easeIO(c),y=lerp(1.6,8.6,ec);camera.position.set(0,y,0);
+      const eu=new THREE.Euler().setFromQuaternion(camera.quaternion,'YXZ');const w=Math.min(1,e/0.15);const up=Math.min(1,Math.max(0,(y-6.2)/2.4));
+      const tp=lerp(1.25,0.06,easeIO(up));let dy=-Math.PI/2-eu.y;dy=Math.atan2(Math.sin(dy),Math.cos(dy));
+      camera.quaternion.setFromEuler(new THREE.Euler(lerp(eu.x,tp,w),eu.y+dy*w*easeIO(up),0,'YXZ'));}
+  }
+  /* ---------- panels ---------- */
+  const take=(id,lab)=>`<div class="row"><button class="btn brass" id="${id}">${lab}</button></div>`;
+  const bindTake=(id,fn)=>{const b=$('#'+id);if(b)b.addEventListener('click',()=>{fn();SFX.click();updateHud();renderPanel();});};
+  const look='<span class="tag">Just for looking</span>';
+  const chip=m=>`<span class="r32-chip" style="background:${METAL.find(x=>x.k===m).css}"></span>`;
+  function piece(m,where,text){return()=>S.got[m]?{eye:where,title:'Nothing here',html:'<p>You already took the piece that was here.</p>'}:{eye:where,title:`A piece of ${MN(m).toLowerCase()}`,html:`<p>${text}</p><p class="muted">It looks like part of a statue.</p>${take('take','Take the '+MN(m).toLowerCase()+' piece')}`,bind(){bindTake('take',()=>{S.got[m]=true;});}};}
+  function lionsPanel(){
+    if(S.lionsDone)return{eye:'The four stone lions',title:'The young lion\u2019s secret',html:`<p>All four name plates click into place. Under the blue young lion, a stone panel slides down.</p>${S.rope?'<p>The hiding place is empty now.</p>':`<p>Inside: a coil of strong rope, and a little leather pouch with <b>four signet rings</b>!</p>${take('take','Take the rope and the rings')}`}`,bind(){bindTake('take',()=>{S.rope=true;});}};
+    return{eye:'The four stone lions',title:'Name the lions',html:`<p>Four glazed lions guard the corners of the den. Each pedestal has an empty slot for a bronze name plate. Four plates lie nearby: <b>Ari</b>, <b>Kephir</b>, <b>Labi</b> and <b>Shachal</b>, old Hebrew words for lions in the Bible.</p>
+      <p class="muted">Tap a plate to change its name. The den is laid out like the compass on the floor.</p>
+      <div class="r32-grid">${CORN.map(c=>`<div class="r32-lion"><div class="r32-lhead">${LIONICO(GLAZE[c][2])}<span><b>${CNAME[c]}</b><br><span class="muted">${GLAZE[c][0]} glaze</span></span></div><button class="btn" data-c="${c}">${S.plate[c]||'Choose'}</button></div>`).join('')}</div>
+      <div class="row" style="justify-content:center"><button class="btn brass" id="setp">Set the plates</button></div><p class="msg">${S.msg}</p>`,
+      bind(){on('button[data-c]',el=>{const c=el.dataset.c;const i=LNAME.indexOf(S.plate[c]);S.plate[c]=LNAME[(i+1)%4];S.msg='';SFX.click();renderPanel();});
+        $('#setp').addEventListener('click',()=>{if(CORN.some(c=>!S.plate[c])){S.msg='Every lion needs a name plate.';SFX.thud();}else if(CORN.every(c=>S.plate[c]===LANS[c])){S.lionsDone=true;SFX.ding();updateHud();}else{S.msg='The plates slide back out. Check the keeper\u2019s notes and the word tablet again.';SFX.thud();}renderPanel();});}};}
+  const panels={
+    writing:()=>{
+      if(S.writeDone)return{eye:'North wall',title:'The writing on the wall',html:`${quote('MENE, MENE, TEKEL, UPHARSIN.','Daniel 5:25')}<p>The writing glows softly. ${S.chain?'':'A small stone drawer has slid open under the ledge, and in it lies a heavy <b>chain of gold</b>.'}</p>${quote('Then commanded Belshazzar, and they clothed Daniel with scarlet, and put a chain of gold about his neck','Daniel 5:29')}${S.chain?'':take('take','Take the gold chain')}`,bind(){bindTake('take',()=>{S.chain=true;});}};
+      if(!S.keysSet){const n=(S.half1?1:0)+(S.half2?1:0);
+        return{eye:'North wall',title:'Glowing writing',html:`<p>Strange signs glow on the plaster, as if a hand had just written them. Under them, a stone ledge has two empty slots, shaped like two halves of a clay key tablet.</p><div class="r32-wall">${WORDS.map(w=>`<div>${[...w].map(ch=>gSVG(ch,28)).join('')}</div>`).join('')}</div>
+          ${n===2?take('fit','Fit both key halves into the slots'):`<p class="muted">${n?'You have one half of the key. Find the other half.':'You need both halves of the key to read this.'}</p>`}`,bind(){bindTake('fit',()=>{S.keysSet=true;});}};}
+      const allOk=S.wordsOk.every(Boolean);
+      if(!allOk){const kt=(ks,lab)=>`<div><p class="muted" style="margin:0 0 4px">${lab}</p><div class="r32-key">${ks.map(k=>`<span>${gSVG(k,24)}=${k}</span>`).join('')}</div></div>`;
+        return{eye:'North wall',title:'Read the writing',html:`<p>The two key halves glow. Each sign stands for one letter. Tap a line of writing, then spell what it says.</p>${kt(KEY1,'Key half from the dream image')}${kt(KEY2,'Key half from the furnace')}
+          <div class="r32-words">${WORDS.map((w,i)=>`<button class="r32-w${S.wsel===i&&!S.wordsOk[i]?' on':''}${S.wordsOk[i]?' ok':''}" data-w="${i}" aria-label="Line ${i+1}">${[...w].map((ch,j)=>`<span class="r32-g">${gSVG(ch,26)}<b>${(S.wordsOk[i]?w:S.words[i])[j]||''}</b></span>`).join('')}</button>`).join('')}</div>
+          <div class="r32-keys">${KEYS.map(k=>`<button data-k="${k}">${k}</button>`).join('')}<button data-k="del" aria-label="Delete">\u232B</button></div><p class="msg">${S.msg}</p>`,
+          bind(){on('[data-w]',el=>{S.wsel=+el.dataset.w;S.msg='';SFX.click();renderPanel();});
+            on('[data-k]',el=>{const i=S.wsel;if(S.wordsOk[i]){const nx=S.wordsOk.findIndex(v=>!v);S.wsel=nx<0?0:nx;renderPanel();return;}const kk=el.dataset.k;S.msg='';
+              if(kk==='del')S.words[i]=S.words[i].slice(0,-1);else if(S.words[i].length<WORDS[i].length)S.words[i]+=kk;SFX.click();
+              if(S.words[i].length===WORDS[i].length){if(S.words[i]===WORDS[i]){S.wordsOk[i]=true;SFX.ding();const nx=S.wordsOk.findIndex(v=>!v);if(nx>=0)S.wsel=nx;}else{S.msg=`\u201C${S.words[i]}\u201D? That\u2019s not it. Check each sign against the key.`;S.words[i]='';SFX.thud();}}
+              renderPanel();});}};}
+      return{eye:'North wall',title:'What does it mean?',html:`${quote('MENE, MENE, TEKEL, UPHARSIN.','Daniel 5:25')}<p>You read it! Now give the meaning of each word, as Daniel did for King Belshazzar. (UPHARSIN is the word PERES with \u201Cand\u201D in front.)</p>
+        <div class="parts">${MWORD.map((w,i)=>`<div class="r32-mean"><b>${w}</b><button class="btn quiet" data-m="${i}" style="text-align:left;font-family:var(--f-note);font-size:16px">${S.mean[i]==null?'Choose a meaning':MEAN[S.mean[i]]}</button></div>`).join('')}</div>
+        <div class="row" style="justify-content:center"><button class="btn brass" id="tell">Give the meaning</button></div><p class="msg">${S.msg}</p>`,
+        bind(){on('[data-m]',el=>{const i=+el.dataset.m;S.mean[i]=S.mean[i]==null?MCYCLE[0]:MCYCLE[(MCYCLE.indexOf(S.mean[i])+1)%3];S.msg='';SFX.click();renderPanel();});
+          $('#tell').addEventListener('click',()=>{if(S.mean.every((v,i)=>v===i)){S.writeDone=true;SFX.ding();updateHud();}else{S.msg=S.mean.some(v=>v==null)?'Choose a meaning for every word.':'Not quite. The weights by the wall may help.';SFX.thud();}renderPanel();});}};
+    },
+    scales:()=>({eye:'North, beside the writing',title:'A merchant\u2019s balance',html:`<p>A bronze balance and three stone weights shaped like sleeping ducks. Babylonian weights had names, and each name is also a word that means something:</p>
+      <ul class="clues"><li><b>MENE</b>: a <i>mina</i>, a counted weight. The word means <b>to number</b> or count.</li><li><b>TEKEL</b>: a <i>shekel</i>. The word means <b>to weigh</b>.</li><li><b>PERES</b>: a <i>half</i>. The word means <b>to divide</b>. (U-PHARSIN means \u201Cand halves\u201D.)</li></ul>`,
+      bind(){addClue('scales','Weights: MENE means to number, TEKEL means to weigh, PERES means to divide.');}}),
+    lampstand:()=>({eye:'North',title:'A lampstand',html:`${look}<p>A tall bronze lampstand with three flames.</p>${quote('In the same hour came forth fingers of a man\u2019s hand, and wrote over against the candlestick upon the plaister of the wall of the king\u2019s palace','Daniel 5:5')}`}),
+    dream:()=>({eye:'East wall',title:'The king\u2019s dream',html:`<img class="figure" alt="A stone carving of a tall statue of a man, in five parts: head, chest and arms, belly and thighs, legs, feet. A small stone flies toward its feet." src="${dreamC().toDataURL('image/png')}">${quote('This image\u2019s head was of fine gold, his breast and his arms of silver, his belly and his thighs of brass, His legs of iron, his feet part of iron and part of clay.','Daniel 2:32-33')}`,
+      bind(){addClue('dream','The dream image: head of gold, breast and arms of silver, belly and thighs of brass, legs of iron, feet of iron and clay.');}}),
+    statue:()=>{
+      if(S.statueDone)return{eye:'East',title:'The king\u2019s dream image',html:`<p>The image stands complete, shining from its golden head to its iron and clay feet. A little door has opened in the plinth.</p>${S.half1?'<p>The little hiding place is empty now.</p>':`<p>Inside lies <b>half of a clay key tablet</b>, covered in strange signs with letters beside them.</p>${take('take','Take the key half')}`}`,bind(){bindTake('take',()=>{S.half1=true;});}};
+      const free=METAL.filter(m=>S.got[m.k]&&!S.slots.includes(m.k));
+      return{eye:'East',title:'An empty plinth',html:`<p>A stone plinth with five places for the parts of a statue, from the head down to the feet. The parts are missing, scattered around the den.</p>
+        <div class="parts">${SLOT.map((n,i)=>`<button class="part r32-slot${S.slots[i]?' ok':''}" data-s="${i}"><span class="dot"></span><span><b>${n}</b><br><span class="muted">${S.slots[i]?MN(S.slots[i]):'empty'}</span></span>${S.slots[i]?chip(S.slots[i]):''}</button>`).join('')}</div>
+        <h3 class="sub">Pieces you carry</h3>${free.length?`<div class="row">${free.map(m=>`<button class="btn quiet r32-pc" data-m="${m.k}">${chip(m.k)} ${m.n}</button>`).join('')}</div><p class="muted">Tap a piece to put it in the highest empty place. Tap a place to take its piece back.</p>`:`<p class="muted">${METAL.filter(m=>S.got[m.k]).length?'All the pieces you have found are on the plinth.':'None yet. Look around the den.'} (${METAL.filter(m=>S.got[m.k]).length} of 5 found)</p>`}
+        <div class="row" style="justify-content:center"><button class="btn brass" id="raise" ${S.slots.every(Boolean)?'':'disabled'}>Raise the image</button></div><p class="msg">${S.msg}</p>`,
+        bind(){on('[data-m]',el=>{const i=S.slots.indexOf(null);if(i>=0)S.slots[i]=el.dataset.m;S.msg='';SFX.click();renderPanel();});on('[data-s]',el=>{S.slots[+el.dataset.s]=null;S.msg='';SFX.click();renderPanel();});
+          $('#raise').addEventListener('click',()=>{if(S.slots.every((m,i)=>m===METAL[i].k)){S.statueDone=true;SFX.ding();updateHud();}else{S.slots=[null,null,null,null,null];S.msg='The image wobbles and the pieces slide off. Which metal made which part, in the king\u2019s dream?';SFX.thud();}renderPanel();});}};
+    },
+    pc_gold:piece('gold','South-southeast \u00B7 In the palm\u2019s pot','Half buried in the soil of the date palm\u2019s pot is a heavy bar of shining gold.'),
+    pc_silver:piece('silver','West \u00B7 By the sleeping lion','A bar of silver lies between the sleeping lion\u2019s front paws. The lion doesn\u2019t even open its eyes as you take it.'),
+    pc_brass:piece('brass','South-southwest \u00B7 On the pillar\u2019s base','A bar of brass sits on the base of the pillar.'),
+    pc_iron:piece('iron','North-northwest \u00B7 In the alcove','In the lamplight you spot a bar of dark iron on the alcove\u2019s sill.'),
+    pc_clay:piece('clay','East-southeast \u00B7 In the drawer','In the drawer lies a strange bar: half iron, half baked clay.'),
+    food:()=>{
+      if(S.foodDone)return{eye:'East-southeast',title:'Daniel\u2019s meal',html:`<p>A drawer slid open under the table when you served Daniel\u2019s meal.</p>${quote('And at the end of ten days their countenances appeared fairer and fatter in flesh than all the children which did eat the portion of the king\u2019s meat.','Daniel 1:15')}${S.got.clay?'':'<p>Something is lying in the drawer. Tap it to look.</p>'}`};
+      return{eye:'East-southeast',title:'A table set for a feast',html:`<p>A table laid with food from the king\u2019s kitchen. Words are woven into the cloth:</p>${quote('Prove thy servants, I beseech thee, ten days; and let them give us pulse to eat, and water to drink.','Daniel 1:12')}
+        <p class="muted">Choose what goes on Daniel\u2019s plate, and mark the days of the test on the little clay tally.</p>
+        <div class="opts" style="grid-template-columns:repeat(3,minmax(0,1fr))">${DISH.map(d=>`<button class="opt" data-d="${d[0]}" aria-pressed="${S.dish[d[0]]?'true':'false'}">${DSVG[d[0]]}<span>${d[1]}</span></button>`).join('')}</div>
+        <div class="r32-tally" role="img" aria-label="${S.tally} tally marks">${tallySVG(S.tally)}</div>
+        <div class="row" style="justify-content:center"><button class="btn quiet" id="mark">Scratch a mark</button><button class="btn quiet" id="rub">Rub them out</button></div>
+        <div class="row" style="justify-content:center"><button class="btn brass" id="serve">Serve Daniel\u2019s meal</button></div><p class="msg">${S.msg}</p>`,
+        bind(){on('[data-d]',el=>{const d=el.dataset.d;S.dish[d]=!S.dish[d];S.msg='';SFX.click();renderPanel();});
+          $('#mark').addEventListener('click',()=>{if(S.tally<20)S.tally++;S.msg='';tone(1400,.04,'square',.04);renderPanel();});$('#rub').addEventListener('click',()=>{S.tally=0;S.msg='';SFX.click();renderPanel();});
+          $('#serve').addEventListener('click',()=>{const pick=DISH.filter(d=>S.dish[d[0]]).map(d=>d[0]).sort().join();if(pick!=='pulse,water'){S.msg=S.dish.meat||S.dish.wine||S.dish.cakes?'Daniel would not eat the king\u2019s rich food.':'That\u2019s not what Daniel asked for.';SFX.thud();}
+            else if(S.tally!==10){S.msg=`${S.tally} days? How long did Daniel ask to be tested?`;SFX.thud();}else{S.foodDone=true;SFX.ding();updateHud();}renderPanel();});}};
+    },
+    palm:()=>({eye:'South-southeast',title:'A date palm',html:`${look}<p>A young date palm grows in a big clay pot. Date palms grew all along the rivers of Babylon.</p>`}),
+    fiery:()=>({eye:'South wall',title:'The fiery furnace',html:`<img class="figure" alt="A carving of a furnace full of flames. Four men walk inside the fire; the fourth one shines. Outside, the king points at them. In the top corner is a sun sign with the words: How many walk in the fire?" src="${furnaceC().toDataURL('image/png')}">${quote('Lo, I see four men loose, walking in the midst of the fire, and they have no hurt; and the form of the fourth is like the Son of God.','Daniel 3:25')}<p>Carved by the <b>sun</b> sign: <i>How many walk in the fire?</i></p>`,
+      bind(){addClue('sun','Sun sign (furnace carving): How many walk in the fire?');}}),
+    furnace:()=>{
+      if(S.furOpen)return{eye:'South',title:'The furnace door',html:`<p>The bronze door swings open. It\u2019s warm in here, but nothing burns.</p>${S.half2?'<p>The shelf behind the door is empty now.</p>':`<p>On a shelf behind the door lies <b>half of a clay key tablet</b>.</p>${take('take','Take the key half')}`}`,bind(){bindTake('take',()=>{S.half2=true;});}};
+      return{eye:'South',title:'The furnace door',html:`<p>A small bronze door is set in the brick furnace. Its lock has three dials marked with a <b>sun</b>, a <b>moon</b> and a <b>star</b>. The same signs are carved in other places in the den.</p>
+        <div class="dials" style="background:linear-gradient(#e0a048,#9a5a1a)">${['sun','moon','star'].map((k,i)=>`<div class="dial">${symSVG(k,30,'#3a1a08')}<button data-i="${i}" data-d="-1" aria-label="${k} dial up">${CHEV_UP}</button><span>${S.fur[i]}</span><button data-i="${i}" data-d="1" aria-label="${k} dial down">${CHEV_DN}</button></div>`).join('')}</div>
+        <div class="row" style="justify-content:center"><button class="btn brass" id="fopen">Open the door</button></div><p class="msg">${S.msg}</p>`,
+        bind(){on('.dial button',el=>{const i=+el.dataset.i;S.fur[i]=(S.fur[i]+(+el.dataset.d)+10)%10;S.msg='';SFX.click();renderPanel();});
+          $('#fopen').addEventListener('click',()=>{if(S.fur.join('')===FUR.join('')){S.furOpen=true;SFX.ding();updateHud();}else{S.msg='The door won\u2019t open. Find the sun, the moon and the star.';SFX.thud();}renderPanel();});}};
+    },
+    pillar:()=>({eye:'South-southwest',title:'The pillar of names',html:`<p>Under a carved <b>moon</b> sign, six names are cut into the pillar:</p><ul class="clues"><li>HANANIAH is SHADRACH</li><li>MISHAEL is MESHACH</li><li>AZARIAH is ABED-NEGO</li></ul>${quote('Unto whom the prince of the eunuchs gave names: for he gave unto Daniel the name of Belteshazzar; and to Hananiah, of Shadrach; and to Mishael, of Meshach; and to Azariah, of Abed-nego.','Daniel 1:7')}<p>At the bottom: <i>How many friends?</i></p>`,
+      bind(){addClue('moon','Moon sign (pillar): six names are carved. How many friends?');}}),
+    scroll7:()=>S.scroll?{eye:'In the decree chest',title:'The scroll',html:'<p>You already took the scroll. Its words are in your notes.</p>'}:({eye:'In the decree chest',title:'A scroll',html:`<p>A scroll of King Nebuchadnezzar\u2019s orders, with a <b>star</b> sign at the top:</p>${quote('Then was Nebuchadnezzar full of fury\u2026 therefore he spake, and commanded that they should heat the furnace one seven times more than it was wont to be heated.','Daniel 3:19')}<p>Beside the star: <i>How many times hotter?</i></p>${take('take','Take the scroll')}`,
+      bind(){addClue('star','Star sign (scroll): heat the furnace one seven times more. How many times hotter?');bindTake('take',()=>{S.scroll=true;});}}),
+    chest:()=>{
+      if(S.chestOpen){const both=S.lamp&&S.scroll;return{eye:'West-southwest',title:'The decree chest',html:`<p>The bronze lid is open.</p>${both?'<p>The chest is empty now.</p>':`<p>Inside: ${S.lamp?'':'an old clay <b>oil lamp</b>, still full of oil'}${!S.lamp&&!S.scroll?', and ':''}${S.scroll?'':'a <b>scroll</b> with a star on it'}.</p><div class="row">${S.lamp?'':'<button class="btn brass" id="tlamp">Take the lamp</button>'}${S.scroll?'':'<button class="btn" id="rscroll">Read the scroll</button>'}</div>`}`,
+        bind(){bindTake('tlamp',()=>{S.lamp=true;});const r=$('#rscroll');if(r)r.addEventListener('click',()=>openPanel('scroll7'));}};}
+      return{eye:'West-southwest',title:'The decree chest',html:`<p>A heavy bronze chest for the king\u2019s decrees. Its lock has five dials in three groups, and words are cut into the lid.</p>
+        <div class="r32-dec">${[['How many princes?',[0,1,2]],['How many presidents?',[3]],['Which was Daniel?',[4]]].map(g=>`<div><b>${g[0]}</b><div class="dials">${g[1].map(i=>`<div class="dial"><button data-i="${i}" data-d="-1" aria-label="Dial ${i+1} up">${CHEV_UP}</button><span>${S.dec[i]}</span><button data-i="${i}" data-d="1" aria-label="Dial ${i+1} down">${CHEV_DN}</button></div>`).join('')}</div></div>`).join('')}</div>
+        <div class="row" style="justify-content:center"><button class="btn brass" id="copen">Open the chest</button></div><p class="msg">${S.msg}</p>`,
+        bind(){on('.dial button',el=>{const i=+el.dataset.i;S.dec[i]=(S.dec[i]+(+el.dataset.d)+10)%10;S.msg='';SFX.click();renderPanel();});
+          $('#copen').addEventListener('click',()=>{if(S.dec.join('')===DEC.join('')){S.chestOpen=true;SFX.ding();updateHud();}else{S.msg='The lid won\u2019t budge. Read the decree on the wall.';SFX.thud();}renderPanel();});}};
+    },
+    decree:()=>({eye:'West-southwest wall',title:'The decree of Darius',html:quote('It pleased Darius to set over the kingdom an hundred and twenty princes, which should be over the whole kingdom; And over these three presidents; of whom Daniel was first','Daniel 6:1-2'),
+      bind(){addClue('decree','Decree: 120 princes, 3 presidents, Daniel was first.');}}),
+    tablets:()=>({eye:'West',title:'Clay tablets',html:`${look}<p>Old clay tablets covered in cuneiform, the wedge-shaped writing of Babylon. They are lists of grain, sheep and silver.</p>`}),
+    cylinder:()=>({eye:'West',title:'A cylinder seal',html:`<p>A little stone cylinder carved with a picture. Rolled across soft clay, it prints its picture. Look at the clay strip beside it: the picture comes out <b>backwards</b>, like in a mirror. Every seal prints backwards.</p>`,bind(){addClue('mirror','A seal prints its picture backwards, like a mirror.');}}),
+    window:()=>{
+      if(S.winOpen)return{eye:'West wall',title:'The window toward Jerusalem',html:`<p>The stone shutter stands open. The light-shaft slants up to the open air, and the sky out there is just starting to grow light. Pale light now falls on the stone above you.</p>${quote('He kneeled upon his knees three times a day, and prayed, and gave thanks before his God, as he did aforetime.','Daniel 6:10')}`};
+      return{eye:'West wall',title:'A shuttered window',html:`<p>High in the wall is a window with a stone shutter. It opens onto a light-shaft that slants up to the open air. Under it is a bronze dial with a pointer, and a row of brass beads.</p>${quote('Now when Daniel knew that the writing was signed, he went into his house; and his windows being open in his chamber toward Jerusalem, he kneeled upon his knees three times a day, and prayed, and gave thanks before his God, as he did aforetime.','Daniel 6:10')}
+        <div class="row" style="justify-content:center;gap:22px;align-items:flex-end"><div style="display:flex;flex-direction:column;align-items:center;gap:6px"><b>Pointer</b><button class="btn" id="wdir" style="min-width:120px">${DIRS[S.wdir]}</button></div>
+        <div class="dials"><div class="dial"><button data-d="-1" aria-label="Fewer beads">${CHEV_UP}</button><span>${S.wcount}</span><button data-d="1" aria-label="More beads">${CHEV_DN}</button><span class="muted" style="width:auto;height:auto;background:none;color:#1d140c;font-size:12px">beads</span></div></div></div>
+        <div class="row" style="justify-content:center"><button class="btn brass" id="wopen">Open the shutter</button></div><p class="msg">${S.msg}</p>`,
+        bind(){$('#wdir').addEventListener('click',()=>{S.wdir=(S.wdir+1)%4;S.msg='';SFX.click();renderPanel();});on('.dial button',el=>{S.wcount=(S.wcount+(+el.dataset.d)+10)%10;S.msg='';SFX.click();renderPanel();});
+          $('#wopen').addEventListener('click',()=>{if(S.wdir===3&&S.wcount===3){S.winOpen=true;SFX.ding();updateHud();FX.touch(3);}else{S.msg=S.wdir!==3?'The shutter stays shut. Which way is Jerusalem from Babylon?':'The shutter stays shut. Count again.';SFX.thud();}renderPanel();});}};
+    },
+    map:()=>({eye:'In the alcove',title:'A map on a clay tablet',html:`<img class="figure" alt="Map. Babylon, marked as this den, lies on the river on the right side. Jerusalem lies on the left side, across the desert, near the Great Sea. An arrow marked N points to the top." src="${a.mapC.toDataURL('image/png')}"><p class="muted">The arrow marked N points north.</p>`,
+      bind(){addClue('map','Map: Jerusalem lies to the west of Babylon.');}}),
+    liontab:()=>({eye:'In the alcove',title:'The keeper\u2019s notes',html:`<p>A clay tablet left by the old lion keeper:</p><ul class="clues">${CLUES.map(c=>`<li>${c}</li>`).join('')}</ul><p class="muted">The keeper wrote in plain words. The name plates use the Hebrew words.</p>`,
+      bind(){addClue('lions','Keeper: fierce lion where the sun rises; young lion and lioness in opposite corners; grown lion not gold or white; young lion south, lioness north.');}}),
+    lexicon:()=>({eye:'West-northwest',title:'Words for lion',html:`<p>A clay word list on a shelf. The Bible uses several Hebrew words for lions:</p><ul class="clues">${LNAME.map(n=>`<li><b>${n}</b> <span lang="he" dir="rtl">${HEB[n]}</span>: ${LMEAN[n]}</li>`).join('')}</ul>`,
+      bind(){addClue('lex','Ari: grown lion. Kephir: young lion. Labi: lioness. Shachal: fierce lion.');}}),
+    lion_ne:lionsPanel,lion_se:lionsPanel,lion_sw:lionsPanel,lion_nw:lionsPanel,
+    alcove:()=>{
+      if(S.lampHung)return{eye:'North-northwest',title:'The alcove',html:'<p>The lamp lights up the alcove. On its sill are two clay tablets and a bar of metal. Tap them to look closer.</p>'};
+      return{eye:'North-northwest',title:'A dark alcove',html:`<p>A deep alcove in the wall. It is far too dark in there to see anything. There\u2019s a bronze hook at the top, just right for hanging a lamp.</p>${S.lamp?take('hang','Hang the oil lamp on the hook'):'<p class="muted">If only you had a lamp.</p>'}`,bind(){bindTake('hang',()=>{S.lampHung=true;FX.touch(3);});}};
+    },
+    seal:()=>{
+      if(S.sealDone)return{eye:'Above you',title:'The broken seal',html:'<p>The wax seal lies broken in pieces on the floor. Nothing holds the stone shut now.</p>'};
+      if(!S.winOpen)return{eye:'Above you',title:'The king\u2019s seal',html:`<p>Two wax seals hang on cords under the great stone: a big one and a small one.</p>${quote('And a stone was brought, and laid upon the mouth of the den; and the king sealed it with his own signet, and with the signet of his lords','Daniel 6:17')}<p class="muted">It\u2019s too dark up there to make out the picture pressed into the wax.</p>`};
+      return{eye:'Above you',title:'The king\u2019s seal',html:`${quote('And the king sealed it with his own signet, and with the signet of his lords','Daniel 6:17')}<p>In the pale light from the window you can see the picture pressed into the big seal: the king\u2019s own signet. The seal will only break for the ring that made it.</p>
+        <div style="display:flex;justify-content:center">${sealSVG('B','wax',150)}</div>
+        ${S.rope?`<p class="muted">Which of the four rings made this picture?</p><div class="opts">${RORD.map((r,i)=>`<button class="opt" data-r="${r}" aria-label="Ring ${i+1}">${sealSVG(r,'ring',100)}<span>Ring ${i+1}</span></button>`).join('')}</div>`:'<p class="muted">Whoever sealed you in kept the rings somewhere. Perhaps they are hidden in the den.</p>'}<p class="msg">${S.msg}</p>`,
+        bind(){on('[data-r]',el=>{if(el.dataset.r==='A'){S.sealDone=true;SFX.pop();SFX.ding();updateHud();FX.touch(3);}else{S.msg=el.dataset.r==='B'?'That ring looks just like the picture, but the seal stays whole. Remember how seals print.':'That ring didn\u2019t make this picture. Look carefully.';SFX.thud();}renderPanel();});}};
+    },
+    stone:()=>{const ok=S.rope&&S.chain&&S.sealDone&&S.winOpen;
+      const need=`<div class="parts">${rowPart(S.rope,'A rope','You have it.','Hidden somewhere in the den.')}${rowPart(S.chain,'A gold chain','You have it.','Not found yet.')}${rowPart(S.sealDone,'The king\u2019s seal','Broken.','Still sealed.')}${rowPart(S.winOpen,'Morning','The window is open and dawn is coming.','It is still night.')}</div>`;
+      if(!ok)return{eye:'Above you',title:'The way out',html:`<p>High above, a great stone covers the round opening of the den. Thin moonlight shines around its edge. You\u2019ll need a few things before you can get out of here.</p>${need}`};
+      if(!S.tied)return{eye:'Above you',title:'The way out',html:`${need}<p>The rope is long enough, but too light to throw that high. If you tie the heavy gold chain to its end\u2026</p>${take('tie','Tie the gold chain to the rope')}`,bind(){bindTake('tie',()=>{S.tied=true;});}};
+      if(!S.morning)return{eye:'Above you',title:'The way out',html:`<p>The rope is ready, with the gold chain tied on as a weight. The sky is getting lighter. Soon it will be morning.</p>${take('wait','Wait for the morning')}`,bind(){bindTake('wait',()=>{S.morning=true;tone(196,1.6,'triangle',.14,180);});}};
+      return{eye:'Above you',title:'A voice from above',html:`<p>Early in the morning, footsteps hurry across the ruins above. Then a voice calls down into the den, the very words King Darius once called:</p>${quote('O Daniel, servant of the living God, is thy God, whom thou servest continually, able to deliver thee from the lions?','Daniel 6:20')}
+        <p class="muted">Call back with Daniel\u2019s answer.</p><div class="opts" style="grid-template-columns:1fr">${ANSW.map((o,i)=>`<button class="opt" data-a="${i}" style="font-family:var(--f-note);font-weight:400;font-size:17px;text-align:left;align-items:flex-start">\u201C${o[0]}\u201D</button>`).join('')}</div><p class="msg">${S.msg}</p>`,
+        bind(){on('[data-a]',el=>{const i=+el.dataset.a;if(i===2){closePanel();win();}else{S.msg=ANSW[i][2]+' ('+ANSW[i][1]+')';SFX.thud();renderPanel();}});}};
+    },
+    reallion:()=>({eye:'West',title:'A sleeping lion',html:`${look}<p>A real lion, fast asleep and gently snoring. Its mouth is shut tight. It doesn\u2019t seem to mind you at all.</p>${quote('My God hath sent his angel, and hath shut the lions\u2019 mouths','Daniel 6:22')}`}),
+    wall:()=>({eye:'All around',title:'Glazed brick walls',html:`${look}<p>The walls are built of shining blue glazed bricks with golden lions, dragons and bulls, like the famous Ishtar Gate of Babylon. Rows of white flowers run between them.</p>`}),
+    dome:()=>({eye:'Above',title:'The roof of the den',html:`${look}<p>Rings of old baked bricks lean in, one above the other, until they meet the round opening at the top.</p>`}),
+    floor:()=>({eye:'Under your feet',title:'A compass in the floor',html:`<p>A blue and gold mosaic in the middle of the floor shows the four directions: <b>N</b>orth, <b>E</b>ast, <b>S</b>outh and <b>W</b>est. North points to the glowing writing.</p>`,bind(){addClue('compass','The floor compass: north is the glowing writing, east is the dream carving, south the furnace, west the window.');}})
+  };
+  const DSVG={meat:svgD('<path d="M14 40c-4-10 4-22 16-22 10 0 18 8 16 18-2 12-16 14-24 10l-6 8-6-4 6-8z" fill="#8a3a1a" stroke="#4a1a08" stroke-width="2"/><circle cx="9" cy="52" r="5" fill="#f2ead6" stroke="#4a1a08" stroke-width="2"/>'),
+    wine:svgD('<path d="M18 10h28c0 16-4 24-14 26-10-2-14-10-14-26z" fill="#e2b23e" stroke="#7a5a10" stroke-width="2"/><path d="M20 14h24c0 8-3 14-12 16-9-2-12-8-12-16z" fill="#7a1028"/><path d="M32 36v14M22 54h20" stroke="#7a5a10" stroke-width="4" stroke-linecap="round"/>'),
+    pulse:svgD('<path d="M6 30h52c-2 14-12 22-26 22S8 44 6 30z" fill="#a86a42" stroke="#5a3a1a" stroke-width="2"/><g fill="#d8a050" stroke="#7a4a1a" stroke-width="1"><ellipse cx="18" cy="27" rx="4" ry="3"/><ellipse cx="27" cy="25" rx="4" ry="3"/><ellipse cx="36" cy="26" rx="4" ry="3"/><ellipse cx="45" cy="27" rx="4" ry="3"/><ellipse cx="31" cy="21" rx="4" ry="3"/><ellipse cx="22" cy="21" rx="4" ry="3"/><ellipse cx="40" cy="21" rx="4" ry="3"/></g>'),
+    water:svgD('<path d="M20 12h16l-2 8c8 4 12 12 10 22-2 8-8 12-16 12s-14-4-16-12c-2-10 2-18 10-22z" fill="#e8dcc0" stroke="#7a6a4a" stroke-width="2"/><path d="M16 38c4-3 8 3 12 0s8 3 12 0 6 2 6 2" stroke="#3a8ad0" stroke-width="3" fill="none"/><path d="M44 18c6 0 10 4 8 10" stroke="#7a6a4a" stroke-width="3" fill="none"/>'),
+    cakes:svgD('<ellipse cx="32" cy="46" rx="26" ry="8" fill="#c8a060"/><g fill="#e09a3a" stroke="#8a5010" stroke-width="2"><ellipse cx="22" cy="38" rx="11" ry="5"/><ellipse cx="42" cy="38" rx="11" ry="5"/><ellipse cx="32" cy="30" rx="11" ry="5"/></g>')};
+  function svgD(inner){return `<svg viewBox="0 0 64 64" aria-hidden="true">${inner}</svg>`;}
+  function tallySVG(n){let s='<svg viewBox="0 0 300 90" style="width:100%;max-width:300px;display:block;margin:auto;background:#b8845a;border-radius:10px">';for(let i=0;i<n;i++){const g=Math.floor(i/5),j=i%5,ox=20+g*68;if(j<4)s+=`<path d="M${ox+j*12} 22v46" stroke="#3a1a08" stroke-width="4" stroke-linecap="round"/>`;else s+=`<path d="M${ox-6} 60L${ox+44} 28" stroke="#3a1a08" stroke-width="4" stroke-linecap="round"/>`;}
+    return s+`<text x="292" y="82" text-anchor="end" font-size="13" fill="#3a1a08" font-family="Nunito,sans-serif">${n} marks</text></svg>`;}
+  const prog=()=>[S.statueDone,S.foodDone,S.chestOpen,S.furOpen,S.writeDone,S.lionsDone,S.winOpen,S.sealDone];
+  return{
+    id:'daniel',num:32,name:'Daniel in Babylon',
+    blurb:'Read the writing on the wall, name the stone lions and climb out of the lions\u2019 den at dawn.',
+    eyebrow:'Room 32',titleHTML:'Daniel in <em>Babylon</em>',
+    story:'You were exploring the ruins of old Babylon when the ground gave way, and you slid down into an ancient lions\u2019 den! Its blue walls shine with glazed lions and dragons, and carvings all around tell the story of Daniel. High above, the round opening is sealed by a great stone with the king\u2019s wax seal. The only lion down here is fast asleep. Can you find your way out by morning?',
+    goal:'Solve the puzzles of Daniel\u2019s story, find a rope and the gold chain, open the window toward Jerusalem and break the king\u2019s seal. Then give Daniel\u2019s answer to the voice above.',
+    winTitle:'Out of the den!',winText:'\u201CSo Daniel was taken up out of the den, and no manner of hurt was found upon him, because he believed in his God\u201D (Daniel 6:23). The stone rolls away, strong hands pull on your rope, and up you go, out of the lions\u2019 den and into the golden morning.',
+    bg:0x0a1430,toneMapping:THREE.ACESFilmicToneMapping,exposure:1.25,far:220,eyeY:1.6,winDelay:6800,
+    shadows:true,post:{bloom:0.6,radius:0.55,threshold:0.85,vignette:0.4},
+    total:8,progress:()=>prog().filter(Boolean).length,goalsTitle:'Daniel\u2019s puzzles',
+    howTo:'Each carving tells part of Daniel\u2019s story, and many clues need each other. Clues you read are kept here. Some things only show up in lamplight, and some only once the morning comes.',
+    goalRows:()=>{const got=METAL.filter(m=>S.got[m.k]).length;return[['The king\u2019s dream image',S.statueDone,got>0,`${got} of 5 pieces found`],['Daniel\u2019s meal',S.foodDone,false,''],['The decree chest',S.chestOpen,false,''],['The fiery furnace',S.furOpen,false,''],['The writing on the wall',S.writeDone,S.keysSet,'key in place'],['The four stone lions',S.lionsDone,false,''],['The window toward Jerusalem',S.winOpen,false,''],['The king\u2019s seal',S.sealDone,false,'']]
+      .map(r=>({icon:statusDot(r[1],r[2]),text:`<b>${r[0]}</b>: ${r[1]?'solved':r[2]?r[3]:'not yet'}`}));},
+    icon:()=>'',
+    fresh:()=>({got:{gold:false,silver:false,brass:false,iron:false,clay:false},slots:[null,null,null,null,null],statueDone:false,half1:false,
+      dish:{meat:false,wine:false,pulse:false,water:false,cakes:false},tally:0,foodDone:false,dec:[0,0,0,0,0],chestOpen:false,lamp:false,scroll:false,lampHung:false,
+      fur:[0,0,0],furOpen:false,half2:false,keysSet:false,words:['','','',''],wsel:0,wordsOk:[false,false,false,false],mean:[null,null,null],writeDone:false,chain:false,
+      plate:{NE:null,SE:null,SW:null,NW:null},lionsDone:false,rope:false,wdir:0,wcount:0,winOpen:false,sealDone:false,tied:false,morning:false}),
+    items:()=>{const L=[],ic=d=>svgIcon(d);const n=METAL.filter(m=>S.got[m.k]&&!S.slots.includes(m.k)&&!S.statueDone).length;
+      if(n)L.push({label:n+' statue piece'+(n>1?'s':''),svg:ic('<path d="M4 15l8-4 8 4-8 4z"/><path d="M4 15v3l8 4 8-4v-3"/>')});
+      if(S.lamp&&!S.lampHung)L.push({label:'Oil lamp',svg:ic('<path d="M3 15c4 3 12 3 16 0l2-3h-6c-3-2-7-2-10 0z"/><path d="M19 9c0-2 1-3 2-4 0 2 1 3 0 4"/>')});
+      if(S.scroll&&!S.furOpen)L.push({label:'Scroll',svg:ic('<path d="M6 4h10l3 3v13H6z"/><path d="M9 10h7M9 14h7"/>')});
+      [S.half1,S.half2].forEach((h,i)=>{if(h&&!S.keysSet)L.push({label:'Key half '+(i+1),svg:ic('<path d="M4 6h8l-2 6 2 6H4z"/>')});});
+      if(S.chain&&!S.tied)L.push({label:'Gold chain',svg:ic('<circle cx="7" cy="12" r="3"/><circle cx="12" cy="12" r="3"/><circle cx="17" cy="12" r="3"/>')});
+      if(S.rope)L.push({label:S.tied?'Rope with gold chain':'Rope',svg:ic('<path d="M5 19c0-8 14-8 14-14M5 19c4 0 6-2 6-5"/>')});
+      if(S.rope&&!S.sealDone)L.push({label:'Four signet rings',svg:ic('<circle cx="12" cy="14" r="6"/><path d="M9 7l3-4 3 4"/>')});return L;},
+    build,panels
+  };
+})();
+const LEVELS=[ROOM1,ROOM2,ROOM3,ROOM4,ROOM5,ROOM6,ROOM7,ROOM8,ROOM9,ROOM10,ROOM11,ROOM12,ROOM13,ROOM14,ROOM15,ROOM16,ROOM17,ROOM18,ROOM19,ROOM20,ROOM21,ROOM22,ROOM23,ROOM24,ROOM25,ROOM26,ROOM27,ROOM28,ROOM29,ROOM30,ROOM31,ROOM32];
 
 /* =========================================================
    Panels shared by every room: the door keypad and the notebook

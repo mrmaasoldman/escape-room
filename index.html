@@ -283,6 +283,15 @@ button.pill{cursor:pointer;font:inherit;font-family:var(--f-display);font-size:1
 @media (max-width:430px){.hud-top .pill{padding:6px 9px;gap:5px}button.pill{font-size:14px}#itemPill .lbl{max-width:19vw}#timer{font-size:13px}}
 .hint{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 18px);max-width:calc(100% - 32px);text-align:center;font-family:var(--f-body);font-style:italic;font-size:14px;color:var(--ink);background:var(--parchment);border:1px solid var(--rule);border-radius:12px;padding:8px 14px;transition:opacity .6s;z-index:5;pointer-events:none;box-shadow:0 4px 16px rgba(0,0,0,.25)}
 .hint.fade{opacity:0}
+#hintBtn{padding-left:9px;padding-right:9px}
+@media (max-width:430px){.hud-top .mlbl,#itemPill .ilbl{display:none}#itemPill .lbl{max-width:16vw}}
+@media (max-width:370px){#itemPill .lbl{max-width:12vw}}
+.resume{background:var(--parchment);color:var(--ink);border:1px solid var(--rule);border-radius:12px;padding:10px 14px;margin:6px 0 4px}
+.resume p{margin:0 0 6px;font-size:15px}.resume .linkish{color:inherit;font-size:14px}
+.hintcard{border:1px solid var(--rule);border-radius:12px;padding:10px 12px;margin:0 0 10px;background:rgba(255,255,255,.04)}
+.hintcard h3{margin:0 0 6px;font-size:16px}.hintcard.later{opacity:.75}.hintcard .muted{font-weight:400;font-size:13px}
+.hintlist{margin:0 0 8px;padding-left:20px}.hintlist li{margin:4px 0;line-height:1.35}
+.hintcard .hbtn{font-size:14px}
 #zoomReset{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 70px);z-index:5}
 
 /* Screens: menu, room intro, win */
@@ -946,6 +955,7 @@ body[data-level="2"] .win h1{font-weight:700}
   <span class="row">
     <span class="pill" id="itemPill" hidden></span>
     <button class="pill" id="modeBtn" type="button" hidden></button>
+    <button class="pill" id="hintBtn" type="button" aria-label="Hints"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2h5c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span></button>
     <button class="pill" id="notesBtn" type="button">Notes <span class="badge" id="badge">0/5</span></button>
   </span>
 </div>
@@ -972,6 +982,7 @@ body[data-level="2"] .win h1{font-weight:700}
       <li>Tap an object to inspect it.</li>
       <li id="iGoal">Work out the five-digit code that opens the door.</li>
     </ol>
+    <div class="resume" id="iResume" hidden><p><b>Welcome back!</b> <span id="iResTxt"></span> Choose how to look around below and you'll carry on where you left off.</p><button class="linkish" id="iFresh" type="button">Start this room over instead</button></div>
     <p class="small" id="iLoad" aria-live="polite"></p>
     <p class="small" id="iCredit" style="opacity:.7"></p>
     <div class="choices">
@@ -1331,7 +1342,7 @@ const FX=(function(){
    Game state shared by every room
    ========================================================= */
 let LV=null,LVI=0,ROOM=null;
-function baseState(){return{syms:{},clues:{},entry:'',msg:'',won:false,t0:0,tEnd:0,running:false};}
+function baseState(){return{syms:{},clues:{},entry:'',msg:'',won:false,t0:0,tEnd:0,running:false,hintLv:{},hintN:0};}
 let S=baseState();
 function addSym(k,v){if(!S.syms[k]){S.syms[k]=v;updateHud();}}
 function addClue(k,v){S.clues[k]=v;}
@@ -2334,6 +2345,37 @@ const ROOM1=(function(){
       tel:[1,4],telDone:false,dials:[0,0,0,0,0],chestOpen:false,hasCrank:false,crankFitted:false,orr:[1,1,1,1],orrDone:false,lat:0,lon:0,globeOpen:false,book:null,pulls:[],shelfOpen:false}),
     items:()=>{const L=[];if(S.hasKey&&!S.keyUsed)L.push({label:'Brass key',svg:KEYSVG});if(S.hasPaper&&!S.paperRead)L.push({label:'Blank paper'});if(S.hasCrank&&!S.crankFitted)L.push({label:'Crank handle'});
       if(S.hasClockKey&&!S.clockUnlocked)L.push({label:'Tiny clock key',svg:KEYSVG});if(S.hasCard&&!S.shelfOpen)L.push({label:'Library card'});return L;},
+    hints:()=>{const nSym=Object.keys(S.syms).length;return[
+      {id:'box',t:'The button box (desk)',done:S.boxOpen,h:['The little box on the desk has five coloured buttons. Read the words on its lid: \u201cWe five wander round the Sun. Nearest first.\u201d',
+        'The five colours are five planets. The orrery, or the book \u201cThe Planets, for Young Readers\u201d on the bookshelf, tells you their order going out from the Sun.',
+        'Press GREY, PEARL, BLUE, RED, GOLD (Mercury, Venus, Earth, Mars, Saturn). Then take the brass key.']},
+      {id:'drawer',t:'The desk drawer',done:S.drawerOpen&&S.hasPaper,ready:S.hasKey||S.drawerOpen,h:[S.hasKey||S.drawerOpen?'The brass key from the button box fits the drawer at the front of the desk.':'You need a key first. Solve the button box on the desk.',
+        'Open the drawer with the key. Read the observing log, then take the blank sheet of paper that smells of lemons.']},
+      {id:'tel',t:'The telescope',done:S.telDone,h:['The observing log in the desk drawer says: \u201cTonight: Deneb.\u201d The star atlas on the reading stand tells you which group of stars Deneb belongs to.',
+        'Deneb is the bright star of the Swan, the cross-shaped group. Find the Swan on the ceiling chart (it\u2019s turned round). The rings give the height and the numbers round the edge give the bearing.',
+        'Set the telescope to bearing 300\u00b0 and height 60\u00b0, then look through the eyepiece. (From the start: press Bearing \u2212 three times and Height \u2212 once.)']},
+      {id:'paper',t:'The blank paper',done:S.paperRead,ready:S.hasPaper||S.paperRead,h:[S.hasPaper?'The blank paper smells of lemons. The bookshelf has a book called \u201cLemons and Their Uses\u201d.':'Find the blank paper first. It\u2019s in the desk drawer.',
+        'Lemon-juice writing shows up when you warm it. Tap the fireplace (or the candles on the mantel) and hold the paper near the flames.']},
+      {id:'chest',t:'The chest (five letters)',done:S.chestOpen,ready:S.paperRead||S.chestOpen,h:[S.paperRead?'The hidden writing gives five pairs of numbers. Each pair points to a letter in the square on the chalkboard (east wall).':'You need the hidden writing on the lemon paper first.',
+        'Take each pair as row first, then column. 1\u00b73 is row 1, column 3.',
+        'The pairs spell COMET. Set the chest dials to C O M E T. Then take the crank handle and read the card.']},
+      {id:'orr',t:'The orrery',done:S.orrDone,ready:S.hasCrank||S.crankFitted||S.orrDone,h:[S.hasCrank||S.crankFitted?'Fit the crank handle in the orrery. The card from the chest (\u201cThe night I was born\u201d) says where each planet stood.':'You need the crank handle from the chest first.',
+        'Saturn is stuck on VIII, so Earth (opposite it) is on IV. Mars is a quarter turn (2 marks) from Earth, and Mars + Venus must make 8. Mercury is next to Venus, odd, below IV, and nobody is on I.',
+        'Set Mercury III, Venus II, Earth IV, Mars VI, then turn the crank. (\u25c6 = 3)']},
+      {id:'globe',t:'The globe',done:S.globeOpen,ready:S.orrDone||S.globeOpen,h:[S.orrDone?'The letter from the orrery drawer describes where the professor\u2019s friend works: north of both observatories in Ireland, but west of Greenwich.':'Solve the orrery first. Its drawer has a letter that tells you where to point the globe.',
+        'The Gazetteer of Great Observatories on the bookshelf lists each observatory\u2019s latitude and longitude. Ireland\u2019s two are at 54\u00b0 N and 53\u00b0 N. Which place further north is west (W) of Greenwich?',
+        'It\u2019s Edinburgh. Set the globe to latitude 56\u00b0 N and longitude 3\u00b0 W, then press the pointer down. Take the tiny key. (\u25cf = 9)']},
+      {id:'clock',t:'The clock',done:S.clockOpen,ready:S.hasClockKey||S.clockUnlocked||S.clockOpen,h:[S.hasClockKey||S.clockUnlocked?'Unlock the clock\u2019s glass with the tiny key. Then read the professor\u2019s diary on the bookshelf: it says when she stopped the clock.':'You need the tiny key from inside the globe first.',
+        'She began at sunset on 3rd October (look it up in the Almanac for 1889), painted one hour for each constellation on the ceiling (there are 5), then 15 minutes more.',
+        'Sunset was 5:40. Add 5 hours and 15 minutes: set the clock to 10:55. (From 2:30: Hour \u2212 four times, Minute + five times.) \u25b2 = 5']},
+      {id:'shelf',t:'The bookshelf',done:S.shelfOpen,ready:S.hasCard||S.shelfOpen,h:[S.hasCard?'The library card from the clock tells you three books to pull forward, in order.':'You need the library card from the clock drawer first.',
+        'First, the book that told you when she began to paint. Second, the book that told you where her friend waits. Third, the book that says \u201cthe heavens declare the glory of God\u201d.',
+        'Tap each book and press \u201cPull this book forward\u201d: Almanac for 1889, then A Gazetteer of Great Observatories, then Holy Bible. (\u25a0 = 8)']},
+      {id:'door',t:'The door',done:S.won,ready:nSym>=5,h:[nSym>=5?'You have all five symbols. The plaque over the door shows their order: \u25b2 \u2605 \u25c6 \u25cf \u25a0.':'You have found '+nSym+' of the 5 door symbols so far. The puzzles above lead to the rest.',
+        'Type the number for each symbol in the plaque\u2019s order. Your notes list every number you\u2019ve found.',
+        'Enter 5 7 3 9 8 on the door keypad.']}
+    ];},
+    restore(){for(let i=0;i<30;i++)animate(0,0,1);},
     build,panels
   };
 })();
@@ -3228,6 +3270,45 @@ const ROOM2=(function(){
       if(S.hasWheel&&!S.wheelOn)L.push({label:'Brass wheel',svg:ic('<circle cx="12" cy="12" r="8"/><path d="M12 4v16M4 12h16"/>')});
       if(S.hasCan&&!S.canUsed)L.push({label:S.canFull?'Watering can (full)':'Watering can (empty)',svg:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 9h9v10H7z"/><path d="M16 11l5-4M9 9a3 3 0 0 1 5 0"/></svg>'});
       return L;},
+    hints:()=>{
+      const swaps=(arr,goal,name)=>{const v=arr.slice(),out=[];for(let i=0;i<v.length;i++){if(v[i]!==goal[i]){const j=v.indexOf(goal[i]);out.push(name(i,j));const t=v[i];v[i]=v[j];v[j]=t;}}return out;};
+      const tileSw=swaps(S.tiles,[1,2,3,4,5,6,7],(i,j)=>'spot '+(i+1)+' with spot '+(j+1));
+      const parSw=swaps(S.parade,PARADE,(i,j)=>'the '+ORD[i]+' animal with the '+ORD[j]);
+      const nSym=Object.keys(S.syms).length;
+      return[
+      {id:'tiles',t:'The creation tiles (east wall)',done:S.tilesDone,h:['Put the seven picture tiles in the order God made things. The Creation Scroll on the north wall tells you every day.',
+        'The order is: light, sky and waters, land and plants, sun/moon/stars, fish and birds, animals and people, rest. Tap two tiles to swap them.',
+        'Swap '+(tileSw.length?tileSw.join(', then '):'nothing more')+'.']},
+      {id:'bells',t:'The seven bells',done:S.bellsDone,ready:S.tilesDone,h:[S.tilesDone?'Ring each day\u2019s bell once for every time \u201cGod saw that it was good\u201d on that day. \u201cVery good\u201d counts too.':'The bells are tied up until the creation tiles above them are in order.',
+        'Read each day on the Creation Scroll and count the word \u201cgood\u201d. Some days have none, and some have two.',
+        'Ring Day 1 once, Day 2 not at all, Day 3 twice, Day 4 once, Day 5 once, Day 6 twice, Day 7 not at all. Then press \u201cDone ringing\u201d. (Day 1 = 7)']},
+      {id:'wheel',t:'The blue keepsake box',done:S.hasWheel||S.wheelOn,ready:S.bellsDone,h:[S.bellsDone?'When the bells rang, something clicked open. Look at the little blue box on the side table by the south wall.':'This box opens when the seven bells are rung the right way.',
+        'Tap the blue box and take the brass wheel.']},
+      {id:'cab',t:'The picture cabinet',done:S.cabOpen&&(S.hasCan||S.canUsed),h:['The easel next to the cabinet says which day each dial should show. Find each phrase on the Creation Scroll.',
+        '\u201cCalled the dry land Earth\u201d is Genesis 1:10. \u201cCreated great whales\u201d is Genesis 1:21. Lights \u201cfor signs, and for seasons\u201d is Genesis 1:14.',
+        'Set dial 1 to Day 3 (land and plants), dial 2 to Day 5 (fish and birds) and dial 3 to Day 4 (sun, moon and stars). Take the watering can. (Day 4 = 1)']},
+      {id:'ftn',t:'The fountain of four rivers',done:S.fountainOn,ready:S.hasWheel||S.wheelOn||S.fountainOn,h:[S.hasWheel||S.wheelOn?'Fit the brass wheel on the fountain\u2019s valve. The tablet above the fountain (Genesis 2:10\u201314) names the four rivers in order.':'The fountain needs a handle. It\u2019s in the blue keepsake box, which opens when the bells are rung right.',
+        'Match each river to a spout: Pison has gold and onyx, Gihon goes round Ethiopia, Hiddekel goes toward the east, and the fourth is Euphrates (the plain one).',
+        'Open the heads in this order: WEST, SOUTH, EAST, NORTH. Then turn the wheel. (Day 2 = 4)']},
+      {id:'pot',t:'The flower pot',done:!!S.syms.d3,ready:S.hasCan||S.canUsed,h:[S.hasCan||S.canUsed?S.canFull?'Your watering can is full. Tap the flower pot (west wall) and water the seed.':'The seed in the pot (west wall) needs water, but your watering can is empty.':'You need the watering can from the picture cabinet first.',
+        'Once the fountain is running, tap it and fill your can. Then water the seed.',
+        'Count the petals on the flower: 8. (Day 3 = 8)']},
+      {id:'cage',t:'The birdcage',done:!!S.syms.d5,h:['Tap the birdcage in the northwest corner and read the note on the perch.',
+        'Birds over your head: count the birds painted on the ceiling. Fish under your feet: count the fish in the pond in the floor.',
+        '9 birds minus 4 fish = 5. (Day 5 = 5)']},
+      {id:'adam',t:'Adam\u2019s naming shelf',done:S.namesDone,h:['Read Adam\u2019s five notes above the shelf (north wall). Only one order of the five animals fits every note.',
+        'The dove comes right after the elephant, and exactly one animal stands between the dove and the giraffe. The giraffe isn\u2019t first and isn\u2019t next to the rabbit. Try the rabbit and lion together at the front.',
+        'The order is Rabbit, Lion, Giraffe, Elephant, Dove. '+(parSw.length?'Swap '+parSw.join(', then ')+', then press \u201cShow Adam\u201d.':'Press \u201cShow Adam\u201d.')+' (Day 6 = 2)']},
+      {id:'rest',t:'Rest (Day 7)',done:!!S.syms.d7,ready:workDone()>=6,h:[workDone()>=6?'Your work for days 1 to 6 is done. Sit on the resting bench under the window.':'You can only rest when you have numbers for all of days 1 to 6. You have '+workDone()+' so far.',
+        'When the room goes dark, look up high on the south wall above the cabinet and tap the glowing words.',
+        'Day 7 = 6, the number of days God worked before He rested.']},
+      {id:'door',t:'The door',done:S.won,ready:nSym>=7,h:[nSym>=7?'You have a number for every day. Key them in following the seven pictures over the door.':'You have found '+nSym+' of the 7 day numbers so far. Find them all first.',
+        'The pictures over the door are Day 3, Day 6, Day 1, Day 7, Day 4, Day 2, Day 5.',
+        'Enter 8 2 7 6 1 4 5.']}
+    ];},
+    restore(){const cab=S.cabOpen;leafA.rotation.y=cab?-1.9:0;leafB.rotation.y=cab?1.9:0;a.lid.rotation.x=S.bellsDone?1.25:0;
+      if(S.watered)plant.scale.setScalar(1);a.lvl=S.fountainOn?1:0;a.night=S.resting?1:0;
+      ANIMALS.forEach(n=>{a.toys[n].position.x=1.76+S.parade.indexOf(n)*0.42;});animate(0,0,1);FX.touch(4);},
     build,panels
   };
 })();
@@ -3977,6 +4058,42 @@ const ROOM3=(function(){
     items:()=>{const it=[];if(S.hasKnife&&!S.vinesCut)it.push({label:'Obsidian knife',svg:ico.knife});if(S.hasPole)it.push({label:'Bamboo pole',svg:ico.pole});
       if(S.hasJadeMonkey&&!S.balDone&&!S.pan.includes('monkey'))it.push({label:'Jade monkey',svg:ico.monkey});if(S.hasJadeTile&&!S.tilePlaced)it.push({label:'Jade tile',svg:ico.tile});
       if(S.hasDisk&&!S.diskIn)it.push({label:'Sun disk',svg:ico.disk});return it;},
+    hints:()=>{
+      const WP=[[0,0],[1,0],[2,0],[2,1],[3,1],[3,2],[2,2],[1,2],[1,1],[0,1],[0,2],[0,3],[1,3],[2,3],[3,3]];
+      const dirTo=(p,q)=>q[0]<p[0]?0:q[1]>p[1]?1:q[0]>p[0]?2:3;
+      const taps={};WP.forEach((p,i)=>{const prev=i?WP[i-1]:[p[0],p[1]-1],next=i<WP.length-1?WP[i+1]:[p[0],p[1]+1];const need=[dirTo(p,prev),dirTo(p,next)].sort().join();
+        const base=PT[p[0]][p[1]]==='S'?[0,2]:[0,1];let best=9;for(let k=0;k<4;k++)if(base.map(d=>(d+k)%4).sort().join()===need)best=Math.min(best,(k-S.pipes[p[0]][p[1]]+4)%4);taps[p[0]+','+p[1]]=best;});
+      const rowTxt=r=>'Row '+(r+1)+': '+[0,1,2,3].map(c=>taps[r+','+c]===undefined?'leave it':taps[r+','+c]===1?'1 tap':taps[r+','+c]+' taps').join(', ');
+      const anyFound=GUARD.filter(k=>!S.found[k]).map(k=>ANAME[k]).join(', ');
+      return[
+      {id:'chest',t:'The offering chest',done:S.chestOpen,h:['First read the tall counting stone (northeast). It shows how Maya numbers work. The number on the chest has two levels.',
+        'The top level counts twenties. Top: 2 bars and 4 dots = 14, so 14 × 20 = 280. Bottom: 1 bar and 2 dots = 7.',
+        'Set the wheels to 2 8 7 and lift the lid (280 + 7 = 287). Take the obsidian knife.']},
+      {id:'stones',t:'The stepping stones',done:S.pathDone,h:['Look straight down at your own stone: a rule is carved on it. Then turn around (south) and tap the stepping stones.',
+        'The rule is "start on 4 and add 4 each step": 4, 8, 12, 16, 20, 24, 28. Hop only forward, back or sideways, never diagonally. One of the two 4s is a trap.',
+        'Start on the 4 in the 3rd column. Then tap: the 8 just above it, the 12 to its left, the 16 above, the 20 above, the 24 to its right, and the 28 above that.']},
+      {id:'monkey',t:'The bananas and the monkey',done:S.bananasDown,ready:S.pathDone||S.hasPole,h:['Something shy is hiding high in a tree (southeast). Maybe a snack would bring it down. First cross the stepping stones to reach the shrine.',
+        'A bamboo pole lies on the shrine. Something long can knock down the bananas on the banana plant.',
+        'Take the bamboo pole from the shrine, tap the banana plant and knock the bananas down. The monkey drops a little jade monkey for you.']},
+      {id:'drums',t:'The vines and the drums',done:S.snakeOut,ready:S.hasKnife,h:['The wall on the west is hidden behind thick vines. You need something sharp from the offering chest to cut them.',
+        'Behind the vines, a carving shows four drums with a Maya number over each: big drum 2, small drum 3, middle drum 1, big drum 1. Beat each drum that many times, in that order.',
+        'Cut the vines, then beat: BOOM, BOOM, tap, tap, tap, bum, BOOM (big, big, small, small, small, middle, big). A snake slides out of the hollow tree. Take the jade tile from the hollow.']},
+      {id:'water',t:'The water tablet',done:S.waterOn,ready:S.hasJadeTile||S.tilePlaced,h:['The water tablet by the waterfall has one empty square. The jade tile from the hollow tree (after the drums) fits it.',
+        'Fit the tile, then tap squares to turn them until one channel runs from the waterfall on the top left to the pond on the bottom right. Every square is used except the bottom-left one.',
+        (S.tilePlaced?'':'Fit the jade tile first. ')+'Tap each square this many times, rows from the top, columns from the left. '+[0,1,2,3].map(rowTxt).join('. ')+'.']},
+      {id:'balance',t:'The jade balance',done:S.balDone,ready:S.hasJadeMonkey&&S.pathDone,h:['Read the mural on the shrine wall. It tells you what each jade idol weighs, counted in frogs. The sun disk weighs 13 frogs. You need the jade monkey from the bananas puzzle.',
+        'Work it out: frog = 1, macaw = 2, snake = 3, monkey = 4, jaguar = 5. Choose idols that add up to exactly 13.',
+        'Put the frog, snake, monkey and jaguar on the right pan (1 + 3 + 4 + 5 = 13) and pull the peg. Take the sun disk and read its back.']},
+      {id:'calendar',t:'The sun calendar',done:S.calDone,ready:S.hasDisk,h:['The back of the sun disk says how many days after today the gate wakes. The calendar (northwest) shows today: 4 Monkey.',
+        'The disk says 1 dot over 3 bars and 1 dot: 20 + 16 = 36 days. Each day both wheels move one step. Numbers go 1 to 13 and then start again; there are 8 signs in the circle.',
+        '4 + 36 = 40, and taking away 13s leaves 1. Monkey moved on 36 steps lands on the Sun. Put the disk in the middle, set the wheels to 1 (one dot) and the Sun sign, and press the disk.']},
+      {id:'guardians',t:'The four guardians',done:GUARD.every(k=>S.found[k]),h:['One animal guardian lives in each layer of the rainforest: the emergent layer (very top), the canopy, the understory and the forest floor. Tap each one when you see it.'+(anyFound?' Still to find: '+anyFound+'.':''),
+        'The macaw is there from the start. The monkey comes down after the bananas fall, the snake comes out after the drums and the frog appears when the pond fills.',
+        'Tap the macaw at the very top of the tallest tree behind the gate, the monkey on the high branch (southeast), the snake on the low branch and the frog on the lily pad in the pond.']},
+      {id:'gate',t:'The temple gate',done:S.won,ready:S.calDone,h:['The gate’s four rings stay pinned until the sun calendar is set to the right day.',
+        'Set the rings from the highest layer of the rainforest to the lowest.',
+        'Top ring: Macaw. Second ring: Monkey. Third ring: Snake. Bottom ring: Frog.']}];},
+    restore(){if(bunch)bunch.position.y=S.bananasDown?0.14:2.15;if(a.lid&&a.lid.rotation)a.lid.rotation.x=S.chestOpen?-1.95:0;},
     build,panels
   };
 })();
@@ -4652,6 +4769,32 @@ const ROOM4=(function(){
       S.hasBags&&{label:'Sandbags',svg:svgI('<path d="M6 10c0-3 2-5 6-5s6 2 6 5l1 9H5z"/><path d="M9 5l3 2 3-2"/>')},
       S.hasMallet&&{label:'Mallet',svg:svgI('<path d="M4 20l9-9"/><rect x="11" y="3" width="10" height="6" rx="1.5" transform="rotate(45 16 6)"/>')},
       S.hasDart&&{label:'Dart',svg:svgI('<path d="M4 20L16 8M16 8l4-4M14 6l4 4"/>')},S.hasFuse&&{label:'Fuse',svg:svgI('<rect x="9" y="8" width="6" height="12" rx="2"/><path d="M12 8c0-3 3-3 3-5"/>')},S.hasCrank&&{label:'Crank',svg:svgI('<path d="M5 19l9-9M14 10h5v-5"/><circle cx="5" cy="19" r="2"/>')},S.hasKey&&{label:'Key',svg:svgI('<circle cx="7" cy="12" r="4"/><path d="M11 12h10M17 12v4M20 12v3"/>')}].filter(Boolean),
+    hints:()=>[
+      {id:'calliope',t:'The steam calliope',done:S.tuneDone,h:['You need two clues: the sheet music on the music stand, and the coloured bands on the calliope’s pipes. Each band names an animal.',
+        'The ‖: and :‖ marks mean "play this part twice", so the tune has 9 notes: Lion, Seal, Bear, Lion, Seal, Bear, Elephant, Horse, Elephant. Lion = blue, Seal = red, Bear = green, Elephant = orange, Horse = purple.',
+        'Play: blue, red, green, blue, red, green, orange, purple, orange. Then take the coin purse from the drawer.']},
+      {id:'tokens',t:'The ticket booth',done:S.tokensBought,ready:S.hasPurse||S.tokensBought,h:['The ticket booth sells 3 game tokens for 85¢, but the slot takes exactly 6 coins. You need the coin purse from the calliope.',
+        'Pennies can’t help: 6 coins have to make 85¢ using quarters (25¢), dimes (10¢) and nickels (5¢).',
+        'Put 2 quarters, 3 dimes and 1 nickel on the counter (50 + 30 + 5 = 85¢, 6 coins) and push them into the slot.']},
+      {id:'trunk',t:'The ringmaster’s trunk',done:S.trunkOpen,h:['The programme on the easel gives clues about tonight’s running order. The trunk’s five dials go from 7:00 to 8:00, first act on the left.',
+        'The Seal Show is at 7:30, so it’s 3rd. The Jugglers and then the Lions must be 4th and 5th, because the Acrobats come before the Jugglers. The Clowns don’t open the show.',
+        'Set the dials to Acrobats, Clowns, Seal, Jugglers, Lions and tap Try the latches. Take the sandbags and read the card.']},
+      {id:'fuse',t:'The balloons (fuse)',done:S.hasFuse||S.fuseIn,ready:S.tokensBought,h:['The fuse is inside one of the nine balloons. You need a dart from the dart stall (1 token) and the clue card from the ringmaster’s trunk.',
+        'Clue 1 leaves green, orange or purple. Green is right next to pink, and orange is in the middle column.',
+        'Pop the PURPLE balloon (middle row, on the right). Then put the fuse into the launcher.']},
+      {id:'crank',t:'The cup game (crank)',done:S.hasCrank||S.crankOn,ready:S.tokensBought,h:['The clown in the barrel runs a cup game. Give him a token. The prize is the crank.',
+        'This one is a watching game. Keep your eyes on the cup with the ball. Following it with your finger on the screen helps.',
+        'If you lose track, just guess. Once you’ve paid you can shuffle again as many times as you like for free. Attach the crank you win to the launcher.']},
+      {id:'wire',t:'The high wire',done:S.poleDone,ready:S.hasBags,h:['Tin Tina’s balance pole has a 6 kg lantern on left hook 5. Hang the three sandbags from the trunk on the right-hand hooks, one bag per hook.',
+        'Weight × hook number must add up to the same on both sides. The left side is 6 × 5 = 30.',
+        'Hang 2 kg on hook 5, 3 kg on hook 4 and 4 kg on hook 2 (10 + 12 + 8 = 30), then tap Wind her up! Pick up the mallet that falls into the sawdust.']},
+      {id:'strength',t:'Test your strength (safety key)',done:S.hasKey||S.unlocked,ready:S.hasMallet,h:['The Test-Your-Strength tower needs the mallet from the high wire and a token.',
+        'Watch the marker slide up and down. Swing only when it’s in the gold zone at the very top.',
+        'Put in a token, then tap Swing the mallet! right as the marker reaches the top. Take the key and unlock the launcher.']},
+      {id:'launch',t:'The launcher',done:S.won,ready:S.fuseIn&&S.crankOn&&S.unlocked,h:['Fit the fuse, the crank and the safety key in the launcher. The sign says the power is one notch for every REAL clown in the tent.',
+        'Look high, low and inside the booths. Clowns on posters, the photo cut-out board and the clown painted on the calliope don’t count.',
+        'There are 7 real clowns: in the clown car, on the trapeze, in the seats, in the barrel, on the big ball, asleep in the ticket booth and sitting low by the south rail. Set the power to 7 and press LAUNCH!']}],
+    restore(){a.lid=S.trunkOpen?1:0;a.dr=S.tuneDone?1:0;if(S.poleDone){a.walk=1;a.fall=1;}if(stallDoor)stallDoor.position.y=1.06+(S.stallPaid?0.32:0);},
     build,panels
   };
 })();
@@ -5292,9 +5435,27 @@ const ROOM5=(function(){
       if(S.hasGlass)it.push({label:'Magnifying glass',svg:svgI('<circle cx="10" cy="10" r="6"/><path d="M14.5 14.5L21 21"/>')});
       if(S.hasFish)it.push({label:'Fish',svg:svgI('<path d="M3 12c4-6 10-6 14 0-4 6-10 6-14 0zM17 12l4-4v8z"/>')});
       const n=got().length;if(n)it.push({label:n+(n===1?' flag':' flags'),svg:svgI('<path d="M5 21V4M5 4h12l-3 4 3 4H5"/>')});return it;},
+    hints:()=>{const all4=NEED.every(L=>S.flags[L]);return[
+      {id:'bottle',t:'The message in a bottle',done:S.bottleRead,h:['A green bottle is wedged between the rocks on the east side. Tap it.','Pull out the cork. You get a flag and Captain Rosa’s note.']},
+      {id:'box',t:'The shell box',done:S.memDone,h:['The shell box is up on the lifeguard tower platform (west). Turn the tiles over two at a time to find the six matching pairs.','Tip: when two tiles don’t match, say their shells out loud and remember where they were. A tile you have already seen is your best next pick.','There\u2019s no secret code for this one: it\u2019s a memory game. Go along the rows in order, one new tile at a time. As soon as you turn over a shell you have seen before, turn over its partner next.']},
+      {id:'hut',t:'The hut door',done:S.hutOpen,h:['The beach hut (south-west) has a letter lock. The board beside the door shows five signal flags, from top to bottom.','The chart on the lifeguard tower shows which letter each flag stands for. Match each flag on the board, top to bottom.','Type <b>B O A T S</b>.']},
+      {id:'dig',t:'The treasure hunt',done:S.found,ready:S.hasShovel,h:['Open the hut, take the shovel and read the treasure map pinned to the wall.','The map starts at the flagpole. Count the coconuts on the palm with the seagull’s nest (6) and the steps up the lifeguard tower (4). Walk south 6, east 4, then north 2.','Dig the X that is <b>4 paces east and 1 pace north of your rock</b>, between you and the dock. (The X right next to the bottle rocks is a trick.)']},
+      {id:'chest',t:'The treasure chest',done:S.chestOpen,ready:S.found,h:['The lid says: set the shells from the one that sits highest to the one that sits lowest. A starfish is not a shell.','Find Rosa’s four shells: a scallop in the seagull’s nest at the top of a palm, a sand dollar on the shell box up on the tower, a conch on the hut door, and a clam at the bottom of the tide pool.','Set the dials to <b>Scallop, Sand dollar, Conch, Clam</b> and tap Open the lock.']},
+      {id:'fire',t:'The signal fire',done:S.fireLit,ready:S.hasGlass,h:['The magnifying glass from the chest says: point me straight at the sun. Take it to the fire pit, north-west of your rock.','Look up and find the sun. The flagpole is due north, so use it to work out which way the sun is.','The sun is in the <b>north-east</b>. Choose <b>NE</b> and tap Focus the sunlight.']},
+      {id:'ink',t:'The secret writing',done:S.inkRead,ready:S.fireLit&&S.bottleRead,h:['The back of Rosa’s note smells of lemon juice. Lemon-juice writing shows up when you warm it.','Tap the lit fire and choose <b>Warm Captain Rosa’s note by the fire</b>.']},
+      {id:'fish',t:'Gone fishing',done:S.depthOk&&(S.caught||0)>0,h:['The fishing rod is at the end of the dock. The tide board says how deep the water is at each hour, and the fish only bite on the sea floor.','Read the time on the sundial beside your rock, then find that time on the tide board.','The sundial says 9 o’clock and the tide board says 6 feet at 9 AM. Set the line to <b>6 ft</b> and tap Cast!. Then tap Reel in! the moment the float dips under (not before).']},
+      {id:'crabs',t:'The hermit crabs',done:S.fishGiven,ready:S.hasFish&&S.inkRead,h:['You need a fish and the secret writing from the back of Rosa’s note. Only Pinchy gives you a flag.','Snappy and Coral are at the two ends. Sandy is left of Pinchy, and Coral is right next to Pinchy, so Pinchy is the third crab from the left.','Give the fish to the <b>yellow</b> shell.']},
+      {id:'hoist',t:'Rosa’s secret word and the flagpole',done:S.won,ready:all4,h:['Rosa’s note says to hoist the flags that spell OLSW, after moving each letter <b>back</b> by the number of arms on the starfish on the dock post.','The starfish on the first dock post has 7 arms. Count 7 letters back in the alphabet: O → H, and so on. You get one flag from each of the bottle, the shell box, the chest and the crabs.','The word is <b>HELP</b>. Clip H, E, L, P on the flagpole from top to bottom and press Hoist!']}];},
+    restore(){S.mem.lock=false;S.mem.up=[];doorPivot.rotation.y=S.hutOpen?-1.75:0;chestLid.rotation.x=S.chestOpen?-1.3:0;
+      if(S.fireLit){smoke.material.opacity=0.75;embers.material.opacity=0.9;fireLight.intensity=1.4;}setPoleFlags();FX.touch(4);},
     build,panels
   };
 })();
+
+/* =========================================================
+   ROOM 6 — Orbit Station
+   Exit: insert a keycard, power the pod, plot a course past the planets in order, launch.
+   ========================================================= */
 
 /* =========================================================
    ROOM 6 — Orbit Station
@@ -5548,6 +5709,14 @@ const ROOM6=(function(){
     total:3,progress:()=>[S.cardIn,S.powerOn,S.routeOK].filter(Boolean).length,goalsTitle:'Escape pod lights',howTo:'In zero gravity, things float around the room. Keep looking.',
     goalRows:()=>[['Keycard',S.cardIn,S.hasCard],['Power',S.powerOn],['Course',S.routeOK]].map(([n,ok,got])=>({icon:statusDot(ok,got),text:`<b>${n}</b>: ${ok?'ready':got?'found, not used yet':'not ready'}`})),
     icon:()=>'',
+    noSave:['selCell'],
+    restore(){redrawPod();},
+    hints:()=>[
+      {id:'card',t:'The keycard',done:S.cardIn,h:['Something blue is floating around the station in zero gravity. Look high and all around you.','The blue crew keycard drifts slowly round the room. Tap it when it floats by and grab it.','Tap the floating blue keycard and press “Grab the keycard”. Then tap the escape pod hatch (north) and press Insert.']},
+      {id:'power',t:'The pod batteries',done:S.powerOn,h:['The batteries are on the console on the west side. Each battery takes three power cells, and you have cells from 1 to 6 volts.','The left battery needs three cells that add up to 9 volts. The right battery needs the other three cells, which add up to 12 volts.','Left battery: 1, 3 and 5 (that makes 9). Right battery: 2, 4 and 6 (that makes 12).']},
+      {id:'course',t:'Plot the course',done:S.routeOK,h:['The poster on the south wall shows the planets.','Tap the planets in order from the Sun. The silly sentence on the poster helps: My Very Excellent Mother Just Served Us Nachos.','Tap: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune.']},
+      {id:'launch',t:'Launch the pod',done:S.won,ready:S.cardIn&&S.powerOn&&S.routeOK,h:['The escape pod hatch is on the north side. All three lights (keycard, power and course) must be on before it will launch.','When all three lights glow, tap the hatch and press LAUNCH.']}
+    ],
     fresh:()=>({hasCard:false,cardIn:false,bay:{L:[],R:[]},selCell:null,powerOn:false,route:[],routeOK:false}),
     items:()=>S.hasCard?[{label:'Keycard',svg:svgIcon('<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/>')}]:[],
     build,panels
@@ -5824,6 +5993,15 @@ const ROOM7=(function(){
     total:2,progress:()=>[S.broomFree,S.hasPotion].filter(Boolean).length,goalsTitle:'Ready to fly',howTo:'Wizards hide clues in colors and numbers.',
     goalRows:()=>[['Broom',S.broomFree],['Flying potion',S.hasPotion]].map(([n,ok])=>({icon:statusDot(ok),text:`<b>${n}</b>: ${ok?'ready':'not ready'}`})),
     icon:()=>'',
+    hints:()=>{const NM=['top-left','top-middle','top-right','middle-left','middle','middle-right','bottom-left','bottom-middle','bottom-right'];
+      let taps=null;for(let m=0;m<512&&!S.candlesDone;m++){const g=S.cand.map(r=>r.slice());for(let i=0;i<9;i++)if(m>>i&1){const r=(i/3)|0,c=i%3;[[0,0],[1,0],[-1,0],[0,1],[0,-1]].forEach(([dr,dc])=>{const y=r+dr,x=c+dc;if(y>=0&&y<3&&x>=0&&x<3)g[y][x]^=1;});}
+        if(g.every(r=>r.every(Boolean))){const l=NM.filter((_,i)=>m>>i&1);if(!taps||l.length<taps.length)taps=l;}}
+      return[
+      {id:'candles',t:'The candle table',done:S.candlesDone,h:['The candle table is in the northwest. Tapping a candle also flips the candles above, below, left and right of it.','Look at which candles are dark. You can light them all with just a few taps. Corners flip fewer candles than the middle does.',taps?'From the way the candles are right now, tap: '+taps.join(', ')+'.':'All the candles are lit.']},
+      {id:'cabinet',t:'The little cabinet',done:!!S.vials.blue,ready:S.candlesDone,h:['The little cabinet next to the candles is sealed by magic. It opens when all nine candles are lit.','Once the candles are lit, tap the cabinet and take the blue potion.']},
+      {id:'potion',t:'The flying potion',done:S.hasPotion,h:['The spellbook (southwest) says the flying potion must be the color of the owl’s eyes. Look at the owl (northeast).','The owl’s eyes are purple. The chart in the spellbook shows which two colors mix to make purple.','Take the red potion from the shelf and the blue potion from the cabinet. Pour red and blue into the cauldron, then tap “Fill a bottle”.']},
+      {id:'broom',t:'The chained broom',done:S.broomFree,h:['A few books on the west shelves glow. Each one has a letter and a Roman numeral.','The crystal ball shows I = 1, II = 2, III = 3 and IV = 4. Put the glowing letters in number order.','Set the broom’s lock to S O A R.']},
+      {id:'fly',t:'Fly out the window',done:S.won,ready:S.broomFree&&S.hasPotion,h:['The tall window is on the east side. You need the broom free and the flying potion bottled.','When both are ready, tap the window and press Fly!']}];},
     fresh:()=>({cand:CAND0.map(r=>r.slice()),candlesDone:false,vials:{},pot:[],hasPotion:false,broomL:BROOM0.slice(),broomFree:false}),
     items:()=>{const it=(S.hasPotion?[]:['red','yellow','blue']).filter(v=>S.vials[v]).map(v=>({label:v[0].toUpperCase()+v.slice(1)+' potion',svg:svgIcon('<path d="M9 3h6M10 3v5l-4 9a3 3 0 0 0 3 4h6a3 3 0 0 0 3-4l-4-9V3"/>')}));if(S.hasPotion)it.push({label:'Flying potion',svg:svgIcon('<path d="M9 3h6M10 3v5l-4 9a3 3 0 0 0 3 4h6a3 3 0 0 0 3-4l-4-9V3"/>')});return it;},
     build,panels
@@ -6102,6 +6280,13 @@ const ROOM8=(function(){
     total:3,progress:()=>[S.doorOpen,S.pressureOK,S.subCalled].filter(Boolean).length,goalsTitle:'Airlock checklist',howTo:'Some answers are swimming right outside the glass.',
     goalRows:()=>[['Door code',S.doorOpen],['Pressure',S.pressureOK],['Mini-sub',S.subCalled]].map(([n,ok])=>({icon:statusDot(ok),text:`<b>${n}</b>: ${ok?'ready':'not ready'}`})),
     icon:()=>'',
+    noSave:['heard'],
+    hints:()=>{const sig=S.simon.seq.map(i=>PADS[i].n);
+      return[
+      {id:'code',t:'The airlock code',done:S.doorOpen,h:['Read the logbook on the lab bench. It tells you which sea creatures outside to count.','Count the starfish’s arms, then the octopus’s arms, then the crab’s legs. Don’t forget the crab’s two claws!','The starfish has 5 arms, the octopus has 8 and the crab has 10 legs with its claws. Tap the airlock (north) and enter 5 8 1 0.']},
+      {id:'valves',t:'The pressure valves',done:S.pressureOK,h:['The valves are on the east side. Gauge 1 must read 5 and gauge 2 must read 7.','Valve A adds to gauge 1, valve C adds to gauge 2, and valve B adds to both. So A + B must make 5 and B + C must make 7.','Set valve A to 2, valve B to 3 and valve C to 4.']},
+      {id:'sonar',t:'Call the mini-sub',done:S.subCalled,h:['The sonar is on the west side. Tap “Play the signal”, watch which pads light up, then tap the same pads in the same order.','There are three signals: 3 beeps, then 4, then 5. Each one starts the same way as the one before and adds one more beep. Play a signal again any time.','The whole signal is: '+sig.join(', ')+'. Signal 1 is the first 3 of these, signal 2 the first 4, and signal 3 all 5. Press “Play the signal” before each one.']},
+      {id:'board',t:'Board the sub',done:S.won,ready:S.doorOpen&&S.pressureOK&&S.subCalled,h:['The airlock is on the north side. It needs the door code, balanced pressure and the mini-sub docked.','When all three are ready, tap the airlock and press “Board the sub”.']}];},
     fresh:()=>{const seq=[];for(let i=0;i<5;i++)seq.push((Math.random()*4)|0);return{doorOpen:false,valve:[0,0,0],pressureOK:false,simon:{seq,round:0},heard:false,subCalled:false};},
     items:()=>[],build,panels
   };
@@ -6535,6 +6720,20 @@ const ROOM9=(function(){
     fresh:()=>({chDial:CH0.slice(),chestOpen:false,hasWeights:false,wPlaced:false,wOn:{},sarcOpen:false,hasMirror:false,mirrorPlaced:false,mir:Object.assign({},M0)}),
     onOpen:id=>{if(id==='door'||id==='mirror')updateBeam();},
     items:()=>{const it=[];if(S.hasWeights)it.push({label:'Weights',svg:svgIcon('<path d="M6 20h12l-2-9H8z"/><circle cx="12" cy="7" r="3"/>')});if(S.hasMirror)it.push({label:'Bronze mirror',svg:svgIcon('<circle cx="12" cy="9" r="6"/><path d="M12 15v6"/>')});return it;},
+    hints:()=>[
+      {id:'chest',t:'The scribe\u2019s chest',done:S.chestOpen&&(S.hasWeights||S.wPlaced),h:['The chest lid says: \u201cWrite the name of the bird painted on the wall.\u201d Find the bird painting on the east wall.',
+        'The bird\u2019s name is written in the oval next to it with four hieroglyphs. Copy those same four pictures onto the chest dials. The alphabet chart on the south wall shows each picture\u2019s letter.',
+        'Set the dials to reed, foot, reed, folded cloth (I, B, I, S: IBIS). Then take the weights.']},
+      {id:'scales',t:'The scales',done:S.sarcOpen,ready:S.hasWeights||S.wPlaced||S.sarcOpen,h:[S.hasWeights||S.wPlaced?'The idol weighs as many feathers as there are scarabs carved on these walls. Look all the way round the room for blue scarab beetles.':'You need the weights from the scribe\u2019s chest first.',
+        'There are 7 scarabs, so put weights adding up to 7 on the scale.',
+        'Put the 1, 2 and 4 weights on the scale. Leave the 8 off.']},
+      {id:'mirror',t:'The missing mirror',done:S.mirrorPlaced,ready:S.sarcOpen,h:[S.sarcOpen?'The sarcophagus slid open when the scales balanced. Take what\u2019s inside.':'The sarcophagus opens when the scales are balanced.',
+        'Tap the sun door to open the map of the chamber. Tap the empty mirror stand in the second row from the top, fourth square from the left, to put the bronze mirror there.']},
+      {id:'beam',t:'The sun door (beam of light)',done:S.won,ready:S.mirrorPlaced,h:[S.mirrorPlaced?'Turn the mirrors on the map so the beam of sunlight from the bottom right reaches the sun at the top middle. Tapping a mirror flips which way it leans.':'You\u2019ll need the missing mirror from the sarcophagus first.',
+        'The light needs to go left, then up the fourth column, then left one square, then up into the sun. Only three mirrors are on that path.',
+        'Make these three mirrors lean from top-left to bottom-right (\\): the bottom row, fourth square from the left; the second row, fourth square from the left (the one you placed); and the second row, middle square.']}
+    ],
+    restore(){animate(0,0,1);FX.touch(4);},
     build,panels
   };
 })();
@@ -6844,6 +7043,19 @@ const ROOM10=(function(){
     icon:()=>'',
     fresh:()=>({seal:SEAL0.slice(),sealHome:false,hasClip:false,clipOn:false,hasNote:false,searchedBush:false,team:[null,null,null,null]}),
     items:()=>{const it=[];if(S.hasNote)it.push({label:'Mittens',svg:svgIcon('<path d="M7 21V9a3 3 0 0 1 6 0v3l3-3a2 2 0 0 1 3 3l-6 6v3z"/>')});if(S.hasClip)it.push({label:'Harness clip',svg:svgIcon('<path d="M8 4h8v6a4 4 0 0 1-8 0z"/><path d="M12 14v6"/>')});return it;},
+    hints:()=>[
+      {id:'note',t:'The sled-team note',done:S.hasNote,h:['Read the note pinned to the musher\u2019s tent (southwest). A thief took the mittens with the team notes inside. Look down at the tracks in the snow.',
+        'The tracks that start at the tent are small oval paw prints with four toes. The chart in the tent shows they belong to an arctic fox. Follow them to where they end.',
+        'They lead to the snowbank in the southeast. Tap it and press \u201cSearch the snowbank\u201d to find the mittens and the note.']},
+      {id:'seal',t:'The seal pup',done:S.sealHome,h:['Tap the seal pup on the ice (east). It slides until it hits a rock or the edge, so plan each slide.',
+        'It takes four slides. The first one is to the right.',
+        'Press Reset if you need to, then slide Right, Up, Right, Up.']},
+      {id:'clip',t:'The harness clip',done:S.clipOn,ready:S.sealHome||S.hasClip||S.clipOn,h:[S.sealHome?'Look at the ice where the seal pup was lying.':'Help the seal pup get home first.',
+        'Take the brass harness clip, then tap the sled and press \u201cClip it on\u201d.']},
+      {id:'sled',t:'The dog team',done:S.won,ready:S.hasNote,h:[S.hasNote?'The note in the mittens says where each dog runs. Lead is at the very front and Wheel is closest to the sled.':'You need the sled-team note first. Follow the thief\u2019s tracks from the tent.',
+        'Comet goes at the front. Dash runs right behind Comet. Blizzard runs closest to the sled. Aurora takes the last spot.',
+        'Lead: Comet, Swing: Dash, Team: Aurora, Wheel: Blizzard. Clip on the harness, then press Mush!']}
+    ],
     build,panels
   };
 })();
@@ -7186,6 +7398,17 @@ const ROOM11=(function(){
     fresh:()=>({placed:{},sel:null,fossilDone:false,eggAt:[-1,-1,-1,-1,-1,-1],eggsDone:false,hasVine:false,food:[],bundle:false}),
     onOpen(){S.sel=null;},
     items:()=>{const it=[];if(S.hasVine)it.push({label:'Vine',svg:svgIcon('<path d="M4 20c4-2 4-8 8-8s4 6 8 4"/><path d="M8 13c-2-1-2-3 0-4M16 15c2-1 2-3 0-4"/>')});if(S.bundle&&!S.won)it.push({label:'Snack bundle',svg:svgIcon('<circle cx="12" cy="13" r="7"/><path d="M8 8l8 10M16 8l-8 10"/>')});return it;},
+    hints:()=>[
+      {id:'skeleton',t:'The fossil dig',done:S.fossilDone,h:['At the dig (east), match each bone to the outlined spot with the same shape. Careful: not every bone in the pile belongs to this dinosaur.',
+        'The jagged tooth belongs to a meat-eater, and the fish fossil isn’t a dinosaur at all. Leave those two in the pile.',
+        'Tap a bone, then its spot: the skull, the neck bones, the ribs and the leg bone. Then read the plaque that appears.']},
+      {id:'eggs',t:'The dinosaur eggs',done:S.eggsDone,h:['Mama Maiasaura (west) knows her eggs by their markings, not their colour, because eggs change colour in the sun.',
+        'Each nest still has one egg that never rolled out (on the left). Put spotted eggs with spotted, striped with striped and zigzag with zigzag.',
+        'Nest 1 (spots): the blue spotted and the tan spotted eggs. Nest 2 (stripes): the tan striped and the green striped eggs. Nest 3 (zigzags): the green zigzag and the blue zigzag eggs. Then tap Call Mama Maiasaura and take the vine.']},
+      {id:'snack',t:'The snack basket',done:S.bundle,ready:S.hasVine,h:['Bronty only bends down for her favourite snack tied in a bundle. You need the vine Mama Maiasaura gives you. The skeleton’s plaque tells you what she eats.',
+        'The plaque says a Brachiosaurus strips leaves and twigs from the tops of the tallest trees. Pick only the snacks that come from a treetop.',
+        'Pick Conifer twigs and Ginkgo leaves (nothing else), then tap Tie the bundle.']},
+      {id:'bronty',t:'Bronty',done:S.won,ready:S.bundle,h:['Show Bronty (north) the snack bundle.','Tap Bronty and press Hold up the snack.']}],
     build,panels
   };
 })();
@@ -7473,6 +7696,19 @@ const ROOM12=(function(){
     icon:()=>'',
     fresh:()=>({hasCracker:false,parrotTalked:false,lock:[0,0,0,0],cabinOpen:false,chest:[0,0],chestOpen:false,hasHandle:false,handleOn:false,heading:null}),
     items:()=>{const it=[];if(S.hasCracker)it.push({label:'Cracker',svg:svgIcon('<rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="9" cy="9" r=".8"/><circle cx="15" cy="9" r=".8"/><circle cx="12" cy="13" r=".8"/><circle cx="9" cy="16" r=".8"/><circle cx="15" cy="16" r=".8"/>')});if(S.hasHandle)it.push({label:'Winch handle',svg:svgIcon('<path d="M5 19l9-9"/><circle cx="16" cy="8" r="3"/><path d="M5 19h-1v-4"/>')});return it;},
+    hints:()=>[
+      {id:'parrot',t:'The parrot',done:S.parrotTalked,h:['The parrot on the west rail won’t talk until it gets a snack.','There’s a barrel of crackers on the east side of the deck.',
+        'Take a cracker from the barrel and give it to the parrot. It squawks: D! L! O! G!']},
+      {id:'cabin',t:'The cabin door',done:S.cabinOpen,h:['Read the note on the cabin door (south). Only the captain and his parrot know the password.',
+        'The note says the parrot says everything backwards. Turn the parrot’s four letters around.',
+        'D L O G backwards is GOLD. Set the lock to G O L D and open the door. Look at the treasure map inside.']},
+      {id:'chest',t:'The treasure chest',done:S.chestOpen,ready:S.cabinOpen,h:['The chest at the bow (northeast) says "X marks the spot". You need the treasure map from the captain’s cabin.',
+        'On the map, find the letter of the column and the number of the row for the square with the red X.',
+        'The X is in square C4. Set the dials to C and 4, open the chest and take the winch handle.']},
+      {id:'boat',t:'The longboat',done:S.won,ready:S.hasHandle||S.handleOn,h:['The longboat (west) needs the winch handle from the chest, and the right direction to row.',
+        'On the treasure map, the ship is in the top right corner and the island is in the bottom left. North is at the top.',
+        'Fit the handle, set the compass to SW, and tap Lower the boat and row!']}],
+    restore(){a.lid=S.chestOpen?1:0;},
     build,panels
   };
 })();
@@ -7480,7 +7716,7 @@ const ROOM12=(function(){
 const ROOM13=(function(){
   const CC={red:'#e8384a',blue:'#3a8ae8',yellow:'#f6c83a',green:'#3ab85a',purple:'#9a5ad8',star:'#f6a81a',heart:'#ff5fa8'};
   const OPTS=['red','blue','yellow','green','purple','star','heart'];
-  const ROWS=[['red','red','blue','red','red','blue','red','red',null],['yellow','green','purple','yellow',null,'purple','yellow','green','purple'],['star','heart','star','heart','heart','star','heart','heart','heart',null]];
+  const ROWS=[['red','red','blue','red','red','blue','red','red',null],['yellow','green','purple','yellow',null,'purple','yellow','green','purple'],['star','heart','star','heart','heart','star','heart','heart',null]];
   const BANS=['blue','green','heart'];
   const COINS=[['q0','q',25,'Quarter'],['d0','d',10,'Dime'],['d1','d',10,'Dime'],['n0','n',5,'Nickel'],['n1','n',5,'Nickel'],['n2','n',5,'Nickel'],['p0','p',1,'Penny'],['p1','p',1,'Penny'],['p2','p',1,'Penny'],['p3','p',1,'Penny']];
   const CV=Object.fromEntries(COINS.map(c=>[c[0],c[2]]));
@@ -7739,6 +7975,12 @@ const ROOM13=(function(){
     icon:()=>'',
     fresh:()=>({coins:[],hasGumball:false,gumIn:false,gaps:[null,null,null],beltOn:false,gateOpen:false,taffy:{sugar:0,syrup:0,color:0},hasRope:false,lassoed:false}),
     items:()=>{const it=[];if(S.hasGumball)it.push({label:'Gumball',svg:svgIcon('<circle cx="12" cy="12" r="7"/><path d="M9 9a3 3 0 0 1 3-2"/>')});if(S.hasRope)it.push({label:'Taffy rope',svg:svgIcon('<path d="M4 18c3-6 6 2 9-4s5 0 7-6"/>')});return it;},
+    hints:()=>[
+      {id:'gum',t:'The gumball machine',done:S.hasGumball||S.gumIn,h:['The gumball machine on the east bank wants <b>35¢</b>, paid with <b>exactly 5 coins</b>.','Pennies won’t work: you’d need five of them and the jar only has four. Try using only dimes and nickels.','Put in <b>2 dimes and 3 nickels</b> (10 + 10 + 5 + 5 + 5 = 35¢), then turn the crank.']},
+      {id:'belt',t:'The candy conveyor',done:S.beltOn,h:['The conveyor belt on the west bank has one missing candy in each row. Look at how each row repeats.','Row 1 repeats red, red, blue. Row 2 repeats yellow, green, purple. In row 3, each star gets one more heart after it than the star before.','Tap the gaps until they show: row 1 <b>blue</b>, row 2 <b>green</b>, row 3 <b>heart</b>. Then press Start the belt.']},
+      {id:'taffy',t:'The taffy puller',done:S.hasRope||S.lassoed,h:['The taffy puller (south-east) makes a taffy rope. The boat is <b>6 meters</b> away. Read the recipe card.','One batch makes a 2-meter rope: 2 sugar, 3 syrup, 1 color. How many batches make 6 meters?','Three batches: set <b>Sugar 6, Syrup 9, Color 3</b> and pull the lever.']},
+      {id:'boat',t:'The gumdrop boat',done:S.won,h:['The boat needs three things: pulling close with a long rope, a gumball for its motor, and the river gate open. The gate opens when the candy belt runs.','Tap the boat. Press Lasso it (needs the taffy rope), then Drop in the gumball.','When the rope, the gumball and the gate are all done, press <b>Full speed ahead!</b>']}],
+    restore(){gate.position.y=S.gateOpen?6.2:0;if(S.lassoed)boat.position.z=-1.7;FX.touch(4);},
     build,panels
   };
 })();
@@ -8035,6 +8277,15 @@ const ROOM14=(function(){
     icon:()=>'',
     fresh:()=>({scroll:false,hasKey:false,keyIn:false,cat:{a:30,p:5,last:null},bellRung:false,hasHandle:false,handleOn:false,kn:KN0.slice(),kmoves:0,chessDone:false}),
     items:()=>{const it=[];if(S.hasKey)it.push({label:'Iron key',svg:svgIcon('<circle cx="7" cy="12" r="4"/><path d="M11 12h10M17 12v3M20 12v3"/>')});if(S.hasHandle)it.push({label:'Crank handle',svg:svgIcon('<path d="M5 19l9-9"/><circle cx="16" cy="8" r="3"/><path d="M5 19h-1v-4"/>')});return it;},
+    hints:()=>[
+      {id:'well',t:'The well',done:S.scroll,h:[`Something in the southwest corner might be hiding a message.`,`Tap the old stone well and wind up the bucket.`,`Tap the well (southwest) and press "Wind up the bucket". A bottle with the Queen's scroll comes up.`]},
+      {id:'key',t:'The gatehouse key',done:S.hasKey||S.keyIn,ready:S.scroll,h:[`The Queen's scroll from the well says the key hides behind one of the four shields on the east wall.`,`"A golden beast. Not the lion. Not upon the green." So the animal must be gold, it isn't the lion, and the shield isn't green.`,`Look behind Shield 2: the blue shield with the gold eagle.`]},
+      {id:'catapult',t:'The catapult and the bell',done:S.bellRung,h:[`The bell on the corner tower is 24 paces away. Ring it with the catapult (west).`,`Each miss tells you how many paces short or too far you were. A middle angle throws the farthest, so try 45\u00b0 and then change the power.`,`Set the angle to 45\u00b0 and the power to 7, then press "Fire!".`]},
+      {id:'handle',t:'The crank handle',done:S.hasHandle||S.handleOn,ready:S.bellRung,h:[`Something fell out of the bell tower when the bell rang.`,`Tap the handle lying at the foot of the bell tower (northwest corner) and take it.`]},
+      {id:'chess',t:'The knight\u2019s riddle',done:S.chessDone,h:[`The giant chessboard on the ground (south) opens the winch house. The knight must land on the crown in exactly three jumps.`,`A knight jumps in an L: two squares one way, then one square to the side. Work backwards: which squares could jump onto the crown?`,`The knight starts in the bottom-left corner. Counting rows from the top and columns from the left, tap row 4 column 3, then row 3 column 5, then the crown (row 2 column 3).`]},
+      {id:'winch',t:'The winch (the way out)',done:S.won,ready:S.chessDone,h:[`The winch house is by the gate (north). It opens once the knight wears the crown.`,`Inside, the chain needs the key from behind the shield, and the drum needs the crank handle from the bell tower.`,`Tap the winch house, press "Use the key" and "Fit the handle", then "Turn the winch".`]}
+    ],
+    restore(){const [x,z]=a.sq(S.kn[0],S.kn[1]);knight3d.position.x=x;knight3d.position.z=z;a.whDoor.position.x=S.chessDone?-0.95:0;},
     build,panels
   };
 })();
@@ -8302,6 +8553,17 @@ const ROOM15=(function(){
     fresh:()=>({stalls:[null,null,null,null,null,null],sel:null,paired:false,hasKey:false,cageOpen:false,dims:[0,0,0],windowOpen:false,birds:[],birdsDone:false,rb:[null,null,null,null,null,null,null]}),
     onOpen(){S.sel=null;},
     items:()=>{const it=[];if(S.hasKey)it.push({label:'Little key',svg:svgIcon('<circle cx="7" cy="12" r="4"/><path d="M11 12h10M17 12v3M20 12v3"/>')});return it;},
+    hints:()=>{const taps=S.rb.map((c,i)=>c==null?i+1:(i-c+7)%7);return[
+      {id:'stalls',t:'Animals two by two',done:S.paired,h:[`Six animals have wandered out of their stalls along the west side. Every stall has a riddle carved on it.`,`Read each riddle and put the matching animal in that stall: tap an animal, then tap its stall.`,`Stall 1 Camel, Stall 2 Lion, Stall 3 Sheep, Stall 4 Giraffe, Stall 5 Elephant, Stall 6 Zebra. Then press "Latch the stall gates" and you get a little key.`]},
+      {id:'window',t:'The shuttered window',done:S.windowOpen,h:[`The window lock (north end, high up) wants three numbers: Length, Breadth and Height, in cubits. Look up at the big carved beam on the ceiling.`,`Genesis 6:15: "The length of the ark shall be three hundred cubits, the breadth of it fifty cubits, and the height of it thirty cubits."`,`Set Length 300, Breadth 50, Height 30, then press "Open the shutters".`]},
+      {id:'cage',t:'Unlock the bird cage',done:S.cageOpen||S.birdsDone,ready:S.hasKey||S.cageOpen,h:[`The little key is your reward for putting all the animals in the right stalls.`,`Tap the bird cage hanging up high and press "Use the little key".`]},
+      {id:'birds',t:'Send out the birds',done:S.birdsDone,ready:S.cageOpen&&S.windowOpen,h:[`Send the birds out the way Noah did. The open cage and the open window both have to be ready. The story is on Noah's desk (south end), but the pieces are shuffled.`,`Read the pieces in verse order: Genesis 8:7, 8:8, 8:9, 8:10, 8:11, 8:12. The raven goes first. Each time Noah "stayed yet other seven days", wait seven days.`,`Press: Send the raven, Send the dove, Wait seven days, Send the dove, Wait seven days, Send the dove.`]},
+      {id:'door',t:'The door of the ark (the way out)',done:S.won,ready:S.birdsDone,h:[`The big door on the east side wants a rainbow painted on its seven arches, from the top down. It only opens once the waters are gone.`,`Roy G. Biv: Red, Orange, Yellow, Green, Blue, Indigo, Violet. Each tap changes an arch to the next color. Arch 1 (top) is on the left.`,`Tap ${taps.map((n,i)=>`arch ${i+1} ${n?n+(n>1?' times':' time'):'0 times (it\u2019s already right)'}`).join(', ')}. That gives Red, Orange, Yellow, Green, Blue, Indigo, Violet. Then press "Open the door".`]}
+    ];},
+    restore(){if(S.birdsDone){rainT.image=rainCanvas(true);rainT.needsUpdate=true;}
+      a.shut=S.windowOpen?1:0;shutters.forEach(([p,s])=>p.rotation.y=s*a.shut*1.6);
+      const placed={};S.stalls.forEach((an,i)=>{if(an)placed[an]=i;});
+      ANIMALS.forEach(an=>{const g=beasts[an],[tx,tz]=placed[an]!=null?a.stallPos[placed[an]]:a.loose[an];g.position.x=tx;g.position.z=tz;if(placed[an]!=null)g.rotation.y=Math.PI/2;});},
     build,panels
   };
 })();
@@ -8594,6 +8856,13 @@ const ROOM16=(function(){
     icon:()=>'',
     fresh:()=>({lock:[0,0,0,0],safeOpen:false,hasKey:false,keyUsed:false,hasMatches:false,hasLantern:false,lanternHung:false,lanternLit:false,sw:{A:'R',B:'L',C:'R'}}),
     items:()=>{const it=[];if(S.hasKey)it.push({label:'Switch key',svg:svgIcon('<circle cx="7" cy="12" r="4"/><path d="M11 12h10M17 12v3M20 12v3"/>')});if(S.hasMatches)it.push({label:'Matches',svg:svgIcon('<rect x="5" y="8" width="14" height="10" rx="1"/><path d="M9 8V4M12 8V3"/>')});if(S.hasLantern)it.push({label:'Lantern',svg:svgIcon('<rect x="8" y="7" width="8" height="11" rx="2"/><path d="M10 4h4M12 4v3M8 18h8"/>')});return it;},
+    hints:()=>[
+      {id:'safe',t:'The station safe',done:S.safeOpen,h:[`The telegraph at the ticket window (west) is printing dots and dashes. The note beside it says it's the safe code.`,`Match each group on the tape with the Morse code chart by the ticket window. The tape reads ... / - / .- / .-.`,`... is S, - is T, .- is A, .-. is R. Set the safe dials to S T A R and press "Turn the handle". Take the switch key and the matches.`]},
+      {id:'lantern',t:'The signal lantern',done:S.hasLantern||S.lanternHung,h:[`Read the sheriff's note on the station wall, then look closely at the four wanted posters.`,`The thief had no mustache (so not Dusty Dan), didn't wear a black hat (so not Slim Jim) and was taller than One-Eye Pete (so not Pete).`,`Open Rattlesnake Rita's crate in the evidence boxes at the south end of the platform.`]},
+      {id:'switches',t:'The track switches',done:routeOf(S.sw)[1]==='Platform',ready:S.hasKey||S.keyUsed,h:[`The levers at the north end of the platform are chained up. The switch key is in the station safe.`,`Use the switch key. Lever A sends the train to B or C, then that lever picks where it ends up. Watch the map until it says "Platform".`,`Set A to Left and B to Right. (C doesn't matter.)`]},
+      {id:'signal',t:'Signal the train (the way out)',done:S.won,ready:(S.hasLantern||S.lanternHung)&&(S.hasMatches||S.lanternLit),h:[`The signal post at the edge of the platform has a hook for a lantern. The train only stops for a red light.`,`Hang the red lantern, light it with a match, and make sure the track switches send the train to the platform.`,`At the signal post press "Hang the lantern", "Strike a match", then "Swing the lantern!".`]}
+    ],
+    restore(){a.safeDoor.position.x=S.safeOpen?-0.55:0;a.safeDoor.rotation.y=S.safeOpen?-1.4:0;a.levers.forEach((lv,i)=>lv.rotation.z=S.sw['ABC'[i]]==='L'?0.5:-0.5);},
     build,panels
   };
 })();
@@ -8883,6 +9152,13 @@ const ROOM17=(function(){
     icon:()=>'',
     fresh:()=>({bits:[false,false,false,false],lockerOpen:false,hasCore:false,coreIn:false,chain:[],drawerOpen:false,hasChip:false,chipIn:false,prog:[],lastPath:[]}),
     items:()=>{const it=[];if(S.hasCore)it.push({label:'Power core',svg:svgIcon('<rect x="8" y="4" width="8" height="16" rx="2"/><path d="M12 8l-2 4h4l-2 4"/>')});if(S.hasChip)it.push({label:'Memory chip',svg:svgIcon('<rect x="6" y="6" width="12" height="12" rx="1"/><path d="M9 3v3M12 3v3M15 3v3M9 18v3M12 18v3M15 18v3"/>')});return it;},
+    hints:()=>[
+      {id:'locker',t:'The power-core locker',done:S.lockerOpen,h:[`The locker (east) wants the robot's model number. Look at the plate on Bolt's chest.`,`Bolt is B-13. The lights are worth 8, 4, 2 and 1. Turn on the lights that add up to 13.`,`Turn on 8, 4 and 1 (leave the 2 off) so it reads 1 1 0 1 = 13, then press "Enter". Take the power core.`]},
+      {id:'gears',t:'The gear drawer',done:S.drawerOpen,h:[`The drawer on the workbench (west) opens when its gold gear turns counterclockwise.`,`The gears must fill exactly 7 units. Each gear turns the opposite way from the one next to it, so you need an even number of gears for the gold gear to turn the right way.`,`Add the 3-unit gear and the 4-unit gear, then press "Start the motor". Take the memory chip.`]},
+      {id:'power',t:'Switch Bolt on',done:S.coreIn&&S.chipIn,ready:(S.hasCore||S.coreIn)&&(S.hasChip||S.chipIn),h:[`Bolt needs a power core (from the locker) and a memory chip (from the gear drawer).`,`Tap Bolt and press "Plug it in" and "Install it".`]},
+      {id:'program',t:'Program Bolt (the way out)',done:S.won,ready:S.coreIn&&S.chipIn,h:[`Bolt starts in the bottom-left corner facing up. The yellow button is in the top-right corner. Plan a path around the crates.`,`Go up one square, right to the middle column, up the middle column to the top row, then right to the button. Remember to turn before you move Forward.`,`Forward, Right, Forward, Forward, Left, Forward, Forward, Forward, Right, Forward, Forward. Then press "Run program".`]}
+    ],
+    restore(){a.lockerDoor.rotation.y=S.lockerOpen?-1.6:0;a.lockerDoor.position.x=S.lockerOpen?-0.6:0;a.drawer.position.z=S.drawerOpen?0.5:0;},
     build,panels
   };
 })();
@@ -9144,6 +9420,25 @@ const ROOM18=(function(){
     fresh:()=>({mix:[[0,0,0],[0,0,0],[0,0,0]],vaultOpen:false,hasKey:false,keyIn:false,tool:null,tests:[],shelf:[null,null,null,null],sel:null,shelved:false,hasFuse:false,fuseIn:false,j5:0,j3:0,cwHung:false}),
     onOpen(){S.sel=null;S.tool=null;},
     items:()=>{const it=[];if(S.hasKey)it.push({label:'Elevator key',svg:svgIcon('<circle cx="7" cy="12" r="4"/><path d="M11 12h10M17 12v3M20 12v3"/>')});if(S.hasFuse)it.push({label:'Fuse',svg:svgIcon('<rect x="6" y="9" width="12" height="6" rx="2"/><path d="M3 12h3M18 12h3"/>')});return it;},
+    hints:()=>[
+      {id:'vault',t:'The crystal vault',done:S.vaultOpen,h:[
+        'Look at the carving on the round stone door in the east. The sun crystal must glow yellow, the sea crystal cyan (blue-green) and the rose crystal magenta (pink-purple).',
+        'Colored light mixes differently from paint! Red + green light make yellow. Green + blue make cyan. Red + blue make magenta.',
+        'Sun crystal: Red and Green on. Sea crystal: Green and Blue on. Rose crystal: Red and Blue on. Then tap \u201cPush the door\u201d and take the key.']},
+      {id:'samples',t:'The sample shelf',done:S.shelved,h:[
+        'The geologist\u2019s table in the west has four rock samples, A to D. Her notes say to shelve them from softest to hardest.',
+        'Use the scratch test. A harder rock scratches a softer one, but never the other way round. The rock that scratches all the others is the hardest.',
+        'From left to right: B (talc), D (calcite), A (quartz), C (diamond). Check the shelf, then take the fuse from the little compartment.']},
+      {id:'jugs',t:'The water jugs',done:S.cwHung,h:[
+        'The pump in the south has a 5-liter jug and a 3-liter jug. The elevator\u2019s counterweight needs exactly 4 liters in the big jug.',
+        'There are no markings, so you can only fill a jug to the top, empty it, or pour one jug into the other until it\u2019s full. Try to get 2 liters in the big jug first.',
+        'Tap: Fill 5 L, Pour 5\u21923, Empty 3 L, Pour 5\u21923, Fill 5 L, Pour 5\u21923. The 5-liter jug now holds 4 liters. Hang it on the hook.']},
+      {id:'exit',t:'The elevator',ready:S.vaultOpen&&S.shelved&&S.cwHung,done:S.won,h:[
+        'The elevator in the north needs three things: the key, the fuse and the 4-liter counterweight.',
+        'The key is in the crystal vault and the fuse is in the compartment above the sample shelf. Take them both.',
+        'Tap the elevator, then \u201cUse the key\u201d, \u201cPut in the fuse\u201d and \u201cGoing up!\u201d']}
+    ],
+    restore(){for(let i=0;i<40;i++)animate(0,0,1);FX.touch(4);},
     build,panels
   };
 })();
@@ -9404,6 +9699,24 @@ const ROOM19=(function(){
     fresh:()=>({haiku:[null,null,null],haikuDone:false,rack:[null,null,null,null,null],sel:null,stonesUp:false,dial:[1,1,1,1],gateUnlocked:false}),
     onOpen(){S.sel=null;},
     items:()=>[],
+    hints:()=>[
+      {id:'haiku',t:'The haiku',done:S.haikuDone,h:[
+        'The board at the tea house in the east asks for a haiku: three lines of 5, then 7, then 5 syllables.',
+        'Clap the beats of each line. \u201cCher-ry blos-soms fall\u201d has 5 claps.',
+        'Line 1: \u201cCherry blossoms fall\u201d. Line 2: \u201cKoi fish swim under the bridge\u201d. Line 3: \u201cSpring is here at last\u201d. Then pin it to the board.']},
+      {id:'chimes',t:'The wind chimes',done:S.stonesUp,h:[
+        'The sign at the wind chimes in the west says to hang them from the lowest sound to the highest.',
+        'Longer chimes sound lower. Put the longest chime on the left hook and work your way down to the shortest.',
+        'Hang them longest to shortest from left to right (each one a little shorter than the one before), then tap \u201cRing all the chimes\u201d.']},
+      {id:'gate',t:'The gate lock',done:S.gateUnlocked,h:[
+        'The plaque on the gate in the north shows four Japanese numbers. The hanging scroll in the south teaches them.',
+        '\u4e00 is 1, \u4e8c is 2, \u4e09 is 3, \u56db is 4 and \u4e94 is 5.',
+        'The plaque says \u4e09 \u4e00 \u56db \u4e8c, so set the dials to 3, 1, 4, 2 and try the lock.']},
+      {id:'exit',t:'Crossing the pond',ready:S.haikuDone&&S.stonesUp&&S.gateUnlocked,done:S.won,h:[
+        'To cross you need the lanterns lit (the haiku), the stepping stones raised (the chimes) and the gate unlocked.',
+        'When all three are done, tap the gate and \u201cStep across to the gate\u201d.']}
+    ],
+    restore(){for(let i=0;i<40;i++)animate(0,0,1);FX.touch(4);},
     build,panels
   };
 })();
@@ -9721,6 +10034,25 @@ const ROOM20=(function(){
     fresh:()=>({pegs:[[0,1,2],[],[]],hold:null,moves:0,towerDone:false,hasKey:false,keyIn:false,played:[],songDone:false,hasProp:false,propOn:false,holes:[null,null,null,null],sel:null,sorted:false,hasBat:false,batIn:false}),
     onOpen(){S.sel=null;S.hold=null;},
     items:()=>{const it=[];if(S.hasKey)it.push({label:'Wind-up key',svg:svgIcon('<circle cx="12" cy="7" r="4"/><path d="M12 11v10M9 18h6"/>')});if(S.hasProp)it.push({label:'Propeller',svg:svgIcon('<path d="M12 12L5 5M12 12l7 7M12 12l7-7M12 12l-7 7"/><circle cx="12" cy="12" r="2"/>')});if(S.hasBat)it.push({label:'Battery',svg:svgIcon('<rect x="7" y="5" width="10" height="16" rx="2"/><path d="M10 2h4v3h-4z"/>')});return it;},
+    hints:()=>[
+      {id:'hanoi',t:'The ring tower',done:S.towerDone,h:[
+        'The ring tower in the east: move all three rings to the last peg, one ring at a time, and never put a bigger ring on a smaller one.',
+        'Start by moving the smallest ring straight to the last peg. It can be done in 7 moves.',
+        'Tap the pegs in pairs (from \u2192 to): 1\u21923, 1\u21922, 3\u21922, 1\u21923, 2\u21921, 2\u21923, 1\u21923. Then take the wind-up key.']},
+      {id:'xylo',t:'The xylophone',done:S.songDone,h:[
+        'The songbook beside the xylophone in the west shows \u201cTwinkle, Twinkle\u201d as colors.',
+        'Play the colors in the songbook in order: red, red, light blue, light blue, blue, blue, light blue.',
+        'Tap the 1st bar (red) twice, the 5th bar (light blue) twice, the 6th bar (blue) twice, then the 5th bar (light blue) once. Take the propeller.']},
+      {id:'sorter',t:'The shape sorter',done:S.sorted,h:[
+        'The shape sorter in the south says \u201cCount my sides!\u201d Each hole shows a number of dots.',
+        'Match each hole\u2019s dots to a shape with that many sides. The circle and the star don\u2019t fit anywhere.',
+        '5 dots: pentagon. 3 dots: triangle. 6 dots: hexagon. 4 dots: trapezoid. Take the battery.']},
+      {id:'exit',t:'The toy plane',ready:S.towerDone&&S.songDone&&S.sorted,done:S.won,h:[
+        'The toy plane in the north needs a propeller, a wind-up key and a battery.',
+        'The key comes from the ring tower, the propeller from the xylophone and the battery from the shape sorter. Take each one when it pops out.',
+        'Tap the plane: \u201cAttach it\u201d, \u201cWind it up\u201d, \u201cPut in the battery\u201d, then \u201cClimb in and fly!\u201d']}
+    ],
+    restore(){for(let i=0;i<40;i++)animate(0,0,1);FX.touch(4);},
     build,panels
   };
 })();
@@ -9980,6 +10312,28 @@ const ROOM21=(function(){
     icon:()=>'',
     fresh:()=>({chan:[0,0,0],radioDone:false,rings:RING0.slice(),grid:[[null,null,null,null],[null,null,null,null],[null,null,null,null],[null,null,null,null]],boxOpen:false,hasBulb:false,bulbIn:false,lampOn:false,hasHarness:false,harnessOn:false}),
     items:()=>{const it=[];if(S.hasBulb)it.push({label:'Lamp bulb',svg:svgIcon('<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5V16h8v-2.5A6 6 0 0 0 12 3z"/>')});if(S.hasHarness)it.push({label:'Harness',svg:svgIcon('<path d="M7 4l5 8 5-8M12 12v8"/><circle cx="12" cy="20" r="1.5"/>')});return it;},
+    hints:()=>[
+      {id:'radio',t:'The radio',done:S.radioDone,h:[
+        'The keeper\u2019s logbook by the radio in the east says sailors flash their radio channel with their lights.',
+        'Watch the ship far out to the west (tap it and press \u201cWatch the light\u201d). Count each group of flashes. A long dark pause means the next number.',
+        'The flashes go 3, then 1, then 4. Set the radio to 3 1 4 and call.']},
+      {id:'box',t:'The spare-parts box',done:S.boxOpen,h:[
+        'The box in the west has a picture lock. Every row, column and 2-by-2 square needs one anchor, one shell, one star and one fish.',
+        'Start with the rows that already have two pictures. Tapping a square changes it: anchor, shell, star, fish, then empty again.',
+        'Row 1: shell, star in the two middle squares. Row 2: star first, shell last. Row 3: anchor, fish in the middle. Row 4: fish first, anchor last. Then take the bulb.']},
+      {id:'lens',t:'The lens rings',done:S.rings.every(r=>r===0),h:[
+        'At the great lamp in the north, turn the four lens rings until the orange pieces make one straight beam pointing right.',
+        'Turning a ring also turns the ring just outside it. Fix ring 1 first, then ring 2, then ring 3, then ring 4.',
+        'Tap \u201cTurn ring 1\u201d 5 times, \u201cTurn ring 2\u201d 5 times, \u201cTurn ring 3\u201d 2 times and \u201cTurn ring 4\u201d once.']},
+      {id:'lamp',t:'Lighting the lamp',ready:S.boxOpen&&S.rings.every(r=>r===0),done:S.lampOn,h:[
+        'The lamp needs the lens lined up and a bulb. The spare bulb is in the spare-parts box.',
+        'Take the bulb from the box, then tap the lamp, \u201cPut in the bulb\u201d and \u201cSwitch on the lamp\u201d.']},
+      {id:'exit',t:'Getting down',ready:S.radioDone&&S.lampOn,done:S.won,h:[
+        'Take the orange safety harness from the hook by the gallery door in the south.',
+        'The zip line only appears once the lifeboat is called on the radio and the lamp is lit.',
+        'Tap the gallery door, \u201cPut it on\u201d, then \u201cClip on and zip down!\u201d']}
+    ],
+    restore(){for(let i=0;i<40;i++)animate(0,0,1);FX.touch(4);},
     build,panels
   };
 })();
@@ -10360,7 +10714,15 @@ const ROOM22=(function(){
     fresh:()=>({match:[null,null,null,null],selS:null,shadowsDone:false,hasKey:false,keyUsed:false,grateOpen:false,found:[],portraitDone:false,fireOut:false,riddle:0,mirrorDone:false,pw:[0,0,0],passOpen:false}),
     onOpen(){S.selS=null;},
     items:()=>{const it=[];if(S.hasKey)it.push({label:'Silver key',svg:svgIcon('<circle cx="7" cy="12" r="4"/><path d="M11 12h10M17 12v3M20 12v3"/>')});return it;},
-    build,panels
+    build,panels,
+    hints:()=>[
+      {id:'shadows',t:'The shadow wall',done:S.shadowsDone,h:['Tap the shadow wall on the west side. The lamp is behind the things on the shelf, so every shadow is a <b>flipped</b> copy of one of them.','Pick a shadow, then pick the object with the same shape facing the other way. One object (the umbrella) makes no shadow at all.','Shadow 1 = Raven statue, 2 = Teapot, 3 = Top hat, 4 = Candlestick. Then take the silver key from the little drawer.']},
+      {id:'portraits',t:'The two portraits',done:S.portraitDone,h:['Tap the portraits above the stairs. Compare the old one with the new one and tap the 5 differences on the right-hand portrait.','Look at the hat, the ears, the mouth, the candles and the bottom-left corner.','Tap the hat band (green now, not red), the ear where the gold earring is missing, the wide wavy smile, the candles (only 2 now) and the black cat in the bottom-left corner.']},
+      {id:'lever',t:'Putting out the fire',done:S.fireOut,ready:S.portraitDone,h:['Something has to put out the fire in the fireplace. Find all 5 portrait differences first.','When the new portrait swings aside, there is an iron lever behind it.','Open the portraits again and press <b>Pull the lever</b>. The fire goes out.']},
+      {id:'mirror',t:'The talking mirror',done:S.mirrorDone,h:['Tap the old mirror on the east wall and answer its three riddles.','The answers are a thing with pages, a bird that hoots at night, and very salty water.','Riddle 1: A book. Riddle 2: An owl. Riddle 3: An ocean.']},
+      {id:'exit',t:'The gargoyle and the secret passage',done:S.won,ready:S.mirrorDone,h:['The mirror says the password is the <b>first letter</b> of each riddle answer. The fire must be out and the grate unlocked too.','Book, Owl, Ocean: B, O, O. Unlock the grate with the silver key from the shadow wall.','At the fireplace: press <b>Use the silver key</b>, set the gargoyle’s letters to <b>B O O</b>, press Speak, then Sneak through.']}
+    ],
+    restore(){a.fire=S.fireOut?0:1;a.grate.position.y=S.grateOpen?1.6:0;a.hiddenDrawer.position.z=S.shadowsDone?0.6:0.3;a.pR.position.x=S.portraitDone?1.6:0.75;a.leverG.rotation.z=S.fireOut?-1.2:0;FX.touch(4);}
   };
 })();
 
@@ -10598,7 +10960,14 @@ const ROOM23=(function(){
     icon:()=>'',
     fresh:()=>({danceDone:false,jobs:{},jobsDone:false,path:[],wordDone:false,pilot:null,dest:null}),
     items:()=>[],
-    build,panels
+    build,panels,
+    hints:()=>[
+      {id:'dance',t:'The waggle dance',done:S.danceDone,h:['Tap the scout bee on the dance floor (east) and press <b>Watch her dance</b>.','Her direction compared to straight up is the direction to fly compared to the sun. Count her waggles: each one is 100 meters.','She waggles 6 times, tilted to the right of straight up: 600 meters, a little to the right of the sun. Pick <b>Clover meadow</b>.']},
+      {id:'jobs',t:'Who does which job?',done:S.jobsDone,h:['Tap the wax job board on the west side and read the four clues.','Stinger stands at the door all day, so Stinger is the guard. Bea and Honey never leave the hive, so neither of them can be the forager.','Bea = Nurse, Buzzby = Forager, Honey = Builder, Stinger = Guard. Then press Check.']},
+      {id:'word',t:'The letter comb',done:S.wordDone,h:['Tap the letter comb on the north side. The guard’s password is a six-letter word hidden in it.','It’s the sweet juice bees collect from flowers: <b>NECTAR</b>. Each letter has to touch the one before it.','2nd row: tap N then E (the 4th and 5th letters). 3rd row: C (5th), then T (4th). 4th row: A (4th), then R (5th). Then press Try this word.']},
+      {id:'exit',t:'Flying out',done:S.won,ready:S.danceDone&&S.jobsDone&&S.wordDone,h:['Go to the hive entrance (south) once the dance, the jobs and the password are all done.','Only the forager flies out to the flowers, and the dance told you where to go.','Pick <b>Buzzby</b> and <b>Clover meadow</b>, then press Hop on and fly!']}
+    ],
+    restore(){a.guard.position.x=S.wordDone?-2.4:-1.5;FX.touch(4);}
   };
 })();
 
@@ -10811,7 +11180,16 @@ const ROOM24=(function(){
     fresh:()=>({dirs:[null,null],chestOpen:false,p1:false,slots:START.slice(),wsel:null,weedDone:false,p2:false,hrs:[0,0],clamOpen:false,p3:false,order:[null,null,null]}),
     onOpen(){S.wsel=null;},
     items:()=>{const n=[S.p1,S.p2,S.p3].filter(Boolean).length;return n?[{label:n+' scroll piece'+(n>1?'s':''),svg:svgIcon('<path d="M6 4h10l3 3v13H6z"/><path d="M9 10h7M9 14h7"/>')}]:[];},
-    build,panels
+    build,panels,
+    hints:()=>{const CN=['green','orange','light blue','pink','purple','yellow'],s=S.slots.slice(),sw=[];
+      for(let i=0;i<6;i++){if(s[i]!==i){const j=s.indexOf(i);sw.push(CN[i]+' and '+CN[j]);const t=s[i];s[i]=s[j];s[j]=t;}}
+      return[
+      {id:'chest',t:'The sailor’s chest',done:S.p1,h:['Tap the sailor’s chest (east). It asks which way God sent Jonah and which way Jonah ran.','Read the soggy map on the floating plank (west). North is at the top, so east is to the right.','God sent Jonah: <b>East</b> (to Nineveh). Jonah ran: <b>West</b> (to Tarshish). Open the chest and take the scroll piece.']},
+      {id:'weed',t:'The tangled seaweed',done:S.p2,h:['Tap the seaweed (northwest). Untangle it so that no strands cross. Tap one knot, then another, to swap them.','Put the knots round the ring in an order where each strand only joins knots that are close together.','Going clockwise from the top, the knots should be: green, orange, light blue, pink, purple, yellow.'+(sw.length&&!S.weedDone?' From where they are now, swap: '+sw.join('; then ')+'.':'')+' Then take the scroll piece.']},
+      {id:'clam',t:'The giant clam',done:S.p3,h:['Tap the giant clam (southeast). It asks how many <b>hours</b> Jonah was in the fish.','The floating plank nearby says Jonah was in the fish “three days and three nights” (Jonah 1:17). One day and one night is 24 hours.','3 × 24 = <b>72</b>. Set the dial to 7 2, tickle the clam and take the scroll piece.']},
+      {id:'exit',t:'Jonah’s prayer',done:S.won,ready:S.p1&&S.p2&&S.p3,h:['Find all three scroll pieces, then tap the fish’s mouth (north).','This is Jonah 2:9. Jonah first promises to give thanks, then promises to keep his vow, and he ends by saying who saves.','1: “But I will sacrifice unto thee with the voice of thanksgiving;” 2: “I will pay that that I have vowed.” 3: “Salvation is of the LORD.” Then press Pray.']}
+    ];},
+    restore(){a.chestLid.rotation.x=S.chestOpen?-1.4:0;a.clamTop.rotation.x=S.clamOpen?-0.9:0;FX.touch(4);}
   };
 })();
 
@@ -11057,7 +11435,17 @@ const ROOM25=(function(){
     icon:()=>'',
     fresh:()=>({lock:[0,0],tackOpen:false,hasPole:false,ropeDown:false,bun:[0,0],trail:[],mazeDone:false,hasCarrots:false,wagonMoved:false,pen:[2,2],penDone:false,hasGloves:false,glovesOn:false}),
     items:()=>{const it=[];if(S.hasPole)it.push({label:'Hook pole',svg:svgIcon('<path d="M6 20L18 6"/><path d="M18 6a3 3 0 0 1-3-3"/>')});if(S.hasCarrots)it.push({label:'Carrots',svg:svgIcon('<path d="M14 10L5 19"/><path d="M14 10l-2-4 4 2 2-4 0 4 4-2-2 4"/>')});if(S.hasGloves)it.push({label:'Gloves',svg:svgIcon('<path d="M7 21V9a2 2 0 0 1 4 0v3V6a2 2 0 0 1 4 0v8l2-2a2 2 0 0 1 3 3l-5 6z"/>')});return it;},
-    build,panels
+    build,panels,
+    hints:()=>[
+      {id:'tack',t:'The tack room padlock',done:S.tackOpen,h:['Tap the tack room door (east wall) and read Farmer Jo’s riddle: 10 heads and 28 legs.','Every animal has 1 head. Cows have 4 legs and chickens have 2. If all 10 were chickens there would be 20 legs, and every cow adds 2 more.','<b>4 cows and 6 chickens</b> (16 + 12 = 28 legs). Set the padlock to 4, then 6, and take the hook pole.']},
+      {id:'rope',t:'Getting the rope down',done:S.ropeDown,ready:S.tackOpen,h:['The rope is coiled high on a rafter. You need something long to reach it. It’s in the tack room.','Take the hook pole, then tap the rope and press <b>Hook it down</b>.']},
+      {id:'maze',t:'Bunny’s corn maze',done:S.mazeDone,h:['Tap the corn maze map on the farmer’s desk (west). Guide Bunny to the carrot in the bottom-right corner.','Use the arrow buttons. Corn blocks the way, and Reset puts Bunny back at the start.','Press Reset, then: Down 2, Right 3, Up 2, Right 3, Down 2, Left 1, Down 2, Right 1, Down 2. Take the carrots.']},
+      {id:'wagon',t:'Something soft to land on',done:S.wagonMoved,ready:S.mazeDone,h:['It’s a long drop outside the loft door. Daisy the horse (out of the east window) is hitched to a hay wagon, and she looks hungry.','Get the carrots from the corn maze first.','Tap the window and press <b>Toss Daisy the carrots</b>. She pulls the hay wagon under the loft door.']},
+      {id:'pen',t:'The lamb pen',done:S.penDone,h:['Tap the lamb pen (southwest). Use exactly 14 fence pieces and give the lambs 12 squares of grass.','Fence pieces = 2 × (wide + long), so wide + long must be 7. Grass squares = wide × long, so they must multiply to 12.','<b>3 wide and 4 long</b> (4 wide and 3 long works too). Build the pen and take the gloves.']},
+      {id:'gloves',t:'A good grip',done:S.glovesOn,ready:S.penDone,h:['The rope is rough. You need gloves to hold on, and they’re hanging at the lamb pen.','Take the gloves from the finished pen, then tap the rope and press <b>Put on gloves</b>.']},
+      {id:'exit',t:'The rope swing',done:S.won,ready:S.ropeDown&&S.glovesOn&&S.wagonMoved,h:['You need three things: the rope hooked down, gloves on and the hay wagon under the loft door.','When all three are ticked, tap the rope and press <b>Grab the rope and swing!</b>']}
+    ],
+    restore(){a.tackDoor.rotation.y=S.tackOpen?-1.5:0;a.wag=S.wagonMoved?1:0;wagon.position.x=S.wagonMoved?0:6;FX.touch(4);}
   };
 })();
 
@@ -11327,6 +11715,13 @@ const ROOM26=(function(){
     icon:()=>'',
     fresh:()=>({shield:RIGHT0.map(r=>r.slice()),shieldDone:false,side:{Erik:'P',Astrid:'P',Bjorn:'P',Freya:'S',Leif:'S',Sigrid:'S'},used:[],knotAt:null,knotDone:false,hasSail:false,sailOn:false,sailUp:false}),
     items:()=>{const it=[];if(S.hasSail)it.push({label:'Sail',svg:svgIcon('<path d="M6 4v16M6 5l12 6-12 6"/>')});return it;},
+    hints:()=>{const bal=CREW.filter(([n])=>S.side[n]==='P').reduce((p,c)=>p+c[1],0)===20;return[
+      {id:'shield',t:'The jarl’s shield (the doors)',done:S.shieldDone,h:['Tap the barred doors at the north end. The right half of the shield must be a mirror image of the left half.','A mirror flips the pattern across the middle line. In each row, the right square next to the line copies the left square next to the line, and the outside squares copy each other. Tap a square to change its color.','Make the right half like this, top row to bottom row (each row read left to right): red, red, blue · red, gold, red · gold, gold, red · gold, gold, red · red, gold, red · red, red, blue.']},
+      {id:'crew',t:'The rowing crew',done:bal,h:['Tap the crew on the benches. The ship tips because one side is heavier. All six Vikings weigh 40 stones together, so each side needs 20.','Port (left) has 26 stones and starboard (right) has 14, so port is 6 too heavy. Swap one Viking from each side whose weights are 6 apart.','Tap Astrid (9) to send her to starboard, then tap Sigrid (3) to bring her to port. Now each side has 20.']},
+      {id:'knot',t:'The rune stone knot',done:S.knotDone,h:['Tap the rune stone on the west side. You must trace every line exactly once without lifting your finger.','Count the lines at each dot. The two bottom dots each have 3 lines and every other dot has an even number, so start at one bottom dot and finish at the other.','Start on the bottom-left dot, then tap: upper-left, top, upper-right, upper-left, middle, upper-right, bottom-right, middle, bottom-left, bottom-right.']},
+      {id:'sail',t:'The sail',done:S.sailUp,ready:S.knotDone||S.hasSail,h:['The sail is locked in the chest beside the rune stone. Trace the knot first and the lock falls open.','Open the sail chest and take the sail. Then look down at the longship under your feet.','Take the sail from the chest, tap the longship and press “Hoist the sail”.']},
+      {id:'exit',t:'Row out',done:S.won,ready:S.shieldDone&&bal&&S.sailUp,h:['You need three things: the doors open, the crew balanced and the sail hoisted.','When all three are done, look down and tap the longship.','Tap the longship and press “Row out!”.']}];},
+    restore(){a.doors=S.shieldDone?1:0;a.scLid.rotation.x=S.knotDone?-1.4:0;animate(0,0,1);},
     build,panels
   };
 })();
@@ -11633,6 +12028,12 @@ const ROOM27=(function(){
     fresh:()=>({tl:[null,null,null,null,null],sel:null,tlDone:false,hasCard:false,cardUsed:false,starPick:null,alarmOff:false,code:[0,0,0,0],codeOk:false}),
     onOpen(){S.sel=null;},
     items:()=>{const it=[];if(S.hasCard)it.push({label:'Keycard',svg:svgIcon('<rect x="4" y="7" width="16" height="10" rx="2"/><path d="M4 11h16"/>')});return it;},
+    hints:()=>[
+      {id:'stars',t:'The laser alarm (planetarium)',done:S.alarmOff,h:['Tap the planetarium console on the west side. You switch off the alarm by tapping the North Star on its star map.','Read the guide beside it. Find the cup of the Big Dipper and the two Pointer Stars at the end of the cup. Draw a line from the bottom pointer up through the top pointer and keep going.','Tap the star in the top-right corner of the map, straight up from the Pointer Stars. That is Polaris, the North Star.']},
+      {id:'timeline',t:'The Hall of Inventions',done:S.tlDone,h:['Tap the Hall of Inventions on the east side. Put the five inventions in order from oldest to newest, using their years in Roman numerals.','Use the Roman numerals chart on the south wall: M = 1000, D = 500, C = 100, L = 50, X = 10, V = 5, I = 1. A smaller letter before a bigger one is taken away (CM = 900). The wheel is older than Rome itself!','Oldest to newest: the wheel, the printing press (1440), the telephone (1876), the airplane (1903), the moon landing (1969). Then press “Check the timeline”.']},
+      {id:'card',t:'The guard’s keycard',done:S.cardUsed,ready:S.tlDone||S.hasCard,h:['The keycard is in a hidden drawer that opens when the inventions are in the right order.','Take the keycard from the Hall of Inventions, then tap the front doors (north).','At the front doors, press “Swipe the card”.']},
+      {id:'code',t:'The year code',done:S.codeOk,h:['The doors want the year the museum was founded. Read the plaque on the Roman statue (south).','The plaque says MCMXXVI. M = 1000, CM = 900, XX = 20, VI = 6.','Set the dials on the front doors to 1 9 2 6 and press Enter.']},
+      {id:'exit',t:'Open the front doors',done:S.won,ready:S.alarmOff&&S.cardUsed&&S.codeOk,h:['Switch off the alarm, swipe the keycard and enter the year first.','When all three are done, go back to the front doors.','Press “Open the doors”.']}],
     build,panels
   };
 })();
@@ -11911,6 +12312,11 @@ const ROOM28=(function(){
     fresh:()=>({scoops:[],dough:false,inOven:false,hr:12,mn:0,baked:false,hasBread:false,layers:[null,null,null],sel:null,cakeDone:false,cakeBoxed:false}),
     onOpen(){S.sel=null;},
     items:()=>{const it=[];if(S.hasBread)it.push({label:'Bread',svg:svgIcon('<path d="M5 12c0-4 14-4 14 0v6H5z"/>')});if(S.cakeBoxed)it.push({label:'Cake box',svg:svgIcon('<rect x="5" y="8" width="14" height="11"/><path d="M12 8v11M8 5l4 3 4-3"/>')});return it;},
+    hints:()=>[
+      {id:'dough',t:'The bread dough',done:S.dough,h:['Read Grandma’s recipe card on the east wall, then tap the mixing bench.','The recipe needs 1¾ cups of flour. 1¾ cups is 1 cup, plus ½ cup, plus ¼ cup.','Tap the 1 cup, the ½ cup and the ¼ cup once each (the bowl shows 1¾ cups), then press “Mix the dough”. If you add too much, press “Dump it out” and start again.']},
+      {id:'bake',t:'The oven timer',done:S.baked,ready:S.dough,h:['Put the dough in the brick oven (north). The timer wants the time the bread will be DONE, not how long it bakes.','The kitchen clock on the south wall says 5:50. The recipe says to bake for 1 hour 25 minutes.','5:50 plus 1 hour 25 minutes is 7:15. Set the timer to 7:15 and press “Start baking”. Then take the bread.']},
+      {id:'cake',t:'The birthday cake',done:S.cakeDone,h:['Read the order slip on the west wall, then tap the cake stand.','Strawberry can’t go on top, and chocolate must sit right on top of vanilla. Only one order works.','Top: Chocolate. Middle: Vanilla. Bottom: Strawberry. Press “Add the frosting”, then put the cake in a box.']},
+      {id:'exit',t:'The dumbwaiter',done:S.won,ready:S.hasBread&&S.cakeBoxed,h:['The dumbwaiter only goes up with the bread and the boxed cake.','Take the bread out of the oven and box the cake, then tap the dumbwaiter on the south wall.','Tap the dumbwaiter and press “Climb in and ride up”.']}],
     build,panels
   };
 })();
@@ -12248,6 +12654,12 @@ const ROOM29=(function(){
     icon:()=>'',
     fresh:()=>({lock:[1,1,1],chestOpen:false,hasMap:false,load:{you:true},loadOk:false,route:[],routeOk:false}),
     items:()=>{const it=[];if(S.hasMap)it.push({label:'Sky map',svg:svgIcon('<path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/>')});return it;},
+    hints:()=>[
+      {id:'chest',t:'The supply chest',done:S.chestOpen,h:['Tap the supply chest (north). It wants the picture numbers of three kinds of cloud from the cloud spotting board (west).','Read the Sky Guide (northwest). Cirrus is thin, wispy streaks. Cumulus is puffy, like cotton balls. Stratus is a flat gray layer. Match each one to a numbered picture.','Cirrus is picture 2, cumulus is picture 4 and stratus is picture 1. Set the dials to 2, 4, 1 and press Open. Then take the sky map.']},
+      {id:'load',t:'Loading the balloon',done:S.loadOk,ready:S.hasMap,h:['Tap the balloon (south). The load must be exactly 60 kg, and you must bring the map, the rope and the lantern.','You (35) + map (2) + rope (4) + lantern (3) = 44 kg. So you need exactly 16 kg of sandbags.','Put in the map, the rope, the lantern and the 7 kg and 9 kg sandbags (60 kg). Then press “Light the burner”.']},
+      {id:'route',t:'The route home',done:S.routeOk,ready:S.loadOk,h:['Read the weather station (east). High winds blow west, middle winds blow north and low winds blow east. Each tap moves you one square.','You start in the bottom-left square. Home is 2 squares east and 3 squares north. Zig-zag between the storm clouds.','Tap: Middle, Low, Middle, Low, Middle.']},
+      {id:'exit',t:'Fly home',done:S.won,ready:S.routeOk,h:['Load the balloon and plan the route first.','When the route reaches home, the balloon is ready.','Tap the balloon and press “Untie and fly home”.']}],
+    restore(){a.lid.rotation.x=S.chestOpen?-1.6:0;},
     build,panels
   };
 })();
@@ -12506,6 +12918,13 @@ const ROOM30=(function(){
     icon:()=>'',
     fresh:()=>({count:[0,0],flockSafe:false,hasLamp:false,fill:[null,null,null],msgDone:false,pick:null,stableFound:false}),
     items:()=>{const it=[];if(S.hasLamp)it.push({label:'Lamp',svg:svgIcon('<path d="M4 14c0-3 12-3 14 0l3-2"/><path d="M4 14c2 3 12 3 14 0"/><path d="M20 10c1-2 0-3 0-3"/>')});return it;},
+    hints:()=>[
+      {id:'flock',t:'The sheepfold',done:S.flockSafe,h:['Count the tally marks on the counting post (north), then tap the sheepfold.','Each bundle with a line across it means 5. There are 4 bundles and 3 single marks.','4 × 5 + 3 = 23. Set the dials to 2 3 and press “Close the gate”.']},
+      {id:'lamp',t:'The lamp',done:S.hasLamp,ready:S.flockSafe,h:['The head shepherd’s lamp hangs on the gatepost of the sheepfold.','Once all the sheep are safe, open the sheepfold again.','Tap the sheepfold and press “Take the lamp”.']},
+      {id:'angel',t:'The angel’s message',done:S.msgDone,h:['Tap the glowing spot to the west where the angel stood. Fill in the three missing words of the angel’s message (Luke 2:10-12).','Think of the Christmas story: “good tidings of great …”, “the city of …” (the great king of Israel), and the baby was lying in a … (a feeding box for animals).','Blank 1: joy. Blank 2: David. Blank 3: manger. Then press “Finish the scroll”.']},
+      {id:'town',t:'Where is the baby?',done:S.stableFound,ready:S.msgDone,h:['Finish the angel’s message first, then tap the town of Bethlehem far to the south.','The inn is across the road from the well, and the well is in front of house B. The stable is right next to the inn, on the side away from the palm tree.','The inn is house E, so the stable is house F (bottom right). Tap house F.']},
+      {id:'exit',t:'The road to Bethlehem',done:S.won,ready:S.flockSafe&&S.hasLamp&&S.stableFound,h:['Get the flock safe, take the lamp and find the stable first.','Then tap the signpost on the road (southeast).','Press “Go with haste to Bethlehem”.']}],
+    restore(){a.gate.rotation.y=S.flockSafe?0:-1.3;},
     build,panels
   };
 })();
@@ -12532,6 +12951,18 @@ const ROOM31=(function(){
   const hhmm=T=>{const h=Math.floor(T/60)%12||12,m=T%60;return`${h}:${String(m).padStart(2,'0')}`;};
   function scramble(){const r=rng(3131);const t=[1,2,3,4,5,6,7,8,0];let b=8,prev=-1;
     for(let k=0;k<22;k++){const nb=[b-3,b+3,b%3?b-1:-1,b%3<2?b+1:-1].filter(i=>i>=0&&i<9&&i!==prev);const n=nb[Math.floor(r()*nb.length)];t[b]=t[n];t[n]=0;prev=b;b=n;}return t;}
+  // Sliding-puzzle solver for the hint: IDA* with Manhattan distance, returns the tile numbers to tap (shortest).
+  let solveKey='',solveOut=null;
+  function solveTiles(t0){const key=t0.join(',');if(key===solveKey)return solveOut;
+    const s=t0.slice(),md=(v,i)=>{const g=v-1;return Math.abs(i%3-g%3)+Math.abs(((i/3)|0)-((g/3)|0));};
+    let h=0;for(let i=0;i<9;i++)if(s[i])h+=md(s[i],i);
+    const path=[];let nodes=0,found=false,b=s.indexOf(0);
+    const dfs=(g,bound,prev)=>{if(h===0){found=true;return g;}const f=g+h;if(f>bound)return f;if(++nodes>3e6)return Infinity;let min=Infinity;
+      for(const n of [b-3,b+3,b%3?b-1:-1,b%3<2?b+1:-1]){if(n<0||n>8||n===prev)continue;const v=s[n],d=md(v,b)-md(v,n);
+        s[b]=v;s[n]=0;h+=d;const ob=b;b=n;path.push(v);const r=dfs(g+1,bound,ob);if(found)return r;path.pop();b=ob;h-=d;s[n]=v;s[b]=0;if(r<min)min=r;}
+      return min;};
+    let bound=h;while(!found&&bound<60&&nodes<=3e6){const r=dfs(0,bound,-1);if(found)break;if(r===Infinity)break;bound=r;}
+    solveKey=key;solveOut=found?path.slice():null;return solveOut;}
   const near=(i,j)=>(Math.abs(i-j)===3)||(Math.abs(i-j)===1&&Math.floor(i/3)===Math.floor(j/3));
 
   /* ---------- Painters ---------- */
@@ -13054,6 +13485,19 @@ const ROOM31=(function(){
     items:()=>{const it=[];const g=['g25','g20','g15'].filter(kk=>S.has[kk]&&!S.axle.includes(kk)).length;if(g)it.push({label:g+(g>1?' gears':' gear'),svg:gearIco});
       if(S.hasMirror)it.push({label:'Hand mirror',svg:svgIcon('<circle cx="10" cy="9" r="6"/><path d="M14 13l6 7"/>')});if(S.hasLever&&!S.leverIn)it.push({label:'Lever',svg:svgIcon('<path d="M5 20L18 5"/><circle cx="18" cy="5" r="2.5"/>')});
       if(S.hasLog)it.push({label:'Log page',svg:svgIcon('<path d="M6 3h9l4 4v14H6z"/><path d="M9 11h7M9 15h7"/>')});return it;},
+    hints:()=>{const tl=S.hintLv.tiles||0;let tAns='';
+      if(tl>=3&&!S.tilesDone){const p=solveTiles(S.tiles);tAns=p?(p.length?`From where your tiles are right now, tap these tiles one after another (${p.length} taps):<br><b>${p.join(', ')}</b><br><span class="muted">Tap a wrong one by mistake? Open this hint again: it always works out the taps from where the tiles are now.</span>`:'The picture is already whole!'):'Tap Reset in the puzzle, then open this hint again.';}
+      return[
+      {id:'drawer',t:'The desk drawer',done:S.drawerOpen,h:['The note on the desk says: shift each letter of <b>TMZSX</b> back by the number of bells above you. Look up and count the bells.','There are <b>4</b> bells. Move each letter 4 places back in the alphabet: T → P, and so on. The brass cipher wheel on the desk does it for you if you set it to BACK 4.','The word is <b>PIVOT</b>. Set the five letter wheels to P I V O T and pull.']},
+      {id:'bells',t:'The bell chime',done:S.bellsDone,h:['Find the music stand in the north-west. It shows “The Tower Chime”: eight notes at different heights.','Big bells sing low, small bells sing high. Biggest to smallest: Sun, Star, Key, Moon. A note on the bottom line is the lowest. The notes’ heights are 4, 2, 3, 1, then 1, 3, 4, 2.','Ring <b>Moon, Star, Key, Sun, Sun, Key, Moon, Star</b>.']},
+      {id:'moon',t:'The moon dial',done:S.moonDone,h:['The moon dial is on the west wall. You need today’s date (the newspaper on the chair in the south) and the calendar, which shows the last full moon.','Full moon was October 1st. The paper says October 16th: 15 days later. The chart moves on one picture about every 3.7 days, so count 4 pictures on from the full moon.','Set the dial to <b>New moon</b>.']},
+      {id:'tiles',t:'The cabinet’s sliding puzzle',done:S.tilesDone,h:['The maintenance cabinet (north-east) is locked with a sliding picture puzzle. Tap a tile next to the empty space to slide it in.','The finished puzzle reads 1 2 3 / 4 5 6 / 7 8, with the gap at the bottom right. Solve the top row first, then the rest. Reset puts the tiles back the way they started.',tAns||'(the exact taps)']},
+      {id:'gears',t:'The going train',done:S.gearsDone,ready:S.has.g25&&S.has.g20&&S.has.g15,h:['The gear board on the east wall needs three gears. You get them from the desk drawer, the biggest bell and the moon dial. Gears that touch must add up to the number painted between them.','The motor gear has 10 teeth and the first number is 35, so axle A needs 35 − 10 = 25. Keep going along the row.','Fit <b>25 on axle A, 20 on axle B, 15 on axle C</b>, then start the motor.']},
+      {id:'pend',t:'The pendulum',done:S.pendDone,h:['The pendulum pit is on the west side. The plate says one second each way, so there and back takes <b>2 seconds</b>.','The chart says a rod 4 times as long takes twice as long. A 0.25 m rod takes 1 second there and back.','Pick the <b>1 m rod</b>. Any bob works, because the weight makes no difference.']},
+      {id:'hands',t:'Setting the hands',done:S.handsDone,ready:S.gearsDone,h:['The keeper’s log (in the desk drawer) says the clock stopped 1 hour 35 minutes after the evening paper came off the press. The time it was printed is on the newspaper.','The paper was printed at 3:40 pm, so the clock stopped at <b>5:15</b>. The setting dial shows the face from inside, back to front. The hand mirror on the desk turns it the right way round.','Take the hand mirror and tap Hold up the hand mirror. Then set an ordinary <b>5:15</b> (minute hand on the 3, hour hand just past the 5) and lock the hands.']},
+      {id:'exit',t:'The counterweight',done:S.won,ready:S.hasLever||S.leverIn,h:['The counterweight in the south-east shaft needs the release lever from the maintenance cabinet, and it only unlocks once the clock is fixed.','Get the gears in, the pendulum hung and the hands set. Then tap the weight, fit the lever, and <b>pull the lever and grab the chain!</b>']}];},
+    restore(){a.drawer.position.z=S.drawerOpen?-0.75:-0.43;a.cabDoor.rotation.y=S.tilesDone?-1.9:0;a.moonDoor.rotation.x=S.moonDone?-1.4:0;
+      if(S.handsDone)a.dT=HANDS_OK;else a.dT=S.T;a.tilesKey='';a.moonI=-1;FX.touch(4);},
     build,panels
   };
 })();
@@ -13651,6 +14095,19 @@ const ROOM32=(function(){
     goalRows:()=>{const got=METAL.filter(m=>S.got[m.k]).length;return[['The king\u2019s dream image',S.statueDone,got>0,`${got} of 5 pieces found`],['Daniel\u2019s meal',S.foodDone,false,''],['The decree chest',S.chestOpen,false,''],['The fiery furnace',S.furOpen,false,''],['The writing on the wall',S.writeDone,S.keysSet,'key in place'],['The four stone lions',S.lionsDone,false,''],['The window toward Jerusalem',S.winOpen,false,''],['The king\u2019s seal',S.sealDone,false,'']]
       .map(r=>({icon:statusDot(r[1],r[2]),text:`<b>${r[0]}</b>: ${r[1]?'solved':r[2]?r[3]:'not yet'}`}));},
     icon:()=>'',
+    noSave:['wsel'],
+    hints:()=>{const allGot=METAL.every(m=>S.got[m.k]);return[
+      {id:'meal',t:'Daniel’s meal',done:S.foodDone,h:['The table is east-southeast. Read the words woven into the cloth (Daniel 1:12). They tell you what Daniel asked for.','Daniel asked for pulse to eat and water to drink, and to be tested for ten days. Leave all the king’s rich food off the plate.','Choose only Pulse and Water. Scratch exactly 10 tally marks, then tap “Serve Daniel’s meal”. Tap the piece in the drawer to take it.']},
+      {id:'chest',t:'The decree chest',done:S.chestOpen,h:['The bronze chest is west-southwest. The decree carved on the wall above it answers the three questions on its lid.','Read Daniel 6:1-2 on the wall: how many princes, how many presidents, and which president was Daniel?','There were 120 princes and 3 presidents, and Daniel was first. Set the dials to 1 2 0 | 3 | 1, then tap “Open the chest”. Take the oil lamp, and read and take the scroll.']},
+      {id:'alcove',t:'The dark alcove',done:S.lampHung,ready:S.lamp,h:['The dark alcove is north-northwest. It is too dark to see inside. Something in the decree chest gives light.','Take the oil lamp from the decree chest. Then tap the alcove and hang the lamp on the hook. Inside you’ll find the iron piece, the keeper’s notes and a map.']},
+      {id:'pieces',t:'Find the five statue pieces',done:allGot,h:['Five metal pieces are hidden around the den. Look in a plant pot, near the sleeping lion and on the pillar.','Gold is in the date palm’s pot (south-southeast). Silver is between the sleeping lion’s front paws (west). Brass is on the base of the pillar of names (south-southwest).','The last two come later. Iron is on the alcove sill once the lamp is hung. The iron-and-clay piece is in the drawer under the table after you serve Daniel’s meal.']},
+      {id:'statue',t:'The king’s dream image',done:S.statueDone,ready:allGot,h:['The plinth is on the east side, next to the dream carving. The carving quotes Daniel 2:32-33.','Put the metals in the order of the king’s dream, from the head down to the feet.','Head: gold. Breast and arms: silver. Belly and thighs: brass. Legs: iron. Feet: iron and clay. Tap “Raise the image” and take key half 1.']},
+      {id:'furnace',t:'The furnace door',done:S.furOpen,h:['The furnace door is on the south side. Its dials are marked with a sun, a moon and a star. Find the same three signs around the den.','Sun: the furnace carving asks how many walk in the fire. Moon: the pillar of names asks how many friends. Star: the scroll from the decree chest asks how many times hotter.','Four men walk in the fire, there were three friends, and the furnace was heated seven times more. Set sun 4, moon 3, star 7 and tap “Open the door”. Take key half 2.']},
+      {id:'writing',t:'The writing on the wall',done:S.writeDone,ready:S.half1&&S.half2||S.keysSet,h:['The glowing writing is on the north wall. You need both halves of the clay key: one from the statue plinth and one from the furnace.','Fit the key halves, then match each sign to its letter on the keys. For the meanings, read the balance and the weights beside the wall: MENE means to number, TEKEL means to weigh and PERES means to divide.','Spell MENE, MENE, TEKEL, UPHARSIN. Meanings: MENE = “God hath numbered thy kingdom, and finished it.” TEKEL = “Thou art weighed in the balances, and art found wanting.” PERES = “Thy kingdom is divided, and given to the Medes and Persians.” Then take the gold chain.']},
+      {id:'lions',t:'The four stone lions',done:S.lionsDone,h:['Tap any of the four glazed lions in the corners. The word tablet on the shelf (west-northwest) says what Ari, Kephir, Labi and Shachal mean.','The keeper’s notes are in the alcove (hang the lamp first). The sun rises in the east. The young lion is on the south side and the lioness on the north, in opposite corners. The grown lion is not gold or white.','Northeast (gold): Shachal. Southeast (blue): Kephir. Southwest (green): Ari. Northwest (white): Labi. Tap “Set the plates” and take the rope and the rings.']},
+      {id:'window',t:'The window toward Jerusalem',done:S.winOpen,h:['The shuttered window is high on the west wall. Read Daniel 6:10 under it: Daniel prayed with his windows open toward Jerusalem, three times a day.','The map in the lit alcove shows which way Jerusalem is from Babylon.','Jerusalem is west. Set the pointer to West and the beads to 3, then tap “Open the shutter”.']},
+      {id:'seal',t:'The king’s seal',done:S.sealDone,ready:S.winOpen&&S.rope,h:['Look straight up at the big wax seal. You need the open window’s light to see it, and the four signet rings hidden under one of the lions.','The cylinder seal (west) shows that a seal prints its picture backwards, like a mirror. Find the ring whose picture is the mirror image of the wax.','Pick Ring 3: the lion faces right, the moon is on the left and three stars are on the right. Ring 1 looks just like the wax, so it is the trick one.']},
+      {id:'out',t:'The way out',done:S.won,ready:S.rope&&S.chain&&S.sealDone&&S.winOpen,h:['Tap the great stone above you. You need the rope, the gold chain, the broken seal and the open window.','Tie the gold chain to the rope, then wait for the morning. A voice calls down King Darius’s question from Daniel 6:20.','Answer with Daniel 6:22: “My God hath sent his angel, and hath shut the lions’ mouths, that they have not hurt me”.']}];},
     fresh:()=>({got:{gold:false,silver:false,brass:false,iron:false,clay:false},slots:[null,null,null,null,null],statueDone:false,half1:false,
       dish:{meat:false,wine:false,pulse:false,water:false,cakes:false},tally:0,foodDone:false,dec:[0,0,0,0,0],chestOpen:false,lamp:false,scroll:false,lampHung:false,
       fur:[0,0,0],furOpen:false,half2:false,keysSet:false,words:['','','',''],wsel:0,wordsOk:[false,false,false,false],mean:[null,null,null],writeDone:false,chain:false,
@@ -13683,6 +14140,20 @@ const COMMON={
         else{S.entry='';S.msg='Nothing happens. That’s not the code.';renderPanel();const g=$('#lockgrid');g.classList.remove('shake');void g.offsetWidth;if(!REDUCED)g.classList.add('shake');return;}}
       else if(S.entry.length<5)S.entry+=k;
       renderPanel();});}}),
+  hints:()=>{
+    const list=(LV.hints?LV.hints():[]).map((x,i)=>Object.assign({key:x.id||('h'+i)},x));
+    const open=list.filter(x=>!x.done),done=list.filter(x=>x.done);
+    const ready=open.filter(x=>x.ready!==false),later=open.filter(x=>x.ready===false);
+    const card=x=>{const n=S.hintLv[x.key]||0,st=x.h||[];
+      const sk=!!x.skill,shown=st.slice(0,n).map((s,j)=>`<li><b>${sk?'Tip '+(j+1):j===st.length-1?'Answer':'Hint '+(j+1)}:</b> ${s}</li>`).join('');
+      const lbl=n>=st.length?'':sk?(n?'Another tip':'Show a tip'):n===st.length-1?'Show the answer':n?'Another hint':'Show a hint';
+      return `<div class="hintcard${x.ready===false?' later':''}"><h3>${x.t}${x.ready===false?' <span class="muted">(needs something else first)</span>':''}</h3>${shown?`<ol class="hintlist">${shown}</ol>`:''}${lbl?`<button class="btn quiet hbtn" type="button" data-k="${x.key}">${lbl} <span class="muted">+0:30</span></button>`:''}</div>`;};
+    return{eye:'Hints · '+LV.name,title:'Need a hint?',html:`<p class="muted">Pick the puzzle you're stuck on. Each hint adds 30 seconds to your time.${S.hintN?` Hints used so far: ${S.hintN}.`:''}</p>
+      ${ready.map(card).join('')}${later.map(card).join('')}${open.length?'':'<p>Everything is solved. Head for the way out!</p>'}
+      ${done.length?`<h3 class="sub">Already solved</h3><p class="muted">${done.map(x=>x.t).join(' · ')}</p>`:''}`,
+      bind(){document.querySelectorAll('#p-body .hbtn').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.k,c=$('#card'),y=c.scrollTop;
+        S.hintLv[k]=(S.hintLv[k]||0)+1;S.hintN++;S.t0-=HINT_MS;SFX.click();saveRoom(true);renderPanel();c.scrollTop=y;}));}};
+  },
   notes:()=>{
     const fmt=v=>/^\d$/.test(v)?`= <b>${v}</b>`:`= ${v}`;
     const clues=Object.values(S.clues),its=itemsOf();
@@ -13692,8 +14163,9 @@ const COMMON={
       <h3 class="sub">Clues</h3>${clues.length?`<ul class="clues">${clues.map(c=>`<li>${c}</li>`).join('')}</ul>`:'<p class="muted">Nothing yet. Tap things around you.</p>'}
       <h3 class="sub">Carrying</h3><p>${its.length?its.map(i=>i.label).join(', ')+'.':'Nothing.'}</p>
       <h3 class="sub">How to play</h3><p class="muted">Turn your phone or drag the screen to look around. The Motion/Touch button at the top switches between them. Pinch to zoom. A few things are just for looking. ${LV.goal} ${LV.howTo}</p>
-      <div class="row"><button class="btn quiet" id="leave">Leave to all rooms</button></div>`,
-      bind(){$('#leave').addEventListener('click',()=>{closePanel();showTitle();});}};
+      <div class="row"><button class="btn quiet" id="nHints">Need a hint?</button><button class="btn quiet" id="leave">Leave to all rooms</button></div>
+      <p class="muted small">Your progress in this room is saved on this device, so you can leave and come back later.</p>`,
+      bind(){$('#leave').addEventListener('click',()=>{closePanel();showTitle();});$('#nHints').addEventListener('click',()=>openPanel('hints'));}};
   }
 };
 
@@ -13709,6 +14181,7 @@ $('#closeP').addEventListener('click',closePanel);
 panel.addEventListener('click',e=>{if(e.target===panel)closePanel();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)closePanel();});
 $('#notesBtn').addEventListener('click',()=>{if(S.running&&!S.won)openPanel('notes');});
+$('#hintBtn').addEventListener('click',()=>{if(S.running&&!S.won)openPanel('hints');});
 function renderPanel(){runCleanup();const d=panelFor(current);if(!d)return;const r=d();$('#p-eye').textContent=r.eye;$('#p-title').textContent=r.title;$('#p-body').innerHTML=r.html;if(r.bind){const c=r.bind();if(typeof c==='function')panelCleanup=c;}updateHud();}
 
 /* =========================================================
@@ -13724,13 +14197,30 @@ function updateHud(){
   $('#badge').textContent=pr+'/'+(LV.total||5);
   const its=itemsOf(),p=$('#itemPill');
   if(its.length===1){p.innerHTML=`<span class="ico">${its[0].svg||BAG}</span><span class="lbl">${its[0].label}</span>`;p.setAttribute('aria-label','Carrying: '+its[0].label);p.hidden=false;}
-  else if(its.length>1){p.innerHTML=`<span class="ico">${BAG}</span>${its.length} items`;p.setAttribute('aria-label','Carrying: '+its.map(i=>i.label).join(', '));p.hidden=false;}
+  else if(its.length>1){p.innerHTML=`<span class="ico">${BAG}</span>${its.length}<span class="ilbl"> items</span>`;p.setAttribute('aria-label','Carrying: '+its.map(i=>i.label).join(', '));p.hidden=false;}
   else p.hidden=true;
 }
 setInterval(()=>{if(S.running&&!S.won)$('#timer').textContent=fmtT(performance.now()-S.t0);},500);
 const SAVE_KEY='escaped.v1';
 function loadSave(){try{const v=JSON.parse(localStorage.getItem(SAVE_KEY));if(v&&v.done&&v.best)return v;}catch(_){}return{done:{},best:{}};}
 function writeSave(v){try{localStorage.setItem(SAVE_KEY,JSON.stringify(v));}catch(_){}}
+// Progress inside a room: saved every few seconds and whenever you leave, restored from the room intro.
+const RSAVE='escaped.room.',HINT_MS=30000,NOSAVE=new Set(['msg','won','t0','tEnd','running','entry']);
+let resumeEl=0,freshSnap='';
+function snapState(){if(LV.saveState)return LV.saveState();const o={};for(const k in S){if(NOSAVE.has(k)||(LV.noSave&&LV.noSave.includes(k)))continue;const v=S[k];if(typeof v==='function')continue;o[k]=v;}return o;}
+function getRoomSave(L){try{const v=JSON.parse(localStorage.getItem(RSAVE+L.id));if(v&&v.v===1&&v.S&&v.num===L.num)return v;}catch(_){}return null;}
+function clearRoomSave(L){try{localStorage.removeItem(RSAVE+L.id);}catch(_){}}
+function saveRoom(force){
+  if(!LV||!S.running||S.won)return;
+  try{const st=JSON.stringify(snapState()),el=performance.now()-S.t0;
+    if(!force&&st===freshSnap&&el<60000)return;
+    const pr=LV.progress?LV.progress():Object.keys(S.syms).length;
+    localStorage.setItem(RSAVE+LV.id,`{"v":1,"num":${LV.num},"pr":${+pr||0},"tot":${LV.total||5},"el":${Math.round(el)},"at":${Date.now()},"S":${st}}`);
+  }catch(e){}
+}
+setInterval(()=>saveRoom(),2500);
+addEventListener('pagehide',()=>saveRoom());
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveRoom();});
 
 /* =========================================================
    Look controls: motion (gyro) or touch (drag), pinch zoom, tap
@@ -13754,7 +14244,7 @@ function askMotion(){
 }
 const ICON_MOTION='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="3" width="8" height="18" rx="2"/><path d="M4 8a6 6 0 0 0 0 8M20 8a6 6 0 0 1 0 8"/></svg>';
 const ICON_TOUCH='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11V5a1.5 1.5 0 0 1 3 0v6M12 10V8.5a1.5 1.5 0 0 1 3 0V11M15 10.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a5 5 0 0 1-4.2-2.3L4 14.5a1.5 1.5 0 0 1 2.5-1.6L9 15"/></svg>';
-function updateModeBtn(){const b=$('#modeBtn');b.innerHTML=`<span class="ico">${mode==='motion'?ICON_MOTION:ICON_TOUCH}</span>${mode==='motion'?'Motion':'Touch'}`;b.setAttribute('aria-label','Look controls: '+(mode==='motion'?'phone motion':'touch')+'. Tap to switch.');}
+function updateModeBtn(){const b=$('#modeBtn');b.innerHTML=`<span class="ico">${mode==='motion'?ICON_MOTION:ICON_TOUCH}</span><span class="mlbl">${mode==='motion'?'Motion':'Touch'}</span>`;b.setAttribute('aria-label','Look controls: '+(mode==='motion'?'phone motion':'touch')+'. Tap to switch.');}
 function useMotion(){
   syncFromCamera();mode='motion';needCal=true;dragMode=!gyroLive;updateModeBtn();
   showHint('Turn your phone to look around. Pinch to zoom. Tap things to inspect them.',6000);
@@ -13811,14 +14301,17 @@ function tap(cx,cy){
    Screens and flow: menu -> room intro -> play -> win
    ========================================================= */
 let pendingLevel=0;
-function loadLevel(i){
+function loadLevel(i,saved){
   LVI=i;LV=LEVELS[i];
   S=Object.assign(baseState(),LV.fresh());
+  if(saved){if(LV.loadState)LV.loadState(saved.S);else Object.assign(S,saved.S);S.msg='';S.won=false;S.running=false;}
   const old=scene;scene=new THREE.Scene();scene.background=new THREE.Color(LV.bg);
   renderer.toneMapping=LV.toneMapping;renderer.toneMappingExposure=LV.exposure;
   camera.position.set(0,LV.eyeY||1.6,0);camera.far=LV.far||60;camera.updateProjectionMatrix();
   FX.begin();
   ROOM=LV.build();
+  if(saved&&LV.restore)LV.restore();
+  if(saved)FX.touch(4);
   if(old&&old!==scene)disposeScene(old);
   door=0;setFov(70);needCal=true;
   updateHud();$('#timer').textContent='0:00';
@@ -13836,23 +14329,31 @@ function renderRooms(){
 }
 function hideScreens(){['#title','#intro','#win'].forEach(s=>$(s).hidden=true);}
 function showTitle(){
-  S.running=false;hideScreens();closePanel();document.body.dataset.level='0';
+  saveRoom();S.running=false;hideScreens();closePanel();document.body.dataset.level='0';
   $('#modeBtn').hidden=true;idleSpin=true;renderRooms();$('#title').hidden=false;
 }
 function showIntro(i){
   pendingLevel=i;const L=LEVELS[i];
-  try{loadLevel(i);}catch(e){console.error(e);}idleSpin=true;S.running=false;
+  let sv=getRoomSave(L);resumeEl=0;
+  if(sv){try{loadLevel(i,sv);resumeEl=sv.el||0;}catch(e){console.error(e);clearRoomSave(L);sv=null;}}
+  if(!sv){try{loadLevel(i);}catch(e){console.error(e);}}
+  idleSpin=true;S.running=false;
+  $('#iResume').hidden=!sv;
+  if(sv)$('#iResTxt').textContent=`You've solved ${sv.pr} of ${sv.tot} here so far, with ${fmtT(sv.el||0)} on the clock.`;
   document.body.dataset.level=String(L.num);
   $('#iCredit').textContent=L.credits||'';$('#iEye').textContent=L.eyebrow+' of '+LEVELS.length;$('#iTitle').innerHTML=L.titleHTML;$('#iStory').textContent=L.story;$('#iGoal').textContent=L.goal;
   hideScreens();$('#intro').hidden=false;$('#intro').scrollTop=0;
 }
 function begin(m,reload){
   if(m==='motion')askMotion();
-  if(reload)loadLevel(LVI);
+  if(reload){clearRoomSave(LV);resumeEl=0;loadLevel(LVI);}
   hideScreens();idleSpin=false;yaw=0;pitch=-0.06;camera.quaternion.setFromEuler(eul.set(-0.06,0,0,"YXZ"));
-  S.running=true;S.t0=performance.now();updateHud();$('#modeBtn').hidden=false;
+  S.running=true;S.t0=performance.now()-resumeEl;resumeEl=0;
+  try{freshSnap=sv0();}catch(_){freshSnap='';}updateHud();$('#modeBtn').hidden=false;
   if(m==='motion')useMotion();else useTouch();
 }
+function sv0(){return getRoomSave(LV)?'':JSON.stringify(snapState());}
+$('#iFresh').addEventListener('click',()=>{clearRoomSave(LEVELS[pendingLevel]);resumeEl=0;try{loadLevel(pendingLevel);}catch(e){console.error(e);}idleSpin=true;S.running=false;$('#iResume').hidden=true;});
 $('#go').addEventListener('click',()=>begin('motion'));
 $('#goTouch').addEventListener('click',()=>begin('touch'));
 $('#backRooms').addEventListener('click',showTitle);
@@ -13862,12 +14363,12 @@ $('#next').addEventListener('click',()=>showIntro(LVI+1));
 let door=0;
 function win(){
   if(S.won)return;
-  S.won=true;S.tEnd=performance.now();
+  S.won=true;S.tEnd=performance.now();clearRoomSave(LV);
   if(ROOM.door){ROOM.door.glow.visible=true;door=0.0001;}
   if(ROOM.onWin)ROOM.onWin();
   SFX.win();
   const ms=S.tEnd-S.t0,sv=loadSave();sv.done[LV.id]=true;const prevBest=sv.best[LV.id];if(!prevBest||ms<prevBest)sv.best[LV.id]=ms;writeSave(sv);
-  $('#winTime').textContent='Escaped in '+fmtT(ms)+(!prevBest||ms<prevBest?' · new best':' · best '+fmtT(prevBest));
+  $('#winTime').textContent='Escaped in '+fmtT(ms)+(!prevBest||ms<prevBest?' · new best':' · best '+fmtT(prevBest))+(S.hintN?' · '+S.hintN+(S.hintN===1?' hint':' hints'):'');
   $('#wTitle').textContent=LV.winTitle;$('#wText').textContent=LV.winText;
   const hasNext=LVI<LEVELS.length-1;$('#next').hidden=!hasNext;
   if(!hasNext)$('#wText').textContent=LV.winText+' You’ve escaped every room. More rooms are coming soon.';

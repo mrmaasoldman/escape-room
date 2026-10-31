@@ -16337,7 +16337,7 @@ const ROOM24=(function(){
     x.strokeStyle='#2a6a2a';x.setLineDash([6,5]);x.lineWidth=2.5;x.beginPath();x.moveTo(170,118);x.lineTo(292,74);x.stroke();x.strokeStyle='#8a2a10';x.beginPath();x.moveTo(154,122);x.lineTo(30,148);x.stroke();x.setLineDash([]);
     const cx=300,cy=180;x.fillStyle='#3a2a1a';x.beginPath();x.moveTo(cx,cy-22);x.lineTo(cx+6,cy);x.lineTo(cx,cy+22);x.lineTo(cx-6,cy);x.fill();x.beginPath();x.moveTo(cx-22,cy);x.lineTo(cx,cy+6);x.lineTo(cx+22,cy);x.lineTo(cx,cy-6);x.fill();x.font=`700 13px ${NUN}`;x.fillText('N',cx,cy-28);
     x.font=`italic 13px ${FELL}`;x.fillText('green path: where God sent Jonah',100,200);x.fillText('red path: where Jonah ran',100,215);return c;}
-  function plankCanvas(){return signC(320,170,{bg:'#a87a4a',border:'#5a3a1a',bw:6,r:6,top:34,color:'#fff3d6',lines:[['Now the LORD had prepared',`italic 18px ${FELL}`,null,26],['a great fish to swallow up Jonah.',`italic 18px ${FELL}`,null,26],['And Jonah was in the belly of the fish',`italic 18px ${FELL}`,null,26],['three days and three nights.',`italic 18px ${FELL}`,null,26],['\u2014 Jonah 1:17',`italic 15px ${FELL}`,'#ffe0a0',24]]});}
+  function plankCanvas(){return signC(320,170,{bg:'#4a2c14',border:'#2a1606',bw:6,r:6,top:34,color:'#fff3d6',lines:[['Now the LORD had prepared',`italic 18px ${FELL}`,null,26],['a great fish to swallow up Jonah.',`italic 18px ${FELL}`,null,26],['And Jonah was in the belly of the fish',`italic 18px ${FELL}`,null,26],['three days and three nights.',`italic 18px ${FELL}`,null,26],['\u2014 Jonah 1:17',`italic 15px ${FELL}`,'#ffe0a0',24]]});}
   function slateCanvas(){const W=320,H=200,c=mk(W,H),x=c.getContext('2d');x.fillStyle='#2e3330';x.fillRect(0,0,W,H);{const r=rng(2481);for(let i=0;i<220;i++){x.fillStyle=`rgba(255,255,255,${0.02+r()*0.05})`;x.fillRect(r()*W,r()*H,1+r()*3,1+r()*2);}}x.strokeStyle='#8a6a3a';x.lineWidth=12;x.strokeRect(6,6,W-12,H-12);
     x.fillStyle='rgba(240,240,230,.9)';x.font=`italic 17px ${FELL}`;x.textAlign='center';x.fillText('Five jars went over the side',W/2,42);x.font=`16px ${FELL}`;x.fillText('1 \u00b7 2 \u00b7 3 \u00b7 4 \u00b7 5 \u2026',W/2,74);
     x.textAlign='left';x.font=`14px ${NUN}`;['red after white','yellow before white','green after blue','one between blue & white'].forEach((t,i)=>x.fillText('\u2022 '+t,30,104+i*22));return c;}
@@ -16383,6 +16383,14 @@ const ROOM24=(function(){
   function clayCanvas(){const N=256,c=FX.plainCanvas(N,N),x=c.getContext('2d');x.fillStyle='#b8743a';x.fillRect(0,0,N,N);FX.noise(x,N,N,2491,[4,16,64],[0.25,0.2,0.15]);
     for(let y=0;y<N;y+=9){x.fillStyle='rgba(90,40,10,.12)';x.fillRect(0,y,N,2);}return c;}
 
+  // The belly wall's shape (the belly mesh, the ribs, the throat and the glow-spots all use it, so they meet the wall)
+  function wallK(an,y){return 1+0.05*Math.sin(an*5+y*0.7)+0.03*Math.sin(an*11-y*1.3)+0.016*Math.sin(an*23+Math.sin(y*0.9)*1.6);}
+  function wallPt(an,zw,inset,out){const R=4.2*wallK(an,(zw+1)/0.9)-(inset||0);return (out||new THREE.Vector3()).set(1.15*R*Math.cos(an),1.6-R*Math.sin(an),zw);}
+  function underwaterCanvas(){const W=512,H=384,c=mk(W,H),x=c.getContext('2d');const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#e8fbff');g.addColorStop(0.18,'#8fdcf2');g.addColorStop(0.5,'#2f8fc0');g.addColorStop(1,'#0c3a62');x.fillStyle=g;x.fillRect(0,0,W,H);
+    const r=rng(2497);x.globalCompositeOperation='lighter';for(let i=0;i<9;i++){const x0=r()*W,w=18+r()*50;const gr=x.createLinearGradient(0,0,0,H);gr.addColorStop(0,'rgba(220,250,255,.35)');gr.addColorStop(1,'rgba(220,250,255,0)');x.fillStyle=gr;x.beginPath();x.moveTo(x0,0);x.lineTo(x0+w,0);x.lineTo(x0+w*2.2-60,H);x.lineTo(x0-60,H);x.closePath();x.fill();}
+    for(let i=0;i<70;i++){x.fillStyle=`rgba(255,255,255,${0.15+r()*0.4})`;x.beginPath();x.arc(r()*W,r()*H*0.25,2+r()*10,0,7);x.fill();}
+    for(let i=0;i<40;i++){x.strokeStyle=`rgba(255,255,255,${0.2+r()*0.3})`;x.lineWidth=1.5;x.beginPath();x.arc(r()*W,H*0.3+r()*H*0.7,1.5+r()*4,0,7);x.stroke();}
+    x.globalCompositeOperation='source-over';return c;}
   const JELLY_HOME=new THREE.Vector3(-1.6,2.8,-3.2),JAR_CARRY=new THREE.Vector3(0.62,0.12,-0.72);
   const FOLD=new THREE.Vector3(-3.7,0.45,5.0);
   function build(){
@@ -16392,32 +16400,68 @@ const ROOM24=(function(){
       const j=new THREE.Mesh(new THREE.SphereGeometry(0.9,12,8),new THREE.MeshBasicMaterial({color:0x60e8ff}));j.position.set(-1.6,2.8,-3.2);es.add(j);
       const m=new THREE.Mesh(new THREE.CircleGeometry(2,16),new THREE.MeshBasicMaterial({color:0x3a7aa0}));m.position.set(0,1.4,-5.5);es.add(m);
       [[2,3,2],[-2.5,2.6,3],[3,2,-4]].forEach(([x,y,z])=>{const b=new THREE.Mesh(new THREE.SphereGeometry(0.4,8,6),new THREE.MeshBasicMaterial({color:0x40ffb0}));b.position.set(x,y,z);es.add(b);});});}catch(e){}
-    // The belly: wet, glistening stomach wall with folds and veins
-    const fs=fleshSet(),fN=FX.normalFromCanvas(fs.hgt,3.5);
-    const fleshM=rep=>new THREE.MeshStandardMaterial({map:tex(fs.alb,rep),normalMap:FX.linTex(fN,rep),roughnessMap:FX.linTex(fs.rough,rep),roughness:0.75,metalness:0,side:THREE.BackSide,emissive:FX.lin(0x2a0408),emissiveIntensity:0.5,envMapIntensity:1.3});
-    const belly=new THREE.Mesh(new THREE.CylinderGeometry(4.2,4.2,22,48,8,true),fleshM([5,4]));belly.rotation.x=Math.PI/2;belly.position.set(0,1.6,-1);belly.scale.set(1.15,0.9,1);belly.receiveShadow=true;scene.add(tag(belly,'belly'));
-    {const p=belly.geometry.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i);const an=Math.atan2(z,x);const k=1+0.05*Math.sin(an*5+y*0.7)+0.03*Math.sin(an*11-y*1.3);p.setX(i,x*k);p.setZ(i,z*k);}belly.geometry.computeVertexNormals();}
-    const back=new THREE.Mesh(new THREE.SphereGeometry(4.2,32,16,0,Math.PI*2,0,Math.PI/2),fleshM([4,2]));back.rotation.x=Math.PI/2;back.position.set(0,1.6,10);back.scale.set(1.15,0.9,1);scene.add(tag(back,'belly'));
-    // Ribs
-    const bs=boneSet(),boneM=new THREE.MeshStandardMaterial({map:tex(bs.alb,[6,1]),normalMap:FX.normalTex(bs.hgt,3,[6,1]),roughness:0.45,envMapIntensity:1.2});
-    for(let i=0;i<8;i++){const arc=Math.PI*(i===6?0.95:1.2);// the rib beside the dark fold stops higher up the wall
-      const r=new THREE.Mesh(new THREE.TorusGeometry(3.9,0.14+0.02*(i%3),10,48,arc),boneM);r.position.set(0,1.6,-8+i*2.4);r.rotation.z=-Math.PI*0.1;r.scale.set(1.15,0.9,1);r.castShadow=true;scene.add(tag(r,'ribs'));ribs.push(r);
-      [-1,1].forEach(sd=>{const kn=sph(0.22,boneM,0,0,0,r);const an=sd>0?0:arc;kn.position.set(Math.cos(an)*3.9,Math.sin(an)*3.9,0);kn.scale.set(1,1.2,1);});}
+    // The belly: wet, glistening stomach wall with folds and veins. Belly, end dome and ribs breathe together.
+    const fs=fleshSet(),fN=FX.normalFromCanvas(fs.hgt,3.4);
+    const fleshM=(rep,side,tint)=>new THREE.MeshStandardMaterial({map:tex(fs.alb,rep),normalMap:FX.linTex(fN,rep),normalScale:new THREE.Vector2(0.9,0.9),roughnessMap:FX.linTex(fs.rough,rep),roughness:0.72,metalness:0,color:FX.lin(tint||0xffffff),side:side===undefined?THREE.BackSide:side,emissive:FX.lin(0x2a0408),emissiveIntensity:0.5,envMapIntensity:1.3});
+    a.body=new THREE.Group();a.body.position.set(0,1.6,0);scene.add(a.body);
+    const belly=new THREE.Mesh(new THREE.CylinderGeometry(4.2,4.2,22,128,40,true),fleshM([6,4]));belly.rotation.x=Math.PI/2;belly.position.set(0,0,-1);belly.scale.set(1.15,0.9,1);belly.receiveShadow=true;belly.renderOrder=2;a.body.add(tag(belly,'belly'));// drawn after the ribs and throat so hidden wall is skipped
+    {const p=belly.geometry.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i);const an=Math.atan2(z,x);const k=wallK(an,y);p.setX(i,x*k);p.setZ(i,z*k);}belly.geometry.computeVertexNormals();}
+    const back=new THREE.Mesh(new THREE.SphereGeometry(4.2,48,20,0,Math.PI*2,0,Math.PI/2),fleshM([4,2]));back.rotation.x=Math.PI/2;back.position.set(0,0,8.85);back.scale.set(1.15,0.9,1);back.receiveShadow=true;back.renderOrder=2;a.body.add(tag(back,'belly'));
+    // Ribs: bone half sunk into the wall, wrapped in a ridge of gristle, running down into the water
+    const bs=boneSet(),boneM=new THREE.MeshStandardMaterial({map:tex(bs.alb,[10,1]),normalMap:FX.normalTex(bs.hgt,3,[10,1]),roughness:0.38,envMapIntensity:1.25});
+    const sheathM=fleshM([8,1],THREE.FrontSide,0xd88a90);
+    for(let i=0;i<8;i++){const z=-8+i*2.4,pts=[],sp=[];let cut=false;
+      for(let s2=0;s2<=60;s2++){const an=0.72-s2/60*4.58;let Rs=0;for(let j=-3;j<=3;j++)Rs+=4.2*wallK(an+j*0.05,(z+1)/0.9);Rs/=7;
+        const P=(ins)=>new THREE.Vector3(1.15*(Rs-ins)*Math.cos(an),-(Rs-ins)*Math.sin(an),z);const p=P(0.12);
+        if(an<-2.4&&p.clone().add(new THREE.Vector3(0,1.6,0)).distanceTo(FOLD)<2.7){cut=true;break;}pts.push(p);sp.push(P(-0.2));}
+      if(pts.length<4)continue;const rr=0.16+0.025*(i%3);
+      const rc=new THREE.CatmullRomCurve3(pts),r=new THREE.Mesh(new THREE.TubeGeometry(rc,pts.length*2,rr,10),boneM);r.castShadow=true;r.receiveShadow=true;a.body.add(tag(r,'ribs'));ribs.push(r);
+      const sh=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(sp),sp.length*2,0.29,10),sheathM);sh.receiveShadow=true;a.body.add(tag(sh,'ribs'));
+      if(cut){const e=pts[pts.length-1];const cf=sph(0.34,sheathM,e.x,e.y,e.z,a.body);cf.scale.set(1.2,1,1.1);tag(cf,'ribs');}}
     // Seawater
     const wn=waterNormal();a.wN=FX.linTex(wn,[4,10]);
-    const water=new THREE.Mesh(new THREE.PlaneGeometry(8,20),new THREE.MeshStandardMaterial({color:FX.lin(0x0e3a40),roughness:0.06,metalness:0.3,normalMap:a.wN,normalScale:new THREE.Vector2(0.6,0.6),transparent:true,opacity:.94,envMapIntensity:1.8}));water.rotation.x=-Math.PI/2;water.position.set(0,-0.6,-1);water.receiveShadow=true;scene.add(tag(water,'water'));a.water=water;
+    const water=new THREE.Mesh(new THREE.PlaneGeometry(9.4,20.4,16,40),new THREE.MeshStandardMaterial({color:FX.lin(0x0e3a40),roughness:0.06,metalness:0.3,normalMap:a.wN,normalScale:new THREE.Vector2(0.6,0.6),transparent:true,opacity:.94,envMapIntensity:1.35}));water.rotation.x=-Math.PI/2;water.position.set(0,-0.6,-1.2);water.receiveShadow=true;scene.add(tag(water,'water'));a.water=water;
     // Your barrel
     barrel=tag(new THREE.Group(),'barrel');scene.add(barrel);const sv=staveSet('#8a5a2b',2402);const bwM=new THREE.MeshStandardMaterial({map:tex(sv.alb,[2,1]),normalMap:FX.normalTex(sv.hgt,3,[2,1]),roughness:0.55,envMapIntensity:1});
     const bb=FX.lathe([[0,-0.56],[0.5,-0.56],[0.56,-0.4],[0.61,0],[0.56,0.4],[0.5,0.56],[0,0.56]],bwM,32);bb.rotation.z=Math.PI/2;barrel.add(bb);
     const ironM=new THREE.MeshStandardMaterial({map:tex(rustCanvas()),metalness:0.7,roughness:0.5,envMapIntensity:1});[-0.42,-0.15,0.15,0.42].forEach(x=>{const h=new THREE.Mesh(new THREE.TorusGeometry(0.58-Math.abs(x)*0.12,0.025,8,32),ironM);h.rotation.y=Math.PI/2;h.position.x=x;barrel.add(h);});barrel.position.y=-0.25;
-    // Mouth (north)
-    const mouth=tag(new THREE.Group(),'mouth');mouth.position.set(0,0,-10.6);scene.add(mouth);const glow=new THREE.Mesh(new THREE.CircleGeometry(2.6,48),new THREE.MeshBasicMaterial({color:0x2a5a7a,fog:false}));glow.position.set(0,1.4,-0.3);glow.scale.y=0.55;mouth.add(glow);a.mouthGlow=glow;
-    const tm=new THREE.MeshStandardMaterial({color:FX.lin(0xf2ead6),roughness:0.25,envMapIntensity:1.4}),gum=new THREE.MeshStandardMaterial({map:tex(fs.alb,[2,1]),roughness:0.3,color:FX.lin(0xd06070),envMapIntensity:1.5});
-    mouthT=new THREE.Group();mouthT.position.y=1.5;mouth.add(mouthT);mouthB=new THREE.Group();mouthB.position.y=1.3;mouth.add(mouthB);
-    const tooth=FX.lathe([[0,0],[0.2,0],[0.18,0.2],[0.12,0.45],[0.05,0.62],[0,0.7]],tm,10);
-    for(let i=0;i<9;i++){const x=-2.4+i*0.6;const t1=tooth.clone();t1.rotation.x=Math.PI;t1.position.set(x,0.35+Math.abs(x)*0.25,0);t1.rotation.z=-x*0.05;mouthT.add(t1);const t2=tooth.clone();t2.scale.setScalar(0.85);t2.position.set(x+0.3,-0.3-Math.abs(x)*0.25,0);mouthB.add(t2);}
-    const gT=new THREE.Mesh(new THREE.TorusGeometry(2.6,0.3,10,40,Math.PI),gum);gT.scale.set(1,0.25,1);gT.position.y=0.55;mouthT.add(gT);const gB=gT.clone();gB.rotation.z=Math.PI;gB.position.y=-0.4;mouthB.add(gB);
-    const rim=new THREE.PointLight(0x4a9ad0,0.7,9,2);rim.position.set(0,1.6,-9.4);scene.add(rim);
+    // Mouth (north): the throat narrows to a pair of thick lips; teeth are rooted in gum ridges on each jaw
+    const MZ=-11.0,MCY=1.3,MA=2.7,MB=1.6,LW=2.4,GU=0.78,GL=0.62;
+    const yU=x=>MCY+GU*Math.sqrt(Math.max(0,1-(x/LW)*(x/LW))),yL=x=>MCY-GL*Math.sqrt(Math.max(0,1-(x/LW)*(x/LW)));
+    {const g=new THREE.CylinderGeometry(1,1,1,96,18,true),p=g.attributes.position;
+      for(let i=0;i<p.count;i++){const th=Math.atan2(p.getX(i),p.getZ(i)),t=0.5-p.getY(i),sm=t*t*(3-2*t),zw=-9.0+(MZ+0.02+9.0)*t;
+        const k=wallK(th,(zw+1)/0.9),kk=1+(k-1)*(1-sm*0.7);const rx=(4.2*1.15*1.05*(1-sm)+MA*sm)*kk,ry=(4.2*1.05*(1-sm)+MB*sm)*kk,cy=1.6+(MCY-1.6)*sm;
+        p.setXYZ(i,rx*Math.cos(th),cy-ry*Math.sin(th),zw);}
+      g.computeVertexNormals();const thr=new THREE.Mesh(g,fleshM([7,1.4],THREE.DoubleSide));thr.receiveShadow=true;thr.renderOrder=1;scene.add(tag(thr,'belly'));}
+    const mouth=tag(new THREE.Group(),'mouth');scene.add(mouth);
+    const lipM=fleshM([1.2,0.6],THREE.FrontSide,0xffc0c8);lipM.emissive=FX.lin(0x6a1e28);lipM.emissiveIntensity=0.55;
+    // the jaws: thick fleshy slabs filling the opening, with a smile-shaped gap between them
+    const jawM=fleshM([0.55,0.55],THREE.FrontSide,0xe89098);
+    const jaw=up=>{const sh=new THREE.Shape(),N=40,yf=up?yU:yL,sg=up?1:-1;sh.moveTo(-LW,MCY);for(let i=1;i<=N;i++){const x=-LW+2*LW*i/N;sh.lineTo(x,yf(x));}
+      sh.lineTo(MA*1.12,MCY);for(let i=1;i<=N;i++){const an=i/N*Math.PI;sh.lineTo(MA*1.12*Math.cos(an),MCY+sg*MB*1.12*Math.sin(an));}sh.lineTo(-LW,MCY);
+      const m=new THREE.Mesh(new THREE.ExtrudeGeometry(sh,{depth:0.4,bevelEnabled:true,bevelThickness:0.2,bevelSize:0.1,bevelSegments:5,curveSegments:24}),jawM);m.position.z=MZ-0.5;m.receiveShadow=true;
+      // a bulging face: push the front of the jaw toward you, most of all near the gap (lips)
+      const p=m.geometry.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i);if(z<0.3)continue;const d=Math.abs(y-yf(Math.max(-LW,Math.min(LW,x))));p.setZ(i,z+0.35*Math.exp(-d*1.6)*(1-Math.pow(Math.abs(x)/(MA*1.12),4)));}
+      m.geometry.computeVertexNormals();return m;};
+    mouthT=new THREE.Group();mouth.add(mouthT);mouthB=new THREE.Group();mouth.add(mouthB);mouthT.add(jaw(true));mouthB.add(jaw(false));
+    const gumM=new THREE.MeshPhysicalMaterial({normalMap:FX.linTex(fN,[3,0.4]),color:FX.lin(0xc85a6a),roughness:0.35,clearcoat:0.9,clearcoatRoughness:0.12,envMapIntensity:1.5,emissive:FX.lin(0x2a0608),emissiveIntensity:0.6});
+    [[mouthT,yU,1],[mouthB,yL,-1]].forEach(([g,yf,sg])=>{const pts=[],lp=[];for(let i=0;i<=28;i++){const x=-LW*0.99+2*LW*0.99*i/28;const c=Math.sqrt(Math.max(0,1-(x/LW)*(x/LW)));
+        pts.push(new THREE.Vector3(x,yf(x)-sg*0.02,MZ+0.12));lp.push(new THREE.Vector3(x,yf(x)+sg*(0.1+0.04*c),MZ+0.42+0.1*c));}
+      g.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),56,0.13,10),gumM));
+      const lip=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(lp),56,0.2,12),lipM);lip.scale.z=1;g.add(lip);});
+    [-1,1].forEach(sd=>{[[mouthT,0.07],[mouthB,-0.07]].forEach(([g,dy])=>{const c=sph(0.3,lipM,sd*LW,MCY+dy,MZ+0.36,g);c.scale.set(1.1,0.95,0.9);});});
+    const toothM=new THREE.MeshPhysicalMaterial({color:FX.lin(0xf4ecd6),roughness:0.24,clearcoat:0.85,clearcoatRoughness:0.12,envMapIntensity:1.5,emissive:FX.lin(0x3a3226),emissiveIntensity:1});
+    const toothG=new THREE.LatheGeometry([[0,-0.14],[0.15,-0.14],[0.17,0],[0.155,0.22],[0.11,0.5],[0.055,0.8],[0.012,0.98],[0,1]].map(p=>new THREE.Vector2(p[0],p[1])),12);
+    const Yv=new THREE.Vector3(0,1,0),rt=rng(2499);
+    const teeth=(g,yf,up,n,x0)=>{for(let j=0;j<n;j++){const x=x0+j*0.41+(rt()-0.5)*0.07;if(Math.abs(x)>LW*0.93)continue;
+      const c=1-Math.abs(x)/LW,gap=(GU+GL)*Math.sqrt(Math.max(0,1-(x/LW)*(x/LW)))-0.26;const L=Math.min((0.26+0.3*c)*(0.85+0.3*rt()),gap*(up?0.6:0.5));if(L<0.08)continue;
+      const tm=new THREE.Mesh(toothG,toothM);tm.scale.set(0.5+0.35*c,L,0.5+0.35*c);tm.position.set(x,yf(x)+(up?-0.06:0.06),MZ+0.2);
+      tm.quaternion.setFromUnitVectors(Yv,new THREE.Vector3(-x*0.05,up?-1:1,0.42).normalize());g.add(tm);}};
+    teeth(mouthT,yU,true,11,-2.1);teeth(mouthB,yL,false,10,-1.89);
+    // beyond the lips: open sea with sunlight coming down through it
+    const glow=new THREE.Mesh(new THREE.PlaneGeometry(10,6.5),new THREE.MeshBasicMaterial({map:tex(underwaterCanvas()),color:0x9ab8cc,fog:false,toneMapped:false,transparent:true}));glow.position.set(0,1.7,-13.4);scene.add(noRay(glow));a.mouthGlow=glow;
+    const mg=new THREE.Sprite(new THREE.SpriteMaterial({map:tex(glowCanvas()),color:0x7cc8f0,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:0.55,fog:false}));mg.scale.set(6,2.6,1);mg.position.set(0,MCY,-11.7);scene.add(noRay(mg));a.mouthHalo=mg;
+    const rim=new THREE.PointLight(0x5aa8e0,1.0,9,2);rim.position.set(0,1.5,-9.6);scene.add(rim);
     beach=plane(30,15,new THREE.MeshBasicMaterial({map:tex(beachCanvas()),fog:false,toneMapped:false}),0,3,-26,0);beach.visible=false;
     // Glowing jellyfish
     jelly=tag(new THREE.Group(),'jelly');jelly.position.copy(JELLY_HOME);scene.add(jelly);
@@ -16430,7 +16474,7 @@ const ROOM24=(function(){
     // a soft fill where the jellyfish used to float, so the north end stays readable once it has been moved
     a.nFill=new THREE.PointLight(0x7ad8e8,0,10,2);a.nFill.position.copy(JELLY_HOME);scene.add(a.nFill);
     // Glow-spots on the belly wall
-    const gm=new THREE.MeshBasicMaterial({color:0x5affc8});[[3.4,2.6,2.2],[-3.6,2.2,1.4],[3.2,2.2,-4.6],[-3.4,3.0,-6],[0,4.6,0.5],[-0.6,2.6,6.4],[3.0,1.0,4.4]].forEach(([x,y,z],i)=>{const g=new THREE.Group();g.position.set(x,y,z);scene.add(noRay(g));
+    const gm=new THREE.MeshBasicMaterial({color:0x5affc8});[[3.4,2.6,2.2],[-3.6,2.2,1.4],[3.2,2.2,-4.6],[-3.4,3.0,-6],[0,4.6,0.5],[-0.6,2.6,6.4],[3.0,1.0,4.4]].forEach(([x,y,z],i)=>{const g=new THREE.Group();g.position.copy(wallPt(Math.atan2(-(y-1.6),x/1.15),z,0.12));scene.add(noRay(g));
       for(let k=0;k<5;k++){const d=sph(0.05+0.03*(k%2),gm,(k-2)*0.12,Math.sin(k)*0.1,Math.cos(k*2)*0.1,g);noRay(d);}const hs=new THREE.Sprite(new THREE.SpriteMaterial({map:tex(glowCanvas()),color:0x40ffb0,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:0.5}));hs.scale.set(1.1,1.1,1);g.add(noRay(hs));a.glows.push(hs);});
     const gl1=new THREE.PointLight(0x40ffb0,0.6,7,2);gl1.position.set(2.6,2.4,1.6);scene.add(gl1);const gl2=new THREE.PointLight(0x40ffb0,0.5,7,2);gl2.position.set(1.6,2.0,4.4);scene.add(gl2);
     a.plankton=FX.particles(scene,{count:140,min:[-3.4,-0.4,-8],max:[3.4,3.6,6],size:0.03,color:0x7affe0,opacity:0.6,rise:0.04,drift:0.05});
@@ -16463,8 +16507,8 @@ const ROOM24=(function(){
     a.clamTop=new THREE.Group();a.clamTop.position.set(0,0.4,-0.7);cl2.add(a.clamTop);const up=new THREE.Mesh(new THREE.SphereGeometry(0.8,32,12,0,Math.PI*2,0,Math.PI/2),sm);up.scale.y=0.5;up.position.z=0.7;a.clamTop.add(up);
     a.pearl=sph(0.12,new THREE.MeshStandardMaterial({color:FX.lin(0xfff8f0),metalness:0.4,roughness:0.08,envMapIntensity:2}),0,0.5,0,cl2);
     a.clP=plane(0.26,0.18,new THREE.MeshStandardMaterial({color:FX.lin(0xf2e6c8),roughness:0.8}),0.3,0.43,0.1,0,cl2);a.clP.rotation.x=-Math.PI/2;FX.shadow(cl2);
-    const vs=staveSet('#a87a4a',2471);const vp=new THREE.Group();vp.position.set(3.3,1.6,1.4);scene.add(vp);faceCenter(vp);
-    tag(plane(1.5,0.8,new THREE.MeshStandardMaterial({map:tex(plankCanvas()),roughness:0.45,envMapIntensity:0.5}),0,0,0.03,0,vp),'verse');const vb=FX.rbox(1.6,0.9,0.05,0.02,new THREE.MeshStandardMaterial({map:tex(vs.alb),roughness:0.5}));vp.add(vb);
+    const vs=staveSet('#a87a4a',2471);const vp=new THREE.Group();vp.position.copy(wallPt(-0.03,0.4,0.52));vp.position.y=1.7;scene.add(vp);vp.lookAt(0,1.7,0.4);vp.scale.setScalar(1.4);
+    {const pt=tex(plankCanvas());tag(plane(1.5,0.8,new THREE.MeshStandardMaterial({map:pt,emissiveMap:pt,emissive:0xffffff,emissiveIntensity:0.32,roughness:0.6,envMapIntensity:0.4,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2}),0,0,0.07,0,vp),'verse');}// well clear of the board (its face is at z=0.025) so the two never fightconst vb=FX.rbox(1.6,0.9,0.05,0.02,new THREE.MeshStandardMaterial({map:tex(vs.alb),roughness:0.5}));vp.add(vb);
     // ---- The ship's cargo: five clay jars in a rope net, with the shipmaster's slate (west-southwest)
     const cg=tag(new THREE.Group(),'cargo');cg.position.set(-3.0,-0.5,1.6);scene.add(cg);faceCenter(cg);
     const clayT=clayCanvas();a.jars={};
@@ -16522,8 +16566,6 @@ const ROOM24=(function(){
       a.padlock=new THREE.Group();a.padlock.position.set(0,0.3,0.24);sb.add(a.padlock);{const pb=FX.rbox(0.07,0.06,0.03,0.008,brassK);a.padlock.add(pb);const sh=new THREE.Mesh(new THREE.TorusGeometry(0.03,0.008,6,16,Math.PI),brassK);sh.position.y=0.035;a.padlock.add(sh);}
       a.sbP=plane(0.26,0.18,new THREE.MeshStandardMaterial({color:FX.lin(0xf2e6c8),roughness:0.8}),0,0.36,0,0,sb);a.sbP.rotation.x=-Math.PI/2;
       FX.shadow(sb);}
-    // rib knuckles that would poke into the fold are left off
-    ribs.forEach(r=>{r.updateMatrixWorld(true);r.children.forEach(kn=>{const w=new THREE.Vector3().setFromMatrixPosition(kn.matrixWorld);if(w.distanceTo(FOLD)<2.6)kn.visible=false;});});
     a.darkMats=a.dark.map(([m])=>{m.fog=false;const base=m.color.clone();return{m,base,env:m.envMapIntensity};});a.foldBack.material.fog=false;
     // ---- Swallowed things (just for looking)
     const an=tag(new THREE.Group(),'anchor');an.position.set(1.0,-0.5,6.6);an.rotation.z=0.9;scene.add(an);const am=new THREE.MeshStandardMaterial({map:tex(rustCanvas()),metalness:0.6,roughness:0.6,envMapIntensity:0.8});
@@ -16532,6 +16574,16 @@ const ROOM24=(function(){
     const oar=tag(new THREE.Group(),'oar');oar.position.set(1.3,-0.45,-3.6);oar.rotation.y=0.7;scene.add(oar);const oarM=new THREE.MeshStandardMaterial({map:tex(sv.alb),roughness:0.5,envMapIntensity:1});const o1=cyl(0.04,0.04,2.4,oarM,0,0,0,oar,8);o1.rotation.z=Math.PI/2;const blo=FX.rbox(0.6,0.04,0.25,0.02,oarM);blo.position.x=1.4;oar.add(blo);box(0.06,0.06,0.06,oarM,-1.2,0,0,oar);
     smallFish=tag(new THREE.Group(),'smallfish');scene.add(smallFish);const fishM=new THREE.MeshStandardMaterial({color:FX.lin(0xf2902a),roughness:0.25,envMapIntensity:1.2,emissive:FX.lin(0x2a1000),emissiveIntensity:1});
     sph(1,fishM,0,0,0,smallFish,0.08,0.07,0.18);const ft=new THREE.Mesh(new THREE.ConeGeometry(0.07,0.14,4),fishM);ft.rotation.x=Math.PI/2;ft.position.z=-0.21;smallFish.add(ft);[-1,1].forEach(sd=>sph(0.015,new THREE.MeshStandardMaterial({color:FX.lin(0x111111)}),sd*0.05,0.025,0.12,smallFish));
+    // Fleshy mounds rising out of the water, so the chest, the clam and the cargo rest on something
+    {const mm=fleshM([1.5,1.5],THREE.FrontSide,0xb86a72);[[2.7,-0.8,0.85,0.62,-0.58],[2.5,3.2,1.05,1.0,-0.58],[-3.0,1.6,1.05,1.0,-0.49]].forEach(([x,z,rx,rz,top])=>{
+      const m=sph(1,mm,x,top-0.24,z,scene,rx,0.24,rz);m.receiveShadow=true;noRay(m);FX.blob(scene,x,z,rx*1.5,rz*1.5,0.45,top+0.012);});}
+    // Slow drips from the roof, each landing with a little ripple
+    a.drips=[];{const dm=new THREE.MeshStandardMaterial({color:FX.lin(0xffd6dc),roughness:0.05,metalness:0.1,transparent:true,opacity:0.85,envMapIntensity:2.2});
+      const rmM=new THREE.MeshBasicMaterial({color:0xffe8ec,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending});const rr=rng(2501);
+      for(let i=0;i<7;i++){const z=-7+i*2.1+rr()*0.8,an=-1.15-rr()*0.85,top=wallPt(an,z,0.11);
+        if(Math.hypot(top.x-2.7,top.z+0.8)<1.2||Math.hypot(top.x-2.5,top.z-3.2)<1.4||Math.hypot(top.x+3,top.z-1.6)<1.4||Math.hypot(top.x,top.z)<1.0)continue;
+        const d=noRay(sph(0.035,dm,top.x,top.y,top.z,scene,1,1.6,1));const ring=noRay(new THREE.Mesh(new THREE.RingGeometry(0.8,1,28),rmM.clone()));ring.rotation.x=-Math.PI/2;ring.position.set(top.x,-0.585,top.z);scene.add(ring);
+        a.drips.push({d,ring,top,per:4.5+rr()*4,off:rr()*10});}}
     scene.add(new THREE.AmbientLight(0xc86a7a,0.14));scene.add(new THREE.HemisphereLight(0xe88a9a,0x1a0a10,0.18));a.dayL=new THREE.PointLight(0xfff6d0,0,30,1.5);a.dayL.position.set(0,2,-11);scene.add(a.dayL);
     applyDark(a.lit);
     FX.touch(4);
@@ -16559,7 +16611,9 @@ const ROOM24=(function(){
   function animate(t,dt,k){
     placeStatic(false);
     if(!REDUCED){barrel.position.y=-0.25+Math.sin(t*1.2)*0.04;barrel.rotation.x=Math.sin(t*0.9)*0.04;
-      const br=1+Math.sin(t*0.7)*0.015;ribs.forEach((r,i)=>r.scale.set(1.15*br,0.9*br,1));a.weed.forEach((w,i)=>w.rotation.y=S.weedDone?0:Math.sin(t*0.6+i)*0.1);
+      const br=1+Math.sin(t*0.7)*0.012;a.body.scale.set(br,br,1);a.mouthHalo.material.opacity=0.5+0.08*Math.sin(t*0.9);
+      a.drips.forEach(o=>{const ph=((t+o.off)%o.per)/o.per;if(ph<0.6){o.d.position.copy(o.top);const g=0.4+ph;o.d.scale.set(g,g*1.6,g);}else{const f=(ph-0.6)/0.4;o.d.position.set(o.top.x,o.top.y-(o.top.y+0.6)*f*f,o.top.z);o.d.scale.set(0.8,2.2,0.8);}
+        const rp=ph<0.25?ph/0.25:1;o.ring.material.opacity=ph<0.25?0.5*(1-rp):0;o.ring.scale.setScalar(0.03+rp*0.35);});a.weed.forEach((w,i)=>w.rotation.y=S.weedDone?0:Math.sin(t*0.6+i)*0.1);
       const an=t*0.5;smallFish.position.set(Math.sin(an)*1.6,-0.55,-1+Math.cos(an)*3);smallFish.rotation.y=an+Math.PI/2;
       a.wN.offset.set(t*0.02,t*0.035);a.tent.forEach((tb,i)=>{tb.rotation.x=Math.sin(t*1.4+i)*0.12;tb.rotation.z=Math.cos(t*1.1+i)*0.12;});
       a.glows.forEach((g,i)=>g.material.opacity=0.35+0.2*Math.sin(t*1.3+i*1.7));a.plankton.userData.tick(t,dt);}
@@ -16571,7 +16625,7 @@ const ROOM24=(function(){
     const lidT=S.chestOpen?-1.4:0,clamT=S.clamOpen?-0.9:0,lotT=S.lotsOpen?-1.5:0,sbT=S.sbOpen?-1.3:0;
     if(Math.abs(a.chestLid.rotation.x-lidT)>0.01||Math.abs(a.clamTop.rotation.x-clamT)>0.01||Math.abs(a.lotLid.rotation.x-lotT)>0.01||Math.abs(a.sbLid.rotation.x-sbT)>0.01)FX.touch(1);
     a.chestLid.rotation.x=lerp(a.chestLid.rotation.x,lidT,k);a.clamTop.rotation.x=lerp(a.clamTop.rotation.x,clamT,k);a.lotLid.rotation.x=lerp(a.lotLid.rotation.x,lotT,k);a.sbLid.rotation.x=lerp(a.sbLid.rotation.x,sbT,k);
-    if(a.open>0){a.open=Math.min(1,a.open+dt/(REDUCED?0.3:1.4));mouthT.position.y=1.5+a.open*1.8;mouthB.position.y=1.3-a.open*1.6;a.mouthGlow.material.color.lerpColors(new THREE.Color(0x2a5a7a),new THREE.Color(0xfff6e0),a.open);a.dayL.intensity=a.open*1.5;if(a.open>=1&&!(ext.t>0))startFly(ext);}
+    if(a.open>0){a.open=Math.min(1,a.open+dt/(REDUCED?0.3:1.4));mouthT.position.y=a.open*1.9;mouthB.position.y=-a.open*1.7;a.mouthGlow.material.color.lerpColors(new THREE.Color(0x9ab8cc),new THREE.Color(0xffffff),a.open);a.mouthGlow.material.opacity=1-a.open*a.open;FX.touch(1);a.dayL.intensity=a.open*1.5;if(a.open>=1&&!(ext.t>0))startFly(ext);}
     if(ext.t>0){ext.t=Math.min(1,ext.t+dt/(REDUCED?0.6:2.4));const p=easeIO(ext.t);camera.position.set(0,1.2,lerp(0,-20,p));}
   }
   /* ---------- Panels ---------- */
